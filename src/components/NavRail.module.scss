@@ -1,0 +1,88 @@
+.NavRail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+
+    width: 8rem;
+    height: 100%;
+    padding: 1rem;
+
+    background-color: var(--surface-low);
+    color: var(--neutral-variant-low);
+    border-right: 2px solid var(--surface-high);
+
+    font-weight: 600;
+}
+
+.NavRailItem {
+    background-color: transparent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 6rem;
+    height: 6rem;
+    
+    padding-block: 0.5rem;
+    gap: 0.5rem;
+
+    border-radius: 1.5rem;
+    outline: 2px solid transparent;
+    outline-offset: 3px;
+
+    transition: all 100ms ease-out;
+
+    & > label {
+        font-size: 0.875rem;
+    }
+
+    & [data-icon-non-default] {
+        position: absolute;
+
+        fill: var(--neutral-variant-high);
+        opacity: 0;
+    }
+
+    &:hover, &:focus-visible, &:active, &[data-selected] {
+        & [data-icon-non-default] {
+            opacity: 1;
+        }
+
+        & [data-icon-default] {
+            opacity: 0
+        }
+
+        & > label {
+            color: var(--neutral-variant-high);
+        }
+    }
+
+    &:hover, &:focus-visible {
+        background-color: var(--primary-on-hovered)
+    }
+
+    &:active, &[data-selected] {
+        background-color: var(--primary-on-selected)
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--secondary);
+        outline-offset: 0px;
+    }
+}
+
+.NavRailItemIconCont {
+    position: relative;
+
+    & > svg {
+        width: 2.5rem;
+        height: 2.5rem;
+        fill: var(--neutral-variant-low);
+        transition: all 150ms ease-out;
+    }
+}
