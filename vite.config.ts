@@ -15,7 +15,7 @@ export default defineConfig({
         }),
         solidSvg({
             defaultAsComponent: true,
-        })
+        }),
     ],
     server: {
         port: 3000,
