@@ -37,9 +37,38 @@
 
     transition: all 100ms ease-out;
 
+    /* For both components (Link & Button) */
+
+    & svg {
+        fill: var(--neutral-variant-low);
+        transition: all 150ms;
+    }
+
     & > label {
         font-size: 0.875rem;
     }
+
+    /* For NavRailLink's icon */
+
+    & > svg {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    &:hover > svg {
+        fill: var(--neutral-variant-high);
+    }
+
+    &:active > svg {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &:focus-visible > svg {
+        fill: var(--neutral-variant-high);
+    }
+
+    /* States (for NavRailButton) */
 
     & [data-icon-non-default] {
         position: absolute;
@@ -71,7 +100,7 @@
     }
 
     &:focus-visible {
-        outline: 2px solid var(--secondary);
+        outline: 2px solid var(--tertiary);
         outline-offset: 0px;
     }
 }
@@ -82,7 +111,5 @@
     & > svg {
         width: 2.5rem;
         height: 2.5rem;
-        fill: var(--neutral-variant-low);
-        transition: all 150ms;
     }
 }
