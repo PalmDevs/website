@@ -1,9 +1,9 @@
 .Page {
-    width: 100%;
-    height: 100%;
+    flex: 1;
 
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .NavRailGroup {
@@ -17,4 +17,67 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+}
+
+.NavRailTop > hr {
+    width: 4rem;
+    border: var(--divider) 2px solid;
+    border-radius: 1rem;
+}
+
+.Section {
+    display: flex;
+    max-width: 80rem;
+    margin: 4rem;
+}
+
+.SectionContent {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    max-width: 52.5rem;
+}
+
+.SectionTextContent {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.SectionTextContent > * {
+    margin: 0;
+}
+
+.GradientText {
+    font-weight: 800;
+    background: linear-gradient(230deg, #4FEAA9 10.89%, #57B7D9 60.95%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.SectionButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+// TODO: Exit animation
+.NavRailSkipNavButton {
+    position: absolute;
+    top: -1000px;
+
+    &:focus-visible {
+        top: 0;
+        position: initial;
+        transform: none !important;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 800;
+    }
 }

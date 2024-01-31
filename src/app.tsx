@@ -1,30 +1,21 @@
-import type { Component } from 'solid-js'
-import { NavRail, NavRailButton } from './components/NavRail'
+// Why does it not work when it's in TSConfig?
+/// <reference types="vite-plugin-solid-svg/types-component-solid" />
 
-import styles from './app.module.scss'
-
-import IconWavingHand from './assets/icons/waving_hand.svg'
-import IconAllInbox from './assets/icons/all_inbox.svg'
-import IconAccountBox from './assets/icons/account_box.svg'
-
-import IconWavingHandFilled from './assets/icons/waving_hand_filled.svg'
-import IconAllInboxFilled from './assets/icons/all_inbox_filled.svg'
-import IconAccountBoxFilled from './assets/icons/account_box_filled.svg'
+import { Suspense, type Component } from 'solid-js'
+import { Router } from '@solidjs/router'
+import { FileRoutes } from '@solidjs/start'
 
 const App: Component = () => {
     return (
-        <>
-            <NavRail>
-                <div class={styles.NavRailTop}>
-                    <div class={styles.NavRailGroup}>
-                        <NavRailButton icon={IconWavingHand} altIcon={IconWavingHandFilled} label='Welcome' />
-                        <NavRailButton icon={IconAllInbox} altIcon={IconAllInboxFilled} label='Projects' />
-                        <NavRailButton icon={IconAccountBox} altIcon={IconAccountBoxFilled} label='Contact' />
-                    </div>
-                </div>
-            </NavRail>
-            <main class={styles.Page}>main!!!</main>
-        </>
+        <Router
+            root={props => (
+                <Suspense>
+                    {props.children}
+                </Suspense>
+            )}
+        >
+            <FileRoutes />
+        </Router>
     )
 }
 
