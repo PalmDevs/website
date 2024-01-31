@@ -1,27 +1,25 @@
 {
-  "name": "@palmdevs/website",
-  "description": "",
-  "version": "0.0.0",
+  "name": "website",
   "type": "module",
-  "private": true,
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
   },
-  "license": "MIT",
+  "dependencies": {
+    "@solidjs/router": "^0.10.10",
+    "@solidjs/start": "^0.4.11",
+    "solid-js": "^1.8.12",
+    "vinxi": "^0.1.10",
+    "vite-plugin-solid-svg": "^0.8.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
     "sass": "^1.70.0",
-    "solid-devtools": "^0.29.2",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.11",
-    "vite-plugin-solid": "^2.8.2",
-    "vite-plugin-solid-svg": "^0.8.0"
+    "solid-devtools": "^0.29.3",
+    "typescript": "^5.3.3"
   },
-  "dependencies": {
-    "modern-normalize": "^2.0.0",
-    "solid-js": "^1.8.11"
+  "engines": {
+    "node": ">=18"
   }
 }
