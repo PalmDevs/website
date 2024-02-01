@@ -38,7 +38,7 @@
       "arrowParentheses": "asNeeded",
       "indentStyle": "space",
       "indentWidth": 4,
-      "lineWidth": 120,
+      "lineWidth": 80,
       "quoteProperties": "asNeeded",
       "quoteStyle": "single",
       "semicolons": "asNeeded",
