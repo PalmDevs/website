@@ -7,6 +7,9 @@ export default {
     email: {
         title: 'Email',
         icon: null,
-        url: 'mailto:PalmDevelops+Web@gmail.com'
+        url: 'mailto:PalmDevelops+Web@gmail.com',
     },
-} as const satisfies Record<string, { title: string; icon: string | null; url: string; }>
+} as const satisfies Record<
+    string,
+    { title: string; icon: string | null; url: string }
+>
