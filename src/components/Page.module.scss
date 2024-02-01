@@ -1,0 +1,83 @@
+// NavRail
+
+.NavRailGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+// TODO: Exit animation
+.NavRailSkipNavButton {
+    position: absolute;
+    top: -1000px;
+
+    &:focus-visible {
+        top: 0;
+        position: initial;
+        transform: none !important;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+        font-weight: 800;
+    }
+}
+
+.NavRailTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.NavRailTop > hr {
+    width: 4rem;
+    border: var(--divider) 2px solid;
+    border-radius: 1rem;
+}
+
+// Page
+
+.Content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Section {
+    display: flex;
+    max-width: 80rem;
+    margin: 4rem;
+}
+
+.SectionContent {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    max-width: 52.5rem;
+}
+
+.SectionHeroContent {
+    & > .SectionTextContent {
+        align-items: flex-start;
+    }
+}
+
+.SectionTextContent {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.25rem;
+}
+
+.SectionButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}

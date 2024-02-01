@@ -1,5 +1,5 @@
 import type { Component, JSX } from 'solid-js'
-import type { IconType } from '.'
+import type { IconType } from '..'
 
 import styles from './NavRail.module.scss'
 
@@ -33,7 +33,8 @@ const NavRailLink: Component<NavRailLinkProps> = props => {
     )
 }
 
-export { NavRail, NavRailButton, NavRailLink }
+export default NavRail
+export { NavRailButton, NavRailLink }
 
 type NavRailItemProps = {
     label: string

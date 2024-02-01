@@ -1,7 +1,7 @@
-import { type Component, type ComponentProps } from 'solid-js'
-import type { IconType } from '.'
+import { createEffect, type Component, type ComponentProps, splitProps } from 'solid-js'
+import type { IconType } from '..'
 
-import { undefinedIf } from '../utils'
+import { undefinedIf } from '~/utils'
 
 import styles from './Button.module.scss'
 
@@ -13,7 +13,7 @@ const Button: Component<ButtonProps> = props => {
             {...getBasicAttributesFromProps(props)}
         >
             {renderIconIfSpecified(props.leadingIcon)}
-            {props.children}
+            <p>{props.children}</p>
             {renderIconIfSpecified(props.trailingIcon)}
         </button>
     )
@@ -22,13 +22,13 @@ const Button: Component<ButtonProps> = props => {
 const LinkButton: Component<LinkButtonProps> = props => {
     return (
         <a
-            {...props}
-            href={undefinedIf(!props.disabled, props.href)}
+            {...splitProps(props, ['href'])[1]}
+            href={props.disabled ? undefined : props.href}
             target={props.openInCurrentTab ? '_self' : '_blank'}
             {...getBasicAttributesFromProps(props)}
         >
             {renderIconIfSpecified(props.leadingIcon)}
-            {props.children}
+            <p>{props.children}</p>
             {renderIconIfSpecified(props.trailingIcon)}
         </a>
     )
@@ -45,7 +45,7 @@ function getBasicAttributesFromProps(props: ButtonProps | LinkButtonProps) {
     } as const satisfies ComponentProps<'button'> & ComponentProps<'a'>
 }
 
-function renderIconIfSpecified(Icon: IconType | undefined) {
+function renderIconIfSpecified(Icon: IconType | undefined, ) {
     return Icon ? <Icon class={styles.ButtonIcon} /> : null
 }
 
