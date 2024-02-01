@@ -1,4 +1,4 @@
 import { mount, StartClient } from '@solidjs/start/client'
-import './globals.css'
+import './globals.scss'
 
 mount(() => <StartClient />, document.body)
