@@ -1,49 +1,133 @@
-import { createSignal, type Component } from 'solid-js'
-import { Button, LinkButton, NavRail } from '../components'
-import styles from '../app.module.scss'
-import { clientOnly } from '@solidjs/start'
+import { createSignal, type Component, createEffect } from 'solid-js'
 
-const ClientOnlyButton = clientOnly(async () => ({
-    default: (await import('../components/Button')).Button,
-}))
+import styles from '~/components/Page.module.scss'
+import appStyles from '~/app.module.scss'
+
+import { Button, LinkButton, Page, NavigationSkipTarget, IconType } from '~/components'
+import { resolveIcon } from '~/utils'
+
+import IconNext from '~/assets/icons/button/next.svg'
+import IconWavingHandFilled from '~/assets/icons/nav/waving_hand_filled.svg'
+import { createStore } from 'solid-js/store'
 
 const TestPage: Component = () => {
     const [buttonsDisabled, setButtonsDisabled] = createSignal(false)
+    const [buttonsLeadingIconShown, setButtonsLeadingIconShown] = createSignal(false)
+    const [buttonsTrailingIconShown, setButtonsTrailingIconShown] = createSignal(false)
+    // const [showNavRail, setShowNavRail] = createSignal(false)
+
+    const [buttonProps, setButtonProps] = createStore<{
+        disabled: boolean
+        leadingIcon?: IconType
+        trailingIcon?: IconType
+    }>({
+        disabled: false,
+        leadingIcon: undefined,
+        trailingIcon: undefined,
+    })
+
+    createEffect(() => {
+        setButtonProps({
+            disabled: buttonsDisabled(),
+            leadingIcon: buttonsLeadingIconShown() ? resolveIcon(IconWavingHandFilled) : undefined,
+            trailingIcon: buttonsTrailingIconShown() ? resolveIcon(IconNext) : undefined,
+        })
+    }, [buttonsDisabled(), buttonsLeadingIconShown(), buttonsTrailingIconShown()])
 
     return (
-        <>
-            <NavRail>
-                <div class={styles.NavRailTop}>
-                    <ClientOnlyButton onClick={() => alert('Insane alert')} class={styles.NavRailSkipNavButton}>
-                        Cool hidden button that you can tab to because skipping navigation is so cool
-                    </ClientOnlyButton>
-                </div>
-            </NavRail>
-            <main id="content" tabIndex="-1" class={styles.Page}>
-                <Button tabIndex='-1' onClick={() => setButtonsDisabled(!buttonsDisabled())}>Toggle disabled state: {buttonsDisabled().toString()}</Button>
-                <section class={styles.Section}>
-                    <div class={styles.SectionContent}>
-                        <div class={styles.SectionTextContent}>
-                            <h1>
-                                Design system <span class={styles.GradientText}>testing</span>
-                            </h1>
-                            <h2>Really cool text here!</h2>
-                            <p style="margin-top: 0.5rem">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, consequatur.
-                                Optio corporis delectus alias itaque pariatur ut a, omnis temporibus placeat,
-                                iste dolor, vel repellat labore ratione sequi sit mollitia.
-                            </p>
-                        </div>
-                        <div class={styles.SectionButtons}>
-                            <Button disabled={buttonsDisabled()}>Primary button</Button>
-                            <Button disabled={buttonsDisabled()} variant='secondary'>Secondary button</Button>
-                            <Button disabled={buttonsDisabled()} variant='tertiary'>Tertiary button</Button>
-                            <LinkButton disabled={buttonsDisabled()} href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' variant='tertiary'>Tertiary button (link)</LinkButton>
-                        </div>
+        <Page>
+            <section class={styles.Section}>
+                <div
+                    class={`${styles.SectionContent} ${styles.SectionHeroContent}`}
+                >
+                    <div class={styles.SectionTextContent}>
+                        <h1>
+                            Design system{' '}
+                            <span class={appStyles.GradientText}>testing</span>
+                        </h1>
+                        <h2>Welcome to the test area</h2>
+                        <p>
+                            This is where you can play and test with the
+                            components from the design system.
+                            <br />
+                            The design system is inspired by both Material
+                            Design and Fluent UI (with a bit of fun animations
+                            and 💖 added on top).
+                        </p>
                     </div>
-                </section>
-            </main>
-        </>
+                </div>
+            </section>
+            <section class={styles.Section}>
+                <div
+                    class={`${styles.SectionContent} ${styles.SectionHeroContent}`}
+                >
+                    <div class={styles.SectionTextContent}>
+                        <h1 class="headline-title">Buttons</h1>
+                        <p>
+                            Buttons are interactive elements that users can tap
+                            or click on to do an action.
+                            <br />
+                            <br />
+                            By default when skipping navigation, buttons should
+                            be focused first. To do this, wrap the button in a{' '}
+                            <code>{'<NavigationSkipTarget>'}</code> component.{' '}
+                            <strong>
+                                If you do not do so, a warning will be logged in
+                                the console.{' '}
+                            </strong>
+                            Click on the navigation rail and press{' '}
+                            <kbd>Tab</kbd> to test.
+                        </p>
+                    </div>
+                    <div class={styles.SectionButtons}>
+                        <Button
+                            {...buttonProps}
+                            onClick={() => alert('You clicked!')}
+                        >
+                            Primary button
+                        </Button>
+                        <NavigationSkipTarget>
+                            <Button
+                                {...buttonProps}
+                                variant="secondary"
+                            >
+                                Secondary button (nav skip target)
+                            </Button>
+                        </NavigationSkipTarget>
+                        <LinkButton
+                            {...buttonProps}
+                            variant="tertiary"
+                            href="https://youtube.com/watch?v=dQw4w9WgXcQ"
+                        >
+                            Tertiary button (link)
+                        </LinkButton>
+                    </div>
+                    <div class={styles.SectionButtons}>
+                    <Button
+                            onClick={() =>
+                                setButtonsDisabled(!buttonsDisabled())
+                            }
+                        >
+                            Disabled: {buttonsDisabled() ? 'yes' : 'no'}
+                        </Button>
+                        <Button
+                            onClick={() =>
+                                setButtonsLeadingIconShown(!buttonsLeadingIconShown())
+                            }
+                        >
+                            Leading icons: {buttonsLeadingIconShown() ? 'yes' : 'no'}
+                        </Button>
+                        <Button
+                            onClick={() =>
+                                setButtonsTrailingIconShown(!buttonsTrailingIconShown())
+                            }
+                        >
+                            Trailing icons: {buttonsTrailingIconShown() ? 'yes' : 'no'}
+                        </Button>
+                    </div>
+                </div>
+            </section>
+        </Page>
     )
 }
 
