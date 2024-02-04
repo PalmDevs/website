@@ -21,16 +21,16 @@ import { createEffect, createSignal, lazy } from 'solid-js'
 import AccessibilityContext from '~/contexts/AccessibilityContext'
 
 const ClientOnlyButton = clientOnly(async () => ({
-    default: (await import('~/components/common/Button')).Button,
+    default: (await import('~/components/interactive/Button')).Button,
 }))
 
 const navSkipTargetElementId = `skip-nav-target-${Date.now()}`
 
-const Page: ContainerWithChildren = props => {
+const Content: ContainerWithChildren = props => {
     const [navSkipTargetRendered, setNavSkipTargetRendered] =
         createSignal(false)
 
-    createEffect<number>((renderCount) => {
+    createEffect<number>(renderCount => {
         if (renderCount && !navSkipTargetRendered())
             console.warn('Navigation skip target not rendered')
         return renderCount + 1
@@ -87,12 +87,14 @@ const Page: ContainerWithChildren = props => {
                     )}
                 </div>
             </NavRail>
-            <main id='content' tabIndex='-1' class={styles.Content}>{props.children}</main>
+            <main id="content" tabIndex="-1" class={styles.Content}>
+                {props.children}
+            </main>
         </AccessibilityContext.Provider>
     )
 }
 
-export default Page
+export { Content }
 
 const handleSkipNav = (id: string) => {
     console.log('Handling navigation skip')
