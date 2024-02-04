@@ -17,7 +17,7 @@ import IconAccountBox from '~/assets/icons/nav/account_box.svg'
 import IconAccountBoxFilled from '~/assets/icons/nav/account_box_filled.svg'
 
 import socials from '~/constants/socials'
-import { createEffect, createSignal, lazy } from 'solid-js'
+import { Component, ComponentProps, createEffect, createSignal, lazy } from 'solid-js'
 import AccessibilityContext from '~/contexts/AccessibilityContext'
 
 const ClientOnlyButton = clientOnly(async () => ({
@@ -94,7 +94,23 @@ const Content: ContainerWithChildren = props => {
     )
 }
 
-export { Content }
+const Section: Component<ComponentProps<'section'> & SectionProps> = props => {
+    return (
+        <section class={styles.Section}>
+            <div
+                class={`${styles.SectionContent} ${props.type === 'large' ? styles.SectionLargeContent : ''}`}
+            >
+                {props.children}
+            </div>
+        </section>
+    )
+}
+
+interface SectionProps {
+    type?: 'large' | 'small'
+}
+
+export { Content, Section }
 
 const handleSkipNav = (id: string) => {
     console.log('Handling navigation skip')
