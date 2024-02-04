@@ -4,8 +4,10 @@ export type IconType = Component<ComponentProps<'svg'>>
 export type ContainerWithChild = Component<{ children: JSX.Element }>
 export type ContainerWithChildren = Component<ComponentProps<'div'>>
 
-export * from './accessibility/_exports'
-export * from './common/_exports'
+export * from './common/Button'
+
+export * from './accessibility/NavigationSkipTarget'
+export { default as NavigationSkipTarget } from './accessibility/NavigationSkipTarget'
 
 export { default as NavRail } from './NavRail'
 export * from './NavRail'
