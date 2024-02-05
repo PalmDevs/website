@@ -17,21 +17,18 @@ import IconAccountBox from '~/assets/icons/nav/account_box.svg'
 import IconAccountBoxFilled from '~/assets/icons/nav/account_box_filled.svg'
 
 import socials from '~/constants/socials'
-import { Component, ComponentProps, createEffect, createSignal, lazy } from 'solid-js'
+import { Component, ComponentProps, createEffect, lazy } from 'solid-js'
 import AccessibilityContext from '~/contexts/AccessibilityContext'
 
 const ClientOnlyButton = clientOnly(async () => ({
     default: (await import('~/components/interactive/Button')).Button,
 }))
 
-const navSkipTargetElementId = `skip-nav-target-${Date.now()}`
-
 const Content: ContainerWithChildren = props => {
-    const [navSkipTargetRendered, setNavSkipTargetRendered] =
-        createSignal(false)
+    const navSkipTargetElementId = `skip-nav-target-${Date.now()}`
 
     createEffect<number>(renderCount => {
-        if (renderCount && !navSkipTargetRendered())
+        if (renderCount && !document.getElementById(navSkipTargetElementId))
             console.warn('Navigation skip target not rendered')
         return renderCount + 1
     }, 0)
@@ -40,8 +37,6 @@ const Content: ContainerWithChildren = props => {
         <AccessibilityContext.Provider
             value={{
                 navSkipTargetElementId,
-                navSkipTargetRendered,
-                setNavSkipTargetRendered,
             }}
         >
             <NavRail>
@@ -77,10 +72,7 @@ const Content: ContainerWithChildren = props => {
                                 href={url}
                                 label={title}
                                 icon={lazy<IconType>(
-                                    () =>
-                                        import(
-                                            `~/assets/icons/socials/${icon}.svg`
-                                        ),
+                                    () => import(`~/assets/icons/socials/${icon}.svg`),
                                 )}
                             />
                         ) : null,
@@ -96,25 +88,32 @@ const Content: ContainerWithChildren = props => {
 
 const Section: Component<ComponentProps<'section'> & SectionProps> = props => {
     return (
-        <section class={styles.Section}>
-            <div
-                class={`${styles.SectionContent} ${props.type === 'large' ? styles.SectionLargeContent : ''}`}
-            >
-                {props.children}
-            </div>
+        <section
+            {...props}
+            class={`${styles.Section} ${
+                props.type === 'large' ? styles.LargeSection : ''
+            }`}
+        >
+            <div class={styles.SectionContent}>{props.children}</div>
+            {props.type === 'large' && props.image && <props.image height="16rem" />}
         </section>
     )
 }
 
-interface SectionProps {
-    type?: 'large' | 'small'
-}
+type SectionProps =
+    | {
+          type?: 'small'
+      }
+    | {
+          type: 'large'
+          image?: IconType
+      }
 
 export { Content, Section }
 
 const handleSkipNav = (id: string) => {
-    console.log('Handling navigation skip')
+    console.debug(`[f:handleSkipNav] Handling navigation skip`)
     const nextPossibleElement = document.getElementById(id)
     if (nextPossibleElement) return nextPossibleElement.focus()
-    console.error('Could not find any element to focus on')
+    console.error('[f:handleSkipNav] Could not find any element to focus on')
 }

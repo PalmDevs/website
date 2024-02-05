@@ -11,20 +11,20 @@ const NavigationSkipTarget: ContainerWithChild = props => {
     // Early return so hydration key is initialized correctly
     if (isServer) return resolved()
 
-    if (accessibility.navSkipTargetRendered()) {
-        console.warn('Another navigation skip target already exists!')
+    if (document.getElementById(accessibility.navSkipTargetElementId)) {
+        console.warn(`[c:NavigationSkipTarget] Target (${accessibility.navSkipTargetElementId}) already exists! Maybe false positive if this file was hot-reloaded.`)
         return resolved()
     }
 
-    const elems = resolved.toArray()    
+    const elems = resolved.toArray()
+
+    console.debug(`[c:NavigationSkipTarget] Assigning (${accessibility.navSkipTargetElementId}) to:`, elems[0])
 
     if (elems[0] instanceof Element)
         (elems[0] as Element)?.setAttribute(
             'id',
             accessibility.navSkipTargetElementId,
         )
-
-    accessibility.setNavSkipTargetRendered(true)
 
     return resolved()
 }
