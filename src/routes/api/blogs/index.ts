@@ -4,9 +4,10 @@ import { cutValuesFromIterator } from '../../../utils'
 import { config } from '../../../constants/blog'
 
 let lastFetched = 0
+let postsAmount = 0
 const postsCache = new Map<string, Post>()
 
-export function GET({ nativeEvent }: APIEvent) {
+export async function GET({ nativeEvent }: APIEvent) {
     const params = nativeEvent.web?.url?.searchParams
 
     // Min page 1
@@ -14,29 +15,40 @@ export function GET({ nativeEvent }: APIEvent) {
     // Max 30 posts per page
     const limit = Math.min(Number(params?.get('limit')) || 10, 30)
 
-    try {
-        return getPosts(page, limit)
-    } catch (e) {
-        console.error(e)
-        return nativeEvent.respondWith(
+    const postsOrNull = await getPosts(page, limit)
+
+    if (!postsOrNull)
+        nativeEvent.respondWith(
             new Response(null, {
                 status: 500,
                 statusText: 'Internal Server Error',
             }),
         )
-    }
+
+    return postsOrNull
 }
 
-const getPosts = (page = 1, limit = 10) =>
-    Date.now() - lastFetched > config.postsCacheTime
-        ? fetchPostsFromFS(page, limit)
-        // TODO: Find a more efficient way to cut the values, maybe cache the pages too?
-        : Promise.resolve(
-              cutValuesFromIterator(
-                  postsCache.values(),
-                  ...getRangesToCutFromPage(page, limit),
-              ),
-          )
+const getPosts = (page = 1, limit = 10) => {
+    const [startIndex, endIndex] = getRangesToCutFromPage(page, limit)
+
+    // Early return in case if a page should be empty
+    if (startIndex >= postsAmount && postsCache.size) return []
+
+    try {
+        return Date.now() - lastFetched > config.postsCacheTime
+            ? fetchPostsFromFS(page, limit)
+            : Promise.resolve(
+                  cutValuesFromIterator(
+                      postsCache.values(),
+                      startIndex,
+                      endIndex,
+                  ),
+              )
+    } catch (e) {
+        console.error(e)
+        return null
+    }
+}
 
 const getRangesToCutFromPage = (page: number, count: number) => {
     const startIndex = Math.max((page - 1) * count - 1, 0)
@@ -44,10 +56,13 @@ const getRangesToCutFromPage = (page: number, count: number) => {
     return [startIndex, endIndex]
 }
 
+//! No error handling here
 const fetchPostsFromFS = async (page = 1, limit = 50) => {
     lastFetched = Date.now()
 
     const files = (await readdir('posts')).filter(x => x.endsWith('.md'))
+    postsAmount = files.length
+
     const posts: Post[] = []
     const [startIndex, endIndex] = getRangesToCutFromPage(page, limit)
 
@@ -55,41 +70,34 @@ const fetchPostsFromFS = async (page = 1, limit = 50) => {
         const [id] = files[i]?.split('.') ?? []
         if (!id) break
 
-        try {
-            const file = await readFile(
-                `${config.postsDirPath}/${id}.md`,
-                'utf-8',
-            )
+        const file = await readFile(`${config.postsDirPath}/${id}.md`, 'utf-8')
 
-            const toSlice = file.indexOf('\n') + 1
-            const metaString = file
-                .slice(0, toSlice)
-                .match(/\[(.+)\]: #/)?.[1]
-                ?.replace(/\\([\[\]])/g, '$1')
+        const toSlice = file.indexOf('\n') + 1
+        const metaString = file
+            .slice(0, toSlice)
+            .match(/\[(.+)\]: #/)?.[1]
+            ?.replace(/\\([\[\]])/g, '$1')
 
-            if (!metaString) continue
+        if (!metaString) continue
 
-            const [
-                title,
-                desc = undefined,
-                tagsString = '',
-                timestamp = Date.now().toString(),
-            ] = metaString.split('\u241D').map(x => x.trim())
+        const [
+            title,
+            desc = undefined,
+            tagsString = '',
+            timestamp = Date.now().toString(),
+        ] = metaString.split('\u241D').map(x => x.trim())
 
-            const post: Post = {
-                id,
-                title,
-                desc: desc ?? title,
-                tags: tagsString.split(','),
-                timestamp,
-                content: file.slice(toSlice).trim(),
-            }
-
-            postsCache.set(id, post)
-            posts.push(post)
-        } catch (e) {
-            console.error(e)
+        const post: Post = {
+            id,
+            title,
+            desc: desc ?? title,
+            tags: tagsString.split(','),
+            timestamp,
+            content: file.slice(toSlice).trim(),
         }
+
+        postsCache.set(id, post)
+        posts.push(post)
     }
 
     return posts
