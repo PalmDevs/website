@@ -1,9 +1,10 @@
-import { createEffect, type Component, type ComponentProps, splitProps } from 'solid-js'
+import { type Component, type ComponentProps, splitProps } from 'solid-js'
 import type { IconType } from '..'
 
 import { undefinedIf } from '~/utils'
 
 import styles from './Button.module.scss'
+import { clientOnly } from '@solidjs/start'
 
 const Button: Component<ButtonProps> = props => {
     return (
@@ -13,7 +14,7 @@ const Button: Component<ButtonProps> = props => {
             {...getBasicAttributesFromProps(props)}
         >
             {renderIconIfSpecified(props.leadingIcon)}
-            <p>{props.children}</p>
+            <span>{props.children}</span>
             {renderIconIfSpecified(props.trailingIcon)}
         </button>
     )
@@ -28,24 +29,28 @@ const LinkButton: Component<LinkButtonProps> = props => {
             {...getBasicAttributesFromProps(props)}
         >
             {renderIconIfSpecified(props.leadingIcon)}
-            <p>{props.children}</p>
+            <span>{props.children}</span>
             {renderIconIfSpecified(props.trailingIcon)}
         </a>
     )
 }
 
+export { Button, LinkButton }
+
 function getBasicAttributesFromProps(props: ButtonProps | LinkButtonProps) {
     const disabledProp = undefinedIf(props.disabled, true)
 
     return {
-        class: `${styles.BaseButton} ${styles[props.variant ?? 'primary']} ${props.class ?? ''}`,
+        class: `${styles.BaseButton} ${styles[props.variant ?? 'primary']} ${
+            props.class ?? ''
+        }`,
         tabIndex: undefinedIf(props.disabled, -1),
         disabled: disabledProp,
         ['aria-disabled']: disabledProp,
     } as const satisfies ComponentProps<'button'> & ComponentProps<'a'>
 }
 
-function renderIconIfSpecified(Icon: IconType | undefined, ) {
+function renderIconIfSpecified(Icon: IconType | undefined) {
     return Icon ? <Icon class={styles.ButtonIcon} /> : null
 }
 
@@ -59,11 +64,10 @@ type BaseButtonProps = {
     disabled?: boolean
 }
 
-type LinkButtonProps = ComponentProps<'a'> & BaseButtonProps & {
-    href: string
-    openInCurrentTab?: boolean
-}
+type LinkButtonProps = ComponentProps<'a'> &
+    BaseButtonProps & {
+        href: string
+        openInCurrentTab?: boolean
+    }
 
 type ButtonProps = ComponentProps<'button'> & BaseButtonProps
-
-export { Button, LinkButton }
