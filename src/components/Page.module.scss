@@ -41,10 +41,11 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 
 .Section {
+    align-self: center;
     display: flex;
     max-width: 80rem;
     margin: 4rem;
@@ -52,16 +53,19 @@
 
 .SectionContent {
     flex: 1;
+    
+    max-width: 52.5rem;
 
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-
-    max-width: 52.5rem;
+    gap: 1rem;
 }
 
-.SectionLargeContent {
-    & > .SectionTextContent {
+.LargeSection {
+    margin-block-start: max(10vh, 4rem);
+    margin-block-end: max(12.5vh, 5rem);
+
+    & .SectionTextContent {
         align-items: flex-start;
     }
 }
