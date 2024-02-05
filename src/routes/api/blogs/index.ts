@@ -45,7 +45,7 @@ const getPosts = (page = 1, limit = 10) => {
                   ),
               )
     } catch (e) {
-        console.error(e)
+        console.error('[f(api):getPosts] ', e)
         return null
     }
 }
