@@ -7,7 +7,7 @@
   --neutral-lowest: #7f8b96;
 
   --neutral-variant-high: #81b0c3;
-  --neutral-variant-low: #889ca4;
+  --neutral-variant-low: #9da8ac;
 
   --surface-highest: #30353f;
   --surface-high: #23262c;
@@ -75,10 +75,13 @@ h2, .headline {
   font-weight: 600;
 }
 
-p {
-  color: var(--neutral-medium);
-  font-size: 1.25rem;
+p, span {
   margin-block: 0.25em;
+}
+
+p {
+  font-size: 1.25rem;
+  color: var(--neutral-medium);
 }
 
 button,
