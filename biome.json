@@ -47,7 +47,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "include": ["*.js", "*.json", "*.ts"],
+    "include": ["*.jsx", "*.json", "*.tsx", "*.js", "*.ts"],
     "ignore": ["dist/**/*", "node_modules/**/*", ".vinxi/**/*", ".output/**/*"]
   }
 }
