@@ -1,0 +1,87 @@
+.ProjectCard {
+    display: flex;
+    
+    width: 100%;
+    max-width: 36rem;
+    
+    background-color: var(--surface-medium);
+    border-radius: 1.5rem;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    
+    outline: 2px solid transparent;
+    outline-offset: -4px;
+
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+    &, &:visited, &:hover {
+        text-decoration: none;
+    }
+
+    &:hover, &:focus-visible {
+        background-color: var(--surface-high);
+
+        outline: 2px solid var(--surface-highest);
+        outline-offset: 0px;
+
+        .ProjectCardImageContainer {
+            background-color: var(--surface-highest);
+
+            & img {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    & h2 {
+        font-weight: 600;
+    }
+
+    & p {
+        color: var(--neutral-high);
+        font-weight: 500;
+        margin-block: 0;
+    }
+
+    & span {
+        color: var(--tertiary);
+    }
+    
+    & span:last-child {
+        color: var(--neutral-lowest)
+    }
+
+    & span:last-child::before {
+        content: '‣';
+        font-size: 1.125rem;
+        margin-inline: 0.5rem;
+    }
+}
+
+.ProjectCardTextContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    padding: 1.5rem;
+}
+
+.ProjectCardImageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--surface-high);
+    border-radius: 1.5rem;
+
+    transition: inherit;
+
+    & > img {
+        padding: 1rem;
+        border-radius: inherit;
+        
+        transition: inherit;
+    }
+}

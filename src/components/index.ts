@@ -6,10 +6,9 @@ export type ContainerWithChildren = Component<ComponentProps<'div'>>
 
 export * from './interactive/Button'
 
-export * from './accessibility/NavigationSkipTarget'
-export { default as NavigationSkipTarget } from './accessibility/NavigationSkipTarget'
-
 export { default as NavRail } from './interactive/NavRail'
 export * from './interactive/NavRail'
 
 export * from './Page'
+
+export { default as ProjectCard } from './content/ProjectCard'
