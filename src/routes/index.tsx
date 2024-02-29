@@ -15,6 +15,42 @@ import IconProjectsFilled from '~/assets/icons/nav/all_inbox_filled.svg'
 import IconGitHub from '~/assets/icons/socials/github.svg'
 
 const IndexPage: Component = () => {
+    createEffect(() => {
+        Object.defineProperty(
+            window,
+            'I_WANT_TO_SEE_FIRE_IN_THE_HOLE_EVERYWHERE_THIS_WILL_BREAK_A_LOT_OF_THINGS',
+            {
+                async get() {
+                    const elements = [
+                        ...document.querySelectorAll(
+                            'p, h1, h2, h3, h4, h5, h6, span, label, img, svg',
+                        ),
+                    ]
+                        .map(value => ({ value, sort: Math.random() }))
+                        .sort((a, b) => a.sort - b.sort)
+                        .map(({ value }) => value)
+
+                    console.log('YOU CANNOT ESCAPE FIRE IN THE HOLE')
+
+                    for (const element of elements) {
+                        new Audio('/assets/fith.mp3').play()
+                        await new Promise(rs =>
+                            setTimeout(rs, Math.max(Math.random() * 250, 100)),
+                        )
+                        if (['IMG', 'svg'].includes(element.tagName))
+                            element.outerHTML =
+                                '<img src="/assets/fith.webp" alt="FIRE IN THE HOLE" />'
+                        else element.textContent = 'FIRE IN THE HOLE'
+                    }
+
+                    return console.log(
+                        'PLEASE RELOAD THE SITE IF YOU WANT IT TO BE FUNCTIONAL AGAIN',
+                    )
+                },
+            },
+        )
+    }, 0)
+
     return (
         <Content>
             <Section id="hero" type="large">
