@@ -1,48 +1,35 @@
 import { clientOnly } from '@solidjs/start'
 import {
     type ContainerWithChildren,
+    IconType,
     NavRail,
     NavRailButton,
     NavRailLink,
-    IconType,
 } from '.'
 
 import styles from './Page.module.scss'
 
-import IconWavingHand from '~/assets/icons/nav/waving_hand.svg'
-import IconWavingHandFilled from '~/assets/icons/nav/waving_hand_filled.svg'
-import IconAllInbox from '~/assets/icons/nav/all_inbox.svg'
-import IconAllInboxFilled from '~/assets/icons/nav/all_inbox_filled.svg'
 import IconAccountBox from '~/assets/icons/nav/account_box.svg'
 import IconAccountBoxFilled from '~/assets/icons/nav/account_box_filled.svg'
+import IconAllInbox from '~/assets/icons/nav/all_inbox.svg'
+import IconAllInboxFilled from '~/assets/icons/nav/all_inbox_filled.svg'
+import IconWavingHand from '~/assets/icons/nav/waving_hand.svg'
+import IconWavingHandFilled from '~/assets/icons/nav/waving_hand_filled.svg'
 
-import socials from '~/constants/socials'
 import { Component, ComponentProps, createEffect, lazy } from 'solid-js'
-import AccessibilityContext from '~/contexts/AccessibilityContext'
+import socials from '~/constants/socials'
 
 const ClientOnlyButton = clientOnly(async () => ({
     default: (await import('~/components/interactive/Button')).Button,
 }))
 
 const Content: ContainerWithChildren = props => {
-    const navSkipTargetElementId = `skip-nav-target-${Date.now()}`
-
-    createEffect<number>(renderCount => {
-        if (renderCount && !document.getElementById(navSkipTargetElementId))
-            console.warn('Navigation skip target not rendered')
-        return renderCount + 1
-    }, 0)
-
     return (
-        <AccessibilityContext.Provider
-            value={{
-                navSkipTargetElementId,
-            }}
-        >
+        <>
             <NavRail>
                 <div class={styles.NavRailTop}>
                     <ClientOnlyButton
-                        onClick={() => handleSkipNav(navSkipTargetElementId)}
+                        onClick={() => handleSkipNav()}
                         class={styles.NavRailSkipNavButton}
                     >
                         Skip navigation
@@ -82,7 +69,7 @@ const Content: ContainerWithChildren = props => {
             <main id="content" tabIndex="-1" class={styles.Content}>
                 {props.children}
             </main>
-        </AccessibilityContext.Provider>
+        </>
     )
 }
 
@@ -111,9 +98,9 @@ type SectionProps =
 
 export { Content, Section }
 
-const handleSkipNav = (id: string) => {
-    console.debug(`[f:handleSkipNav] Handling navigation skip`)
-    const nextPossibleElement = document.getElementById(id)
+const handleSkipNav = () => {
+    console.debug('[Cf:handleSkipNav] Handling navigation skip')
+    const nextPossibleElement = document.getElementById('nav-skip-target')
     if (nextPossibleElement) return nextPossibleElement.focus()
-    console.error('[f:handleSkipNav] Could not find any element to focus on')
+    console.error('[Cf:handleSkipNav] Could not find any element to focus on')
 }

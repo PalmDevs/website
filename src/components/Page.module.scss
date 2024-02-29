@@ -62,11 +62,14 @@
 }
 
 .LargeSection {
-    margin-block-start: max(10vh, 4rem);
-    margin-block-end: max(12.5vh, 5rem);
+    margin-block-start: max(10vh, 8rem);
+    margin-block-end: max(12.5vh, 12rem);
 
     & .SectionTextContent {
         align-items: flex-start;
+        & > * {
+            text-align: start;
+        }
     }
 }
 
@@ -78,9 +81,13 @@
     align-items: center;
 
     gap: 0.25rem;
+
+    & > * {
+        text-align: center;
+    }
 }
 
-.SectionButtons {
+.SectionButtons {   
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
