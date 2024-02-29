@@ -1,14 +1,14 @@
 import { type Component, type ComponentProps, splitProps } from 'solid-js'
-import type { IconType } from '..'
 
 import { undefinedIf } from '~/utils'
+import type { IconType } from '..'
 
 import styles from './Button.module.scss'
-import { clientOnly } from '@solidjs/start'
 
 const Button: Component<ButtonProps> = props => {
     return (
         <button
+            type="button"
             {...props}
             onClick={undefinedIf(!props.disabled, props.onClick)}
             {...getBasicAttributesFromProps(props)}

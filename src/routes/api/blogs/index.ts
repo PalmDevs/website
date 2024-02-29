@@ -1,7 +1,7 @@
 import type { APIEvent } from '@solidjs/start/server'
 import { readFile, readdir } from 'fs/promises'
-import { cutValuesFromIterator } from '../../../utils'
 import { config } from '../../../constants/blog'
+import { cutValuesFromIterator } from '../../../utils'
 
 let lastFetched = 0
 let postsAmount = 0
@@ -38,14 +38,10 @@ const getPosts = (page = 1, limit = 10) => {
         return Date.now() - lastFetched > config.postsCacheTime
             ? fetchPostsFromFS(page, limit)
             : Promise.resolve(
-                  cutValuesFromIterator(
-                      postsCache.values(),
-                      startIndex,
-                      endIndex,
-                  ),
+                  cutValuesFromIterator(postsCache.values(), startIndex, endIndex),
               )
     } catch (e) {
-        console.error('[f(api):getPosts] ', e)
+        console.error('[Bf:getPosts] ', e)
         return null
     }
 }

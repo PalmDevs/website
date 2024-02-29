@@ -1,5 +1,5 @@
-import { createHandler, StartServer } from '@solidjs/start/server'
-import { Title, Meta, Link, Style, MetaProvider } from '@solidjs/meta'
+import { Link, Meta, MetaProvider, Style, Title } from '@solidjs/meta'
+import { StartServer, createHandler } from '@solidjs/start/server'
 
 export default createHandler(() => (
     <StartServer
@@ -36,11 +36,7 @@ export default createHandler(() => (
                             sizes="32x32"
                             href="/assets/favicon-variants/favicon-32x32.png"
                         />
-                        <Link
-                            rel="shortcut icon"
-                            type="image/ico"
-                            href="/favicon.ico"
-                        />
+                        <Link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
                         <Link
                             rel="preload"
                             href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap"
@@ -60,7 +56,8 @@ export default createHandler(() => (
                         {scripts}
                     </body>
                     <Style>
-                        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap");
+                        @import
+                        url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap");
                     </Style>
                 </html>
             </MetaProvider>

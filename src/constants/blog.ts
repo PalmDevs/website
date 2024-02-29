@@ -8,5 +8,5 @@ export const config = {
      * Time in milliseconds to cache posts, a new fetch will be made if a request has been processed after this time
      * @default 15 * 60 * 1000 // 15 minutes
      */
-    postsCacheTime: 15 * 60 * 1000
+    postsCacheTime: 15 * 60 * 1000,
 } as const

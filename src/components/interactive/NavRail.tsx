@@ -9,7 +9,7 @@ const NavRail: Component<{ children?: JSX.Element }> = props => {
 
 const NavRailButton: Component<NavRailButtonProps> = props => {
     return (
-        <button class={styles.NavRailItem} role='button' onClick={props.onClick}>
+        <button type="button" class={styles.NavRailItem} onClick={props.onClick}>
             <div class={styles.NavRailItemIconCont}>
                 {props.altIcon ? (
                     <>
@@ -27,7 +27,12 @@ const NavRailButton: Component<NavRailButtonProps> = props => {
 
 const NavRailLink: Component<NavRailLinkProps> = props => {
     return (
-        <a class={styles.NavRailItem} href={props.href} title={props.label} target={props.openInCurrentTab ? undefined : '_blank'}>
+        <a
+            class={styles.NavRailItem}
+            href={props.href}
+            title={props.label}
+            target={props.openInCurrentTab ? undefined : '_blank'}
+        >
             <props.icon />
         </a>
     )
