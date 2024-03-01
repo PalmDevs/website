@@ -9,18 +9,18 @@ import {
 
 import styles from './Page.module.scss'
 
-import IconAccountBox from '~/assets/icons/nav/account_box.svg'
-import IconAccountBoxFilled from '~/assets/icons/nav/account_box_filled.svg'
-import IconAllInbox from '~/assets/icons/nav/all_inbox.svg'
-import IconAllInboxFilled from '~/assets/icons/nav/all_inbox_filled.svg'
-import IconWavingHand from '~/assets/icons/nav/waving_hand.svg'
-import IconWavingHandFilled from '~/assets/icons/nav/waving_hand_filled.svg'
+import IconAccountBox from '@/assets/icons/nav/account_box.svg?component-solid'
+import IconAccountBoxFilled from '@/assets/icons/nav/account_box_filled.svg?component-solid'
+import IconAllInbox from '@/assets/icons/nav/all_inbox.svg?component-solid'
+import IconAllInboxFilled from '@/assets/icons/nav/all_inbox_filled.svg?component-solid'
+import IconWavingHand from '@/assets/icons/nav/waving_hand.svg?component-solid'
+import IconWavingHandFilled from '@/assets/icons/nav/waving_hand_filled.svg?component-solid'
 
+import socials from '@/constants/socials'
 import { Component, ComponentProps, createEffect, lazy } from 'solid-js'
-import socials from '~/constants/socials'
 
 const ClientOnlyButton = clientOnly(async () => ({
-    default: (await import('~/components/interactive/Button')).Button,
+    default: (await import('@/components/interactive/Button')).Button,
 }))
 
 const Content: ContainerWithChildren = props => {
@@ -59,7 +59,10 @@ const Content: ContainerWithChildren = props => {
                                 href={url}
                                 label={title}
                                 icon={lazy<IconType>(
-                                    () => import(`~/assets/icons/socials/${icon}.svg`),
+                                    () =>
+                                        import(
+                                            `@/assets/icons/socials/${icon}.svg?component-solid`
+                                        ),
                                 )}
                             />
                         ) : null,

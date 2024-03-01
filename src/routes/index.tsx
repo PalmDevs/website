@@ -1,18 +1,18 @@
-import { type Component, createEffect, createSignal } from 'solid-js'
+import { type Component, createEffect } from 'solid-js'
 
-import appStyles from '~/app.module.scss'
-import styles from '~/components/Page.module.scss'
+import appStyles from '@/app.module.scss'
+import styles from '@/components/Page.module.scss'
 import pageStyles from './index.module.scss'
 
-import projects from '~/constants/projects'
-import socials from '~/constants/socials'
+import projects from '@/constants/projects'
+import socials from '@/constants/socials'
 
-import { Button, Content, LinkButton, ProjectCard, Section } from '~/components'
-import { resolveIcon } from '~/utils'
+import { Button, Content, LinkButton, ProjectCard, Section } from '@/components'
+import { resolveIcon } from '@/utils'
 
-import IconNext from '~/assets/icons/button/next.svg'
-import IconProjectsFilled from '~/assets/icons/nav/all_inbox_filled.svg'
-import IconGitHub from '~/assets/icons/socials/github.svg'
+import IconNext from '@/assets/icons/button/next.svg?component-solid'
+import IconProjectsFilled from '@/assets/icons/nav/all_inbox_filled.svg?component-solid'
+import IconGitHub from '@/assets/icons/socials/github.svg?component-solid'
 
 const IndexPage: Component = () => {
     createEffect(() => {

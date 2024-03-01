@@ -14,9 +14,5 @@ export default defineConfig({
             },
         },
     },
-    plugins: [
-        svgPlugin({
-            defaultAsComponent: true,
-        }),
-    ],
+    plugins: [svgPlugin()],
 })

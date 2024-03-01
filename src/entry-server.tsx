@@ -21,7 +21,7 @@ export default createHandler(() => (
                         />
                         <Link
                             rel="mask-icon"
-                            href="/assets/favicon-variants/safari-pinned-tab.svg"
+                            href="/assets/favicon-variants/safari-pinned-tab.svg?component-solid"
                             color="#30a3a3"
                         />
                         <Link

@@ -1,6 +1,6 @@
 import { type Component, type ComponentProps, splitProps } from 'solid-js'
 
-import { undefinedIf } from '~/utils'
+import { undefinedIf } from '@/utils'
 import type { IconType } from '..'
 
 import styles from './Button.module.scss'

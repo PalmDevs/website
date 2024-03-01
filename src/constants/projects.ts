@@ -1,4 +1,4 @@
-import type { ProjectCardProps } from '~/components/content/ProjectCard'
+import type { ProjectCardProps } from '@/components/content/ProjectCard'
 
 export default [
     {
@@ -8,6 +8,6 @@ export default [
         level: 'Organization member',
         jobs: ['UI/UX', 'CI', 'Bots'],
         href: 'https://revanced.app',
-        image: '/assets/projects/revanced.svg',
+        image: '/assets/projects/revanced.svg?component-solid',
     },
 ] as const satisfies Array<ProjectCardProps>
