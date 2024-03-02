@@ -1,4 +1,4 @@
-import type { ProjectCardProps } from '@/components/content/ProjectCard'
+import type { ProjectCardProps } from '~/components/content/ProjectCard'
 
 export default [
     {

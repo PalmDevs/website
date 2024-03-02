@@ -1,13 +1,13 @@
 import { type Component, createEffect, createSignal } from 'solid-js'
 
-import appStyles from '@/app.module.scss'
-import styles from '@/components/Page.module.scss'
+import appStyles from '../app.module.scss'
+import styles from '~/components/Page.module.scss'
 
-import { Button, Content, IconType, LinkButton, Section } from '@/components'
-import { resolveIcon } from '@/utils'
+import { Button, Content, IconType, LinkButton, Section } from '~/components'
+import { resolveIcon } from '~/utils'
 
-import IconNext from '@/assets/icons/button/next.svg?component-solid'
-import IconWavingHandFilled from '@/assets/icons/nav/waving_hand_filled.svg?component-solid'
+import IconNext from '~/assets/icons/button/next.svg?component-solid'
+import IconWavingHandFilled from '~/assets/icons/nav/waving_hand_filled.svg?component-solid'
 import { createStore } from 'solid-js/store'
 
 const TestPage: Component = () => {

@@ -1,18 +1,18 @@
 import { type Component, createEffect } from 'solid-js'
 
-import appStyles from '@/app.module.scss'
-import styles from '@/components/Page.module.scss'
+import appStyles from '~/app.module.scss'
+import styles from '~/components/Page.module.scss'
 import pageStyles from './index.module.scss'
 
-import projects from '@/constants/projects'
-import socials from '@/constants/socials'
+import projects from '~/constants/projects'
+import socials from '~/constants/socials'
 
-import { Button, Content, LinkButton, ProjectCard, Section } from '@/components'
-import { resolveIcon } from '@/utils'
+import { Button, Content, LinkButton, ProjectCard, Section } from '~/components'
+import { resolveIcon } from '~/utils'
 
-import IconNext from '@/assets/icons/button/next.svg?component-solid'
-import IconProjectsFilled from '@/assets/icons/nav/all_inbox_filled.svg?component-solid'
-import IconGitHub from '@/assets/icons/socials/github.svg?component-solid'
+import IconNext from '~/assets/icons/button/next.svg?component-solid'
+import IconProjectsFilled from '~/assets/icons/nav/all_inbox_filled.svg?component-solid'
+import IconGitHub from '~/assets/icons/socials/github.svg?component-solid'
 
 const IndexPage: Component = () => {
     createEffect(() => {
@@ -30,13 +30,17 @@ const IndexPage: Component = () => {
                         .sort((a, b) => a.sort - b.sort)
                         .map(({ value }) => value)
 
+                    const audio = new Audio('/assets/fith.mp3')
+
                     console.log('YOU CANNOT ESCAPE FIRE IN THE HOLE')
 
                     for (const element of elements) {
-                        new Audio('/assets/fith.mp3').play()
+                        audio.play()
+
                         await new Promise(rs =>
                             setTimeout(rs, Math.max(Math.random() * 250, 100)),
                         )
+
                         if (['IMG', 'svg'].includes(element.tagName))
                             element.outerHTML =
                                 '<img src="/assets/fith.webp" alt="FIRE IN THE HOLE" />'

@@ -12,7 +12,7 @@
 		"noEmit": true,
 		"isolatedModules": true,
 		"paths": {
-			"@/*": ["./src/*"],
+			"~/*": ["./src/*"],
 			// Needs to be fixed plugin-side, Bundler moduleResolution works though, but not recommended
 			"vite-plugin-solid-svg": ["./node_modules/vite-plugin-solid-svg/dist/index"]
 		},
