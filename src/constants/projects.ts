@@ -8,6 +8,13 @@ export default [
         level: 'Organization member',
         jobs: ['UI/UX', 'CI', 'Bots'],
         href: 'https://revanced.app',
-        image: '/assets/projects/revanced.svg?component-solid',
+        image: '../../assets/projects/revanced.svg',
+    },
+    {
+        name: 'My Website',
+        description:
+            "You're on it right now! This took way too long to design and create. If you enjoyed it, please leave a star on the repository. It really means a lot!",
+        href: 'https://github.com/PalmDevs/website',
+        image: '../../assets/projects/website.svg',
     },
 ] as const satisfies Array<ProjectCardProps>

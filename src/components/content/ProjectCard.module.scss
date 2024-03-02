@@ -29,9 +29,17 @@
         .ProjectCardImageContainer {
             background-color: var(--surface-highest);
 
-            & img {
+            & > * {
                 transform: scale(1.1);
             }
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
+
+        .ProjectCardImageContainer > * {
+            transform: initial;
         }
     }
 
@@ -78,10 +86,9 @@
 
     transition: inherit;
 
-    & > img {
-        padding: 1rem;
-        border-radius: inherit;
-        
+    & > * {
+        width: 100%;
+        padding-inline: 1rem;
         transition: inherit;
     }
 }

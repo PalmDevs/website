@@ -1,9 +1,16 @@
-import { createMemo } from 'solid-js'
+import { createMemo, lazy } from 'solid-js'
 import styles from './ProjectCard.module.scss'
+import { IconType } from '..'
+
+const Images = import.meta.glob<{ default: IconType }>('../../assets/projects/*.svg')
 
 export default function ProjectCard(props: ProjectCardProps) {
     const accessibilityLabel = createMemo(() => getAccessibilityLabel(props), props)
 
+    const ProjectImage = Images[props.image]
+        ? lazy(() => Images[props.image]())
+        : () => <img src={props.image} alt={props.name} />
+    
     return (
         <a
             class={styles.ProjectCard}
@@ -11,7 +18,7 @@ export default function ProjectCard(props: ProjectCardProps) {
             target={props.openInCurrentTab ? undefined : '_blank'}
         >
             <div class={styles.ProjectCardImageContainer}>
-                <img src={props.image} alt={props.name} />
+                <ProjectImage />
             </div>
             <div
                 class={styles.ProjectCardTextContainer}
