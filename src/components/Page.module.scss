@@ -69,6 +69,7 @@
         align-items: flex-start;
         & > * {
             text-align: start;
+            text-wrap: balance;
         }
     }
 }
