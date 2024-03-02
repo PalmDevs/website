@@ -1,4 +1,4 @@
-import { type Component, createEffect } from 'solid-js'
+import { type Component, onMount } from 'solid-js'
 
 import appStyles from '~/app.module.scss'
 import styles from '~/components/Page.module.scss'
@@ -14,11 +14,15 @@ import IconNext from '~/assets/icons/button/next.svg?component-solid'
 import IconProjectsFilled from '~/assets/icons/nav/all_inbox_filled.svg?component-solid'
 import IconGitHub from '~/assets/icons/socials/github.svg?component-solid'
 
+const FITH_PROPERTY = 'I_WANT_TO_SEE_FIRE_IN_THE_HOLE_EVERYWHERE_THIS_WILL_BREAK_A_LOT_OF_THINGS'
+
 const IndexPage: Component = () => {
-    createEffect(() => {
+    onMount(() => {
+        if (Object.getOwnPropertyNames(window).includes(FITH_PROPERTY)) return
+
         Object.defineProperty(
             window,
-            'I_WANT_TO_SEE_FIRE_IN_THE_HOLE_EVERYWHERE_THIS_WILL_BREAK_A_LOT_OF_THINGS',
+            FITH_PROPERTY,
             {
                 async get() {
                     const elements = [
@@ -53,7 +57,7 @@ const IndexPage: Component = () => {
                 },
             },
         )
-    }, 0)
+    })
 
     return (
         <Content>
@@ -62,7 +66,7 @@ const IndexPage: Component = () => {
                     <h1>
                         Hey there, I'm <span class={appStyles.GradientText}>Palm</span>!
                     </h1>
-                    <h2>I design and build cool things.</h2>
+                    {/* <h2>I design and build cool things.</h2> */}
                     <p>
                         I'm a 15-year-old self-taught full-stack developer and a UI/UX
                         designer who is interested in security and automation.
