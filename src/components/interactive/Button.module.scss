@@ -33,7 +33,7 @@
     }
 
     &:hover, &:focus-visible {
-        & > .ButtonIcon:last-child {
+        & > .Icon:last-child {
             animation: moveRightAndBack 0.5s;
         }
     }
