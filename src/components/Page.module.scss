@@ -68,8 +68,7 @@
 }
 
 .SectionImage {
-    width: 16rem;
-    height: auto;
+    max-width: 16rem;
 }
 
 .LargeSection {
@@ -112,7 +111,6 @@
     }
 
     .SectionImage {
-        width: auto;
-        height: 16rem;
+        max-height: 16rem;
     }
 }

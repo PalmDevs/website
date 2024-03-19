@@ -181,7 +181,7 @@ const IndexPage: Component = () => {
             <Section
                 type="large"
                 id="contact"
-                image={props => <IconMailContent class={props.class} />}
+                image={props => <IconMailContent style="overflow: visible" class={props.class} />}
             >
                 <div class={styles.SectionTextContent}>
                     <h1 class="headline-title">Contact me</h1>
@@ -203,7 +203,7 @@ const IndexPage: Component = () => {
                     </LinkButton>
                 </div>
             </Section>
-            <div data-not-ready ref={glowElem} class={appStyles.GlowImage}>
+            <div aria-hidden="true" data-not-ready ref={glowElem} class={appStyles.GlowImage}>
                 {[...Array(7)].map(() => (
                     <img
                         data-not-ready
