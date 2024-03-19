@@ -67,7 +67,11 @@ const IndexPage: Component = () => {
                 type="large"
                 image={props => (
                     <div class={appStyles.HoveringUpDown}>
-                        <p style='--glow-color: var(--primary)' class={`${props.class} ${appStyles.GlowBreathing}`} data-tiltable>
+                        <p
+                            style="--glow-color: var(--primary)"
+                            class={`${props.class} ${appStyles.GlowBreathing}`}
+                            data-tiltable
+                        >
                             PLACEHOLDER THIS WILL BE WHERE I AM.
                             <br />
                             IF I USE ANY OF MY EXISTING IMAGES, I WILL DIE OF CRINGE!!!
@@ -123,7 +127,10 @@ const IndexPage: Component = () => {
                 style="flex-direction: row-reverse"
                 type="large"
                 image={props => (
-                    <div style="display: flex; flex-direction: column" class={appStyles.HoveringUpDown}>
+                    <div
+                        style="display: flex; flex-direction: column"
+                        class={appStyles.HoveringUpDown}
+                    >
                         <img
                             data-tiltable
                             style="border-radius: 1rem; margin-right: 3rem;"
@@ -183,7 +190,13 @@ const IndexPage: Component = () => {
             <Section
                 type="large"
                 id="contact"
-                image={props => <IconMailContent style="overflow: visible" data-tiltable class={`${props.class}`} />}
+                image={props => (
+                    <IconMailContent
+                        style="overflow: visible"
+                        data-tiltable
+                        class={`${props.class}`}
+                    />
+                )}
             >
                 <div class={styles.SectionTextContent}>
                     <h1 class="headline-small">Contact me</h1>
@@ -205,7 +218,12 @@ const IndexPage: Component = () => {
                     </LinkButton>
                 </div>
             </Section>
-            <div aria-hidden="true" data-not-ready ref={glowElem} class={appStyles.GlowImage}>
+            <div
+                aria-hidden="true"
+                data-not-ready
+                ref={glowElem}
+                class={appStyles.GlowImage}
+            >
                 {[...Array(7)].map(() => (
                     <img
                         data-not-ready
