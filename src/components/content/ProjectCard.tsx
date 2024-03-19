@@ -1,50 +1,43 @@
-import { createMemo, lazy } from 'solid-js'
+import { undefinedIf } from '~/utils'
 import styles from './ProjectCard.module.scss'
-import { IconType } from '..'
-
-const Images = import.meta.glob<{ default: IconType }>('../../assets/projects/*.svg')
 
 export default function ProjectCard(props: ProjectCardProps) {
-    const accessibilityLabel = createMemo(() => getAccessibilityLabel(props), props)
-
-    const ProjectImage = Images[props.image]
-        ? lazy(() => Images[props.image]())
-        : () => <img src={props.image} alt={props.name} />
-    
     return (
         <a
-            class={styles.ProjectCard}
+            class={styles.Card}
             href={props.href}
-            target={props.openInCurrentTab ? undefined : '_blank'}
+            target={undefinedIf(props.openInCurrentTab, '_blank')}
+            aria-label={compureARIALabel(props)}
         >
-            <div class={styles.ProjectCardImageContainer}>
-                <ProjectImage />
+            <div class={styles.ImageContainer}>
+                <img
+                    aria-hidden="true"
+                    loading="lazy"
+                    src={props.image}
+                    alt={props.name}
+                />
             </div>
-            <div
-                class={styles.ProjectCardTextContainer}
-                aria-label={accessibilityLabel()}
-            >
+            <div class={styles.TextContainer} aria-hidden="true">
                 <div>
                     {props.level && <span>{props.level}</span>}
                     {props.jobs && <span>{props.jobs.join(' • ')}</span>}
                 </div>
                 <h2>{props.name}</h2>
                 <p>{props.description}</p>
+                {props.hintText && <p class={styles.HintText}>{props.hintText}</p>}
             </div>
         </a>
     )
 }
 
-const getAccessibilityLabel = (props: ProjectCardProps) => {
+const compureARIALabel = (props: ProjectCardProps) => {
     let label = `${props.name}`
-    if (props.level) label = `${props.level} ${label}`
-    if (props.jobs) {
-        if (props.jobs.length === 1) label += ` doing ${props.jobs[0]}`
-        else
-            label += ` doing ${props.jobs
-                .slice(0, -2)
-                .join(', ')}, and ${props.jobs.slice(-1)}`
-    }
+    if (props.level) label = `${props.level} at ${label}`
+    if (props.jobs && props.jobs.length > 0)
+        label += ` doing ${props.jobs!.join(' and ')}`
+
+    label += `. ${props.description}`
+    if (props.hintText) label += ` Press to ${props.hintText}`
 
     return label
 }
@@ -58,5 +51,6 @@ export interface ProjectCardProps {
     image: string
 
     href: string
+    hintText?: string
     openInCurrentTab?: boolean
 }

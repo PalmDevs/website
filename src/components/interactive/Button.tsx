@@ -1,6 +1,6 @@
 import { type Component, type ComponentProps, splitProps } from 'solid-js'
 
-import { undefinedIf } from '~/utils'
+import { combineClassNames, undefinedIf } from '~/utils'
 import type { IconType } from '..'
 
 import styles from './Button.module.scss'
@@ -10,12 +10,12 @@ const Button: Component<ButtonProps> = props => {
         <button
             type="button"
             {...props}
-            onClick={undefinedIf(!props.disabled, props.onClick)}
-            {...getBasicAttributesFromProps(props)}
+            onClick={undefinedIf(props.disabled, props.onClick)}
+            {...computeAttribs(props)}
         >
-            {renderIconIfSpecified(props.leadingIcon)}
+            {renderIcon(props.leadingIcon)}
             <span>{props.children}</span>
-            {renderIconIfSpecified(props.trailingIcon)}
+            {renderIcon(props.trailingIcon)}
         </button>
     )
 }
@@ -24,37 +24,39 @@ const LinkButton: Component<LinkButtonProps> = props => {
     return (
         <a
             {...splitProps(props, ['href'])[1]}
-            href={props.disabled ? undefined : props.href}
+            {...computeAttribs(props)}
+            href={undefinedIf(props.disabled, props.href)}
             target={props.openInCurrentTab ? '_self' : '_blank'}
-            {...getBasicAttributesFromProps(props)}
         >
-            {renderIconIfSpecified(props.leadingIcon)}
+            {renderIcon(props.leadingIcon)}
             <span>{props.children}</span>
-            {renderIconIfSpecified(props.trailingIcon)}
+            {renderIcon(props.trailingIcon)}
         </a>
     )
 }
 
 export { Button, LinkButton }
 
-function getBasicAttributesFromProps(props: ButtonProps | LinkButtonProps) {
-    const disabledProp = undefinedIf(props.disabled, true)
+function computeAttribs(props: ButtonProps | LinkButtonProps) {
+    const disabledProp = undefinedIf(!props.disabled, true)
 
     return {
-        class: `${styles.BaseButton} ${styles[props.variant ?? 'primary']} ${
-            props.class ?? ''
-        }`,
-        tabIndex: undefinedIf(props.disabled, -1),
+        class: combineClassNames(
+            styles.Base,
+            styles[props.variant ?? 'primary'],
+            props.class,
+        ),
+        tabIndex: undefinedIf(!props.disabled, -1),
         disabled: disabledProp,
         ['aria-disabled']: disabledProp,
-    } as const satisfies ComponentProps<'button'> & ComponentProps<'a'>
+    } satisfies ComponentProps<'button'> & ComponentProps<'a'>
 }
 
-function renderIconIfSpecified(Icon: IconType | undefined) {
-    return Icon ? <Icon class={styles.ButtonIcon} /> : null
+function renderIcon(Icon: IconType | undefined) {
+    return Icon ? <Icon class={styles.Icon} /> : null
 }
 
-type BaseButtonProps = {
+interface BaseButtonProps {
     variant?: 'primary' | 'secondary' | 'tertiary'
     children: string | string[]
 

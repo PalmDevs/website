@@ -1,16 +1,27 @@
 import type { Component, JSX } from 'solid-js'
 import type { IconType } from '..'
 
+import { undefinedIf } from '~/utils'
 import styles from './NavRail.module.scss'
 
-const NavRail: Component<{ children?: JSX.Element }> = props => {
-    return <nav class={styles.NavRail}>{props.children}</nav>
+function NavRail(props: { children: MaybeArray<JSX.Element> }) {
+    return <nav class={styles.Container}>{props.children}</nav>
+}
+
+NavRail.Group = (props: { children: MaybeArray<JSX.Element> }) => {
+    return <div class={styles.Group}>{props.children}</div>
 }
 
 const NavRailButton: Component<NavRailButtonProps> = props => {
     return (
-        <button type="button" class={styles.NavRailItem} onClick={props.onClick}>
-            <div class={styles.NavRailItemIconCont}>
+        <button
+            aria-label={`Navigate to \'${props.label}\' section`}
+            data-selected={props.selected}
+            type="button"
+            class={styles.Item}
+            onClick={props.onClick}
+        >
+            <div class={styles.ButtonIconContainer}>
                 {props.altIcon ? (
                     <>
                         <props.altIcon data-icon-non-default />
@@ -20,7 +31,7 @@ const NavRailButton: Component<NavRailButtonProps> = props => {
                     <props.icon />
                 )}
             </div>
-            <label>{props.label}</label>
+            <label aria-hidden="true">{props.label}</label>
         </button>
     )
 }
@@ -28,10 +39,10 @@ const NavRailButton: Component<NavRailButtonProps> = props => {
 const NavRailLink: Component<NavRailLinkProps> = props => {
     return (
         <a
-            class={styles.NavRailItem}
+            class={styles.Item}
             href={props.href}
             title={props.label}
-            target={props.openInCurrentTab ? undefined : '_blank'}
+            target={undefinedIf(props.openInCurrentTab, '_blank')}
         >
             <props.icon />
         </a>
@@ -52,6 +63,7 @@ type NavRailLinkProps = NavRailItemProps & {
 }
 
 type NavRailButtonProps = NavRailItemProps & {
+    selected?: boolean
     altIcon?: IconType
     onClick?: () => void
 }

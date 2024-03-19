@@ -1,11 +1,5 @@
 // NavRail
 
-.NavRailGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 // TODO: Exit animation
 .NavRailSkipNavButton {
     position: absolute;
@@ -41,29 +35,46 @@
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.ContentWrapper {
     align-items: stretch;
 }
 
 .Section {
-    align-self: center;
+    align-items: center;
     display: flex;
     max-width: 80rem;
-    margin: 4rem;
+    margin-inline: 4rem;
+    padding-block: 4rem;
+    gap: 4rem;
+
+    @media (max-width: 47rem) {
+        & .SectionTextContent {
+            align-items: flex-start;
+            & > * {
+                text-align: start;
+                text-wrap: initial;
+            }
+        }
+    }
 }
 
-.SectionContent {
-    flex: 1;
-    
-    max-width: 52.5rem;
-
+.SectionContent {   
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
+.SectionImage {
+    width: 16rem;
+    height: auto;
+}
+
 .LargeSection {
-    margin-block-start: max(10vh, 8rem);
-    margin-block-end: max(12.5vh, 12rem);
+    padding-block-start: max(10vh, 8rem);
+    padding-block-end: max(12.5vh, 12rem);
 
     & .SectionTextContent {
         align-items: flex-start;
@@ -75,8 +86,6 @@
 }
 
 .SectionTextContent {
-    flex: 1;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,4 +101,18 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+@media (max-width: 55rem) {
+    .Section {
+        // TODO: Fix this maybe?
+        flex-direction: column-reverse !important;
+        align-items: start;
+        gap: 1rem;
+    }
+
+    .SectionImage {
+        width: auto;
+        height: 16rem;
+    }
 }

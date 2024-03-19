@@ -1,4 +1,4 @@
-.ProjectCard {
+.Card {
     display: flex;
     
     width: 100%;
@@ -14,7 +14,7 @@
     outline: 2px solid transparent;
     outline-offset: -4px;
 
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.5s var(--easing-quick);
 
     &, &:visited, &:hover {
         text-decoration: none;
@@ -26,7 +26,7 @@
         outline: 2px solid var(--surface-highest);
         outline-offset: 0px;
 
-        .ProjectCardImageContainer {
+        .ImageContainer {
             background-color: var(--surface-highest);
 
             & > * {
@@ -36,9 +36,9 @@
     }
 
     &:active {
-        transform: scale(0.95);
+        transform: scale(0.975);
 
-        .ProjectCardImageContainer > * {
+        .ImageContainer > * {
             transform: initial;
         }
     }
@@ -51,6 +51,22 @@
         color: var(--neutral-high);
         font-weight: 500;
         margin-block: 0;
+    }
+
+    & .HintText {
+        padding-top: 1rem;
+        display: flex;
+        flex: 1;
+        align-items: end;
+        color: var(--primary);
+        font-weight: 600;
+
+        &::after {
+            content: '>';
+            font-size: 0.9rem;
+            margin-inline: 0.75rem;
+            margin-bottom: 3px;
+        }
     }
 
     & span {
@@ -68,27 +84,35 @@
     }
 }
 
-.ProjectCardTextContainer {
+.TextContainer {
     display: flex;
     flex-direction: column;
     flex: 1;
+    gap: 0.25rem;
 
     padding: 1.5rem;
 }
 
-.ProjectCardImageContainer {
+.ImageContainer {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 12rem;
 
     background-color: var(--surface-high);
     border-radius: 1.5rem;
 
     transition: inherit;
+    transition-duration: 0.5s;
+
+    padding-inline: 1rem;
 
     & > * {
-        width: 100%;
-        padding-inline: 1rem;
+        max-width: 100%;
+        height: 9rem;
         transition: inherit;
+        transition-timing-function: var(--easing-default);
+        pointer-events: none;
+        z-index: var(--layer-image-priority);
     }
 }

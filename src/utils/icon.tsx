@@ -1,5 +1,5 @@
-import { ComponentProps } from 'solid-js'
-import { IconType } from '../components'
+import type { ComponentProps } from 'solid-js'
+import type { IconType } from '../components'
 
 /**
  * Hydration error fix for icons that are dynamically displayed via props

@@ -1,6 +1,6 @@
 export default {
     github: {
-        title: 'Github',
+        title: 'Github profile',
         icon: 'github',
         url: 'https://github.com/PalmDevs',
     },

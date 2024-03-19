@@ -1,4 +1,4 @@
-.BaseButton {
+.Base {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,12 +12,13 @@
     font-size: 1.125rem;
     line-height: inherit;
 
-    transition: 200ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: 0.5s var(--easing-quick);
     /* Weird flashing fix for <a> tags, user agent stylesheet issue */
     transition-property: opacity, transform, filter, text-decoration;
 
     text-decoration: underline;
     text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
     text-decoration-color: transparent;
 
     &:hover {
@@ -47,7 +48,21 @@
     }
 }
 
-.ButtonIcon {
+.Base:disabled, .Base[aria-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    user-select: none;
+
+    &:hover, &:focus-visible, &:active {
+        transform: unset;
+        filter: unset;
+        & > * {
+            animation: unset !important;
+        }
+    }
+}
+
+.Icon {
     width: 1.5rem;
     height: 1.5rem;
     fill: currentColor;
@@ -77,20 +92,6 @@
         outline: 2px solid var(--tertiary);
         outline-offset: -2px;
         filter: brightness(1.25);
-    }
-}
-
-.BaseButton:disabled, .BaseButton[aria-disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-    user-select: none;
-
-    &:hover, &:focus-visible, &:active {
-        transform: unset;
-        filter: unset;
-        & > * {
-            animation: unset !important;
-        }
     }
 }
 

@@ -1,8 +1,61 @@
 .GradientText {
-    font-weight: 800;
-    color: black;
-    background: linear-gradient(230deg, #4FEAA9 10.89%, #57B7D9 60.95%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  color: black;
+  background: linear-gradient(230deg, #4feaa9 10.89%, #57b7d9 60.95%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.GlowImage {
+  position: fixed;
+  overflow: hidden;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.35;
+  transition: opacity 5s;
+
+  &[data-not-ready] {
+    opacity: 0;
+  }
+
+  & > * {
+    // outline: 1px solid red;
+    z-index: var(--layer-glow-effect);
+    position: fixed;
+    max-height: 80%;
+    max-width: 80%;
+    transition: 30s;
+    transition-property: top, left, transform, opacity;
+  }
+}
+
+.GlowBreathing {
+  animation: glowBreathing 5s infinite alternate;
+}
+
+.HoveringUpDown {
+  animation: hoveringUpDown 2.5s infinite alternate ease-in-out;
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes hoveringUpDown {
+  to {
+    transform: translateY(-1rem);
+  }
+}
+
+@keyframes glowBreathing {
+  from {
+    filter: drop-shadow(0 0 2rem var(--glow-color));
+  }
+
+  to {
+    filter: drop-shadow(0 0 3rem var(--glow-color));
+  }
 }

@@ -1,4 +1,4 @@
-.NavRail {
+.Container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +19,7 @@
     font-weight: 600;
 }
 
-.NavRailItem {
+.Item {
     background-color: transparent;
 
     display: flex;
@@ -43,7 +43,7 @@
 
     & svg {
         fill: var(--neutral-variant-low);
-        transition: all 150ms;
+        transition: all 100ms;
     }
 
     & > label {
@@ -55,6 +55,8 @@
     & > svg {
         width: 3.5rem;
         height: 3.5rem;
+        transition-duration: 250ms;
+        transition-timing-function: var(--easing-quick);
     }
 
     &:hover > svg {
@@ -78,7 +80,7 @@
         opacity: 0;
     }
 
-    &:hover, &:focus-visible, &:active, &[data-selected] {
+    &:hover, &:focus-visible, &:active, &[data-selected="true"] {
         & [data-icon-non-default] {
             opacity: 1;
         }
@@ -96,7 +98,7 @@
         background-color: var(--primary-on-hovered)
     }
 
-    &:active, &[data-selected] {
+    &:active, &[data-selected="true"] {
         background-color: var(--primary-on-selected)
     }
 
@@ -106,7 +108,13 @@
     }
 }
 
-.NavRailItemIconCont {
+.Group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ButtonIconContainer {
     position: relative;
 
     & > svg {
