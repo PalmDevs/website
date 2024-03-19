@@ -66,11 +66,13 @@ const IndexPage: Component = () => {
                 id="hero"
                 type="large"
                 image={props => (
-                    <p class={props.class} data-tiltable>
-                        PLACEHOLDER THIS WILL BE WHERE I AM.
-                        <br />
-                        IF I USE ANY OF MY EXISTING IMAGES, I WILL DIE OF CRINGE!!!
-                    </p>
+                    <div class={appStyles.HoveringUpDown}>
+                        <p style='--glow-color: var(--primary)' class={`${props.class} ${appStyles.GlowBreathing}`} data-tiltable>
+                            PLACEHOLDER THIS WILL BE WHERE I AM.
+                            <br />
+                            IF I USE ANY OF MY EXISTING IMAGES, I WILL DIE OF CRINGE!!!
+                        </p>
+                    </div>
                 )}
             >
                 <div class={styles.SectionTextContent}>
@@ -181,7 +183,7 @@ const IndexPage: Component = () => {
             <Section
                 type="large"
                 id="contact"
-                image={props => <IconMailContent style="overflow: visible" class={props.class} />}
+                image={props => <IconMailContent style="overflow: visible" data-tiltable class={`${props.class}`} />}
             >
                 <div class={styles.SectionTextContent}>
                     <h1 class="headline-small">Contact me</h1>
