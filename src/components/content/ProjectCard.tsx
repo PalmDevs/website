@@ -20,6 +20,7 @@ export default function ProjectCard(props: ProjectCardProps) {
             <div class={styles.TextContainer} aria-hidden="true">
                 <div>
                     {props.level && <span>{props.level}</span>}
+                    {props.level && props.jobs && <span>‣</span>}
                     {props.jobs && <span>{props.jobs.join(' • ')}</span>}
                 </div>
                 <h2>{props.name}</h2>

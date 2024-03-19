@@ -109,7 +109,7 @@ const IndexPage: Component = () => {
             </Section>
             <Section id="projects">
                 <div class={styles.SectionTextContent}>
-                    <h1 class="headline-title">My Projects</h1>
+                    <h1 class="headline-small">My Projects</h1>
                     <p>Things I've contributed to or built that are meaningful to me.</p>
                 </div>
                 <div class={pageStyles.ProjectsCardContainer}>
@@ -121,7 +121,7 @@ const IndexPage: Component = () => {
                 style="flex-direction: row-reverse"
                 type="large"
                 image={props => (
-                    <div class={appStyles.HoveringUpDown}>
+                    <div style="display: flex; flex-direction: column" class={appStyles.HoveringUpDown}>
                         <img
                             data-tiltable
                             style="border-radius: 1rem; margin-right: 3rem;"
@@ -184,7 +184,7 @@ const IndexPage: Component = () => {
                 image={props => <IconMailContent style="overflow: visible" class={props.class} />}
             >
                 <div class={styles.SectionTextContent}>
-                    <h1 class="headline-title">Contact me</h1>
+                    <h1 class="headline-small">Contact me</h1>
                     <p>
                         Having business inquiries, or just want some small talk? For now,
                         you can always email me. More communication options will arrive

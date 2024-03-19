@@ -8,7 +8,6 @@
     border-radius: 1.5rem;
 
     font-size: 0.9rem;
-    font-weight: 600;
     text-decoration: none;
     
     outline: 2px solid transparent;
@@ -43,13 +42,8 @@
         }
     }
 
-    & h2 {
-        font-weight: 600;
-    }
-
     & p {
         color: var(--neutral-high);
-        font-weight: 500;
         margin-block: 0;
     }
 
@@ -59,7 +53,7 @@
         flex: 1;
         align-items: end;
         color: var(--primary);
-        font-weight: 600;
+        font-weight: var(--text-label);
 
         &::after {
             content: '>';
@@ -70,17 +64,12 @@
     }
 
     & span {
-        color: var(--tertiary);
-    }
-    
-    & span:last-child {
+        font-weight: var(--text-label);
         color: var(--neutral-lowest)
     }
 
-    & span:last-child::before {
-        content: '‣';
-        font-size: 1.125rem;
-        margin-inline: 0.5rem;
+    & span:first-child {
+        color: var(--tertiary);
     }
 }
 
@@ -91,6 +80,16 @@
     gap: 0.25rem;
 
     padding: 1.5rem;
+
+    & > div:first-child {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        
+        & > * {
+            margin-block: 0;
+        }
+    }
 }
 
 .ImageContainer {

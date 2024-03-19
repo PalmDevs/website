@@ -39,7 +39,7 @@ export default createHandler(() => (
                         <Link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
                         <Link
                             rel="preload"
-                            href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap"
+                            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap"
                             as="style"
                         />
                         <Meta
@@ -57,7 +57,7 @@ export default createHandler(() => (
                     </body>
                     <Style>
                         @import
-                        url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap");
+                        url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap");
                     </Style>
                 </html>
             </MetaProvider>

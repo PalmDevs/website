@@ -1,5 +1,5 @@
 .GradientText {
-  font-weight: 800;
+  font-weight: var(--weight-large);
   color: black;
   background: linear-gradient(230deg, #4feaa9 10.89%, #57b7d9 60.95%);
   background-clip: text;

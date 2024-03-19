@@ -68,7 +68,7 @@ const Content: Component<ComponentProps<'main'>> = props => {
                     setActiveSections([closestSection.id])
                 }
             },
-            { threshold: 0.75 },
+            { threshold: 0.33 },
         )
 
         for (const child of children) stalker.observe(child)
