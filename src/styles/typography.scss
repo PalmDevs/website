@@ -1,6 +1,11 @@
 @use "queries";
 
+<<<<<<< Updated upstream
 @import url("https://fonts.bunny.net/css?family=inter:400,500,600,700,800|jetbrains-mono:400");
+=======
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap");
+>>>>>>> Stashed changes
 
 :root {
   --line-height: 1.5;
@@ -41,16 +46,14 @@ h5,
 h6 {
   margin-block: 0;
   font-weight: var(--weight-bold);
+  margin-block-end: var(--gap-smaller);
 }
-
-// Large headings have smaller relative bottom margin
-// They will also be balanced to avoid awkward line breaks
 
 h1,
 h2,
 h3 {
-  line-height: var(--line-height-heading);
   color: var(--neutral-high);
+  line-height: var(--line-height-heading);
   text-wrap: balance;
 }
 
@@ -65,14 +68,6 @@ h2 {
 
 h3 {
   font-size: var(--text-heading);
-  margin-block-end: var(--gap-relative-smaller);
-}
-
-// Small headings have bigger relative bottom margin
-
-h4,
-h5 {
-  margin-block-end: var(--gap-relative-small);
 }
 
 h4 {
@@ -95,7 +90,7 @@ span {
 }
 
 p {
-  margin-block: var(--gap-relative-small);
+  margin-block: var(--gap-smaller);
 }
 
 strong {

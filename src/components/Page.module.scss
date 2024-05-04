@@ -10,7 +10,7 @@
   width: 100%;
   // TODO: Put these as a constant?
   max-width: 44rem;
-  padding: var(--gap-larger);
+  padding: var(--gap-very-large);
 
   // Mobile will have larger padding so it isn't as close to screen edges
   @media (max-width: queries.$mw-mobile) {
@@ -22,7 +22,7 @@
 
 .Section {
   // TODO: Put these as a constant?
-  padding-block: min(4vh, var(--gap-larger));
+  padding-block: min(4vh, var(--gap-very-large));
 }
 
 .FH-Row,
@@ -76,18 +76,6 @@
 
 .G-xxxl {
   gap: var(--gap-insanely-large);
-}
-
-.G-rm {
-  gap: var(--gap-relative-medium);
-}
-
-.G-rsm {
-  gap: var(--gap-relative-small);
-}
-
-.G-rxs {
-  gap: var(--gap-relative-smaller);
 }
 
 @keyframes slideFadeIn {
