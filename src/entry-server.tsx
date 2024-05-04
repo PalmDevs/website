@@ -7,7 +7,6 @@ export default createHandler(() => (
             <html lang="en">
                 <head>
                     <meta charset="utf-8" />
-                    <title>Palm (PalmDevs)</title>
                     <meta
                         name="description"
                         content="I'm a 15-year-old self-taught full-stack developer and a UI/UX designer. I want to make useful things look good and accessible to everyone. I am known for working in the open-source world, and designing applications."

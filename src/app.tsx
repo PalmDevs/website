@@ -1,4 +1,4 @@
-import { MetaProvider } from '@solidjs/meta'
+import { MetaProvider, Title } from '@solidjs/meta'
 import { Router } from '@solidjs/router'
 import { FileRoutes } from '@solidjs/start/router'
 import { type Component, ErrorBoundary, Suspense, onMount } from 'solid-js'
@@ -7,6 +7,11 @@ import { ThemeProvider } from './contexts'
 import ErrorPage from './error-page'
 
 import './app.scss'
+
+// Set up time-ago
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+TimeAgo.addDefaultLocale(en)
 
 const IntegrityEmojiMap: Record<typeof __APP_INTEGRITY, string> = {
     clean: '✅',
@@ -39,8 +44,9 @@ const App: Component = () => {
             root={props => (
                 <ErrorBoundary fallback={(err, reset) => <ErrorPage error={err} reset={reset} />}>
                     <MetaProvider>
+                        <Title>Palm (PalmDevs)</Title>
                         <ThemeProvider>
-                            <Suspense>{props.children}</Suspense>
+                                <Suspense>{props.children}</Suspense>
                         </ThemeProvider>
                     </MetaProvider>
                 </ErrorBoundary>
