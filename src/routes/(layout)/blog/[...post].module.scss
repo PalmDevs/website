@@ -1,0 +1,41 @@
+:global(#content) {
+  max-width: 52rem !important;
+}
+
+.PostRender {
+  width: 100%;
+
+  & :is(h1, h2, h3, h4, h5, h6) {
+    margin-block: var(--gap-larger) var(--gap-medium);
+  }
+
+  & h1 {
+    font-size: var(--text-title);
+  }
+
+  & h2 {
+    font-size: var(--text-subtitle);
+  }
+
+  & h3 {
+    font-size: var(--text-heading);
+  }
+
+  & h4 {
+    font-size: var(--text-subheading);
+  }
+
+  & h5 {
+    font-size: var(--text);
+  }
+
+  & h6 {
+    font-size: var(--text-label);
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-small);
+  }
+}
