@@ -91,7 +91,7 @@ export type FlexHelperProps<E extends ElementType> = FlexHelperCustomProps<E> &
 type FlexHelperCustomProps<E extends ElementType> = {
     as?: E
     asProps?: ComponentProps<E>
-    gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl' | 'rsm' | 'rxs' | 'rm'
+    gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
     flex?: boolean
     wrap?: boolean
     centerVertical?: boolean
