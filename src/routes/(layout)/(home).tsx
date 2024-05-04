@@ -35,7 +35,7 @@ export default (() => {
                             useful things look good and accessible to everyone.
                         </p>
                     </Column>
-                    <Row as="ul" gap="md" centerHorizontal wrap aria-label="My socials">
+                    <Row as="ul" data-no-marker="true" gap="md" centerHorizontal wrap aria-label="My socials">
                         <For each={Object.values(Socials)}>
                             {social => (
                                 <li>
@@ -56,7 +56,7 @@ export default (() => {
                         <span>Projects</span>
                         <span aria-hidden="true">&gt;</span>
                     </h2>
-                    <ul class={styles.ProjectsGrid}>
+                    <ul data-no-marker="true" class={styles.ProjectsGrid}>
                         <For each={Projects}>
                             {project => (
                                 <li>
@@ -74,7 +74,7 @@ export default (() => {
                         <h2>Skillset</h2>
                         <p>These are some of the technologies I know and use regularly.</p>
                     </Column>
-                    <Row as="ul" wrap gap="xs">
+                    <Row as="ul" data-no-marker="true" wrap gap="xs">
                         <For each={Skills}>
                             {skill => (
                                 <li class={styles.SkillItem}>
@@ -117,7 +117,7 @@ export default (() => {
                             chat, you can always contact me at anytime.
                         </p>
                     </Column>
-                    <Row as="ul" gap="sm" wrap>
+                    <Row as="ul" data-no-marker="true" gap="sm" wrap>
                         <li>
                             <LinkButton leadingIcon={IconDiscord} href={Socials.discord.href}>
                                 Chat on Discord

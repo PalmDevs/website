@@ -64,7 +64,7 @@ const NavDock: Component<NavDockProps> = props => {
             <Row ref={handleRef} as="div" class={styles.Dock}>
                 <div id="nav-highlight" class={styles.Highlight} aria-hidden="true" />
                 <nav>
-                    <Row as="ul" gap="xs" aria-label="Navigation links">
+                    <Row as="ul" data-no-marker="true" gap="xs" aria-label="Navigation links">
                         <For each={props.pages}>
                             {page => (
                                 <li>
@@ -106,7 +106,7 @@ const NavDock: Component<NavDockProps> = props => {
                     </Row>
                 </nav>
                 <div>
-                    <Row as="ul" gap="xs" aria-label="Other links and site settings">
+                    <Row as="ul" data-no-marker="true" gap="xs" aria-label="Other links and site settings">
                         <li>
                             <ThemeSwitchNavButton />
                         </li>
