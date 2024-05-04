@@ -8,11 +8,6 @@ import ErrorPage from './error-page'
 
 import './app.scss'
 
-// Set up time-ago
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
-TimeAgo.addDefaultLocale(en)
-
 const IntegrityEmojiMap: Record<typeof __APP_INTEGRITY, string> = {
     clean: '✅',
     dirty: '❌',

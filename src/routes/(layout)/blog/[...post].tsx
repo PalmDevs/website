@@ -2,7 +2,7 @@ import { type Component, Show, createResource, createSignal, createEffect, onCle
 import { Title } from '@solidjs/meta'
 import { useParams } from '@solidjs/router'
 
-import TimeAgo from 'javascript-time-ago'
+import { format as formatTime } from 'timeago.js'
 import { SolidMarkdown } from 'solid-markdown'
 import { readFile } from 'fs/promises'
 
@@ -12,22 +12,20 @@ import FourOhFourPage from '~/routes/(layout)/[...404]'
 import styles from './[...post].module.scss'
 import { Dynamic } from 'solid-js/web'
 
-const timeAgo = new TimeAgo('en-US')
-
 export default (() => {
     const params = useParams<{ post: string }>()
     const [maybePost] = createResource(async () => fetchPost(params.post))
-
+    
     const [timePosted, setTimePosted] = createSignal('...')
 
     createEffect(() => {
         const post = maybePost()
         if (post) {
             const epochPosted = post.updated ?? post.published
-            setTimePosted(timeAgo.format(epochPosted))
+            setTimePosted(formatTime(epochPosted))
 
             const timeout = setTimeout(() => {
-                const interval = setInterval(() => setTimePosted(timeAgo.format(epochPosted)), 60e3)
+                const interval = setInterval(() => setTimePosted(formatTime(epochPosted)), 60e3)
                 onCleanup(() => clearInterval(interval))
             }, epochPosted % 60e3)
 
