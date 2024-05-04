@@ -13,6 +13,7 @@
     "@solidjs/meta": "^0.29.2",
     "@solidjs/router": "^0.13.1",
     "@solidjs/start": "^1.0.0-rc.0",
+    "javascript-time-ago": "^2.5.10",
     "solid-js": "^1.8.16",
     "solid-markdown": "^2.0.1",
     "vinxi": "0.3.10",
