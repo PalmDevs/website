@@ -30,7 +30,7 @@ const ErrorPage: Component<{ error: unknown; reset: () => void }> = props => {
             </div>
             <h4>Stack trace (include this in the bug report):</h4>
             {(() => {
-                const stack = props.error instanceof Error ? props.error.stack! : JSON.stringify(props.error)
+                const stack = props.error instanceof Error ? props.error.stack || `${props.error.name}: ${props.error.message}` : JSON.stringify(props.error)
                 return (
                     <div class={styles.StackContainer}>
                         <code class={styles.Stack}>{stack}</code>
