@@ -11,11 +11,12 @@ import FourOhFourPage from '~/routes/(layout)/[...404]'
 
 import styles from './[...post].module.scss'
 import { Dynamic } from 'solid-js/web'
+import { logger } from '~/utils'
 
 export default (() => {
     const params = useParams<{ post: string }>()
     const [maybePost] = createResource(async () => fetchPost(params.post))
-    
+
     const [timePosted, setTimePosted] = createSignal('...')
 
     createEffect(() => {
@@ -44,9 +45,7 @@ export default (() => {
                                 <h2>{post().title}</h2>
                                 <p>{post().description}</p>
                             </Column>
-                            <p style="color: var(--neutral-lowest); margin: 0">
-                                posted {timePosted()}
-                            </p>
+                            <p style="color: var(--neutral-lowest); margin: 0">posted {timePosted()}</p>
                             <Divider />
                         </Column>
                         <SolidMarkdown
@@ -92,13 +91,18 @@ type Post = {
 const fetchPost = async (post: string): Promise<Post | null> => {
     'use server'
 
-    const metadata = await readFile(`posts/${post}/data.json`, 'utf8').then(JSON.parse)
-    const text = await readFile(`posts/${post}/content.md`, 'utf8')
+    try {
+        const metadata = await readFile(`posts/${post}/data.json`, 'utf8').then(JSON.parse)
+        const text = await readFile(`posts/${post}/content.md`, 'utf8')
 
-    if (!metadata || !text) return null
-
-    return {
-        ...metadata,
-        text,
+        if (!metadata || !text) return null
+        
+        return {
+            ...metadata,
+            text,
+        }
+    } catch (e) {
+        logger.error('Error while fetching post:', e)
+        return null
     }
 }
