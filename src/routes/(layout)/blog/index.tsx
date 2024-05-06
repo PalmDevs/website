@@ -27,6 +27,9 @@ export default (() => {
                 <LinkButton openInCurrentTab leadingIcon={IconHome} href="/">
                     Alright, go back home
                 </LinkButton>
+                <LinkButton openInCurrentTab href="/blog/test">
+                    Let me see the super duper alpha version
+                </LinkButton>
             </Section>
         </Page>
     )
