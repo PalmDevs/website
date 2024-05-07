@@ -1,6 +1,9 @@
 import { useParams } from '@solidjs/router'
 import { Show, Suspense, createResource, lazy } from 'solid-js'
+import { format } from 'timeago.js'
+import { MDXProvider } from 'solid-mdx'
 
+import { Column, Divider } from '~/components'
 import BlogLayout from '~/components/layouts/BlogLayout'
 
 import posts, { type Post } from '~/constants/posts'
@@ -25,13 +28,21 @@ export default () => {
             {info => (
                 <BlogLayout>
                     <div id="post">
-                        <div>
-                            <h1>{info().title}</h1>
-                            <p>{info().description}</p>
-                        </div>
-                        <Suspense>
-                            <PostComponent />
-                        </Suspense>
+                        <Column gap="xs">
+                            <div>
+                                <h1>{info().title}</h1>
+                                <p>{info().description}</p>
+                            </div>
+                            <p style="color: var(--neutral-lowest)">posted {format(info().posted)}</p>
+                            <Divider />
+                        </Column>
+                        <MDXProvider components={{
+                            hr: () => <Divider />,
+                        }}>
+                            <Suspense>
+                                <PostComponent />
+                            </Suspense>
+                        </MDXProvider>
                     </div>
                 </BlogLayout>
             )}
