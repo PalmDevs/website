@@ -51,6 +51,7 @@ main {
   accent-color: var(--primary);
   // Estimated height for NavDock + its margins
   scroll-padding: 6rem;
+  scrollbar-gutter: stable both-edges;
 }
 
 body {
