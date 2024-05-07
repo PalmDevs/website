@@ -16,16 +16,17 @@
     "remark-gfm": "^4.0.0",
     "remark-slug": "^7.0.1",
     "solid-js": "^1.8.16",
-    "vinxi": "0.3.10",
+    "vinxi": "^0.3.10",
     "vite-plugin-solid-svg": "^0.8.1"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=16"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.6.4",
     "@vinxi/plugin-mdx": "^3.7.1",
-    "sass": "^1.74.1"
+    "sass": "^1.74.1",
+    "solid-mdx": "^0.0.7"
   },
   "trustedDependencies": ["@biomejs/biome", "esbuild"]
 }
