@@ -1,7 +1,6 @@
 import { useParams } from '@solidjs/router'
 import { Show, Suspense, createResource, lazy } from 'solid-js'
 
-import { Column } from '~/components'
 import BlogLayout from '~/components/layouts/BlogLayout'
 
 import posts, { type Post } from '~/constants/posts'
@@ -26,10 +25,10 @@ export default () => {
             {info => (
                 <BlogLayout>
                     <div id="post">
-                        <Column>
+                        <div>
                             <h1>{info().title}</h1>
                             <p>{info().description}</p>
-                        </Column>
+                        </div>
                         <Suspense>
                             <PostComponent />
                         </Suspense>
