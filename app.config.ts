@@ -4,9 +4,8 @@ import svgPlugin from 'vite-plugin-solid-svg'
 
 // @ts-expect-error: Missing types
 import mdxPkg from '@vinxi/plugin-mdx'
-const { default: mdx } = mdxPkg
+const { default: { withImports: mdx } } = mdxPkg
 
-import remarkGfm from 'remark-gfm'
 import remarkSlug from 'remark-slug'
 
 const defineString = (str?: string) => `"${str || 'unknown'}"`
@@ -30,11 +29,11 @@ export default defineConfig({
     extensions: ['mdx', 'md'],
     vite: {
         plugins: [
-            mdx.withImports({})({
+            mdx({})({
                 jsx: true,
                 jsxImportSource: 'solid-js',
                 providerImportSource: 'solid-mdx',
-                remarkPlugins: [remarkGfm, remarkSlug],
+                remarkPlugins: [remarkSlug],
             }),
             svgPlugin({ defaultAsComponent: true }),
         ],

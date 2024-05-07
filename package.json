@@ -10,22 +10,21 @@
     "format": "biome check --apply ."
   },
   "dependencies": {
-    "@solidjs/meta": "^0.29.2",
-    "@solidjs/router": "^0.13.1",
-    "@solidjs/start": "^1.0.0-rc.0",
-    "remark-gfm": "^3.0.0",
+    "@solidjs/meta": "^0.29.3",
+    "@solidjs/router": "^0.13.3",
+    "@solidjs/start": "^1.0.0-rc.1",
     "remark-slug": "^7.0.1",
-    "solid-js": "^1.8.16",
-    "vinxi": "^0.3.10",
+    "solid-js": "^1.8.17",
+    "vinxi": "^0.3.11",
     "vite-plugin-solid-svg": "^0.8.1"
   },
   "engines": {
     "node": ">=16"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.6.4",
+    "@biomejs/biome": "^1.7.3",
     "@vinxi/plugin-mdx": "^3.7.1",
-    "sass": "^1.74.1",
+    "sass": "^1.77.0",
     "solid-mdx": "^0.0.7"
   },
   "trustedDependencies": ["@biomejs/biome", "esbuild"]
