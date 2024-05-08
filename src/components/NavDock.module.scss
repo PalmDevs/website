@@ -18,7 +18,7 @@
 
   outline: var(--line-style) transparent;
 
-  transition: var(---duration-short);
+  transition: var(--duration-short);
   transition-property: background-color, outline-color;
   
   &:has(.ActiveItem) .Highlight {
@@ -65,8 +65,8 @@
   // Default opacity (hidden)
   opacity: 0;
 
-  transition: all var(---duration-medium) var(--easing-bounce);
-  transition-delay: var(---duration-shorter);
+  transition: all var(--duration-medium) var(--easing-bounce);
+  transition-delay: var(--duration-shorter);
 }
 
 .Item {
@@ -79,7 +79,7 @@
   font-weight: var(--weight-label);
   text-decoration: none;
 
-  transition: all var(---duration-short) var(--easing-quick);
+  transition: all var(--duration-short) var(--easing-quick);
 
   &:not(.ActiveItem):is(:hover, :active) {
     background-color: var(--surface-low);

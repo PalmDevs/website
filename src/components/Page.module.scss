@@ -2,7 +2,7 @@
 
 :global(main) {
   @media not (prefers-reduced-motion: reduce) {
-    animation: slideFadeIn var(---duration-medium) var(--easing);
+    animation: slideFadeIn var(--duration-medium) var(--easing);
   }
 }
 

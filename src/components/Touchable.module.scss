@@ -2,7 +2,7 @@
   position: relative;
   cursor: pointer;
 
-  transition: var(---duration-medium) var(--easing-quick);
+  transition: var(--duration-medium) var(--easing-quick);
 
   &:active {
     transform: scale(var(--interaction-click-scale));
@@ -20,7 +20,7 @@
     height: 100%;
     width: 100%;
 
-    transition: opacity var(---duration-short);
+    transition: opacity var(--duration-short);
 
     border-radius: inherit;
     opacity: 0;
