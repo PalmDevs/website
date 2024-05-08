@@ -1,5 +1,5 @@
-import { MetaProvider } from '@solidjs/meta'
-import { Route, Router } from '@solidjs/router'
+import { Meta, MetaProvider, Title } from '@solidjs/meta'
+import { Router } from '@solidjs/router'
 import { FileRoutes } from '@solidjs/start/router'
 import { type Component, ErrorBoundary, Suspense, onMount } from 'solid-js'
 
@@ -40,6 +40,7 @@ const App: Component = () => {
             root={props => (
                 <ErrorBoundary fallback={(err, reset) => <ErrorPage error={err} reset={reset} />}>
                     <MetaProvider>
+                        <Title>Palm (PalmDevs)</Title>
                         <ThemeProvider>
                             <GlobalLayout>
                                 <Suspense>{props.children}</Suspense>
