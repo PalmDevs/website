@@ -4,10 +4,13 @@ import { Column, LinkButton, Page, Section } from '~/components'
 import IconHome from '~/assets/icons/nav/home.svg'
 
 import sharedStyles from '~/styles/shared.module.scss'
+import { Meta, Title } from '@solidjs/meta'
 
 export default (() => {
     return (
         <Page>
+            <Title>Blog • Palm (PalmDevs)</Title>
+            <Meta name="description" content="Blog posts are currently being added. Check back later!" />
             <Section centerHorizontal constrainSize>
                 <Column gap="none" class={sharedStyles.DirectTextChildrenAlignCenter}>
                     {/* biome-ignore lint/a11y/useHeadingContent: Screen readers kinda suck, so here's a workaround */}
