@@ -1,5 +1,28 @@
+@use '../../styles/queries';
+
 #content {
   max-width: 52rem !important;
+}
+
+#scroll-up-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 1;
+  padding: var(--gap-very-large);
+  transition: var(--duration-medium) var(--easing);
+  transition-property: opacity, transform;
+  
+  @media (max-width: queries.$mw-mobile) {
+    padding: var(--gap-large);
+  }
+
+  &:not([data-scrolled="true"]) {
+    transition: var(--duration-short) var(--easing-quick);
+    opacity: 0;
+    transform: scale(0.75);
+    pointer-events: none;
+  }
 }
 
 #post {
@@ -14,11 +37,11 @@
   & h2 {
     font-size: var(--text-subtitle);
   }
-  
+
   & h3 {
     font-size: var(--text-heading);
   }
-  
+
   & :is(h4, h5, h6) {
     color: var(--neutral-high);
   }
@@ -54,7 +77,7 @@
     overflow-x: auto;
 
     & code {
-      width: 100%;  
+      width: 100%;
       display: block;
       padding: var(--gap-medium);
     }
