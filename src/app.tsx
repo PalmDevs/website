@@ -1,4 +1,4 @@
-import { Meta, MetaProvider, Title } from '@solidjs/meta'
+import { MetaProvider } from '@solidjs/meta'
 import { Router } from '@solidjs/router'
 import { FileRoutes } from '@solidjs/start/router'
 import { type Component, ErrorBoundary, Suspense, onMount } from 'solid-js'
