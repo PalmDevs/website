@@ -1,5 +1,5 @@
 import { type Component, For } from 'solid-js'
-import { Meta } from '@solidjs/meta'
+import { Meta, Title } from '@solidjs/meta'
 
 import { Column, LinkButton, LinkIconButton, Page, ProjectCard, Row, Section, Touchable } from '~/components'
 
@@ -19,6 +19,7 @@ export default (() => {
     return (
         <GlowingBackground>
             <Page>
+                <Title>Palm (PalmDevs)</Title>
                 <Meta
                     name="description"
                     content="I'm a 15-year-old self-taught full-stack developer and a UI/UX designer. I want to make useful things look good and accessible to everyone. I am known for working in the open-source world, and designing applications."

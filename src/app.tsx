@@ -40,7 +40,6 @@ const App: Component = () => {
             root={props => (
                 <ErrorBoundary fallback={(err, reset) => <ErrorPage error={err} reset={reset} />}>
                     <MetaProvider>
-                        <Title>Palm (PalmDevs)</Title>
                         <ThemeProvider>
                             <GlobalLayout>
                                 <Suspense>{props.children}</Suspense>
