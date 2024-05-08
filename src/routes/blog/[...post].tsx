@@ -51,34 +51,32 @@ export default () => {
                             <Meta name="twitter:image:src" content={info().image} />
                         </Show>
                         <div id="post">
-                            <Column gap="xs">
-                                <div
-                                    class={combineClassNames(
-                                        HoverTargetClassName,
-                                        undefinedIf(!info().image, styles.InfoContainerWithCover),
+                            <div
+                                class={combineClassNames(
+                                    HoverTargetClassName,
+                                    undefinedIf(!info().image, styles.InfoContainerWithCover),
+                                )}
+                            >
+                                <Show when={info().image}>
+                                    {img => (
+                                        <a rel="noreferrer" target="_blank" href={img()}>
+                                            <HoverZoomRepel
+                                                as="img"
+                                                class={styles.Cover}
+                                                src={img()}
+                                                alt="Post cover"
+                                            />
+                                        </a>
                                     )}
-                                >
-                                    <Show when={info().image}>
-                                        {img => (
-                                            <a rel="noreferrer" target="_blank" href={img()}>
-                                                <HoverZoomRepel
-                                                    as="img"
-                                                    class={styles.Cover}
-                                                    src={img()}
-                                                    alt="Post cover"
-                                                />
-                                            </a>
-                                        )}
-                                    </Show>
-                                    <Column gap="xs" class={styles.Wrapper}>
-                                        <div>
-                                            <h1>{info().title}</h1>
-                                            <p>{info().description}</p>
-                                        </div>
-                                        <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
-                                    </Column>
-                                </div>
-                            </Column>
+                                </Show>
+                                <Column gap="xs" class={styles.Wrapper}>
+                                    <div>
+                                        <h1>{info().title}</h1>
+                                        <p>{info().description}</p>
+                                    </div>
+                                    <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
+                                </Column>
+                            </div>
                             <Show when={!info().image}>
                                 <Divider />
                             </Show>
