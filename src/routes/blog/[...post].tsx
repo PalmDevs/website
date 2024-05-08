@@ -59,14 +59,7 @@ export default () => {
                             >
                                 <Show when={info().image}>
                                     {img => (
-                                        <a rel="noreferrer" target="_blank" href={img()}>
-                                            <HoverZoomRepel
-                                                as="img"
-                                                class={styles.Cover}
-                                                src={img()}
-                                                alt="Post cover"
-                                            />
-                                        </a>
+                                        <HoverZoomRepel as="img" class={styles.Cover} src={img()} alt="Post cover" />
                                     )}
                                 </Show>
                                 <Column gap="xs" class={styles.Wrapper}>
