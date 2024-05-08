@@ -10,4 +10,5 @@ export interface Post {
     id: string
     description: string
     posted: Date
+    image?: string
 }
