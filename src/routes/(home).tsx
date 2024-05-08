@@ -1,4 +1,6 @@
 import { type Component, For } from 'solid-js'
+import { Meta, Title } from '@solidjs/meta'
+
 import { Column, LinkButton, LinkIconButton, Page, ProjectCard, Row, Section, Touchable } from '~/components'
 
 import IconDiscord from '~/assets/icons/discord.svg'
@@ -10,12 +12,22 @@ import Socials from '~/constants/socials'
 
 import GlowingBackground from '~/components/effects/GlowingBackground'
 import sharedStyles from '~/styles/shared.module.scss'
+
 import styles from './(home).module.scss'
 
 export default (() => {
     return (
         <GlowingBackground>
             <Page>
+                <Title>Palm (PalmDevs)</Title>
+                <Meta
+                    name="description"
+                    content="I'm a 15-year-old self-taught full-stack developer and a UI/UX designer. I want to make useful things look good and accessible to everyone. I am known for working in the open-source world, and designing applications."
+                />
+                <Meta property="og:image" content="/assets/og/image.webp" />
+                <Meta property="og:image:width" content="500" />
+                <Meta property="og:image:height" content="500" />
+                <Meta property="og:image:type" content="image/webp" />
                 <Section constrainSize style="padding-block: min(8vh, var(--gap-insanely-large));">
                     <Column gap="none" class={sharedStyles.DirectTextChildrenAlignCenter}>
                         {/* biome-ignore lint/a11y/useHeadingContent: Screen readers kinda suck, so here's a workaround */}
@@ -35,7 +47,7 @@ export default (() => {
                             useful things look good and accessible to everyone.
                         </p>
                     </Column>
-                    <Row as="ul" gap="md" centerHorizontal wrap aria-label="My socials">
+                    <Row as="ul" data-no-marker="true" gap="md" centerHorizontal wrap aria-label="My socials">
                         <For each={Object.values(Socials)}>
                             {social => (
                                 <li>
@@ -56,7 +68,7 @@ export default (() => {
                         <span>Projects</span>
                         <span aria-hidden="true">&gt;</span>
                     </h2>
-                    <ul class={styles.ProjectsGrid}>
+                    <ul data-no-marker="true" class={styles.ProjectsGrid}>
                         <For each={Projects}>
                             {project => (
                                 <li>
@@ -74,7 +86,7 @@ export default (() => {
                         <h2>Skillset</h2>
                         <p>These are some of the technologies I know and use regularly.</p>
                     </Column>
-                    <Row as="ul" wrap gap="xs">
+                    <Row as="ul" data-no-marker="true" wrap gap="xs">
                         <For each={Skills}>
                             {skill => (
                                 <li class={styles.SkillItem}>
@@ -117,7 +129,7 @@ export default (() => {
                             chat, you can always contact me at anytime.
                         </p>
                     </Column>
-                    <Row as="ul" gap="sm" wrap>
+                    <Row as="ul" data-no-marker="true" gap="sm" wrap>
                         <li>
                             <LinkButton leadingIcon={IconDiscord} href={Socials.discord.href}>
                                 Chat on Discord

@@ -6,7 +6,7 @@
   background-color: var(--comp-bg);
   color: var(--comp-color);
 
-  transition: var(---duration-medium) var(--easing-quick);
+  transition: var(--duration-medium) var(--easing-quick);
   /* Weird flashing fix for <a> tags, user agent stylesheet issue */
   transition-property: opacity, transform, filter, text-decoration,
     outline-color, background-color;

@@ -10,7 +10,7 @@
   align-items: center;
   text-decoration: none;
 
-  transition: transform var(---duration-longer) var(--easing);
+  transition: transform var(--duration-longer) var(--easing);
 
   &:where(:hover, :focus-visible) {
     background-color: var(--surface-medium);

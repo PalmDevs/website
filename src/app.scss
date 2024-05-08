@@ -74,7 +74,7 @@ button {
   font-size: var(--text-label);
 }
 
-ul:not([role="list"]) {
+ul[data-no-marker="true"] {
   list-style: none;
   margin: 0;
   padding: 0;

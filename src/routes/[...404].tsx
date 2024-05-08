@@ -9,9 +9,12 @@ import IconReport from '~/assets/icons/report.svg'
 import type { Component } from 'solid-js'
 
 import sharedStyles from '~/styles/shared.module.scss'
+import { Meta, Title } from '@solidjs/meta'
 
 export default (() => (
     <Page>
+        <Title>404 • Palm (PalmDevs)</Title>
+        <Meta name="description" content="This page doesn't exist. Did you take a wrong turn?" />
         <HttpStatusCode code={404} />
         <Section id="info">
             <Column gap="none" centerHorizontal class={sharedStyles.DirectTextChildrenAlignCenter}>

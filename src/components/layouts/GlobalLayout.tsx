@@ -1,13 +1,11 @@
+import { type JSX, Suspense, type Component } from 'solid-js'
 import NavDock from '~/components/NavDock'
 
 import IconBlog from '~/assets/icons/nav/blog.svg'
 import IconHome from '~/assets/icons/nav/home.svg'
 import IconSource from '~/assets/icons/source.svg'
 
-import type { RouteSectionProps } from '@solidjs/router'
-import type { Component } from 'solid-js'
-
-const Layout: Component<RouteSectionProps> = props => {
+const GlobalLayout: Component<{ children: JSX.Element }> = props => {
     return (
         <>
             <NavDock
@@ -23,9 +21,9 @@ const Layout: Component<RouteSectionProps> = props => {
                     },
                 ]}
             />
-            {props.children}
+            <Suspense>{props.children}</Suspense>
         </>
     )
 }
 
-export default Layout
+export default GlobalLayout
