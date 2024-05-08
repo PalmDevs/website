@@ -4,11 +4,12 @@ import { Meta, Title } from '@solidjs/meta'
 import { MDXProvider } from 'solid-mdx'
 import { format } from 'timeago.js'
 
-import { Column, Divider } from '~/components'
+import { Column, Divider, HoverZoomRepel } from '~/components'
+import { HoverTargetClassName } from '~/components/effects/HoverZoomRepel'
 import BlogLayout from '~/components/layouts/BlogLayout'
 
 import posts, { type Post } from '~/constants/posts'
-import { logger, undefinedIf } from '~/utils'
+import { combineClassNames, logger, undefinedIf } from '~/utils'
 
 import FourOhFourPage from '~/routes/[...404]'
 
@@ -52,17 +53,35 @@ export default () => {
                         <div id="post">
                             <Column gap="xs">
                                 <div
-                                    {...undefinedIf(!info().image, {
-                                        class: styles.InfoContainerWithImage,
-                                        style: `--comp-img-url: url("${info().image}")`,
-                                    })}
+                                    class={combineClassNames(
+                                        HoverTargetClassName,
+                                        undefinedIf(!info().image, styles.InfoContainerWithCover),
+                                    )}
                                 >
-                                    <h1>{info().title}</h1>
-                                    <p>{info().description}</p>
+                                    <Show when={info().image}>
+                                        {img => (
+                                            <a rel="noreferrer" target="_blank" href={img()}>
+                                                <HoverZoomRepel
+                                                    as="img"
+                                                    class={styles.Cover}
+                                                    src={img()}
+                                                    alt="Post cover"
+                                                />
+                                            </a>
+                                        )}
+                                    </Show>
+                                    <Column gap="xs" class={styles.Wrapper}>
+                                        <div>
+                                            <h1>{info().title}</h1>
+                                            <p>{info().description}</p>
+                                        </div>
+                                        <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
+                                    </Column>
                                 </div>
-                                <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
-                                <Divider />
                             </Column>
+                            <Show when={!info().image}>
+                                <Divider />
+                            </Show>
                             <MDXProvider
                                 components={{
                                     hr: () => <Divider />,

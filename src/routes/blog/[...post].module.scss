@@ -1,11 +1,32 @@
-.InfoContainerWithImage {
-  background-color: var(--surface-low);
-  background-image: linear-gradient(to bottom, transparent, var(--surface-low)),
-    var(--comp-img-url);
-
-  background-size: cover;
-
-  padding: var(--gap-medium);
-  padding-block-start: var(--gap-insanely-large);
+.InfoContainerWithCover {
+  position: relative;
   border-radius: var(--radius-medium);
+  overflow: hidden;
+
+  & .Cover {
+    width: 100%;
+    height: auto;
+    background-color: var(--surface-low);
+  }
+
+  & .Wrapper {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+
+    padding: var(--gap-medium);
+    padding-block-start: var(--gap-insanely-large);
+
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      color-mix(in srgb, var(--surface-low), transparent 5%) 75%
+    );
+
+    pointer-events: none;
+
+    & > * {
+      pointer-events: auto;
+    }
+  }
 }
