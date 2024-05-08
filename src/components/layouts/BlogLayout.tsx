@@ -47,7 +47,6 @@ const BlogLayout: Component<{ children: JSX.Element }> = props => {
                 <IconButton
                     ref={buttonRef}
                     label="Scroll to top"
-                    variant="secondary"
                     size="medium"
                     onClick={() => window.scrollTo({ top: 0 })}
                     icon={IconUp}
