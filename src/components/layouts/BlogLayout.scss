@@ -14,9 +14,13 @@
   & h2 {
     font-size: var(--text-subtitle);
   }
-
+  
   & h3 {
     font-size: var(--text-heading);
+  }
+  
+  & :is(h4, h5, h6) {
+    color: var(--neutral-high);
   }
 
   & h4 {
@@ -54,5 +58,15 @@
       display: block;
       padding: var(--gap-medium);
     }
+  }
+
+  & img {
+    display: block;
+    width: auto;
+    height: auto;
+  }
+
+  & a {
+    color: var(--primary);
   }
 }

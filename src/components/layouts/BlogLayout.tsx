@@ -6,9 +6,7 @@ import './BlogLayout.scss'
 const BlogLayout: Component<{ children: JSX.Element }> = props => {
     return (
         <Page>
-            <Suspense>
-                <div>{props.children}</div>
-            </Suspense>
+            <Suspense>{props.children}</Suspense>
         </Page>
     )
 }
