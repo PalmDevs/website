@@ -1,12 +1,14 @@
+import { Show, Suspense, createResource, createSignal, lazy, onCleanup, onMount } from 'solid-js'
 import { useParams } from '@solidjs/router'
-import { Show, Suspense, createResource, lazy } from 'solid-js'
-import { format } from 'timeago.js'
+import { Meta, Title } from '@solidjs/meta'
 import { MDXProvider } from 'solid-mdx'
+import { format } from 'timeago.js'
 
 import { Column, Divider } from '~/components'
 import BlogLayout from '~/components/layouts/BlogLayout'
 
 import posts, { type Post } from '~/constants/posts'
+import { logger } from '~/utils'
 
 import FourOhFourPage from '~/routes/[...404]'
 
@@ -25,27 +27,48 @@ export default () => {
 
     return (
         <Show when={postInfo()} fallback={<FourOhFourPage />}>
-            {info => (
-                <BlogLayout>
-                    <div id="post">
-                        <Column gap="xs">
-                            <div>
-                                <h1>{info().title}</h1>
-                                <p>{info().description}</p>
-                            </div>
-                            <p style="color: var(--neutral-lowest)">posted {format(info().posted)}</p>
-                            <Divider />
-                        </Column>
-                        <MDXProvider components={{
-                            hr: () => <Divider />,
-                        }}>
-                            <Suspense>
-                                <PostComponent />
-                            </Suspense>
-                        </MDXProvider>
-                    </div>
-                </BlogLayout>
-            )}
+            {info => {
+                const [formattedTime, setFormattedTime] = createSignal(format(info().posted))
+
+                onMount(() => {
+                    const interval = setInterval(() => {
+                        logger.debug('Blog', 'Updating posted time...')
+                        setFormattedTime(format(info().posted))
+                    }, 60e3)
+                    onCleanup(() => clearInterval(interval))
+                })
+
+                return (
+                    <BlogLayout>
+                        <Title>{`${info().title} • Palm (PalmDevs)`}</Title>
+                        <Meta name="description" content={info().description} />
+                        <Show when={info().image}>
+                            {/* Add twitter embeds, for large thumbnail display */}
+                            <Meta name="twitter:card" content="summary_large_image" />
+                            <Meta name="twitter:image:src" content={info().image} />
+                        </Show>
+                        <div id="post">
+                            <Column gap="xs">
+                                <div>
+                                    <h1>{info().title}</h1>
+                                    <p>{info().description}</p>
+                                </div>
+                                <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
+                                <Divider />
+                            </Column>
+                            <MDXProvider
+                                components={{
+                                    hr: () => <Divider />,
+                                }}
+                            >
+                                <Suspense>
+                                    <PostComponent />
+                                </Suspense>
+                            </MDXProvider>
+                        </div>
+                    </BlogLayout>
+                )
+            }}
         </Show>
     )
 }
