@@ -3,6 +3,7 @@
   position: sticky;
   top: 0;
   z-index: var(--layer-nav);
+  pointer-events: none;
 }
 
 .Dock {
@@ -10,6 +11,7 @@
   top: var(--gap-medium);
   margin-block: var(--gap-medium);
   overflow-x: auto;
+  pointer-events: auto;
 
   padding: var(--gap-smaller) var(--gap-small);
   border-radius: var(--radius-full);
