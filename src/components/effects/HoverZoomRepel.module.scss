@@ -4,7 +4,8 @@
   transition-property: box-shadow, transform;
 }
 
-.Tiltable:hover {
+.Tiltable:hover,
+.HoverTarget:hover .Tiltable {
   transform: perspective(var(--tilt-perspective, 500px))
     scale(var(--tilt-scale, 1.1)) rotateX(var(--tilt-rotate-x, 0deg))
     rotateY(var(--tilt-rotate-y, 0deg));
