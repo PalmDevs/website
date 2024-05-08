@@ -8,9 +8,11 @@ import { Column, Divider } from '~/components'
 import BlogLayout from '~/components/layouts/BlogLayout'
 
 import posts, { type Post } from '~/constants/posts'
-import { logger } from '~/utils'
+import { logger, undefinedIf } from '~/utils'
 
 import FourOhFourPage from '~/routes/[...404]'
+
+import styles from './[...post].module.scss'
 
 export default () => {
     const params = useParams<{ post: string }>()
@@ -49,7 +51,12 @@ export default () => {
                         </Show>
                         <div id="post">
                             <Column gap="xs">
-                                <div>
+                                <div
+                                    {...undefinedIf(!info().image, {
+                                        class: styles.InfoContainerWithImage,
+                                        style: `--comp-img-url: url("${info().image}")`,
+                                    })}
+                                >
                                     <h1>{info().title}</h1>
                                     <p>{info().description}</p>
                                 </div>

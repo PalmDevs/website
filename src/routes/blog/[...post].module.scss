@@ -1,0 +1,11 @@
+.InfoContainerWithImage {
+  background-color: var(--surface-low);
+  background-image: linear-gradient(to bottom, transparent, var(--surface-low)),
+    var(--comp-img-url);
+
+  background-size: cover;
+
+  padding: var(--gap-medium);
+  padding-block-start: var(--gap-insanely-large);
+  border-radius: var(--radius-medium);
+}
