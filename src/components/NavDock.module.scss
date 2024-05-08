@@ -34,11 +34,13 @@
     }
     
     @media not print and (prefers-contrast: more) and (prefers-reduced-transparency: reduce) and (prefers-reduced-motion: reduce) {
+      -webkit-backdrop-filter: blur(var(--gap-small));
       backdrop-filter: blur(var(--gap-small));
       background-color: color-mix(in srgb, var(--surface-low), transparent 10%);
       
       [data-theme="dark"] & {
-        transition-property: background-color, outline-color, backdrop-filter;
+        transition-property: background-color, outline-color, backdrop-filter, -webkit-backdrop-filter;
+        -webkit-backdrop-filter: blur(var(--gap-small)) brightness(80%);
         backdrop-filter: blur(var(--gap-small)) brightness(80%);
       }
 
