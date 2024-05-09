@@ -20,6 +20,11 @@ const integrityDirtyItems = integrityCheck.stdout.toString().trim().split('\n').
 export default defineConfig({
     ssr: true,
     server: {
+        esbuild: {
+            options: {
+                target: 'es2022',
+            }
+        },
         preset: process.env.NITRO_PRESET ?? 'bun',
         prerender: {
             crawlLinks: true,
@@ -28,6 +33,7 @@ export default defineConfig({
     },
     extensions: ['mdx', 'md'],
     vite: {
+        target: 'es2022',
         plugins: [
             mdx({})({
                 jsx: true,
