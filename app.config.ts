@@ -4,7 +4,9 @@ import svgPlugin from 'vite-plugin-solid-svg'
 
 // @ts-expect-error: Missing types
 import mdxPkg from '@vinxi/plugin-mdx'
-const { default: { withImports: mdx } } = mdxPkg
+const {
+    default: { withImports: mdx },
+} = mdxPkg
 
 import remarkSlug from 'remark-slug'
 
@@ -23,7 +25,7 @@ export default defineConfig({
         esbuild: {
             options: {
                 target: 'es2022',
-            }
+            },
         },
         preset: process.env.NITRO_PRESET ?? 'bun',
         prerender: {

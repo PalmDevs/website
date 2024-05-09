@@ -1,4 +1,4 @@
-import { type JSX, Suspense, type Component, onMount, onCleanup } from 'solid-js'
+import { type Component, type JSX, Suspense, onCleanup, onMount } from 'solid-js'
 
 import { IconButton, Page } from '~/components'
 import { logger } from '~/utils'
@@ -17,10 +17,10 @@ const BlogLayout: Component<{ children: JSX.Element }> = props => {
 
             const listener = () => {
                 requestAnimationFrame(() => {
-                    // Yes, it's a magic number (40rem) 
-                    // Doing conditions this way prevents unnecessary calls to get body's rect                   
+                    // Yes, it's a magic number (40rem)
+                    // Doing conditions this way prevents unnecessary calls to get body's rect
                     if (window.scrollY < 640) return applyTransition(false)
-                    
+
                     const { height } = document.body.getBoundingClientRect()
                     if (height < 640 || window.scrollY < height * 0.15) return applyTransition(false)
 

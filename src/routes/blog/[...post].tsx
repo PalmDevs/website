@@ -1,6 +1,6 @@
-import { Show, Suspense, createResource, createSignal, lazy, onCleanup, onMount } from 'solid-js'
-import { useParams } from '@solidjs/router'
 import { Meta, Title } from '@solidjs/meta'
+import { useParams } from '@solidjs/router'
+import { Show, Suspense, createResource, createSignal, lazy, onCleanup, onMount } from 'solid-js'
 import { MDXProvider } from 'solid-mdx'
 import { format } from 'timeago.js'
 

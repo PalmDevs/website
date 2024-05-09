@@ -8,8 +8,8 @@ import IconReport from '~/assets/icons/report.svg'
 
 import type { Component } from 'solid-js'
 
-import sharedStyles from '~/styles/shared.module.scss'
 import { Meta, Title } from '@solidjs/meta'
+import sharedStyles from '~/styles/shared.module.scss'
 
 export default (() => (
     <Page>

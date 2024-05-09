@@ -3,8 +3,8 @@ import { Dynamic } from 'solid-js/web'
 
 import type { Component, ComponentProps, JSX } from 'solid-js'
 
-import styles from './HoverZoomRepel.module.scss'
 import { combineClassNames } from '~/utils'
+import styles from './HoverZoomRepel.module.scss'
 
 const HoverZoomRepel = <E extends ElementType>(
     props: HoverZoomRepelProps<E> & Omit<ComponentProps<E>, keyof HoverZoomRepelProps<E>>,

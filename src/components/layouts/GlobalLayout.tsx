@@ -1,4 +1,4 @@
-import { type JSX, Suspense, type Component } from 'solid-js'
+import { type Component, type JSX, Suspense } from 'solid-js'
 import NavDock from '~/components/NavDock'
 
 import IconBlog from '~/assets/icons/nav/blog.svg'

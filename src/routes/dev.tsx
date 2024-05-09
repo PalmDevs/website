@@ -1,7 +1,18 @@
 import { type Component, For, useContext } from 'solid-js'
 import { createStore } from 'solid-js/store'
 
-import { Button, Column, IconButton, type IconType, LinkButton, NavDock, Page, Row, Section, Divider } from '~/components'
+import {
+    Button,
+    Column,
+    Divider,
+    IconButton,
+    type IconType,
+    LinkButton,
+    NavDock,
+    Page,
+    Row,
+    Section,
+} from '~/components'
 import { HoverZoomRepel } from '~/components/effects'
 
 import { undefinedIf } from '~/utils'

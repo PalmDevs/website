@@ -1,5 +1,5 @@
-import { type Component, For } from 'solid-js'
 import { Meta, Title } from '@solidjs/meta'
+import { type Component, For } from 'solid-js'
 
 import { Column, LinkButton, LinkIconButton, Page, ProjectCard, Row, Section, Touchable } from '~/components'
 
