@@ -17,7 +17,7 @@ export default createHandler(() => (
                     <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
                     <link
                         rel="preload"
-                        href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800|jetbrains-mono:400"
+                        href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800|jetbrains-mono:400&display=swap"
                         as="style"
                     />
                     <link rel="preconnect" href="https://fonts.bunny.net" as="font" />
