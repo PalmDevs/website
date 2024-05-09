@@ -8,7 +8,7 @@ import { Column, Divider, HoverZoomRepel } from '~/components'
 import { HoverTargetClassName } from '~/components/effects/HoverZoomRepel'
 import BlogLayout from '~/components/layouts/BlogLayout'
 
-import posts, { type Post } from '~/constants/posts'
+import Posts, { type Post } from '~/constants/posts'
 import { combineClassNames, logger, undefinedIf } from '~/utils'
 
 import FourOhFourPage from '~/routes/[...404]'
@@ -20,13 +20,13 @@ export default () => {
 
     // This returns a Promise, since this isn't eager
     // which is great, because we don't want to load the post until we know it's needed
-    const post = posts[`../../posts/${params.post}.mdx`]?.()
+    const post = Posts[params.post]
     // This is just a silly workaround because the above returns a promise
     // so we can abuse resources to get the info we need
     const [postInfo] = createResource(post, getPostInfo)
 
     // `await post` has a `default` property, which is why this is possible
-    const PostComponent = lazy(() => post)
+    const PostComponent = lazy(() => post())
 
     return (
         <Show when={postInfo()} fallback={<FourOhFourPage />}>
