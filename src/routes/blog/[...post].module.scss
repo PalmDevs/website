@@ -1,7 +1,14 @@
 .InfoContainerWithCover {
+  --comp-fade-color: #11111405;
+
+  [data-theme="dark"] {
+    --comp-fade-color: #15192205;
+  }
+
   position: relative;
   border-radius: var(--radius-medium);
   overflow: hidden;
+  color: var(--neutral-medium);
 
   & .Cover {
     background-color: var(--surface-low);
@@ -21,7 +28,7 @@
     background-image: linear-gradient(
       to bottom,
       transparent,
-      color-mix(in srgb, var(--surface-low), transparent 5%) 75%
+      var(--comp-fade-color) 75%
     );
   }
 }

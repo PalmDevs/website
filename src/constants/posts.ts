@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js'
+import type { ThemeColorScheme } from '~/contexts'
 
 const posts = import.meta.glob<false, string, Post>('../../posts/*.mdx')
 const Posts: Record<string, () => Promise<Post>> = Object.fromEntries(
@@ -12,5 +13,9 @@ export interface Post {
     title: string
     description: string
     posted: Date
-    image?: string
+    cover?: {
+        image: string
+        fadeColor?: string
+        theme?: ThemeColorScheme
+    }
 }

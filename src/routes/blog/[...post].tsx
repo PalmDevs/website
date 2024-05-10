@@ -45,19 +45,27 @@ export default () => {
                     <BlogLayout>
                         <Title>{`${info().title} • Palm (PalmDevs)`}</Title>
                         <Meta name="description" content={info().description} />
-                        <Show when={info().image}>
-                            {/* Add twitter embeds, for large thumbnail display */}
-                            <Meta name="twitter:card" content="summary_large_image" />
-                            <Meta name="twitter:image:src" content={info().image} />
+                        <Show when={info().cover?.image}>
+                            {img => (
+                                <>
+                                    <Meta name="twitter:card" content="summary_large_image" />
+                                    <Meta name="twitter:image:src" content={img()} />
+                                </>
+                            )}
                         </Show>
                         <div id="post">
                             <div
+                                style={undefinedIf(
+                                    !info().cover,
+                                    `--comp-fade-color: ${info().cover?.fadeColor}`,
+                                )}
+                                data-theme={undefinedIf(!info().cover, info().cover!.theme)}
                                 class={combineClassNames(
                                     HoverTargetClassName,
-                                    undefinedIf(!info().image, styles.InfoContainerWithCover),
+                                    undefinedIf(!info().cover, styles.InfoContainerWithCover),
                                 )}
                             >
-                                <Show when={info().image}>
+                                <Show when={info().cover?.image}>
                                     {img => (
                                         <HoverZoomRepel as="img" class={styles.Cover} src={img()} alt="Post cover" />
                                     )}
@@ -70,7 +78,7 @@ export default () => {
                                     <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
                                 </Column>
                             </div>
-                            <Show when={!info().image}>
+                            <Show when={!info().cover}>
                                 <Divider />
                             </Show>
                             <MDXProvider
