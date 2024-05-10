@@ -23,11 +23,15 @@
       transparent,
       color-mix(in srgb, var(--surface-low), transparent 5%) 75%
     );
+  }
+}
 
-    pointer-events: none;
+.Wrapper {
+  pointer-events: none;
 
-    & > * {
-      pointer-events: auto;
-    }
+  & :is(h1, h2, h3, h4, h5, h6, p, span) {
+    pointer-events: auto;
+    width: fit-content;
+    margin-block-end: var(--gap-smaller) !important;
   }
 }

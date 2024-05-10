@@ -63,10 +63,10 @@ export default () => {
                                     )}
                                 </Show>
                                 <Column gap="xs" class={styles.Wrapper}>
-                                    <div>
+                                    <Column gap="none">
                                         <h1>{info().title}</h1>
                                         <p>{info().description}</p>
-                                    </div>
+                                    </Column>
                                     <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
                                 </Column>
                             </div>
