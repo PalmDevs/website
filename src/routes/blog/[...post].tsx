@@ -62,7 +62,7 @@ export default () => {
                                         <HoverZoomRepel as="img" class={styles.Cover} src={img()} alt="Post cover" />
                                     )}
                                 </Show>
-                                <Column gap="xs" class={styles.Wrapper}>
+                                <Column as="header" gap="xs" class={styles.Wrapper}>
                                     <Column gap="none">
                                         <h1>{info().title}</h1>
                                         <p>{info().description}</p>
