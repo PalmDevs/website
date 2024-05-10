@@ -1,5 +1,4 @@
-:root,
-:root[data-theme="light"] {
+:root, [data-theme="light"] {
   --bg: #f4f9ff;
 
   --gradient: linear-gradient(230deg, #29a873 25%, #007cfa 70.95%);
@@ -32,7 +31,7 @@
   --interaction-glow: rgba(0, 0, 0, 0.075);
 }
 
-:root[data-theme="dark"] {
+[data-theme="dark"] {
   --bg: #0e1114;
 
   --gradient: linear-gradient(230deg, #4feaa9 10.89%, #57b7d9 60.95%);
