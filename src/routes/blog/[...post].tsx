@@ -29,7 +29,7 @@ export default () => {
     const PostComponent = lazy(() => post())
 
     return (
-        <Show when={postInfo()} fallback={<FourOhFourPage />}>
+        <Show when={postInfo()} fallback={<FourOhFourPage withoutDocTitle />}>
             {info => {
                 const [formattedTime, setFormattedTime] = createSignal(format(info().posted))
 
@@ -55,10 +55,7 @@ export default () => {
                         </Show>
                         <div id="post">
                             <div
-                                style={undefinedIf(
-                                    !info().cover,
-                                    `--comp-fade-color: ${info().cover?.fadeColor}`,
-                                )}
+                                style={undefinedIf(!info().cover, `--comp-fade-color: ${info().cover?.fadeColor}`)}
                                 data-theme={undefinedIf(!info().cover, info().cover!.theme)}
                                 class={combineClassNames(
                                     HoverTargetClassName,

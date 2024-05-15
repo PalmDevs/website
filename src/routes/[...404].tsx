@@ -1,4 +1,6 @@
+import { Meta, Title } from '@solidjs/meta'
 import { HttpStatusCode } from '@solidjs/start'
+import { type Component, Show } from 'solid-js'
 
 import { Column, LinkButton, Page, Row, Section } from '~/components'
 import { RepositoryLinks } from '~/constants/links'
@@ -6,14 +8,13 @@ import { RepositoryLinks } from '~/constants/links'
 import IconHome from '~/assets/icons/nav/home.svg'
 import IconReport from '~/assets/icons/report.svg'
 
-import type { Component } from 'solid-js'
-
-import { Meta, Title } from '@solidjs/meta'
 import sharedStyles from '~/styles/shared.module.scss'
 
-export default (() => (
+const FourOhFourPage: Component<{ withoutDocTitle?: boolean }> = props => (
     <Page>
-        <Title>404 • Palm (PalmDevs)</Title>
+        <Show when={!props.withoutDocTitle}>
+            <Title>404 • Palm (PalmDevs)</Title>
+        </Show>
         <Meta name="description" content="This page doesn't exist. Did you take a wrong turn?" />
         <HttpStatusCode code={404} />
         <Section id="info">
@@ -31,4 +32,6 @@ export default (() => (
             </Column>
         </Section>
     </Page>
-)) satisfies Component
+)
+
+export default FourOhFourPage
