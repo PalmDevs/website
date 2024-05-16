@@ -5,7 +5,7 @@ import { logger } from '~/utils'
 
 import IconUp from '~/assets/icons/up.svg'
 
-import './BlogLayout.scss'
+import styles from './BlogLayout.module.scss'
 
 const BlogLayout: Component<{ children: JSX.Element }> = props => {
     const handleRef = (ref: HTMLDivElement) => {
@@ -41,9 +41,9 @@ const BlogLayout: Component<{ children: JSX.Element }> = props => {
     let buttonRef: HTMLButtonElement | undefined
 
     return (
-        <Page style="position: relative">
+        <Page class={styles.Content}>
             <Suspense>{props.children}</Suspense>
-            <div id="scroll-up-container" ref={handleRef}>
+            <div class={styles.ScrollUpContainer} ref={handleRef}>
                 <IconButton
                     ref={buttonRef}
                     label="Scroll to top"

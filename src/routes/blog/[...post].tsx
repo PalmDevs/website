@@ -45,15 +45,15 @@ export default () => {
                     <BlogLayout>
                         <Title>{`${info().title} • Palm (PalmDevs)`}</Title>
                         <Meta name="description" content={info().description} />
-                        <Show when={info().cover?.image}>
-                            {img => (
-                                <>
-                                    <Meta name="twitter:card" content="summary_large_image" />
-                                    <Meta name="twitter:image:src" content={img()} />
-                                </>
-                            )}
-                        </Show>
-                        <div id="post">
+                        <div class={styles.Post}>
+                            <Show when={info().cover?.image}>
+                                {img => (
+                                    <>
+                                        <Meta name="twitter:card" content="summary_large_image" />
+                                        <Meta name="twitter:image:src" content={img()} />
+                                    </>
+                                )}
+                            </Show>
                             <div
                                 style={undefinedIf(!info().cover, `--comp-fade-color: ${info().cover?.fadeColor}`)}
                                 data-theme={undefinedIf(!info().cover, info().cover!.theme)}

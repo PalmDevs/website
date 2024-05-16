@@ -8,8 +8,8 @@ import styles from './Page.module.scss'
 
 export const Page: Component<ComponentProps<'main'>> = props => {
     return (
-        <Column as="main" flex centerHorizontal {...props} tabIndex="-1">
-            <Column {...props} centerHorizontal id="content">
+        <Column as="main" flex centerHorizontal tabIndex="-1">
+            <Column {...props} centerHorizontal class={combineClassNames(props.class, styles.Content)}>
                 {props.children}
             </Column>
         </Column>
