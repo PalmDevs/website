@@ -67,11 +67,11 @@ export default () => {
                                         <HoverZoomRepel as="img" class={styles.Cover} src={img()} alt="Post cover" />
                                     )}
                                 </Show>
-                                <Column as="header" gap="xs" class={styles.Wrapper}>
-                                    <Column gap="none">
+                                <Column as="header" gap="none" class={styles.Wrapper}>
+                                    <div>
                                         <h1>{info().title}</h1>
                                         <p>{info().description}</p>
-                                    </Column>
+                                    </div>
                                     <p style="color: var(--neutral-lowest)">posted {formattedTime()}</p>
                                 </Column>
                             </div>
