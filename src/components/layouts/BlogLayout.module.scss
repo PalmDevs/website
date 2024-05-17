@@ -1,8 +1,11 @@
 @use '../../styles/queries';
 
-.Content {
+/* Increasing specificity to override global styles */
+.Content.Content {
   position: relative;
   max-width: 52rem;
+
+  padding-bottom: var(--gap-insanely-large);
 }
 
 .ScrollUpContainer {
