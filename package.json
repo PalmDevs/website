@@ -6,38 +6,35 @@
     "dev": "NODE_ENV=development vinxi dev",
     "build": "NODE_ENV=production vinxi build",
     "start": "vinxi start",
-    "version": "vinxi version",
     "format": "biome check --apply ."
   },
   "dependencies": {
-    "@shikijs/transformers": "^1.29.2",
-    "@solidjs/meta": "^0.29.4",
-    "@solidjs/router": "^0.13.6",
-    "@solidjs/start": "^1.0.11",
-    "js-confetti": "^0.12.0",
-    "solid-js": "^1.9.4",
-    "timeago.js": "^4.0.2"
-  },
-  "engines": {
-    "node": ">=16"
-  },
-  "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@mdx-js/mdx": "^2.3.0",
     "@shikijs/rehype": "^1.29.2",
+    "@shikijs/transformers": "^3.2.1",
     "@shikijs/twoslash": "^1.29.2",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.1.0",
     "@vinxi/plugin-mdx": "^3.7.2",
     "rehype-pretty-code": "^0.13.2",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
     "sass": "^1.83.4",
+    "solid-js": "^1.9.5",
     "solid-mdx": "^0.0.7",
-    "vinxi": "^0.4.3",
+    "vinxi": "^0.5.3",
     "vite-plugin-solid-svg": "^0.8.1"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "trustedDependencies": ["@biomejs/biome", "@parcel/watcher", "esbuild"],
   "patchedDependencies": {
     "solid-mdx@0.0.7": "patches/solid-mdx@0.0.7.patch",
-    "@vinxi/plugin-mdx@3.7.2": "patches/@vinxi%2Fplugin-mdx@3.7.2.patch",
-    "@solidjs/start@1.0.11": "patches/@solidjs%2Fstart@1.0.11.patch"
+    "@vinxi/plugin-mdx@3.7.2": "patches/@vinxi%2Fplugin-mdx@3.7.2.patch"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.8"
   }
 }
