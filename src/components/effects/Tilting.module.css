@@ -1,0 +1,15 @@
+.Tiltable {
+	width: fit-content;
+	transition: var(---duration-medium) var(--easing);
+	transition-property: box-shadow, transform;
+}
+
+.Tiltable:hover {
+	transform: perspective(var(--tilt-perspective, 500px))
+		scale(var(--tilt-scale, 1.1)) rotateX(var(--tilt-rotate-x, 0deg))
+		rotateY(var(--tilt-rotate-y, 0deg));
+
+	@media (prefers-reduced-motion: reduce) {
+		transform: none;
+	}
+}
