@@ -1,10 +1,8 @@
+import type { Component, ComponentProps, JSX } from 'solid-js'
 import { createEffect, onCleanup, onMount, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
-
-import type { Component, ComponentProps, JSX } from 'solid-js'
-
-import styles from './Tilting.module.css'
 import { combineClassNames } from '~/utils'
+import styles from './Tilting.module.css'
 
 export default function Tilting<E extends ElementType>(
     props: TiltingProps<E> & Omit<ComponentProps<E>, keyof TiltingProps<E>>,

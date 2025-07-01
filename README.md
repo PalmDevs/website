@@ -1,32 +1,57 @@
-# SolidStart
+# 🌐 Website
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+It's my website! I think having a website is cool, so I'm trying to make it real.
 
-## Creating a project
+- 🖌️ Designed (with love and care) by [me](https://github.com/PalmDevs)
+- 🏗️ Built with [SolidJS](https://www.solidjs.com/) and [SolidStart](https://start.solidjs.com)
+- 🍞 Run by [Bun](https://bun.sh)
+- 🔷 Deployed using [Netlify](https://netlify.com) [![Netlify Status](https://api.netlify.com/api/v1/badges/62de1c9b-432f-4a1e-b0bb-4e32daec0516/deploy-status)](https://app.netlify.com/sites/palmdevs/deploys)
 
-```bash
-# create a new project in the current directory
-npm init solid@latest
+## 👷 Developing
 
-# create a new project in my-app
-npm init solid@latest my-app
-```
+1. Install dependencies
 
-## Developing
+   ```sh
+   bun install
+   ```
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+2. Start the development server
 
-```bash
-npm run dev
+   ```sh
+   bun dev
+   ```
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+3. Make some changes _(optional)_
 
-## Building
+4. Format your code _(recommended)_
 
-Solid apps are built with _presets_, which optimise your project for deployment to different environments.
+   ```sh
+   bun format
+   ```
 
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different preset, add it to the `devDependencies` in `package.json` and specify in your `app.config.js`.
+5. Build the site
 
-## This project was created with the [Solid CLI](https://solid-cli.netlify.app)
+   ```sh
+   bun run build
+   ```
+
+6. Preview the built site _(optional)_
+
+   ```sh
+   bun start
+   ```
+
+### 📃 Common questions & issues
+
+#### Server starts, but loads infinitely
+
+You may be doing cyclic imports. To check if this is actually the issue, try **building the site**. If everything works correctly when building, it is a guaranteed cyclic import issue.
+
+#### Hydration mismatch when renaming routes
+
+Sometimes build caches don't get invalidated. You'll need to remove the following directories and restart the development server:
+
+- `dist`
+- `.output`
+- `.vinxi`
+- `node_modules/.vinxi`

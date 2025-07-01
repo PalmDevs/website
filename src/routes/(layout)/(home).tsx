@@ -3,10 +3,10 @@ import { For } from 'solid-js'
 import IconDiscord from '~/assets/icons/discord.svg'
 import IconMail from '~/assets/icons/mail.svg'
 import { LinkButton, LinkIconButton } from '~/components/buttons'
+import Tilting from '~/components/effects/Tilting'
 import { Column, Page, Row, Section } from '~/components/Page'
 import ProjectCard from '~/components/ProjectCard'
 import Touchable from '~/components/Touchable'
-
 import { BirthDate } from '~/constants/events'
 import Projects from '~/constants/projects'
 import Skills from '~/constants/skills'
@@ -14,7 +14,6 @@ import Socials from '~/constants/socials'
 import sharedStyles from '~/styles/shared.module.css'
 import { getAge } from '~/utils'
 import styles from './(home).module.scss'
-import Tilting from '~/components/effects/Tilting'
 
 export default function Home() {
     const age = getAge(BirthDate)
