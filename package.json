@@ -37,8 +37,9 @@
     "esbuild"
   ],
   "patchedDependencies": {
-    "solid-mdx@0.0.7": "patches/solid-mdx@0.0.7.patch",
-    "@vinxi/plugin-mdx@3.7.2": "patches/@vinxi%2Fplugin-mdx@3.7.2.patch"
+    "@solidjs/start@1.1.5": "patches/@solidjs%2Fstart@1.1.5.patch",
+    "@vinxi/plugin-mdx@3.7.2": "patches/@vinxi%2Fplugin-mdx@3.7.2.patch",
+    "solid-mdx@0.0.7": "patches/solid-mdx@0.0.7.patch"
   },
   "devDependencies": {
     "@types/bun": "^1.2.17"
