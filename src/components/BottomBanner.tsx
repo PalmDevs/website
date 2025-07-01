@@ -1,13 +1,10 @@
-import { type ComponentProps, type JSX, Show, createEffect, createSignal } from 'solid-js'
+import { type ComponentProps, createEffect, createSignal, type JSX, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
-
-import { Row } from './Page'
-import { Button } from './buttons'
-
 import { BottomBannerContext } from '~/contexts'
 import { logger, runAfterFramePaint } from '~/utils'
-
 import styles from './BottomBanner.module.scss'
+import { Button } from './buttons'
+import { Row } from './Page'
 
 const BottomBanner = (props: BottomBarProps) => {
     const log = (method: keyof typeof logger, ...args: unknown[]) => logger[method](`BottomBanner:${props.id}`, ...args)

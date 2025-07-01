@@ -1,24 +1,21 @@
 import { Meta, Title } from '@solidjs/meta'
-import { type Component, For } from 'solid-js'
-
+import { For } from 'solid-js'
+import IconDiscord from '~/assets/icons/discord.svg'
+import IconMail from '~/assets/icons/mail.svg'
+import { LinkButton, LinkIconButton } from '~/components/buttons'
 import { Column, Page, Row, Section } from '~/components/Page'
 import ProjectCard from '~/components/ProjectCard'
 import Touchable from '~/components/Touchable'
-import { LinkButton, LinkIconButton } from '~/components/buttons'
-
-import IconDiscord from '~/assets/icons/discord.svg'
-import IconMail from '~/assets/icons/mail.svg'
 
 import { BirthDate } from '~/constants/events'
 import Projects from '~/constants/projects'
 import Skills from '~/constants/skills'
 import Socials from '~/constants/socials'
-import { getAge } from '~/utils'
-
 import sharedStyles from '~/styles/shared.module.css'
+import { getAge } from '~/utils'
 import styles from './(home).module.scss'
 
-export default (() => {
+export default function Home() {
     const age = getAge(BirthDate)
 
     return (
@@ -26,7 +23,7 @@ export default (() => {
             <Title>Palm (PalmDevs)</Title>
             <Meta
                 name="description"
-                content={`I'm a ${age}-year-old self-taught full-stack developer and a UI/UX designer. I want to make useful things look good and accessible to everyone. I am known for working in the open-source world, and designing applications.`}
+                content={`I'm a ${age}-year-old guy, making cool things with user experience and accessibility in mind. I want to make useful things look good and accessible to everyone. I am known for working in the open-source world, and designing applications.`}
             />
             <Meta property="og:image" content="/assets/og/image.webp" />
             <Meta property="og:image:width" content="500" />
@@ -46,8 +43,7 @@ export default (() => {
                         <span aria-hidden="true">!</span>
                     </h1>
                     <p style="text-wrap: balance">
-                        I'm a {age}-year-old self-taught full-stack developer and a UI/UX designer. I want to make
-                        useful things look good and accessible to everyone.
+                        I'm a {age}-year-old guy, making cool things with user experience and accessibility in mind.
                     </p>
                 </Column>
                 <Row id="contact" as="ul" data-no-marker="true" gap="md" centerHorizontal wrap aria-label="My socials">
@@ -71,6 +67,10 @@ export default (() => {
                     <span>Projects</span>
                     <span aria-hidden="true">&gt;</span>
                 </h2>
+                <p style="text-wrap: balance; text-align: center">
+                    From these projects, I have experience with full-stack development, UI/UX designing &
+                    reverse-engineering.
+                </p>
                 <ul data-no-marker="true" class={styles.ProjectsGrid}>
                     <For each={Projects}>
                         {project => (
@@ -122,10 +122,10 @@ export default (() => {
             </Section>
             <Section>
                 <Column gap="none">
-                    <h2>Let's chat</h2>
+                    <h2>Open to chat</h2>
                     <p style="text-wrap: balance">
-                        Don't be shy! If you want to know more about me, work with me, or just want to have a little
-                        chat, you can always contact me at anytime.
+                        If you want to know more about me, work with me, or just want to have a casual chat, feel free
+                        to reach out!
                     </p>
                 </Column>
                 <Row as="ul" data-no-marker="true" gap="sm" wrap>
@@ -143,4 +143,4 @@ export default (() => {
             </Section>
         </Page>
     )
-}) satisfies Component
+}

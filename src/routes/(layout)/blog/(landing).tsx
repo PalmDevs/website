@@ -1,5 +1,5 @@
 import { Meta, Title } from '@solidjs/meta'
-import { type Component, For, Show, createResource } from 'solid-js'
+import { type Component, createResource, For, Show } from 'solid-js'
 
 import LinkCard from '~/components/LinkCard'
 import { Column, Page, Section } from '~/components/Page'

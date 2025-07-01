@@ -1,27 +1,19 @@
-import { execSync } from 'child_process'
-
-import { defineConfig } from '@solidjs/start/config'
-
-import mdx from '@vinxi/plugin-mdx'
-import svgPlugin from 'vite-plugin-solid-svg'
-
 import rehypeShiki from '@shikijs/rehype'
+import { transformerNotationHighlight, transformerNotationWordHighlight } from '@shikijs/transformers'
+import { transformerTwoslash } from '@shikijs/twoslash'
+import { defineConfig } from '@solidjs/start/config'
+// @ts-expect-error
+import mdx from '@vinxi/plugin-mdx'
+import { execSync } from 'child_process'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
-
-import { transformerTwoslash } from '@shikijs/twoslash'
-import { transformerNotationHighlight, transformerNotationWordHighlight } from '@shikijs/transformers'
+import svgPlugin from 'vite-plugin-solid-svg'
 
 const defineString = (str?: string) => `"${str || 'unknown'}"`
 
 export default defineConfig({
     ssr: true,
     server: {
-        esbuild: {
-            options: {
-                target: 'es2022',
-            },
-        },
         preset: process.env.NITRO_PRESET ?? 'bun',
         // Use this if you want everything to be completely static
         // The site has theming based on events, so this will not be used unless you want to cause a theme flash

@@ -1,23 +1,20 @@
 import JSConfetti from 'js-confetti'
-import { type Component, type JSX, Show, Suspense, createSignal, onCleanup, onMount, useContext } from 'solid-js'
+import { type Component, createSignal, type JSX, onCleanup, onMount, Show, Suspense, useContext } from 'solid-js'
 import { format } from 'timeago.js'
-
-import BottomBanner from '../BottomBanner'
-import NavDock from '../NavDock'
-import { Button } from '../buttons/Button'
-
-import { Birthday, BirthdayLocale } from '~/constants/events'
-
 import IconBlog from '~/assets/icons/nav/blog.svg'
 import IconHome from '~/assets/icons/nav/home.svg'
 import IconSource from '~/assets/icons/source.svg'
 
+import { Birthday, BirthdayLocale } from '~/constants/events'
 import { BottomBannerContext, ConfettiContext, ThemeContext } from '~/contexts'
 import sharedStyles from '~/styles/shared.module.css'
+import BottomBanner from '../BottomBanner'
+import { Button } from '../buttons/Button'
+import NavDock from '../NavDock'
 
 const GlobalLayout: Component<{ children: JSX.Element }> = props => {
     const theme = useContext(ThemeContext)
-    const [time, setTime] = createSignal<string | null>('...')
+    const [time, setTime] = createSignal<string | null | undefined>(undefined)
     const isBirthday =
         typeof globalThis.document !== 'undefined' ? document.documentElement.dataset.event === 'birthday' : true
     const isHalloween =
@@ -48,12 +45,13 @@ const GlobalLayout: Component<{ children: JSX.Element }> = props => {
     onMount(() => {
         confetti = new JSConfetti({ canvas: canvasRef })
 
-        if (!isBirthday) return
-
         const interval = setInterval(() => {
-            launchConfetti()
-            setTime(null)
-            clearInterval(interval)
+            if (isBirthday) {
+                launchConfetti()
+                clearInterval(interval)
+                return setTime(null)
+            }
+
             setTime(format(Birthday, BirthdayLocale))
         }, 1000)
 
@@ -80,7 +78,7 @@ const GlobalLayout: Component<{ children: JSX.Element }> = props => {
                 ]}
             />
             <Suspense>{props.children}</Suspense>
-            <Show when={isBirthday}>
+            <Show when={isBirthday && time() !== undefined}>
                 <BottomBanner
                     id={`${new Date().getFullYear()}-bd`}
                     closeLabel="Close"

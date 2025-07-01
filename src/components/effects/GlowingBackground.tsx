@@ -1,4 +1,4 @@
-import { type Component, For, type JSX, createEffect, createSignal, on, onCleanup, onMount, useContext } from 'solid-js'
+import { type Component, createEffect, createSignal, For, type JSX, on, onCleanup, onMount, useContext } from 'solid-js'
 import { Portal } from 'solid-js/web'
 
 import { ThemeContext } from '~/contexts'

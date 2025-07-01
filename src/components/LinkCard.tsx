@@ -1,12 +1,9 @@
 import { type Component, type ComponentProps, Show, splitProps } from 'solid-js'
-
-import { Column, Row } from './Page'
-import Touchable from './Touchable'
-
 import IconNext from '~/assets/icons/next.svg'
-
 import { combineClassNames, undefinedIf } from '~/utils'
 import styles from './LinkCard.module.scss'
+import { Column, Row } from './Page'
+import Touchable from './Touchable'
 
 const LinkCard: Component<LinkCardProps> = props => {
     const [, aProps] = splitProps(props, [

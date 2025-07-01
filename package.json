@@ -9,32 +9,38 @@
     "format": "biome check --apply ."
   },
   "dependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@mdx-js/mdx": "^2.3.0",
+    "@biomejs/biome": "^2.0.6",
     "@shikijs/rehype": "^1.29.2",
-    "@shikijs/transformers": "^3.2.1",
+    "@shikijs/transformers": "^1.29.2",
     "@shikijs/twoslash": "^1.29.2",
-    "@solidjs/router": "^0.15.0",
-    "@solidjs/start": "^1.1.0",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.15.3",
+    "@solidjs/start": "^1.1.5",
     "@vinxi/plugin-mdx": "^3.7.2",
-    "rehype-pretty-code": "^0.13.2",
+    "js-confetti": "^0.12.0",
+    "rehype-pretty-code": "^0.14.1",
     "rehype-slug": "^6.0.0",
-    "remark-gfm": "^4.0.0",
-    "sass": "^1.83.4",
-    "solid-js": "^1.9.5",
+    "remark-gfm": "^3.0.1",
+    "sass": "^1.89.2",
+    "solid-js": "^1.9.7",
     "solid-mdx": "^0.0.7",
-    "vinxi": "^0.5.3",
+    "timeago.js": "^4.0.2",
+    "vinxi": "^0.5.8",
     "vite-plugin-solid-svg": "^0.8.1"
   },
   "engines": {
     "node": ">=22"
   },
-  "trustedDependencies": ["@biomejs/biome", "@parcel/watcher", "esbuild"],
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "@parcel/watcher",
+    "esbuild"
+  ],
   "patchedDependencies": {
     "solid-mdx@0.0.7": "patches/solid-mdx@0.0.7.patch",
     "@vinxi/plugin-mdx@3.7.2": "patches/@vinxi%2Fplugin-mdx@3.7.2.patch"
   },
   "devDependencies": {
-    "@types/bun": "^1.2.8"
+    "@types/bun": "^1.2.17"
   }
 }

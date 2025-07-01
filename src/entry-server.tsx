@@ -1,5 +1,5 @@
 // @refresh reload
-import { StartServer, createHandler } from '@solidjs/start/server'
+import { createHandler, StartServer } from '@solidjs/start/server'
 import { Birthday, BirthdayEnd, Halloween, HalloweenEnd } from './constants/events'
 
 export default createHandler(() => {
@@ -37,6 +37,7 @@ export default createHandler(() => {
                     </script>
                     <body>
                         <noscript>You will need to enable JavaScript to run this site.</noscript>
+                        <div id="app" />
                         {children}
                         {scripts}
                     </body>

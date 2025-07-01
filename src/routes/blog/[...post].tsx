@@ -1,18 +1,15 @@
 import { Meta, Title } from '@solidjs/meta'
 import { createAsync, useParams } from '@solidjs/router'
-import { Show, Suspense, createSignal, lazy, onCleanup, onMount } from 'solid-js'
+import { createSignal, lazy, onCleanup, onMount, Show, Suspense } from 'solid-js'
 import { MDXProvider } from 'solid-mdx'
 import { format } from 'timeago.js'
-
-import { Column, Page } from '~/components/Page'
 import BlogLayout from '~/components/layouts/BlogLayout'
+import { Column, Page } from '~/components/Page'
 
 import Posts, { type Post } from '~/constants/posts'
-import { combineClassNames, logger, undefinedIf } from '~/utils'
-
 import FourOhFourPage from '~/routes/[...404]'
-
 import sharedStyles from '~/styles/shared.module.css'
+import { combineClassNames, logger, undefinedIf } from '~/utils'
 import styles from './[...post].module.css'
 
 export default () => {

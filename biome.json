@@ -1,8 +1,6 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
@@ -13,7 +11,16 @@
       "style": {
         "noNonNullAssertion": "off",
         "useEnumInitializers": "off",
-        "useNodejsImportProtocol": "off"
+        "useNodejsImportProtocol": "off",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       }
     }
   },
@@ -49,7 +56,17 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "include": ["*.jsx", "*.json", "*.tsx", "*.js", "*.ts", "*.css"],
-    "ignore": ["dist/**/*", "node_modules/**/*", ".vinxi/**/*", ".output/**/*"]
+    "includes": [
+      "**/*.jsx",
+      "**/*.json",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.ts",
+      "**/*.css",
+      "!**/dist/**/*",
+      "!**/node_modules/**/*",
+      "!**/.vinxi/**/*",
+      "!**/.output/**/*"
+    ]
   }
 }

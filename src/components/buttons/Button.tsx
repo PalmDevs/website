@@ -1,10 +1,9 @@
+import type { Component, ComponentProps, JSX } from 'solid-js'
 import { mergeProps, splitProps } from 'solid-js'
 import { combineClassNames, undefinedIf } from '~/utils'
+import type { IconType } from '..'
 import { Row } from '../Page'
 import Touchable from '../Touchable'
-
-import type { Component, ComponentProps, JSX } from 'solid-js'
-import type { IconType } from '..'
 
 import styles from './Button.module.scss'
 

@@ -1,0 +1,16 @@
+.stack {
+	display: flex;
+	flex-direction: column;
+
+	&[data-dir="horizontal"] {
+		flex-direction: row;
+	}
+
+	&[data-grow] {
+		flex-grow: 1;
+	}
+}
+
+.childrenGrow > * {
+	flex-grow: 1;
+}

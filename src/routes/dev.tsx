@@ -1,25 +1,20 @@
-import { type Component, For, createSignal, useContext } from 'solid-js'
+import { createSignal, For, useContext } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { Dynamic } from 'solid-js/web'
-
+import IconSource from '~/assets/icons/source.svg'
+import type { IconType } from '~/components'
+import { Button, IconButton } from '~/components/buttons'
+import GlowingBackground from '~/components/effects/GlowingBackground'
 import LinkCard from '~/components/LinkCard'
 import NavDock from '~/components/NavDock'
 import { Column, Page, Row, Section } from '~/components/Page'
-// TODO: Link buttons? They look the same, does it matter?
-import { Button, IconButton } from '~/components/buttons'
-import GlowingBackground from '~/components/effects/GlowingBackground'
-
-import { undefinedIf } from '~/utils'
-
-import IconSource from '~/assets/icons/source.svg'
 
 import { RepositoryLinks } from '~/constants/links'
 
 import { ConfettiContext, ThemeContext } from '~/contexts'
+import { undefinedIf } from '~/utils'
 
-import type { IconType } from '~/components'
-
-export default (() => {
+export default function Dev() {
     const [isGlowEffectOn, setIsGlowEffectOn] = createSignal(false)
     const theme = useContext(ThemeContext)
     const confetti = useContext(ConfettiContext)
@@ -34,7 +29,7 @@ export default (() => {
     })
 
     return (
-        <Dynamic component={isGlowEffectOn() ? GlowingBackground : ({ children }) => children}>
+        <Dynamic component={isGlowEffectOn() ? GlowingBackground : props => props.children}>
             <Page noCrawl>
                 <Column gap="xxxl">
                     <Row wrap>
@@ -227,4 +222,4 @@ export default (() => {
             </Page>
         </Dynamic>
     )
-}) satisfies Component
+}

@@ -1,16 +1,12 @@
 import { Link, Meta, Title } from '@solidjs/meta'
 import { HttpStatusCode } from '@solidjs/start'
-import { Column, Page, Row, Section } from '~/components/Page'
-import { LinkButton } from '~/components/buttons/Button'
-
-import { RepositoryLinks } from '~/constants/links'
-
+import type { Component } from 'solid-js'
 import IconHome from '~/assets/icons/nav/home.svg'
 import IconReport from '~/assets/icons/report.svg'
-
+import { LinkButton } from '~/components/buttons/Button'
+import { Column, Page, Row, Section } from '~/components/Page'
+import { RepositoryLinks } from '~/constants/links'
 import sharedStyles from '~/styles/shared.module.css'
-
-import type { Component } from 'solid-js'
 
 const FourOhFourPage: Component = () => {
     return (

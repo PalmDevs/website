@@ -1,3 +1,5 @@
+import type { JSX } from 'solid-js'
+
 export const combineClassNames = (...classNames: (string | undefined)[]) => classNames.filter(Boolean).join(' ')
 export const undefinedIf = <T, U>(condition: T, value: U) => (condition ? undefined : value)
 
@@ -13,7 +15,16 @@ export const logger = {
     error: createLogMethod('error'),
 }
 
-export const getAge = (birthDate: Date) => {
+export function mergeStylesProp(
+    current: JSX.CSSProperties | string | undefined,
+    next: { object: JSX.CSSProperties; string: string },
+) {
+    if (!current) return next.string
+    if (typeof current === 'string') return `${current}; ${next.string}`
+    return { ...current, ...next.object }
+}
+
+export function getAge(birthDate: Date) {
     const today = new Date(Date.now() + 7 * 60 * 60 * 1000)
     let age = today.getUTCFullYear() - birthDate.getUTCFullYear()
     const monthDiff = today.getUTCMonth() - birthDate.getUTCMonth()
@@ -24,7 +35,7 @@ export const getAge = (birthDate: Date) => {
 }
 
 // https://webperf.tips/tip/measuring-paint-time/
-export const runAfterFramePaint = (callback: () => unknown) => {
+export function runAfterFramePaint(callback: () => unknown) {
     requestAnimationFrame(() => {
         const messageChannel = new MessageChannel()
         messageChannel.port1.onmessage = callback

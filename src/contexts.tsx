@@ -1,12 +1,12 @@
-import { type Component, type JSX, createContext, onCleanup, onMount } from 'solid-js'
+import { createContext, type JSX, onCleanup, onMount } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { ThemeCycleMap } from './constants/theme'
 import { logger } from './utils'
 
-export const ThemeContext = createContext<ThemeStruct>(undefined as unknown as ThemeStruct)
+export const ThemeContext = createContext<ThemeContextType>(undefined as unknown as ThemeContextType)
 
-export const ThemeProvider: Component<{ children: JSX.Element | JSX.Element[] }> = props => {
-    const [theme, setTheme] = createStore<ThemeStruct>({
+export function ThemeProvider(props: { children: JSX.Element | JSX.Element[] }) {
+    const [theme, setTheme] = createStore<ThemeContextType>({
         theme: 'auto',
         colorScheme: 'dark',
         initialized: false,
@@ -55,12 +55,12 @@ export const ThemeProvider: Component<{ children: JSX.Element | JSX.Element[] }>
     return <ThemeContext.Provider value={theme}>{props.children}</ThemeContext.Provider>
 }
 
-export const ConfettiContext = createContext<ConfettiStruct>(undefined as unknown as ConfettiStruct)
+export const ConfettiContext = createContext<ConfettiContextType>(undefined as unknown as ConfettiContextType)
 
 // This can only be used inside of BottomBanner actions, so it should be nullable to prevent misuse
-export const BottomBannerContext = createContext<BottomBannerStruct>()
+export const BottomBannerContext = createContext<BottomBannerContextType>()
 
-export interface ThemeStruct {
+export interface ThemeContextType {
     theme: ThemeTheme
     colorScheme: ThemeColorScheme
     set: (theme: ThemeTheme) => void
@@ -71,10 +71,10 @@ export interface ThemeStruct {
 export type ThemeColorScheme = 'light' | 'dark'
 export type ThemeTheme = ThemeColorScheme | 'auto'
 
-export interface ConfettiStruct {
+export interface ConfettiContextType {
     launch(): void
 }
 
-export interface BottomBannerStruct {
+export interface BottomBannerContextType {
     close(): void
 }

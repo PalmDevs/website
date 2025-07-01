@@ -57,6 +57,11 @@ main {
   scroll-padding: 6rem;
 }
 
+::selection {
+  background-color: var(--neutral-variant-medium);
+  color: var(--neutral-highest);
+}
+
 body {
   display: flex;
   flex-direction: column;

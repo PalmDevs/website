@@ -1,28 +1,14 @@
 .Page {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100vh;
-	height: 100dvh;
-}
-
-.Page,
-.StackContainer {
-	padding: 1rem;
-}
-
-.Button {
-	padding: 1rem;
-	background: var(--primary);
-	color: var(--on-primary);
-	border-radius: var(--radius-medium);
+	justify-content: center;
+	align-items: center;
+	max-width: 100%;
 }
 
 .StackContainer {
+	padding: 1rem;
 	display: flex;
 	position: relative;
 	background-color: var(--surface-medium);
-	overflow: auto;
 	border-radius: var(--radius-medium);
 
 	& > .Stack {
@@ -35,15 +21,9 @@
 		position: sticky;
 		height: fit-content;
 	}
-}
 
-.ButtonRow {
-	margin-block: var(--gap-medium);
-	display: flex;
-	gap: var(--gap-medium);
-
-	& > * {
-		text-decoration: none;
-		font-size: 1rem;
+	code {
+		width: 100%;
+		overflow-x: scroll;
 	}
 }

@@ -1,9 +1,10 @@
 import { useLocation } from '@solidjs/router'
-import { onMount, type JSX } from 'solid-js'
+import { type JSX, onMount } from 'solid-js'
 import GlowingBackground from '~/components/effects/GlowingBackground'
 
-export default (props: { children: JSX.Element }) => {
+export default function Layout(props: { children: JSX.Element }) {
     const { hash } = useLocation()
+
     onMount(() => {
         if (hash) {
             const element = document.getElementById(hash.slice(1))

@@ -13,13 +13,12 @@
   // TODO: Put these as a constant?
   max-width: 44rem;
   padding: var(--gap-very-large);
+  align-items: stretch;
 
   // Mobile will have larger padding so it isn't as close to screen edges
   @media (max-width: queries.$mw-mobile) {
     padding: var(--gap-large);
   }
-
-  align-items: stretch;
 }
 
 .Section {

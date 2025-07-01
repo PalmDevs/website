@@ -1,11 +1,13 @@
 import { MetaProvider } from '@solidjs/meta'
 import { Router } from '@solidjs/router'
+import { clientOnly } from '@solidjs/start'
 import { FileRoutes } from '@solidjs/start/router'
-import { type Component, ErrorBoundary, Suspense, onMount } from 'solid-js'
+import { type Component, ErrorBoundary, onMount, Suspense } from 'solid-js'
 
-import GlobalLayout from './components/layouts/GlobalLayout'
-import { ThemeProvider } from './contexts'
 import ErrorPage from './error-page'
+
+const GlobalLayout = clientOnly(() => import('./components/layouts/GlobalLayout'))
+const ThemeProvider = clientOnly(() => import('./contexts').then(m => ({ default: m.ThemeProvider })))
 
 import './app.scss'
 
@@ -24,15 +26,15 @@ const App: Component = () => {
     return (
         <Router
             root={props => (
-                <ErrorBoundary fallback={(err, reset) => <ErrorPage error={err} reset={reset} />}>
-                    <MetaProvider>
+                <MetaProvider>
+                    <ErrorBoundary fallback={(err, reset) => <ErrorPage error={err} reset={reset} />}>
                         <ThemeProvider>
                             <GlobalLayout>
                                 <Suspense>{props.children}</Suspense>
                             </GlobalLayout>
                         </ThemeProvider>
-                    </MetaProvider>
-                </ErrorBoundary>
+                    </ErrorBoundary>
+                </MetaProvider>
             )}
         >
             <FileRoutes />

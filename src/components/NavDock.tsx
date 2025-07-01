@@ -1,21 +1,16 @@
 import { A, useIsRouting } from '@solidjs/router'
-import { For, Show, createEffect, createMemo, onCleanup, onMount, useContext } from 'solid-js'
+import type { Component } from 'solid-js'
+import { createEffect, createMemo, For, onCleanup, onMount, Show, useContext } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
-
-import { Column, Row } from './Page'
-import Touchable from './Touchable'
-
 import ThemeSyncing from '~/assets/icons/nav/theme_syncing.svg'
-
 import { ThemeCycleMap, ThemeIconMap, ThemeSwitchHintMap } from '~/constants/theme'
 import { ThemeContext } from '~/contexts'
 import { logger } from '~/utils'
-
-import type { Component } from 'solid-js'
 import type { IconType } from '.'
-import type { FlexHelperProps } from './Page'
-
 import styles from './NavDock.module.scss'
+import type { FlexHelperProps } from './Page'
+import { Column, Row } from './Page'
+import Touchable from './Touchable'
 
 const NavDock: Component<NavDockProps> = props => {
     const isRouting = useIsRouting()

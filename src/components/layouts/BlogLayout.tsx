@@ -1,11 +1,8 @@
-import { type Component, type JSX, Suspense, onCleanup, onMount } from 'solid-js'
-
-import { Page } from '../Page'
-import { IconButton } from '../buttons/IconButton'
-
-import { logger } from '~/utils'
-
+import { type Component, type JSX, onCleanup, onMount, Suspense } from 'solid-js'
 import IconUp from '~/assets/icons/up.svg'
+import { logger } from '~/utils'
+import { IconButton } from '../buttons/IconButton'
+import { Page } from '../Page'
 
 import styles from './BlogLayout.module.scss'
 
