@@ -14,6 +14,7 @@ import Socials from '~/constants/socials'
 import sharedStyles from '~/styles/shared.module.css'
 import { getAge } from '~/utils'
 import styles from './(home).module.scss'
+import Tilting from '~/components/effects/Tilting'
 
 export default function Home() {
     const age = getAge(BirthDate)
@@ -29,7 +30,14 @@ export default function Home() {
             <Meta property="og:image:width" content="500" />
             <Meta property="og:image:height" content="500" />
             <Meta property="og:image:type" content="image/webp" />
-            <Section constrainSize style="padding-block: min(8vh, var(--gap-insanely-large));">
+            <Section constrainSize style="padding-block: 0 min(8vh, var(--gap-insanely-large));">
+                <Tilting
+                    as="img"
+                    class={styles.Portrait}
+                    src="/assets/og/image.webp"
+                    alt="Me wearing a white shirt, smiling at the camera, in vector art style."
+                    draggable="false"
+                />
                 <Column gap="none" class={sharedStyles.TextChildrenCenter}>
                     <h1 aria-label="Hey there, I'm Palm">
                         <span aria-hidden="true">Hey there, I'm </span>

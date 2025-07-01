@@ -89,3 +89,11 @@
   user-select: none;
   color: var(--surface-medium);
 }
+
+.Portrait {
+  width: 17rem;
+  height: 17rem;
+  margin-block-end: 1rem;
+  align-self: center;
+  border-radius: var(--radius-larger);
+}
