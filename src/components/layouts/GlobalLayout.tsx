@@ -45,17 +45,21 @@ const GlobalLayout: Component<{ children: JSX.Element }> = props => {
     onMount(() => {
         confetti = new JSConfetti({ canvas: canvasRef })
 
-        const interval = setInterval(() => {
-            if (isBirthday) {
-                launchConfetti()
-                clearInterval(interval)
-                return setTime(null)
-            }
+        if (isBirthday) {
+            const birthday = Birthday.getTime()
 
-            setTime(format(Birthday, BirthdayLocale))
-        }, 1000)
+            const interval = setInterval(() => {
+                if (Date.now() >= birthday) {
+                    launchConfetti()
+                    clearInterval(interval)
+                    return setTime(null)
+                }
 
-        onCleanup(() => clearInterval(interval))
+                setTime(format(Birthday, BirthdayLocale))
+            }, 1000)
+
+            onCleanup(() => clearInterval(interval))
+        }
     })
 
     return (
