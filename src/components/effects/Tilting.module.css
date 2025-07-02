@@ -1,6 +1,6 @@
 .Tiltable {
 	width: fit-content;
-	transition: var(---duration-medium) var(--easing);
+	transition: var(--duration-medium) var(--easing);
 	transition-property: box-shadow, transform;
 }
 
