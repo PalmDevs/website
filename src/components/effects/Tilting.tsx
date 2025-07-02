@@ -3,11 +3,12 @@ import { createEffect, onCleanup, onMount, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { combineClassNames } from '~/utils'
 import styles from './Tilting.module.css'
+import { mergeRefs } from '@solid-primitives/refs'
 
 export default function Tilting<E extends ElementType>(
     props: TiltingProps<E> & Omit<ComponentProps<E>, keyof TiltingProps<E>>,
 ) {
-    const [local, others] = splitProps(props, ['as', 'tiltPerspective', 'tiltScale'])
+    const [local, others] = splitProps(props, ['as', 'tiltPerspective', 'tiltScale', 'asProps'])
 
     const handleRef = (el: HTMLElement) => {
         const updateProps = () => {
@@ -49,9 +50,10 @@ export default function Tilting<E extends ElementType>(
 
     return (
         <Dynamic
-            component={local.as ?? 'div'}
-            ref={handleRef}
             {...others}
+            {...local.asProps}
+            component={local.as ?? 'div'}
+            ref={mergeRefs(handleRef, others.ref)}
             class={combineClassNames(styles.Tiltable, others.class)}
         />
     )
@@ -61,6 +63,7 @@ export default function Tilting<E extends ElementType>(
 type ElementType = 'div' | 'img' | 'p' | 'a' | Component<any>
 type TiltingProps<E extends ElementType> = {
     as?: E
+    asProps?: ComponentProps<E>
     tiltPerspective?: string
     tiltScale?: string
     children?: JSX.Element | JSX.Element[]
