@@ -20,6 +20,16 @@ const Skills = [
         link: 'https://www.typescriptlang.org/',
     },
     {
+        name: 'Python',
+        icon: '/assets/images/skills/python.svg',
+        link: 'https://www.python.org',
+    },
+    {
+        name: 'Kotlin',
+        icon: '/assets/images/skills/kotlin.svg',
+        link: 'https://kotlinlang.org',
+    },
+    {
         name: 'React',
         icon: '/assets/images/skills/react.svg',
         link: 'https://react.dev',
@@ -28,6 +38,11 @@ const Skills = [
         name: 'SolidJS',
         icon: '/assets/images/skills/solidjs.svg',
         link: 'https://solidjs.com',
+    },
+    {
+        name: 'ElysiaJS',
+        icon: '/assets/images/skills/elysia.svg',
+        link: 'https://elysiajs.com',
     },
     {
         name: 'Node.js',
@@ -40,9 +55,9 @@ const Skills = [
         link: 'https://bun.sh',
     },
     {
-        name: 'Fastify',
-        icon: '/assets/images/skills/fastify.svg',
-        link: 'https://fastify.io',
+        name: 'Drizzle ORM',
+        icon: '/assets/images/skills/drizzle.svg',
+        link: 'https://orm.drizzle.team',
     },
     {
         name: 'Figma',
@@ -50,7 +65,7 @@ const Skills = [
         link: 'https://figma.com',
     },
     {
-        name: 'Linux (Basics)',
+        name: 'Linux',
         icon: '/assets/images/skills/linux.webp',
         link: 'https://en.wikipedia.org/wiki/Linux',
     },
@@ -60,9 +75,19 @@ const Skills = [
         link: 'https://git-scm.com',
     },
     {
+        name: 'Cloudflare',
+        icon: '/assets/images/skills/cloudflare.svg',
+        link: 'https://www.cloudflare.com',
+    },
+    {
         name: 'GitHub Actions',
         icon: '/assets/images/skills/gha.svg',
         link: 'https://github.com/features/actions',
+    },
+    {
+        name: 'Docker',
+        icon: '/assets/images/skills/docker.svg',
+        link: 'https://www.docker.com',
     },
 ] as const satisfies Array<{
     name: string

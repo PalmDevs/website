@@ -17,28 +17,34 @@
   border-radius: var(--radius-larger);
   transition: inherit;
   transition-property: background-color;
-
+  
   & > img {
     transition: transform var(--duration-long) var(--easing);
     width: 8rem;
     height: 8rem;
     object-fit: contain;
-
+    
     // @media (max-width: queries.$mw-mobile) {
     //   width: 6rem;
     //   height: 6rem;
     // }
   }
-
+    
   :where(:hover, :focus-visible) > & {
     background-color: var(--surface-high);
     & > img {
       transform: scale(var(--interaction-zoomable-content-scale));
     }
   }
-
+  
   .Card:active & > img {
     transform: scale(1.075);
+  }
+}
+
+.Card {
+  & p {
+    white-space: pre-wrap;
   }
 }
 
