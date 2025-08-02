@@ -5,7 +5,7 @@ FROM base AS build
 WORKDIR /build
 COPY . .
 RUN bun install --frozen-lockfile --production
-RUN bun run build
+RUN bun --bun run build
 
 FROM base AS release
 

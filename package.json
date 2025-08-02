@@ -9,14 +9,14 @@
     "format": "biome check --apply ."
   },
   "dependencies": {
-    "@biomejs/biome": "^2.0.6",
+    "@biomejs/biome": "^2.1.3",
     "@shikijs/rehype": "^1.29.2",
     "@shikijs/transformers": "^1.29.2",
     "@shikijs/twoslash": "^1.29.2",
     "@solid-primitives/refs": "^1.1.2",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.3",
-    "@solidjs/start": "^1.1.5",
+    "@solidjs/start": "^1.1.7",
     "@vinxi/plugin-mdx": "^3.7.2",
     "js-confetti": "^0.12.0",
     "rehype-pretty-code": "^0.14.1",
@@ -43,6 +43,6 @@
     "solid-mdx@0.0.7": "patches/solid-mdx@0.0.7.patch"
   },
   "devDependencies": {
-    "@types/bun": "^1.2.17"
+    "@types/bun": "^1.2.19"
   }
 }
