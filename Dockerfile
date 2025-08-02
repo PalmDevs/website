@@ -14,7 +14,7 @@ RUN bun --bun run build
 FROM base AS release
 
 WORKDIR /app
-COPY --from=build /build/.output/* /app
+COPY --from=build /build/.output/ /app/
 
 USER bun
 
