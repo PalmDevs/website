@@ -2,12 +2,15 @@ import rehypeShiki from '@shikijs/rehype'
 import { transformerNotationHighlight, transformerNotationWordHighlight } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/twoslash'
 import { defineConfig } from '@solidjs/start/config'
-// @ts-expect-error
-import mdx from '@vinxi/plugin-mdx'
 import { execSync } from 'child_process'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import svgPlugin from 'vite-plugin-solid-svg'
+
+const {
+    default: { default: mdx },
+    // @ts-expect-error
+} = await import('@vinxi/plugin-mdx')
 
 const defineString = (str?: string) => `"${str || 'unknown'}"`
 
@@ -26,7 +29,7 @@ export default defineConfig({
     extensions: ['mdx'],
     vite: {
         plugins: [
-            mdx.default.withImports({})({
+            mdx.withImports({})({
                 jsx: true,
                 jsxImportSource: 'solid-js',
                 providerImportSource: 'solid-mdx',
