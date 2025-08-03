@@ -29,7 +29,11 @@ export default function Home() {
             <Meta property="og:image:width" content="500" />
             <Meta property="og:image:height" content="500" />
             <Meta property="og:image:type" content="image/webp" />
-            <Section constrainSize style="padding-block: 0 min(8vh, var(--gap-insanely-large));">
+            <Section
+                constrainSize
+                style="padding-block: 0 min(8vh, var(--gap-insanely-large));"
+                aria-labelledby="hero-title"
+            >
                 <Tilting
                     as="img"
                     class={styles.Portrait}
@@ -38,7 +42,7 @@ export default function Home() {
                     draggable="false"
                 />
                 <Column gap="none" class={sharedStyles.TextChildrenCenter}>
-                    <h1 aria-label="Hey there, I'm Palm">
+                    <h1 id="hero-title" aria-label="Hey there, I'm Palm">
                         <span aria-hidden="true">Hey there, I'm </span>
                         <span
                             aria-hidden="true"
@@ -68,8 +72,8 @@ export default function Home() {
                     </For>
                 </Row>
             </Section>
-            <Section centerHorizontal constrainSize>
-                <h2 class={styles.JSXHeadingStart} aria-label="Projects">
+            <Section centerHorizontal constrainSize aria-labelledby="projects-title">
+                <h2 id="projects-title" class={styles.JSXHeadingStart} aria-label="Projects">
                     <span aria-hidden="true">&lt;</span>
                     <span>Projects</span>
                     <span aria-hidden="true">&gt;</span>
@@ -91,9 +95,9 @@ export default function Home() {
                     &lt;/Projects&gt;
                 </p>
             </Section>
-            <Section gap="xs">
+            <Section gap="xs" aria-labelledby="skills-title">
                 <Column gap="none">
-                    <h2>Skillset</h2>
+                    <h2 id="skills-title">Skillset</h2>
                     <p>These are some of the technologies I know and use regularly.</p>
                 </Column>
                 <Row as="ul" data-no-marker="true" wrap gap="xs">
@@ -127,9 +131,9 @@ export default function Home() {
                     </For>
                 </Row>
             </Section>
-            <Section>
+            <Section aria-labelledby="contact-title">
                 <Column gap="none">
-                    <h2>Open to chat</h2>
+                    <h2 title="contact-title">Open to chat</h2>
                     <p style="text-wrap: balance">
                         If you want to know more about me, work with me, or just want to have a casual chat, feel free
                         to reach out!

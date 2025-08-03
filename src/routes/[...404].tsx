@@ -15,9 +15,9 @@ const FourOhFourPage: Component = () => {
             <Link rel="canonical" href="https://palmdevs.me" />
             <Meta name="description" content="This page doesn't exist. Did you take a wrong turn?" />
             <HttpStatusCode code={404} />
-            <Section id="info">
+            <Section id="info" aria-labelledby="title">
                 <Column gap="none" centerHorizontal class={sharedStyles.TextChildrenCenter}>
-                    <h1>Wrong way?</h1>
+                    <h1 id="title">Wrong way?</h1>
                     <p style="text-wrap: balance">This page doesn't exist. Did you take a wrong turn?</p>
                     <Row style="padding-block-start: var(--gap-medium)">
                         <LinkButton leadingIcon={IconHome} openInCurrentTab href="/">
