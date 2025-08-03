@@ -27,7 +27,6 @@ export default defineConfig({
     },
     extensions: ['mdx'],
     vite: {
-        // @ts-expect-error: TypeScript is shit
         plugins: [
             ...mdx.withImports({})({
                 jsx: true,
@@ -55,7 +54,7 @@ export default defineConfig({
                 ],
             }),
             svgPlugin({ defaultAsComponent: true }),
-        ] as import('vite').PluginOption[],
+        ],
         define: {
             __APP_COMMIT: defineString(process.env.COMMIT_REF ?? execSync('git rev-parse HEAD').toString().trim()),
             __APP_DEPLOY_CONTEXT: defineString(process.env.CONTEXT ?? process.env.NODE_ENV),
