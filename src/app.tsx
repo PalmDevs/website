@@ -1,15 +1,15 @@
 import { MetaProvider } from '@solidjs/meta'
 import { Router } from '@solidjs/router'
-import { clientOnly } from '@solidjs/start'
 import { FileRoutes } from '@solidjs/start/router'
+import { clientOnly } from '@solidjs/start'
 import { type Component, ErrorBoundary, onMount, Suspense } from 'solid-js'
 
+import GlobalLayout from './components/layouts/GlobalLayout'
 import ErrorPage from './error-page'
 
-const GlobalLayout = clientOnly(() => import('./components/layouts/GlobalLayout'))
-const ThemeProvider = clientOnly(() => import('./contexts').then(m => ({ default: m.ThemeProvider })))
-
 import './app.scss'
+
+const ThemeProvider = clientOnly(() => import('./contexts').then(m => ({ default: m.ThemeProvider })))
 
 const App: Component = () => {
     onMount(() => {

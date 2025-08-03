@@ -1,3 +1,4 @@
+import { clientOnly } from '@solidjs/start'
 import JSConfetti from 'js-confetti'
 import { type Component, createSignal, type JSX, onCleanup, onMount, Show, Suspense, useContext } from 'solid-js'
 import { format } from 'timeago.js'
@@ -6,11 +7,15 @@ import IconHome from '~/assets/icons/nav/home.svg'
 import IconSource from '~/assets/icons/source.svg'
 
 import { Birthday, BirthdayLocale } from '~/constants/events'
-import { BottomBannerContext, ConfettiContext, ThemeContext } from '~/contexts'
+import { BottomBannerContext, ThemeContext } from '~/contexts'
 import sharedStyles from '~/styles/shared.module.css'
 import BottomBanner from '../BottomBanner'
 import { Button } from '../buttons/Button'
 import NavDock from '../NavDock'
+
+const ConfettiContextProvider = clientOnly(() =>
+    import('~/contexts').then(m => ({ default: m.ConfettiContext.Provider })),
+)
 
 const GlobalLayout: Component<{ children: JSX.Element }> = props => {
     const theme = useContext(ThemeContext)
@@ -63,7 +68,7 @@ const GlobalLayout: Component<{ children: JSX.Element }> = props => {
     })
 
     return (
-        <ConfettiContext.Provider value={{ launch: launchConfetti }}>
+        <ConfettiContextProvider value={{ launch: launchConfetti }}>
             <canvas
                 ref={canvasRef}
                 style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: var(--layer-overlay);"
@@ -144,7 +149,7 @@ const GlobalLayout: Component<{ children: JSX.Element }> = props => {
                     </p>
                 </BottomBanner>
             </Show>
-        </ConfettiContext.Provider>
+        </ConfettiContextProvider>
     )
 }
 
