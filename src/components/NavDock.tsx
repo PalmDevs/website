@@ -57,7 +57,7 @@ const NavDock: Component<NavDockProps> = props => {
 
     return (
         <Column centerVertical centerHorizontal class={styles.DockContainer}>
-            <Row ref={handleRef} as="div" class={styles.Dock}>
+            <Row ref={handleRef} as="div" class={styles.Dock} data-scrolled="true">
                 <div id="nav-highlight" class={styles.Highlight} aria-hidden="true" />
                 <nav>
                     <Row as="ul" data-no-marker="true" gap="xs" aria-label="Navigation links">
