@@ -4,10 +4,10 @@ import IconKey from '../icons/key.svg?component-solid'
 import { LinkButton } from './Button'
 import { LinkIconButton } from './IconButton'
 
-const { align = 'flex-start', ...props } = Astro.props
+const { align = 'start', ...props } = Astro.props
 ---
 
-<div flex={`~ vert vert-x-${align}`} gap="xs" {...props}>
+<div flex={`~ vert ${align === 'start' ? `vert-x-flex-start` : `vert-x-center`}`} gap="xs" {...props}>
     <div flex="~" gap="xs">
         {Object.values(SOCIALS).map(({ name, icon, url }) => (
             <LinkIconButton
