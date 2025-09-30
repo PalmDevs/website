@@ -1,6 +1,7 @@
-import { For, onCleanup, onMount } from 'solid-js'
+import { For, onCleanup, onMount, Show } from 'solid-js'
 import Logger from '../../utils/Logger'
 import { LinkButton } from '../Button'
+import { LinkIconButton } from '../IconButton'
 import styles from './NavDock.module.css'
 import type { Component } from 'solid-js'
 import type { IconComponent } from '../_icons'
@@ -10,7 +11,12 @@ const log = new Logger('NavDock')
 const NavDock: Component<NavDockProps> = props => {
 	return (
 		<div flex="~ horz center" class={styles.container}>
-			<div flex="~ horz" class={styles.dock} data-scrolled="true">
+			<div
+				flex="~ horz horz-y-center"
+				gap="m"
+				class={styles.dock}
+				data-scrolled="true"
+			>
 				<div
 					ref={refHandler(props)}
 					id="nav-highlight"
@@ -54,27 +60,24 @@ const NavDock: Component<NavDockProps> = props => {
 						{/* <li>
                             <ThemeSwitchNavButton />
                         </li> */}
-						{/* <Show when={props.links?.length}>
+						<Show when={props.links?.length}>
 							<For each={props.links}>
 								{link => (
 									<li>
-										<Touchable
-											flex="~ horz horz-y-center"
-											class={`${styles.Item} ${styles.IconItem}`}
-											as="a"
-											noHoverEffect
-											href={link.href}
-											target="_blank"
+										<LinkIconButton
+											size="s"
+											variant="text"
+											icon={link.icon}
 											rel="noreferrer"
+											target="_blank"
+											href={link.href}
 											title={link.name}
 											aria-label={link.name}
-										>
-											<link.icon aria-hidden="true" class={styles.Icon} />
-										</Touchable>
+										/>
 									</li>
 								)}
 							</For>
-						</Show> */}
+						</Show>
 					</ul>
 				</div>
 			</div>
@@ -161,11 +164,11 @@ const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 export default NavDock
 
 interface NavDockProps {
-	pages: [LinkConfig, ...LinkConfig[]]
-	links?: [LinkConfig, ...LinkConfig[]]
+	pages: NavLinkConfig[]
+	links?: NavLinkConfig[]
 }
 
-interface LinkConfig {
+export interface NavLinkConfig {
 	icon: IconComponent
 	href: string
 	name: string

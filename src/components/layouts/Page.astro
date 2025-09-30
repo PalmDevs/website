@@ -1,7 +1,8 @@
 ---
 import '../../styles/base.scss'
+
 import { ClientRouter } from 'astro:transitions'
-import { NAV_PAGES } from '../../data/nav'
+import { NAV_LINKS, NAV_PAGES } from '../../data/nav'
 import NavDock from '../navigation/NavDock'
 
 const { title, flex, ...rest } = Astro.props
@@ -17,7 +18,6 @@ const { title, flex, ...rest } = Astro.props
 		<ClientRouter />
 	</head>
 	<body flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
-		<NavDock transition:persist client:load pages={NAV_PAGES} />
-		<slot />
+		<NavDock transition:persist client:load pages={NAV_PAGES} links={NAV_LINKS} />
 	</body>
 </html>
