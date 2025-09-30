@@ -5,14 +5,9 @@ FROM base AS build
 WORKDIR /build
 
 COPY . .
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile
 RUN bun --bun run build
 
-FROM base AS release
-
-WORKDIR /app
-COPY --from=build /build/dist/ /app/dist/
-
-USER bun
-
-ENTRYPOINT [ "bunx", "astro", "preview" ]
+FROM httpd:2.4 AS runtime
+COPY --from=build /build/dist /usr/local/apache2/htdocs/
+EXPOSE 80
