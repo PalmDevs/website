@@ -1,4 +1,4 @@
-@import url("https://fonts.bunny.net/css?family=inter:600,700|jetbrains-mono:400|outfit:600,700&display=swap");
+/* Font imports are done in components/layouts/Page.astro */
 
 :root {
   --text-height-large: 1.5;

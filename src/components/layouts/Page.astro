@@ -15,7 +15,8 @@ const { title, flex, ...rest } = Astro.props
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ? `${title} • Pasuthorn Buala (Palm)` : 'Pasuthorn Buala (Palm)'}</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<ClientRouter />
+		<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:600,700|jetbrains-mono:400|outfit:600,700&display=swap" />
+		<ClientRouter fallback="swap" />
 	</head>
 	<body flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
 		<NavDock transition:persist client:load pages={NAV_PAGES} links={NAV_LINKS} />
