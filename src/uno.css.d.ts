@@ -12,7 +12,7 @@ declare module 'solid-js' {
 
 interface UnoCSSCustomAttributes {
 	gap?: string
-	flex?: string | boolean
+	flex?: string
 	pad?: string
 	padx?: string
 	pady?: string
