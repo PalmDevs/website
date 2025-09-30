@@ -100,7 +100,7 @@ const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 	})
 
 	const rehighlight = () => {
-		const pathname = location.pathname
+		const pathname = location.pathname.replace(/\/+$/, '') || '/'
 
 		const index = props.pages.findIndex(({ href, matchSubroutes }) => {
 			if (matchSubroutes) return pathname.startsWith(href)
