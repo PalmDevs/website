@@ -1,7 +1,29 @@
 ---
+import Avatar from '../components/Avatar.astro'
+import Contacts from '../components/Contacts.astro'
+import LineOfWork from '../components/LineOfWork.astro'
 import Page from '../components/layouts/Page.astro'
+import Section from '../components/Section.astro'
 ---
 
-<Page>
-    i'm palm, what more?
+<Page padx="xl" >
+    <Section flex="vert-x-center">
+        <Avatar />
+        <Contacts align="center" />
+    </Section>
+    <Section title="About me">
+        <p>
+            I’m Pasuthorn Buala (or Palm), a 17-year-old full-stack developer and UI/UX designer from Bangkok, Thailand. I have been making websites and applications for more than 4 years!
+            <br>
+            <br>
+            Started programming at 11, and designing at 12. Still loving both to this day!
+        </p>
+        <LineOfWork detailed />
+    </Section>
 </Page>
+
+<style>
+    section {
+        max-width: 720px;
+    }
+</style>

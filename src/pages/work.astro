@@ -1,7 +1,29 @@
 ---
 import Page from '../components/layouts/Page.astro'
+import Section from '../components/Section.astro'
 ---
 
 <Page>
-    i'm unemployed (it's coming soon)
+    <Section title="Skills" description="These are the technologies I’ve used." id="skills">
+        TODO
+    </Section>
+    <Section title="Projects" id="projects">
+        TODO
+    </Section>
+    <Section title="Experience" id="experience">
+        TODO
+    </Section>
+    <Section title="Certifications" id="certifications">
+        TODO
+    </Section>
 </Page>
+
+<style>
+    section {
+        max-width: 720px;
+    }
+
+    section#experience, section#certifications {
+        max-width: 1080px;
+    }
+</style>
