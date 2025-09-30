@@ -18,9 +18,9 @@ const { title, flex, ...rest } = Astro.props
 		<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:600,700|jetbrains-mono:400|outfit:600,700&display=swap" />
 		<ClientRouter fallback="swap" />
 	</head>
-	<body flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
+	<body>
 		<NavDock transition:persist client:load pages={NAV_PAGES} links={NAV_LINKS} />
-		<main>
+		<main flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
 			<slot />
 		</main>
 	</body>
