@@ -1,0 +1,64 @@
+---
+import Card from './Card.astro'
+
+const { detailed = false } = Astro.props
+---
+
+<div flex="~ vert" gap="m">
+    <h1 class="text-heading">I do</h1>
+    <ul class="list card-list" gap="m">
+        <Card as="li" class="card-item">
+            <h2 class="text-subheading">Full-Stack Development</h2>
+            <p class="text-body-medium">From <span class="tint-high">architecture planning</span> to <span class="tint-high">launching production applications</span>. I make sure all the pieces fit right in.</p>
+        </Card>
+        <Card as="li" class="card-item">
+            <h2 class="text-subheading">UI/UX Design</h2>
+            <p class="text-body-medium">
+                Making beautiful, functional, and accessible experiences.
+                <br>
+                <span class="tint-low">I don’t want things to just work.</span> <span class="tint-high">I want them to work great.</span>
+            </p>
+        </Card>
+    </ul>
+</div>
+{detailed && (
+    <div flex="~ vert" gap="m">
+        <h1 class="text-heading">But did you know? I also do</h1>
+        <ul class="list card-list" gap="m">
+            <Card as="li" class="card-item">
+                <h2 class="text-subheading">Reverse Engineering</h2>
+                <p class="text-body-medium">Poking around with people’s stuff, reverse-engineering my way to make things work the way I want them to.</p>
+            </Card>
+            <Card as="li" class="card-item">
+                <h2 class="text-subheading">Penetration Testing</h2>
+                <p class="text-body-medium">
+                    I’ve reported small amounts of undisclosed vulnerabilities before.
+                </p>
+            </Card>
+        </ul>
+    </div>
+)}
+
+<style>
+    .list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.card-list {
+		display: flex;
+
+		& > * {
+			flex: 1;
+		}
+	}
+
+	.card-item {
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap-xs);
+		padding-inline: var(--gap-l);
+		padding-block: var(--gap-m);
+	}
+</style>

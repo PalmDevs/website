@@ -1,0 +1,26 @@
+---
+import { SOCIALS } from '../data/socials'
+import IconKey from '../icons/key.svg?component-solid'
+import { LinkButton } from './Button'
+import { LinkIconButton } from './IconButton'
+
+const { align = 'flex-start', ...props } = Astro.props
+---
+
+<div flex={`~ vert vert-x-${align}`} gap="xs" {...props}>
+    <div flex="~" gap="xs">
+        {Object.values(SOCIALS).map(({ name, icon, url }) => (
+            <LinkIconButton
+                client:visible
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                icon={icon}
+                size="m"
+                variant="glass"
+            />
+        ))}
+    </div>
+    <LinkButton client:visible variant="glass" icon={IconKey} href="/public_key.gpg" text="GPG key" />
+</div>
