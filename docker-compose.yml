@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  website-v2:
+    # Always rebuild after pulling changes
+    pull_policy: build
+    build: .
+    container_name: website-v2
+    restart: unless-stopped
+    working_dir: /app
+    command: bunx astro preview
