@@ -20,5 +20,8 @@ const { title, flex, ...rest } = Astro.props
 	</head>
 	<body flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
 		<NavDock transition:persist client:load pages={NAV_PAGES} links={NAV_LINKS} />
+		<main>
+			<slot />
+		</main>
 	</body>
 </html>
