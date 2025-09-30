@@ -1,0 +1,29 @@
+/* TODO: Light theme */
+/* :root,
+:root[data-theme="light"] {} */
+
+:root,
+:root[data-theme="dark"] {
+	--bg: linear-gradient(45deg, #070D20 0%, #0F0622 100%);
+
+	--primary: #b770ee;
+	--secondary: #509cff;
+
+	--neutral-high: #F0F0FF;
+	--neutral-medium: #E8E8FF;
+	--neutral-low: #CCCCDD;
+
+	--surface-highest: hsla(274, 79%, 69%, 7%);
+	--surface-high: hsla(274, 79%, 69%, 5%);
+	--surface-medium: hsla(274, 79%, 69%, 3%);
+	--surface-low: hsla(274, 79%, 69%, 1%);
+
+	--tinted-high: #BB9EFF;
+	--tinted-medium: #AB8EC9;
+	--tinted-low: #A292B4;
+
+	--on-tinted: #120B22;
+
+	--intr-hover-glow: rgba(128, 119, 255, 0.05);
+	--intr-hover-glow-inverse: rgba(17, 14, 59, 0.1);
+}

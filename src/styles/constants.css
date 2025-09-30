@@ -1,0 +1,55 @@
+:root {
+	/* GAPS */
+	--gap-2xs: 4px;
+	--gap-xs: 8px;
+	--gap-s: 12px;
+	--gap-m: 16px;
+	--gap-l: 24px;
+	--gap-xl: 32px;
+	--gap-2xl: 48px;
+	--gap-3xl: 64px;
+	--gap-4xl: 128px;
+
+	--line: 2px solid;
+	--line-thin: 1px solid;
+
+	/* BORDER RADII */
+	--rad-full: 1000px;
+	--rad-sm: 16px;
+
+	/* DURATIONS */
+	--dur-xshort: 0.1s;
+	--dur-short: 0.25s;
+	--dur-medium: 0.5s;
+	--dur-long: 0.75s;
+	--dur-xlong: 1s;
+
+	/* EASING */
+	/* Generic animations */
+	--ease: cubic-bezier(0.19, 1, 0.22, 1);
+	/* Interaction animations */
+	--ease-bounce: cubic-bezier(0, 1.25, 0.35, 1);
+	/* Short animations */
+	--ease-quick: cubic-bezier(0, 0.6, 0.1, 1);
+	/* Short animations with a lot of movement */
+	--ease-xquick: cubic-bezier(0, 0.85, 0, 1);
+
+	/* INTERACTION EFFECTS */
+	--intr-tap-scale: 0.975;
+	--intr-hover-zoom-scale: 1.125;
+	/* --interaction-hover-scale: 1.025; */
+
+	--opacity-disabled: 0.5;
+
+	/* Z-INDEX LAYERS */
+	--layer-effect: 1;
+	--layer-content: 2;
+	--layer-nav: 3;
+	--layer-overlay: 4;
+}
+
+@media not (pointer: fine) {
+	:root {
+		--intr-tap-scale: 0.95;
+	}
+}

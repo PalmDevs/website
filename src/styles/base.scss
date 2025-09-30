@@ -1,0 +1,113 @@
+@import url("./theme.css");
+@import url("./constants.css");
+@import url("./typography.css");
+
+:root {
+  --trans-prop-content: color, fill, stroke-color;
+  --trans-props-layout: background-color, outline-color, border-color,
+  box-shadow;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+p,
+span,
+a,
+button,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+img,
+svg {
+  transition-duration: var(--dur-xshort);
+  transition-property: var(--trans-prop-content),
+  var(--trans-props-layout);
+  z-index: var(--layer-content);
+}
+
+body,
+div,
+section,
+nav,
+footer,
+main {
+  transition-duration: var(--dur-xshort);
+  transition-property: var(--trans-props-layout);
+}
+
+
+img,
+svg {
+	position: relative;
+}
+
+:root {
+  color-scheme: dark light;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  accent-color: var(--primary);
+  background: var(--bg);
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+}
+
+::selection {
+  background-color: var(--tinted-high);
+  color: var(--on-tinted);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+button,
+input,
+a {
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
+input,
+button {
+  font-size: var(--text-label);
+}
+
+hr {
+  width: 100%;
+  border-radius: var(--rad-full);
+  border: var(--line-style) var(--surface-medium);
+  margin-block: var(--gap-xl);
+}
+
+// Disabling animations for users who prefer reduced motion
+// or in print mode (why would you print my website)
+@media (prefers-reduced-motion: reduce), print {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}
+
+// Focused elements will have a 2px outline with a bright color
+:where(:is(button, a):not(:focus-visible)) {
+  outline: var(--line) transparent;
+}
+
+:focus-visible {
+  outline: var(--line) var(--secondary) !important;
+  outline-offset: -2px;
+}

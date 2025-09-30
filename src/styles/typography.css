@@ -1,0 +1,154 @@
+@import url("https://fonts.bunny.net/css?family=inter:600,700|jetbrains-mono:400|outfit:600,700&display=swap");
+
+:root {
+  --text-height-large: 1.5;
+  --text-height-medium: 1.4;
+  --text-height-small: 1.3;
+
+  --text-spacing-small: 1%;
+  --text-spacing-medium: 3%;
+  --text-spacing-wide: 5%;
+
+  --text-size-display: 52px;
+  --text-size-title: 36px;
+  --text-size-heading: 28px;
+  --text-size-subheading: 24px;
+  --text-size-label-large: 20px;
+  --text-size-label-medium: 18px;
+  --text-size-label-small: 14px;
+  --text-size-body-large: 18px;
+  --text-size-body-medium: 16px;
+  --text-size-body-small: 15px;
+
+  --text-weight-bold: 700;
+  --text-weight-regular: 600;
+
+  --text-font-fallback: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: "Inter", var(--text-font-fallback);
+  font-size: var(--text-size-body-large);
+  font-weight: var(--text-weight-regular);
+  line-height: var(--text-height-large);
+  color: var(--neutral-low);
+}
+
+.text-display {
+  font-family: 'Outfit', var(--text-font-fallback);
+  font-size: var(--text-size-display);
+  line-height: var(--text-height-small);
+  font-weight: var(--text-weight-bold);
+  color: var(--neutral-high);
+}
+
+.text-title {
+  font-family: 'Outfit', var(--text-font-fallback);
+  font-size: var(--text-size-title);
+  line-height: var(--text-height-small);
+  font-weight: var(--text-weight-bold);
+  letter-spacing: var(--text-spacing-small);
+  color: var(--neutral-high);
+}
+
+.text-heading {
+  font-family: 'Outfit', var(--text-font-fallback);
+  font-size: var(--text-size-heading);
+  line-height: var(--text-height-medium);
+  font-weight: var(--text-weight-bold);
+  letter-spacing: var(--text-spacing-small);
+  color: var(--neutral-medium);
+}
+
+.text-subheading {
+  font-family: 'Outfit', var(--text-font-fallback);
+  font-size: var(--text-size-subheading);
+  line-height: var(--text-height-medium);
+  font-weight: var(--text-weight-bold);
+  letter-spacing: var(--text-spacing-small);
+  color: var(--neutral-medium);
+}
+
+.text-label-large {
+  font-family: 'Outfit', var(--text-font-fallback);
+  font-size: var(--text-size-label-large);
+  line-height: var(--text-height-large);
+  font-weight: var(--text-weight-regular);
+  letter-spacing: var(--text-spacing-small);
+}
+
+.text-label-medium {
+  font-family: 'Outfit', var(--text-font-fallback);
+  font-size: var(--text-size-label-medium);
+  line-height: var(--text-height-large);
+  font-weight: var(--text-weight-regular);
+  letter-spacing: var(--text-spacing-medium);
+}
+
+.text-label-small {
+  font-family: 'Outfit', var(--text-font-fallback);
+  font-size: var(--text-size-label-small);
+  line-height: var(--text-height-large);
+  font-weight: var(--text-weight-regular);
+  letter-spacing: var(--text-spacing-wide);
+}
+
+.text-body-large {
+  font-size: var(--text-size-body-large);
+  line-height: var(--text-height-large);
+  font-weight: var(--text-weight-regular);
+  letter-spacing: var(--text-spacing-small);
+  color: var(--neutral-low);
+}
+
+.text-body-medium {
+  font-size: var(--text-size-body-medium);
+  line-height: var(--text-height-large);
+  font-weight: var(--text-weight-regular);
+  letter-spacing: var(--text-spacing-small);
+  color: var(--neutral-low);
+}
+
+.text-body-small {
+  font-size: var(--text-size-body-small);
+  line-height: var(--text-height-large);
+  font-weight: var(--text-weight-regular);
+  letter-spacing: var(--text-spacing-medium);
+  color: var(--neutral-low);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
+  margin: 0;
+  padding: 0;
+}
+
+p,
+span {
+  color: inherit;
+}
+
+strong {
+  font-weight: var(--text-weight-bold);
+}
+
+code {
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 0.8em;
+}

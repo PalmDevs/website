@@ -1,0 +1,23 @@
+---
+import '../../styles/base.scss'
+import { ClientRouter } from 'astro:transitions'
+import { NAV_PAGES } from '../../data/nav'
+import NavDock from '../navigation/NavDock'
+
+const { title, flex, ...rest } = Astro.props
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />	
+		<meta name="generator" content={Astro.generator} />
+		<title>{title ? `${title} • Pasuthorn Buala (Palm)` : 'Pasuthorn Buala (Palm)'}</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<ClientRouter />
+	</head>
+	<body flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
+		<NavDock transition:persist client:load pages={NAV_PAGES} />
+		<slot />
+	</body>
+</html>

@@ -1,0 +1,51 @@
+.base {
+    border-radius: var(--rad-full);
+    display: flex;
+
+    & > span {
+        line-height: 0;
+
+        & > .icon {
+            fill: currentColor;
+            width: var(--icon-size);
+            height: var(--icon-size);
+        }
+    }
+}
+
+.small {
+    padding: var(--gap-xs);
+    --icon-size: 24px;
+}
+
+.medium {
+    padding: var(--gap-s);
+    --icon-size: 32px;
+}
+
+.filled {
+    background-color: var(--tinted-high);
+    color: var(--on-tinted);
+
+    --intr-hover-glow: var(--intr-hover-glow-inverse);
+}
+
+.glass {
+    background-color: var(--surface-highest);
+    outline: var(--line-thin) var(--surface-highest);
+    outline-offset: -1px;
+    color: var(--neutral-medium);
+
+    &:not(:disabled):hover {
+        color: var(--neutral-high)
+    }
+}
+
+.text {
+    background-color: transparent;
+    color: var(--neutral-medium);
+
+    &:not(:disabled):hover {
+        background-color: var(--surface-high);
+    }
+}

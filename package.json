@@ -1,0 +1,39 @@
+{
+  "name": "@palmdevs/website",
+  "type": "module",
+  "version": "2.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/solid-js": "^5.1.1",
+    "@playform/inline": "^0.1.2",
+    "@solid-primitives/destructure": "^0.2.2",
+    "astro": "5.14.1",
+    "astro-compressor": "^1.1.2",
+    "astro-expressive-code": "^0.41.3",
+    "astro-favicons": "^3.1.5",
+    "astro-font": "^1.1.0",
+    "astro-imagetools": "^0.9.0",
+    "astro-meta-tags": "^0.4.0",
+    "astro-purgecss": "^5.3.0",
+    "astro-robots-txt": "^1.0.0",
+    "astro-seo": "^0.8.4",
+    "purgecss": "^7.0.2",
+    "solid-js": "^1.9.9"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
+    "@solid-primitives/refs": "^1.1.2",
+    "@unocss/preset-rem-to-px": "^66.5.2",
+    "sass-embedded": "^1.93.2",
+    "sonda": "^0.9.0",
+    "unocss": "^66.5.2",
+    "vite-plugin-solid-svg": "^0.8.1"
+  }
+}

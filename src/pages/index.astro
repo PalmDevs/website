@@ -1,0 +1,167 @@
+---
+import { Button, LinkButton } from '../components/Button'
+import Card from '../components/Card.astro'
+import { Clock } from '../components/Clock'
+import { GradientText } from '../components/GradientText'
+import { IconButton } from '../components/IconButton'
+import Page from '../components/layouts/Page.astro'
+import SkillItem from '../components/SkillItem.astro'
+import Socials from '../components/Socials.astro'
+import { SKILLS } from '../data/skills'
+import IconMail from '../icons/mail.svg?component-solid'
+import IconNext from '../icons/next.svg'
+import IconWork from '../icons/work.svg?component-solid'
+import { getAge } from '../utils/date'
+---
+
+<Page padx="xl">
+	<section id="hero" flex="~ horz horz-y-center horz-x-center wrap" gap="3xl" pady="4xl">
+		<img src="/assets/me.webp" alt="Palm's Avatar" class="avatar" />
+		<div flex="~ vert" gap="m">
+			<!-- TODO: Spin on hover (requires mask) -->
+			<h1 class="text-display">Hey there, I'm <span><GradientText direction='45deg'>Palm</GradientText></span>!</h1>
+			<div>
+				<p class="text-label-large tint-high">Full-Stack Developer, UI/UX Designer</p>
+				<p class="text-label-large tint-low">Bangkok, Thailand • <Clock client:only="solid-js">
+					<span slot="fallback">Tick tock...</span>	
+				</Clock></p>
+			</div>
+			<p class="balance">I make cool things with user experience and accessibility in mind.</p>
+			<div flex="~ horz" gap="m">
+				<LinkButton href="/work" icon={IconWork} text="View my work" />
+				<LinkButton href="#get-in-touch" variant="glass" icon={IconMail} text="Get in touch" />
+			</div>
+		</div>
+	</section>
+	<section flex="~ vert" id="brief" pady="2xl" gap="xl">
+		<p>
+			I'm <span class="tint-high">Pasuthorn Buala</span> (<span class="tint-high">Palm</span>), a {getAge()}-year-old from <span class="tint-high">Bangkok, Thailand</span>.
+			<br>
+			I have been making websites and applications for <span class="tint-high">more than {getAge() - 13} years!</span>
+		</p>
+		<div flex="~ vert" gap="m">
+			<h1 class="text-heading">I do</h1>
+			<ul class="list card-list" gap="m">
+				<li>
+					<Card class="card-item">
+						<h2 class="text-subheading">Full-Stack Development</h2>
+						<p class="text-body-medium">From <span class="tint-high">architecture planning</span> to <span class="tint-high">launching production applications</span>. I make sure all the pieces fit right in.</p>
+					</Card>
+				</li>
+				<li>
+					<Card class="card-item">
+						<h2 class="text-subheading">UI/UX Design</h2>
+						<p class="text-body-medium">
+							Making beautiful, functional, and accessible experiences.
+							<br>
+							<span class="tint-low">I don’t want things to just work.</span> <span class="tint-high">I want them to work great.</span>
+						</p>
+					</Card>
+				</li>
+			</ul>
+		</div>
+		<div flex="~ vert" gap="m">
+			<h1 class="text-heading">with these technologies</h1>
+			<ul class="list card-grid" gap="xs">
+				{SKILLS.slice(0, 6).map((skill) => (
+					<SkillItem name={skill.name} icon={skill.icon} />
+				))}
+				<a class="skills-cta" href="/work#skills" aria-label="View all skills">
+					<Card flex="~ horz-y-center horz-x-center" gap="xs">
+						<span class="text-heading">View all</span>
+						<IconNext class="icon" />
+					</Card>
+				</a>
+			</ul>
+		</div>
+		<section flex="~ vert vert-x-center" id="projects" pady="2xl" gap="xl">
+			<h1 class="text-title">Projects</h1>
+			TODO
+		</section>
+		<section flex="~ vert vert-x-center" id="projects" pady="2xl" gap="xl">
+			<h1 class="text-title">Experience</h1>
+			TODO
+		</section>
+		<section flex="~ vert" id="get-in-touch" pady="2xl" gap="xl">
+			<div flex="~ vert" gap="2xs">
+				<h1 class="text-title">Get in touch</h1>
+				<p class="text-body-large">Want to know more about me, work with me, or just want to have a casual chat? Feel free to reach out!</p>
+			</div>
+			<Socials />
+		</section>
+	</section>
+</Page>
+
+<style>
+	.balance {
+		text-wrap: balance;
+	}
+
+	.avatar {
+		width: 256px;
+		height: 256px;
+	}
+
+	.list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.card-list {
+		display: flex;
+
+		& > * {
+			flex: 1;
+		}
+	}
+
+	.card-grid {
+		display: grid;
+    	grid-template-columns: repeat(9, 1fr);
+    	grid-template-rows: repeat(1, 1fr);
+		gap: var(--gap-s);
+	}
+
+	.skills-cta {
+		grid-column: span 3;
+		height: 100%;
+		text-decoration: none;
+		color: var(--neutral-high);
+
+		& .icon {
+			width: 48px;
+			height: 48px;
+			fill: currentColor;
+		}
+
+		&, & > * {
+			height: 100%;
+		}
+	}
+
+	.card-item {
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap-xs);
+		padding-inline: var(--gap-l);
+		padding-block: var(--gap-m);
+		height: 100%;
+	}
+
+	section {
+		max-width: 720px;
+	}
+
+	section#hero {
+		max-width: initial;
+	}
+
+	.tint-high {
+		color: var(--tinted-high);
+	}
+
+	.tint-low {
+		color: var(--tinted-low);
+	}
+</style>

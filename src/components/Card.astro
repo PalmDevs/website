@@ -1,0 +1,16 @@
+---
+const { props } = Astro
+---
+
+<div class:list={["card", props.class]} {...props}>
+    <slot />
+</div>
+
+<style>
+    .card {
+        border-radius: var(--rad-sm);
+        background-color: var(--surface-highest);
+        outline: var(--line) var(--surface-highest);
+        outline-offset: -2px;
+    }
+</style>

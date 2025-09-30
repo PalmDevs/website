@@ -1,0 +1,21 @@
+---
+import { joinToString } from '../utils/strings'
+import Card from './Card.astro'
+
+const { name, icon } = Astro.props
+---
+
+<li title={name} aria-label={name}>
+    <Card flex="~ horz-y-center horz-x-center" pad="s" {...Astro.props}>
+        <img src={icon} alt={`${name} logo`} class="icon" />
+    </Card>
+</li>
+
+<style>
+    .icon {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+    }
+</style>
+    

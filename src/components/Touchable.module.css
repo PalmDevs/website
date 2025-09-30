@@ -1,0 +1,40 @@
+.container {
+	position: relative;
+	cursor: pointer;
+	transition: var(--dur-medium) var(--ease-quick);
+
+	&:active {
+		transform: scale(var(--intr-tap-scale));
+	}
+
+    &:not(.noHoverEffect):where(:hover, :focus-visible) {
+		transform: scale(var(--intr-hover-zoom-scale));
+	}
+
+	&::before {
+		content: "";
+		inset: 0;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		transition: opacity var(--dur-short);
+		border-radius: inherit;
+		background: radial-gradient(
+            /* TODO: Put as constants? (24rem) */
+			24rem circle at calc(var(--mx) * 1px) calc(var(--my) * 1px),
+			var(--intr-hover-glow),
+			transparent
+		);
+
+		z-index: var(--layer-effect);
+	}
+
+    &:is([aria-disabled="true"], :disabled) {
+		cursor: not-allowed;
+		transform: unset;
+	}
+
+    &:not(:disabled, :hover)::before {
+        opacity: 0;
+    }
+}

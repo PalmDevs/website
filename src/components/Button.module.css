@@ -1,0 +1,74 @@
+.base {
+    display: flex;
+    gap: var(--gap-xs);
+    padding-inline: var(--gap-s);
+    padding-block: var(--gap-xs);
+    border-radius: var(--rad-full);
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+        opacity: var(--opacity-disabled);
+    }
+
+    & > :has(.icon) {
+        line-height: 0;
+
+        & > .icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }    
+    }
+
+    text-decoration: none;
+}
+
+.filled {
+    background-color: var(--tinted-high);
+    color: var(--on-tinted);
+
+    --intr-hover-glow: var(--intr-hover-glow-inverse);
+}
+
+.glass {
+    background-color: var(--surface-highest);
+    outline: var(--line-thin) var(--surface-highest);
+    outline-offset: -1px;
+    color: var(--neutral-medium);
+
+    &:not(:disabled):hover {
+        color: var(--neutral-high)
+    }
+}
+
+.outlined {
+    --color: var(--tinted-medium);
+    background-color: transparent;
+    outline: var(--line) var(--color);
+    outline-offset: -2px;
+    color: var(--color);
+
+    &:not(:disabled):hover {
+        --color: var(--tinted-low);
+        background-color: var(--surface-medium);
+    }
+}
+
+.text {
+    background-color: transparent;
+    color: var(--neutral-medium);
+
+    &:not(:disabled):hover {
+        background-color: var(--surface-high);
+    }
+}
+
+.textTinted {
+    background-color: transparent;
+    color: var(--tinted-medium);
+
+    &:not(:disabled):hover {
+        background-color: var(--surface-high);
+    }
+}
