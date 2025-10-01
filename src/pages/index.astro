@@ -9,6 +9,7 @@ import LineOfWork from '../components/LineOfWork.astro'
 import Page from '../components/layouts/Page.astro'
 import Section from '../components/Section.astro'
 import SkillItem from '../components/SkillItem.astro'
+import Touchable from '../components/Touchable'
 import { SKILLS } from '../data/skills'
 import IconMail from '../icons/mail.svg?component-solid'
 import IconNext from '../icons/next.svg'
@@ -43,16 +44,16 @@ import { getAge } from '../utils/date'
 		<LineOfWork />
 		<div flex="~ vert" gap="m">
 			<h1 class="text-heading">with these technologies</h1>
-			<ul class="list card-grid" gap="xs">
+			<ul class="list card-grid">
 				{SKILLS.slice(0, 6).map((skill) => (
 					<SkillItem name={skill.name} icon={skill.icon} />
 				))}
-				<a class="skills-cta" href="/work#skills" aria-label="View all skills">
-					<Card flex="~ horz-y-center horz-x-center" gap="xs">
+				<Touchable client:visible as="a" class="skills-cta" href="/work#skills" aria-label="View all skills">
+					<Card class="actual-card" flex="~ horz-y-center horz-x-center" gap="xs">
 						<span class="text-heading">View all</span>
 						<IconNext class="icon" />
 					</Card>
-				</a>
+				</Touchable>
 			</ul>
 		</div>
 		<Section title="Projects" id="projects" flex="vert-x-center">
@@ -82,7 +83,7 @@ import { getAge } from '../utils/date'
 		display: grid;
     	grid-template-columns: repeat(9, 1fr);
     	grid-template-rows: repeat(1, 1fr);
-		gap: var(--gap-s);
+		gap: var(--gap-xs);
 	}
 
 	.skills-cta {
@@ -90,6 +91,7 @@ import { getAge } from '../utils/date'
 		height: 100%;
 		text-decoration: none;
 		color: var(--neutral-high);
+		border-radius: var(--rad-sm);
 
 		& .icon {
 			width: 48px;
@@ -97,7 +99,7 @@ import { getAge } from '../utils/date'
 			fill: currentColor;
 		}
 
-		&, & > * {
+		&, & .actual-card {
 			height: 100%;
 		}
 	}
