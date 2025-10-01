@@ -34,6 +34,7 @@
 
 		background-color: var(--surface-medium-overlay, var(--surface-low));
 		
+		-webkit-backdrop-filter: blur(var(--gap-xl));
 		backdrop-filter: blur(var(--gap-xl));
 	}
 }
@@ -47,7 +48,8 @@
 	top: 50%;
 	left: 50%;
 	
-	backdrop-filter: blur(var(--gap-m));
+	-webkit-backdrop-filter: blur(var(--gap-xl));
+	backdrop-filter: blur(var(--gap-xl));
 	background-color: var(--surface-highest);
 	outline: var(--line-thin) var(--surface-highest);
 	outline-offset: -1px;
