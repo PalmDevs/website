@@ -1,6 +1,7 @@
 // @ts-check
 
 import mdx from '@astrojs/mdx'
+import node from '@astrojs/node'
 import sitemap from '@astrojs/sitemap'
 import solid from '@astrojs/solid-js'
 import { defineConfig } from 'astro/config'
@@ -16,12 +17,21 @@ import UnoCSS from 'unocss/astro'
 import solidSvg from 'vite-plugin-solid-svg'
 
 export default defineConfig({
+	adapter: node({
+		mode: 'standalone',
+	}),
+	devToolbar: {
+		enabled: false,
+	},
+	output: 'server',
 	vite: {
-		plugins: [solidSvg({
-			svgo: {
-				enabled: true,
-			}
-		})],
+		plugins: [
+			solidSvg({
+				svgo: {
+					enabled: true,
+				},
+			}),
+		],
 		build: {
 			sourcemap: true,
 		},
