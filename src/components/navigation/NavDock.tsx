@@ -65,6 +65,7 @@ const NavDock: Component<NavDockProps> = props => {
 								{link => (
 									<li>
 										<LinkIconButton
+											class={styles.linkButton}
 											size="s"
 											variant="text"
 											icon={link.icon}

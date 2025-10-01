@@ -57,6 +57,12 @@
 	transition-delay: var(--dur-xshort);
 }
 
+.linkButton {
+	width: 100%;
+	height: 100%;
+	padding: var(--gap-s);
+	--icon-size: 24px;
+}
 
 .list {
   list-style: none;
