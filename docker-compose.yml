@@ -1,9 +1,14 @@
-version: '3.9'
 services:
-  apache:
-    image: httpd:latest
+  website:
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "4321"
+    # Always rebuild after pulling changes
+    pull_policy: build
+    build: .
     container_name: website
+    restart: unless-stopped
+    working_dir: /app
     ports:
-    - '444:80'
-    volumes:
-    - ./dist:/usr/local/apache2/htdocs
+      - '8443:4321'
+    command: bun --bun run dist/server/entry.mjs
