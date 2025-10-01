@@ -8,8 +8,6 @@ import { defineConfig } from 'astro/config'
 import compressor from 'astro-compressor'
 import expressiveCode from 'astro-expressive-code'
 import favicons from 'astro-favicons'
-// @ts-expect-error: No types
-import { astroImageTools as imageTools } from 'astro-imagetools'
 import metaTags from 'astro-meta-tags'
 import robotsTxt from 'astro-robots-txt'
 import sonda from 'sonda/astro'
@@ -48,7 +46,6 @@ export default defineConfig({
 		metaTags(),
 		favicons(),
 		compressor(),
-		imageTools,
-		sonda(),
+		process.env.NODE_ENV !== 'build' && sonda(),
 	],
 })
