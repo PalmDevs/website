@@ -13,10 +13,10 @@
 	--neutral-medium: #E8E8FF;
 	--neutral-low: #CCCCDD;
 
-	--surface-highest: hsla(274, 79%, 69%, 7%);
-	--surface-high: hsla(274, 79%, 69%, 5%);
-	--surface-medium: hsla(274, 79%, 69%, 3%);
-	--surface-low: hsla(274, 79%, 69%, 1%);
+	--surface-highest: rgba(54, 36, 84, 0.28);
+    --surface-high: rgba(54, 36, 84, 0.20);
+    --surface-medium: rgba(54, 36, 84, 0.12);
+    --surface-low: rgba(54, 36, 84, 0.04);
 
 	--tinted-high: #BB9EFF;
 	--tinted-medium: #AB8EC9;
