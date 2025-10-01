@@ -15,6 +15,10 @@ import UnoCSS from 'unocss/astro'
 import solidSvg from 'vite-plugin-solid-svg'
 
 export default defineConfig({
+	prefetch: {
+		defaultStrategy: 'hover',
+		prefetchAll: true,
+	},
 	adapter: node({
 		mode: 'standalone',
 	}),
