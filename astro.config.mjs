@@ -20,7 +20,7 @@ export default defineConfig({
 		prefetchAll: true,
 	},
 	adapter: node({
-		mode: 'standalone',
+		mode: 'middleware',
 	}),
 	devToolbar: {
 		enabled: false,

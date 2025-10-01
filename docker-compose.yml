@@ -11,4 +11,4 @@ services:
     working_dir: /app
     ports:
       - '8443:4321'
-    command: bun --bun run dist/server/entry.mjs
+    command: bun --bun run server.ts

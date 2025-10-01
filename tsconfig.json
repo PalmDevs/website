@@ -3,7 +3,7 @@
 	"include": [".astro/types.d.ts", "**/*", "./src/uno.css.d.ts"],
 	"exclude": ["dist"],
 	"compilerOptions": {
-		"types": ["vite-plugin-solid-svg/types"],
+		"types": ["vite-plugin-solid-svg/types", "bun"],
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js"
 	}

@@ -17,6 +17,7 @@ FROM base AS release
 
 WORKDIR /app
 COPY --from=build /build/dist/ /app/dist/
+COPY --from=build /build/server.ts /app/server.ts
 COPY --from=prod-deps /build/node_modules/ /app/node_modules/
 
 USER bun
@@ -25,4 +26,4 @@ ENV HOST=0.0.0.0
 ENV PORT=4321
 EXPOSE 4321
 
-ENTRYPOINT [ "bun", "--bun", "run", "dist/server/entry.mjs" ]
+ENTRYPOINT [ "bun", "--bun", "run", "server.ts" ]
