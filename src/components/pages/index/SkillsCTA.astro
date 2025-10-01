@@ -1,0 +1,32 @@
+---
+import Card from '../../Card.astro'
+import Touchable from '../../Touchable'
+import IconNext from '../../../icons/next.svg'
+---
+
+<Touchable client:visible as="a" class="skills-cta" href="/work#skills" aria-label="View all skills">
+    <Card class="actual-card" flex="~ horz-y-center horz-x-center" gap="xs">
+        <span class="text-heading">View all</span>
+        <IconNext class="icon" />
+    </Card>
+</Touchable>
+
+<style>
+    .skills-cta {
+		flex: 1;
+
+		text-decoration: none;
+		color: var(--neutral-high);
+		border-radius: var(--rad-sm);
+		
+		& .icon {
+			width: 48px;
+			height: 48px;
+			fill: currentColor;
+		}
+		
+		& .actual-card {
+			height: 100%;
+		}
+	}
+</style>

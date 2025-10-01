@@ -1,20 +1,20 @@
 ---
 import Avatar from '../components/Avatar.astro'
 import { LinkButton } from '../components/Button'
-import Card from '../components/Card.astro'
 import { Clock } from '../components/Clock'
 import Contacts from '../components/Contacts.astro'
 import { GradientText } from '../components/GradientText'
 import LineOfWork from '../components/LineOfWork.astro'
 import Page from '../components/layouts/Page.astro'
+import ProjectCard from '../components/ProjectCard.astro'
 import Section from '../components/Section.astro'
 import SkillItem from '../components/SkillItem.astro'
-import Touchable from '../components/Touchable'
 import { SKILLS } from '../data/skills'
 import IconMail from '../icons/mail.svg?component-solid'
-import IconNext from '../icons/next.svg'
 import IconWork from '../icons/work.svg?component-solid'
 import { getAge } from '../utils/date'
+import PROJECTS from '../data/projects'
+import SkillsCTA from '../components/pages/index/SkillsCTA.astro'
 ---
 
 <Page padx="xl">
@@ -44,20 +44,24 @@ import { getAge } from '../utils/date'
 		<LineOfWork />
 		<div flex="~ vert" gap="m">
 			<h1 class="text-heading">with these technologies</h1>
-			<ul class="list card-grid">
-				{SKILLS.slice(0, 6).map((skill) => (
-					<SkillItem name={skill.name} icon={skill.icon} />
-				))}
-				<Touchable client:visible as="a" class="skills-cta" href="/work#skills" aria-label="View all skills">
-					<Card class="actual-card" flex="~ horz-y-center horz-x-center" gap="xs">
-						<span class="text-heading">View all</span>
-						<IconNext class="icon" />
-					</Card>
-				</Touchable>
-			</ul>
+			<div flex="~" gap="xs">
+				<ul class="list card-grid">
+					{SKILLS.slice(0, 6).map((skill) => (
+						<SkillItem name={skill.name} icon={skill.icon} />
+					))}
+				</ul>
+				<SkillsCTA />
+			</div>
 		</div>
 		<Section title="Projects" id="projects" flex="vert-x-center">
-			TODO
+			<ul class="list card-carousel" gap="s" flex="~">
+				{PROJECTS.slice(0, 3).map(({ name, description, href, image, hint }) => (
+					<li class="carousel-item">
+						<ProjectCard preview={image} {name} {description} {href} {hint} />
+					</li>
+				))}
+			</ul>
+			<LinkButton icon={IconWork} href="/work#projects" text="See more projects" variant="glass" />
 		</Section>
 		<Section title="Experience" id="experience" flex="vert-x-center">
 			TODO
@@ -79,29 +83,22 @@ import { getAge } from '../utils/date'
 		margin: 0;
 	}
 
+	.card-carousel {
+		& > .carousel-item {
+			flex: 1;
+		}
+	}
+
 	.card-grid {
 		display: grid;
-    	grid-template-columns: repeat(9, 1fr);
+    	grid-template-columns: repeat(6, 1fr);
     	grid-template-rows: repeat(1, 1fr);
 		gap: var(--gap-xs);
 	}
 
-	.skills-cta {
+	.skills-cta-item {
 		grid-column: span 3;
 		height: 100%;
-		text-decoration: none;
-		color: var(--neutral-high);
-		border-radius: var(--rad-sm);
-
-		& .icon {
-			width: 48px;
-			height: 48px;
-			fill: currentColor;
-		}
-
-		&, & .actual-card {
-			height: 100%;
-		}
 	}
 
 	section {
