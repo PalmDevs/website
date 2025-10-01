@@ -16,7 +16,6 @@ const Touchable: TouchableComponent = props => {
 
 	return (
 		<Dynamic
-			client:load
 			component={local.as ?? 'div'}
 			class={joinToString(
 				styles.container,
