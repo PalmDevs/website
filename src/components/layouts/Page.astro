@@ -38,3 +38,15 @@ const {
 		</main>
 	</body>
 </html>
+
+<style lang="scss">
+	@use '../../styles/breakpoints';
+
+	main {
+		padding-inline: var(--gap-xl);
+
+		@media (max-width: breakpoints.$tablet) {
+			padding-inline: var(--gap-m);
+		}
+	}
+</style>

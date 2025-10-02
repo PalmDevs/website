@@ -19,7 +19,7 @@ import IconWork from '../icons/work.svg?component-solid'
 import { getAge } from '../utils/date'
 ---
 
-<Page padx="xl">
+<Page>
 	<section id="hero" flex="~ horz horz-y-center horz-x-center wrap" gap="3xl" pady="4xl">
 		<Avatar />
 		<div class="hero-content" flex="~ vert" gap="m">
@@ -61,7 +61,7 @@ import { getAge } from '../utils/date'
 					<ProjectCard preview={image} {name} {description} {href} {hint} />
 				))}
 			</ul>
-			<LinkButton icon={IconWork} href="/work#projects" text="View more projects" variant="glass" />
+			<LinkButton client:visible icon={IconWork} href="/work#projects" text="View more projects" variant="glass" />
 		</Section>
 		<Section title="Experience" id="experience" flex="vert-x-center">
 			<ul class="list" flex="~ horz-y-center vert-y-center" gap="l">
@@ -73,7 +73,7 @@ import { getAge } from '../utils/date'
 					</Touchable>
 				))}
 			</ul>
-			<LinkButton icon={IconWork} href="/work#experience" text="View full experience" variant="glass" />
+			<LinkButton client:visible icon={IconWork} href="/work#experience" text="View full experience" variant="glass" />
 		</Section>
 		<Section title="Get in touch" description="Want to know more about me, work with me, or just want to have a casual chat? Feel free to reach out!" id="get-in-touch">
 			<Contacts />
@@ -156,6 +156,9 @@ import { getAge } from '../utils/date'
 	}
 
 	.exp-item {
+		display: flex;
+		justify-content: center;
+		flex: 1;
 	    border-radius: var(--rad-sm);
 	}
 
@@ -165,7 +168,7 @@ import { getAge } from '../utils/date'
 		width: auto;
 		transition: filter var(--dur-medium) var(--ease);
 
-		&:hover {
+		.exp-item:hover & {
 			filter: unset;
 		}
 	}
