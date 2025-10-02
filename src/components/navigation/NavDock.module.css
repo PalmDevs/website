@@ -71,3 +71,8 @@
   margin: 0;
   padding: 0;
 }
+
+/* Active links already have the highlight, they don't need to show hover effects */
+.activeLink:hover {
+	background-color: transparent !important;
+}

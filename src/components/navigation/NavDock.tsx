@@ -1,4 +1,4 @@
-import { For, onCleanup, onMount, Show } from 'solid-js'
+import { createSignal, For, onCleanup, onMount, Show } from 'solid-js'
 import Logger from '../../utils/Logger'
 import { LinkButton } from '../Button'
 import { LinkIconButton } from '../IconButton'
@@ -33,18 +33,7 @@ const NavDock: Component<NavDockProps> = props => {
 						<For each={props.pages}>
 							{page => (
 								<li>
-									<LinkButton
-										on:click={e => {
-											if (location.pathname === page.href) {
-												e.preventDefault()
-												log.warn('Already on page, not navigating:', page.href)
-											}
-										}}
-										variant="text"
-										icon={page.icon}
-										text={page.name}
-										href={page.href}
-									/>
+									<NavDockLink {...page} />
 								</li>
 							)}
 						</For>
@@ -86,6 +75,36 @@ const NavDock: Component<NavDockProps> = props => {
 	)
 }
 
+const NavDockLink = (page: NavLinkConfig) => {
+	const [active, setActive] = createSignal(false)
+
+	onMount(() => {
+		setActive(getPathname() === page.href)
+
+		document.addEventListener('astro:after-swap', () => {
+			setActive(getPathname() === page.href)
+		})
+	})
+
+	return (
+		<LinkButton
+			classList={{
+				[styles.activeLink]: active(),
+			}}
+			on:click={e => {
+				if (getPathname() === page.href) {
+					e.preventDefault()
+					log.warn('Already on page, not navigating:', page.href)
+				}
+			}}
+			variant="text"
+			icon={page.icon}
+			text={page.name}
+			href={page.href}
+		/>
+	)
+}
+
 const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 	const dock = highlight.parentElement!
 
@@ -104,12 +123,14 @@ const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 	})
 
 	const rehighlight = () => {
-		const pathname = location.pathname.replace(/\/+$/, '') || '/'
+		const pathname = getPathname()
 
-		const index = props.pages.findIndex(({ href, matchSubroutes }) => {
-			if (matchSubroutes) return pathname.startsWith(href)
-			return pathname === href
-		})
+		const index = props.pages.findIndex(
+			({ href, subroutes: matchSubroutes }) => {
+				if (matchSubroutes) return pathname.startsWith(href)
+				return pathname === href
+			},
+		)
 
 		if (index === -1) return log.warn('Page not in links:', pathname)
 
@@ -132,6 +153,10 @@ const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 
 	document.fonts.ready.then(rehighlight)
 	document.addEventListener('astro:after-swap', rehighlight)
+}
+
+function getPathname() {
+	return location.pathname.replace(/\/+$/, '') || '/'
 }
 
 // const ThemeSwitchNavButton: Component = () => {
@@ -173,5 +198,5 @@ export interface NavLinkConfig {
 	icon: IconComponent
 	href: string
 	name: string
-	matchSubroutes?: boolean
+	subroutes?: boolean
 }
