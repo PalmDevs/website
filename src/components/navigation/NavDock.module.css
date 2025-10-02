@@ -9,7 +9,7 @@
 
 :global(:root) {
     /* Estimated height + padding */
-    scroll-padding: 6rem;
+    scroll-padding: 64px;
 }
 
 .dock {
@@ -29,10 +29,8 @@
 	transition-property: background-color, outline-color;
 
 	&[data-scrolled="true"] {
-		background-color: var(--surface-highest);
-		outline-color: var(--surface-highest);
-
-		background-color: var(--surface-medium-overlay, var(--surface-low));
+		background-color: var(--surface-medium);
+		outline-color: var(--surface-medium);
 		
 		-webkit-backdrop-filter: blur(var(--gap-xl));
 		backdrop-filter: blur(var(--gap-xl));

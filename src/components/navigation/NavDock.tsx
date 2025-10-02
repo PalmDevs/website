@@ -6,9 +6,20 @@ import styles from './NavDock.module.css'
 import type { Component } from 'solid-js'
 import type { IconComponent } from '../_icons'
 
+// let preserveScroll = 0
 const log = new Logger('NavDock')
 
 const NavDock: Component<NavDockProps> = props => {
+	const [pathname, setPathname] = createSignal('')
+
+	onMount(() => {
+		const listener = () => setPathname(getPathname())
+		listener()
+
+		document.addEventListener('astro:after-swap', listener)
+		onCleanup(() => document.removeEventListener('astro:after-swap', listener))
+	})
+
 	return (
 		<div flex="~ horz center" class={styles.container}>
 			<div
@@ -33,7 +44,7 @@ const NavDock: Component<NavDockProps> = props => {
 						<For each={props.pages}>
 							{page => (
 								<li>
-									<NavDockLink {...page} />
+									<NavDockLink page={page} active={pathname() === page.href} />
 								</li>
 							)}
 						</For>
@@ -75,35 +86,23 @@ const NavDock: Component<NavDockProps> = props => {
 	)
 }
 
-const NavDockLink = (page: NavLinkConfig) => {
-	const [active, setActive] = createSignal(false)
-
-	onMount(() => {
-		setActive(getPathname() === page.href)
-
-		document.addEventListener('astro:after-swap', () => {
-			setActive(getPathname() === page.href)
-		})
-	})
-
-	return (
-		<LinkButton
-			classList={{
-				[styles.activeLink]: active(),
-			}}
-			on:click={e => {
-				if (getPathname() === page.href) {
-					e.preventDefault()
-					log.warn('Already on page, not navigating:', page.href)
-				}
-			}}
-			variant="text"
-			icon={page.icon}
-			text={page.name}
-			href={page.href}
-		/>
-	)
-}
+const NavDockLink = (props: { page: NavLinkConfig; active: boolean }) => (
+	<LinkButton
+		classList={{
+			[styles.activeLink]: props.active,
+		}}
+		on:click={e => {
+			if (getPathname() === props.page.href) {
+				e.preventDefault()
+				log.warn('Already on page, not navigating:', props.page.href)
+			}
+		}}
+		variant="text"
+		icon={props.page.icon}
+		text={props.page.name}
+		href={props.page.href}
+	/>
+)
 
 const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 	const dock = highlight.parentElement!
@@ -156,7 +155,9 @@ const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 }
 
 function getPathname() {
-	return location.pathname.replace(/\/+$/, '') || '/'
+	return globalThis.location
+		? location.pathname.replace(/\/+$/, '') || '/'
+		: (log.warn('Attempted to get pathname on server'), '/')
 }
 
 // const ThemeSwitchNavButton: Component = () => {
