@@ -1,20 +1,97 @@
 ---
 import Card from './Card.astro'
+import Touchable from './Touchable'
 
-const { name, icon } = Astro.props
+interface Props {
+	name: string
+	icon: string
+	variant?: 'small' | 'large' | 'large-horz' | 'large-vert'
+}
+
+const { name, icon, variant = 'small' } = Astro.props
+const shouldHaveLabel = ['large', 'large-horz', 'large-vert'].includes(variant)
+const shouldHaveLargeIcon = variant === 'large'
 ---
 
-<li title={name} aria-label={name}>
-    <Card flex="~ horz-y-center horz-x-center" pad="s" {...Astro.props}>
-        <img aria-hidden="true" src={icon} alt={`${name} logo`} class="icon" />
-    </Card>
+<li class="item" title={name} aria-label={name}>
+    <Touchable class="item" client:visible>
+        <Card class:list={["item", variant === 'large-horz' && 'flex-horz']} flex="~ vert vert-y-center vert-x-center" pad="s" gap="xs">
+            <div class="icon-cont">
+                <img draggable="false" aria-hidden="true" src={icon} alt={`${name} logo`} class:list={["icon", shouldHaveLargeIcon && 'large']} />
+                <img draggable="false" aria-hidden="true" src={icon} alt={`${name} logo`} class:list={["icon", "icon-glow", shouldHaveLargeIcon && 'large']} />
+            </div>
+            {shouldHaveLabel && <span data-variant={variant} aria-hidden="true" class="text-label-medium text">{name}</span>}
+        </Card>
+    </Touchable>
 </li>
 
-<style>
+<style lang="scss">
+    @use "../styles/breakpoints";
+
+    .item {
+        user-select: none;
+        width: 100%;
+        height: 100%;
+        border-radius: var(--rad-sm);
+        cursor: default;
+
+        &:active {
+            transform: none;
+        }
+    }
+
+    .text {
+        text-align: center;
+    }
+
     .icon {
-        width: 48px;
-        height: 48px;
+        --size: 48px;
+
+        width: var(--size);
+        height: var(--size);
         object-fit: contain;
+
+        &.large {
+            --size: 64px;
+        }
+    }
+
+    .icon-cont {
+        display: flex;
+        position: relative;
+    }
+
+    .icon-glow {
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        opacity: 0;
+        filter: blur(16px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: var(--layer-effect);
+
+        .item:hover & {
+            transition: opacity var(--dur-medium);
+            opacity: 0.5;
+        }
+    }
+
+    @media (max-width: breakpoints.$tablet) {
+        .text[data-variant="large-horz"] {
+            display: none;
+        }
+    }
+
+    @media (max-width: calc(breakpoints.$tablet - 32px)) {
+        .text {
+            display: none;
+        }
+
+        .icon.large {
+            --size: 48px;
+        }
     }
 </style>
     
