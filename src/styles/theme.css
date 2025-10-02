@@ -1,14 +1,52 @@
-/* TODO: Light theme */
-/* :root,
-:root[data-theme="light"] {
-	color-scheme: light;
-} */
+@property --bg-1 {
+  syntax: '<color>';
+  initial-value: #000;
+  inherits: false;
+}
+
+@property --bg-2 {
+  syntax: '<color>';
+  initial-value: #000;
+  inherits: false;
+}
 
 :root,
+:root[data-theme="light"] {
+	color-scheme: light;
+
+	--bg-1: #f2efff;
+	--bg-2: #f2efff;
+	--bg: linear-gradient(45deg, var(--bg-1) 0%, var(--bg-2) 100%);
+
+	--primary: #6E36B3;
+	--secondary: #1E5AB2;
+
+	--neutral-high: #121019;
+	--neutral-medium: #2E2B40;
+	--neutral-low: #42415e;
+
+	--surface-highest: rgba(96, 77, 161, 0.08);
+	--surface-high: rgba(78, 56, 155, 0.06);
+	--surface-medium: rgba(80, 58, 158, 0.04);
+	--surface-low: rgba(82, 60, 160, 0.02);
+
+	--tinted-high: #5833a3;
+	--tinted-medium: #7256A9;
+	--tinted-low: #5d4e81;
+
+	--on-tinted: #FFFFFF;
+
+	--intr-hover-glow: rgba(100, 80, 180, 0.05);
+	--intr-hover-glow-inverse: rgba(213, 187, 255, 0.1);
+
+	--line: 1px solid !important;
+}
+
 :root[data-theme="dark"] {
 	color-scheme: dark;
 
-	--bg: linear-gradient(45deg, #070D20 0%, #0F0622 100%);
+	--bg-1: #070D20;
+	--bg-2: #0F0622;
 
 	--primary: #b770ee;
 	--secondary: #509cff;
@@ -29,5 +67,5 @@
 	--on-tinted: #120B22;
 
 	--intr-hover-glow: rgba(128, 119, 255, 0.05);
-	--intr-hover-glow-inverse: rgba(17, 14, 59, 0.1);
+	--intr-hover-glow-inverse: rgba(17, 14, 59, 0.15);
 }
