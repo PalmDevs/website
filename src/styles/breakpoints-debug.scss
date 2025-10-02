@@ -1,7 +1,7 @@
 @use "breakpoints";
 
 :root::before {
-    content: "DESKTOP";
+    content: " DESKTOP ";
     font-size: 16px;
     font-family: "Outfit";
     background: var(--tinted-high);
@@ -9,16 +9,17 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: var(--layer-overlay);
 }
 
 @media (max-width: breakpoints.$tablet) {
     :root::before {
-        content: "TABLET";
+        content: " TABLET ";
     }
 }
 
 @media (max-width: breakpoints.$phone) {
     :root::before {
-        content: "PHONE";
+        content: " PHONE ";
     }
 }

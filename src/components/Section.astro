@@ -3,7 +3,7 @@ const { title, description, flex, ...props } = Astro.props
 ---
 
 <section flex={`~ vert ${flex}`} {...props} pady="2xl" gap="xl">
-    <div flex="~ vert" gap="xs">
+    <div flex={`~ vert ${flex}`} gap="xs">
         <h1 class="text-title">{title}</h1>
         {description && <p>{description}</p>}
     </div>
