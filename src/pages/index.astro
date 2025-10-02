@@ -26,9 +26,7 @@ import { getAge } from '../utils/date'
 			<h1 class="text-display">Hey there, I'm <span><GradientText direction='45deg'>Palm</GradientText></span>!</h1>
 			<div>
 				<p class="text-label-large tint-high">Full-Stack Developer, UI/UX Designer</p>
-				<p class="text-label-large tint-low">Bangkok, Thailand • <Clock client:only="solid-js">
-					<span slot="fallback">Tick tock...</span>	
-				</Clock></p>
+				<p class="text-label-large tint-low">Bangkok, Thailand<span aria-hidden="true"> • <Clock client:idle /></span>
 			</div>
 			<p class="balance">I make cool things with user experience and accessibility in mind.</p>
 			<div flex="~ horz" gap="m">
