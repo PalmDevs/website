@@ -10,7 +10,7 @@ const { preview, name, description, hint = 'View project', href } = Astro.props
     <a class="project-card" {href} target="_blank" rel="noreferrer">
         <Card flex="~ vert" class="actual-card">
             <div class="preview" flex="~ horz-y-center horz-x-center">
-                <img alt={`${name} logo`} class="preview-img" src={preview} />
+                <img alt={name} class="preview-img" src={preview} />
             </div>
             <div class="info" gap="m" pad="m" flex="~ vert">
                 <div flex="~ vert" gap="2xs">

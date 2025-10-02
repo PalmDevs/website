@@ -17,8 +17,8 @@ const shouldHaveLargeIcon = variant === 'large'
     <Touchable class="item" client:visible>
         <Card class:list={["item", variant === 'large-horz' && 'flex-horz']} flex="~ vert vert-y-center vert-x-center" pad="s" gap="xs">
             <div class="icon-cont">
-                <img draggable="false" aria-hidden="true" src={icon} alt={`${name} logo`} class:list={["icon", shouldHaveLargeIcon && 'large']} />
-                <img draggable="false" aria-hidden="true" src={icon} alt={`${name} logo`} class:list={["icon", "icon-glow", shouldHaveLargeIcon && 'large']} />
+                <img draggable="false" aria-hidden="true" src={icon} alt={name} class:list={["icon", shouldHaveLargeIcon && 'large']} />
+                <img draggable="false" aria-hidden="true" src={icon} alt={name} class:list={["icon", "icon-glow", shouldHaveLargeIcon && 'large']} />
             </div>
             {shouldHaveLabel && <span data-variant={variant} aria-hidden="true" class="text-label-medium text">{name}</span>}
         </Card>
