@@ -20,7 +20,7 @@
 	overflow-x: auto;
 	pointer-events: auto;
 
-	padding: var(--gap-xs) var(--gap-s);
+	padding: var(--gap-xs);
 	border-radius: var(--rad-full);
 
 	outline: var(--line) transparent;
