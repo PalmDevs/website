@@ -1,9 +1,11 @@
 # 🌐 Website
 
-My personal and portfolio website built with [Astro](https://astro.build/) and [SolidJS](https://www.solidjs.com/).
+My personal and portfolio website, built with [Astro](https://astro.build/) and [SolidJS](https://www.solidjs.com/).
 
 [📎 Live site](https://v2.palmdevs.me)  
 [🖌️ Figma design](https://www.figma.com/design/scwi73muUFOAd6T02DaHo1/Website-Redesign)
+
+<img style="border-radius: 16px" width="600" alt="Screenshot" src="./SCREENSHOT.jpg">
 
 ## 🧰 Stack
 
@@ -63,3 +65,8 @@ If you want to deploy statically via GitHub pages, Cloudflare pages, or similar,
 ```
 
 The `dist/` directory can then be served statically.
+
+## 📝 License
+
+This project is licensed under the GNU General Public License v3.0. See the [LICENSE](./LICENSE) file for details.  
+While the work itself is open source, I'd appreciate if you would credit me as the author if you'd like to use this project for your own work. Thank you! 💖
