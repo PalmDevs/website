@@ -1,6 +1,7 @@
 import IconDiscord from '../icons/discord.svg?component-solid'
 import IconGitHub from '../icons/github.svg?component-solid'
 import IconEmail from '../icons/mail.svg?component-solid'
+import IconLinkedIn from '../icons/linkedin.svg?component-solid'
 import type { IconComponent } from '../components/_icons'
 
 export const SOCIALS = {
@@ -13,6 +14,11 @@ export const SOCIALS = {
 		name: 'Discord',
 		url: 'https://discord.com/users/629368283354628116',
 		icon: IconDiscord,
+	},
+	linkedin: {
+		name: 'LinkedIn',
+		url: 'https://www.linkedin.com/in/palmdevs',
+		icon: IconLinkedIn,
 	},
 	mail: {
 		name: 'Email',
