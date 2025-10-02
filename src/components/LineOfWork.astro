@@ -6,7 +6,7 @@ const { detailed = false } = Astro.props
 
 <div flex="~ vert" gap="m">
     <h1 class="text-heading">I do</h1>
-    <ul class="list card-list" gap="m">
+    <ul class="list card-list" gap="s">
         <Card as="li" class="card-item">
             <h2 class="text-subheading">Full-Stack Development</h2>
             <p class="text-body-medium">From <span class="tint-high">architecture planning</span> to <span class="tint-high">launching production applications</span>. I make sure all the pieces fit right in.</p>
@@ -24,7 +24,7 @@ const { detailed = false } = Astro.props
 {detailed && (
     <div flex="~ vert" gap="m">
         <h1 class="text-heading">But did you know? I also do</h1>
-        <ul class="list card-list" gap="m">
+        <ul class="list card-list" gap="s">
             <Card as="li" class="card-item">
                 <h2 class="text-subheading">Reverse Engineering</h2>
                 <p class="text-body-medium">Poking around with people’s stuff, reverse-engineering my way to make things work the way I want them to.</p>
@@ -39,7 +39,9 @@ const { detailed = false } = Astro.props
     </div>
 )}
 
-<style>
+<style lang="scss">
+    @use '../styles/breakpoints';
+
     .list {
 		list-style: none;
 		padding: 0;
@@ -52,6 +54,10 @@ const { detailed = false } = Astro.props
 		& > * {
 			flex: 1;
 		}
+
+        @media (max-width: breakpoints.$tablet) {
+            flex-direction: column;
+        }
 	}
 
 	.card-item {

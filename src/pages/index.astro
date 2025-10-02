@@ -22,14 +22,14 @@ import { getAge } from '../utils/date'
 <Page padx="xl">
 	<section id="hero" flex="~ horz horz-y-center horz-x-center wrap" gap="3xl" pady="4xl">
 		<Avatar />
-		<div flex="~ vert" gap="m" style="padding-block-start: var(--gap-2xl);">
-			<h1 class="text-display">Hey there, I'm <span><GradientText direction='45deg'>Palm</GradientText></span>!</h1>
+		<div class="hero-content" flex="~ vert" gap="m">
+			<h1 class="text-display hero-text">Hey there, I'm <span><GradientText direction='45deg'>Palm</GradientText></span>!</h1>
 			<div>
-				<p class="text-label-large tint-high">Full-Stack Developer, UI/UX Designer</p>
-				<p class="text-label-large tint-low">Bangkok, Thailand<span aria-hidden="true"> • <Clock client:idle /></span>
+				<p class="text-label-large tint-high hero-text">Full-Stack Developer, UI/UX Designer</p>
+				<p class="text-label-large tint-low hero-text">Bangkok, Thailand<span aria-hidden="true"> • <Clock client:idle /></span>
 			</div>
-			<p class="balance">I make cool things with user experience and accessibility in mind.</p>
-			<div flex="~ horz" gap="m">
+			<p class="balance hero-text">I make cool things with user experience and accessibility in mind.</p>
+			<div class="hero-buttons" flex="~ horz wrap" gap="m">
 				<LinkButton href="/work" icon={IconWork} text="View my work" />
 				<LinkButton client:visible href="#get-in-touch" variant="glass" icon={IconMail} text="Get in touch" />
 			</div>
@@ -49,12 +49,14 @@ import { getAge } from '../utils/date'
 					{SKILLS.slice(0, 6).map((skill) => (
 						<SkillItem name={skill.name} icon={skill.icon} />
 					))}
+					<li class="skills-cta-item">
+						<SkillsCTA />
+					</li>
 				</ul>
-				<SkillsCTA />
 			</div>
 		</div>
 		<Section title="Projects" id="projects" flex="vert-x-center">
-			<ul class="list card-carousel" gap="s" flex="~">
+			<ul class="list card-carousel projects-list" gap="s" flex="~">
 				{PROJECTS.slice(0, 3).map(({ name, description, href, image, hint }) => (
 					<ProjectCard preview={image} {name} {description} {href} {hint} />
 				))}
@@ -62,9 +64,9 @@ import { getAge } from '../utils/date'
 			<LinkButton icon={IconWork} href="/work#projects" text="View more projects" variant="glass" />
 		</Section>
 		<Section title="Experience" id="experience" flex="vert-x-center">
-			<ul class="list" flex="~" gap="l">
+			<ul class="list" flex="~ horz-y-center vert-y-center" gap="l">
 				{EXPERIENCES.slice(0, 2).map(({ name, image, href }) => (
-					<Touchable as="li" class="exp-item" client:visible >
+					<Touchable as="li" class="exp-item" client:visible>
 						<a title={name} href={href} target="_blank" rel="noreferrer">
 							<img src={image} alt={name} class="exp-image" />
 						</a>
@@ -79,7 +81,9 @@ import { getAge } from '../utils/date'
 	</section>
 </Page>
 
-<style>
+<style lang="scss">
+	@use '../styles/breakpoints';
+
 	.balance {
 		text-wrap: balance;
 	}
@@ -88,6 +92,42 @@ import { getAge } from '../utils/date'
 		list-style: none;
 		padding: 0;
 		margin: 0;
+		flex-wrap: wrap;
+	}
+
+	.hero-content {
+		padding-block-start: var(--gap-2xl);
+	}
+
+	.projects-list {
+		flex-wrap: nowrap;
+
+		@media (max-width: breakpoints.$tablet - 96px) {
+			display: flex;
+			max-width: 384px;
+			flex-wrap: wrap;
+		}
+	}
+
+	@media (max-width: breakpoints.$tablet + 192px) {
+		section#hero {
+			flex-direction: column;
+			gap: var(--gap-xl);
+			padding-block: var(--gap-2xl);
+		}
+
+		.hero-content {
+			padding-block-start: 0;
+		}
+
+		.hero-text {
+			text-wrap: balance;
+			text-align: center;
+		}
+
+		.hero-buttons {
+			justify-content: center;
+		}
 	}
 
 	.card-carousel {
@@ -98,14 +138,13 @@ import { getAge } from '../utils/date'
 
 	.card-grid {
 		display: grid;
-    	grid-template-columns: repeat(6, 1fr);
-    	grid-template-rows: repeat(1, 1fr);
+		flex: 1;
+    	grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
 		gap: var(--gap-xs);
 	}
 
 	.skills-cta-item {
 		grid-column: span 3;
-		height: 100%;
 	}
 
 	section {
