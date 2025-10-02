@@ -6,7 +6,7 @@ import Touchable from './Touchable'
 const { preview, name, description, hint = 'View project', href } = Astro.props
 ---
 
-<Touchable as="li" client:visible>
+<Touchable class="project-card" as="li" client:visible>
     <a class="project-card" {href} target="_blank" rel="noreferrer">
         <Card flex="~ vert" class="actual-card">
             <div class="preview" flex="~ horz-y-center horz-x-center">
