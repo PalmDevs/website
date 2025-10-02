@@ -1,12 +1,12 @@
 // @ts-check
 
-import mdx from '@astrojs/mdx'
+// import mdx from '@astrojs/mdx'
 import node from '@astrojs/node'
 import sitemap from '@astrojs/sitemap'
 import solid from '@astrojs/solid-js'
 import { defineConfig } from 'astro/config'
 import compressor from 'astro-compressor'
-import expressiveCode from 'astro-expressive-code'
+// import expressiveCode from 'astro-expressive-code'
 import favicons from 'astro-favicons'
 import metaTags from 'astro-meta-tags'
 import robotsTxt from 'astro-robots-txt'
@@ -46,8 +46,8 @@ export default defineConfig({
 		}),
 		solid(),
 		sitemap(),
-		expressiveCode(),
-		mdx(),
+		// expressiveCode(),
+		// mdx(),
 		robotsTxt(),
 		metaTags(),
 		favicons(),
