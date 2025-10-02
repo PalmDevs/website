@@ -1,11 +1,11 @@
 ---
+import IconNext from '../../../icons/next.svg'
 import Card from '../../Card.astro'
 import Touchable from '../../Touchable'
-import IconNext from '../../../icons/next.svg'
 ---
 
 <Touchable client:visible as="a" class="skills-cta" href="/work#skills" aria-label="View all skills">
-    <Card class="actual-card" flex="~ horz-y-center horz-x-center" gap="xs">
+    <Card class="actual-card" flex="~ horz-y-center horz-x-center" gap="xs" pad="s">
         <span class="text-heading">View all</span>
         <IconNext class="icon" />
     </Card>
@@ -23,10 +23,6 @@ import IconNext from '../../../icons/next.svg'
 			width: 48px;
 			height: 48px;
 			fill: currentColor;
-		}
-		
-		& .actual-card {
-			height: 100%;
 		}
 	}
 </style>
