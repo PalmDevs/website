@@ -7,14 +7,15 @@ import { GradientText } from '../components/GradientText'
 import LineOfWork from '../components/LineOfWork.astro'
 import Page from '../components/layouts/Page.astro'
 import ProjectCard from '../components/ProjectCard.astro'
+import SkillsCTA from '../components/pages/index/SkillsCTA.astro'
 import Section from '../components/Section.astro'
 import SkillItem from '../components/SkillItem.astro'
+import EXPERIENCES from '../data/experience'
+import PROJECTS from '../data/projects'
 import { SKILLS } from '../data/skills'
 import IconMail from '../icons/mail.svg?component-solid'
 import IconWork from '../icons/work.svg?component-solid'
 import { getAge } from '../utils/date'
-import PROJECTS from '../data/projects'
-import SkillsCTA from '../components/pages/index/SkillsCTA.astro'
 ---
 
 <Page padx="xl">
@@ -61,10 +62,17 @@ import SkillsCTA from '../components/pages/index/SkillsCTA.astro'
 					</li>
 				))}
 			</ul>
-			<LinkButton icon={IconWork} href="/work#projects" text="See more projects" variant="glass" />
+			<LinkButton icon={IconWork} href="/work#projects" text="View more projects" variant="glass" />
 		</Section>
 		<Section title="Experience" id="experience" flex="vert-x-center">
-			TODO
+			<div flex="~" gap="l">
+				{EXPERIENCES.slice(0, 2).map(({ name, image, href }) => (
+					<a title={name} href={href} target="_blank" rel="noreferrer">
+						<img src={image} alt={name} class="exp-image" />
+					</a>
+				))}
+			</div>
+			<LinkButton icon={IconWork} href="/work#experience" text="View full experience" variant="glass" />
 		</Section>
 		<Section title="Get in touch" description="Want to know more about me, work with me, or just want to have a casual chat? Feel free to reach out!" id="get-in-touch">
 			<Contacts />
@@ -107,6 +115,12 @@ import SkillsCTA from '../components/pages/index/SkillsCTA.astro'
 
 	section#hero {
 		max-width: initial;
+	}
+
+	.exp-image {
+		filter: saturate(0) brightness(0.8);
+		height: 128px;
+		width: auto;
 	}
 
 	.tint-high {
