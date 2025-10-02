@@ -7,7 +7,7 @@ const MINUTE = 60 * 1000
 const log = new Logger('Clock')
 
 export const Clock = () => {
-	const [localTime, setLocalTime] = createSignal<string>(null!)
+	const [localTime, setLocalTime] = createSignal<string>('Tick tock...')
 
 	function formatTime() {
 		log.info('Updating time')
