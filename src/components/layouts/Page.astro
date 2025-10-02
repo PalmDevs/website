@@ -3,9 +3,15 @@ import '../../styles/base.scss'
 
 import { ClientRouter } from 'astro:transitions'
 import { NAV_LINKS, NAV_PAGES } from '../../data/nav'
+import { getAge } from '../../utils/date'
 import NavDock from '../navigation/NavDock'
 
-const { title, flex, ...rest } = Astro.props
+const {
+	title,
+	description = `I'm Pasuthorn Buala (or Palm), a full-stack developer and UI/UX designer from Bangkok, Thailand. \nI make cool things with user experience and accessibility in mind. \nI have been making websites and applications for more than ${getAge() - 13} years!`,
+	flex,
+	...rest
+} = Astro.props
 ---
 
 <html lang="en">
@@ -14,6 +20,12 @@ const { title, flex, ...rest } = Astro.props
 		<meta name="viewport" content="width=device-width" />	
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ? `${title} • Pasuthorn Buala (Palm)` : 'Pasuthorn Buala (Palm)'}</title>
+		<meta name="theme-color" content="#b770ee" />
+		<meta name="description" content={description} />
+		<meta property="og:image" content="/assets/og.webp" />
+		<meta property="og:image:width" content="500" />
+		<meta property="og:image:height" content="500" />
+		<meta property="og:image:type" content="image/webp" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:600,700|jetbrains-mono:400|outfit:600,700&display=swap" />
 		<ClientRouter fallback="swap" />
