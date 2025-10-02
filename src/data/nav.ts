@@ -20,6 +20,7 @@ export const NAV_PAGES = [
 		name: 'Blog',
 		href: '/blog',
 		icon: IconBlog,
+		subroutes: true,
 	},
 	{
 		name: 'About',
