@@ -7,7 +7,6 @@
 
   --text-spacing-small: 1%;
   --text-spacing-medium: 3%;
-  --text-spacing-wide: 5%;
 
   --text-size-display: 52px;
   --text-size-title: 36px;
@@ -99,7 +98,7 @@ body {
   font-size: var(--text-size-label-small);
   line-height: var(--text-height-large);
   font-weight: var(--text-weight-regular);
-  letter-spacing: var(--text-spacing-wide);
+  letter-spacing: var(--text-spacing-medium);
 }
 
 .text-body-large {
