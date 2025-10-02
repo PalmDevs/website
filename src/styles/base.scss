@@ -27,7 +27,7 @@ h6,
 hr,
 img,
 svg {
-  transition-duration: var(--dur-xshort);
+  transition-duration: var(--dur-short);
   transition-property: var(--trans-prop-content),
   var(--trans-props-layout);
   z-index: var(--layer-content);
@@ -39,7 +39,7 @@ section,
 nav,
 footer,
 main {
-  transition-duration: var(--dur-xshort);
+  transition-duration: var(--dur-short);
   transition-property: var(--trans-props-layout);
 }
 
@@ -50,7 +50,6 @@ svg {
 }
 
 :root {
-  color-scheme: dark light;
   width: 100%;
   height: 100%;
   font-size: 14px;
@@ -60,6 +59,8 @@ svg {
   background: var(--bg);
   background-repeat: repeat-y;
   background-attachment: fixed;
+  transition-property: --bg-1, --bg-2;
+  transition-duration: var(--dur-xshort);
 }
 
 ::selection {
