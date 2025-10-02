@@ -1,27 +1,29 @@
 ---
+import IconNext from '../icons/next.svg'
 import Card from './Card.astro'
 import Touchable from './Touchable'
-import IconNext from '../icons/next.svg'
 
 const { preview, name, description, hint = 'View project', href } = Astro.props
 ---
 
-<Touchable class="project-card" client:visible as="a" {href} target="_blank" rel="noreferrer">
-    <Card flex="~ vert" class="actual-card">
-        <div class="preview" flex="~ horz-y-center horz-x-center">
-            <img alt={`${name} logo`} class="preview-img" src={preview} />
-        </div>
-        <div class="info" gap="m" pad="m" flex="~ vert">
-            <div flex="~ vert" gap="2xs">
-                <h1 class="text-subheading">{name}</h1>
-                <p class="text-body-small">{description}</p>
+<Touchable as="li" client:visible>
+    <a class="project-card" {href} target="_blank" rel="noreferrer">
+        <Card flex="~ vert" class="actual-card">
+            <div class="preview" flex="~ horz-y-center horz-x-center">
+                <img alt={`${name} logo`} class="preview-img" src={preview} />
             </div>
-            <div flex="~ horz-y-center" gap="2xs">
-                <p class="text-label-small hint">{hint}</p>
-                <IconNext class="hint-icon" />
+            <div class="info" gap="m" pad="m" flex="~ vert">
+                <div flex="~ vert" gap="2xs">
+                    <h1 class="text-subheading">{name}</h1>
+                    <p class="text-body-small">{description}</p>
+                </div>
+                <div flex="~ horz-y-center" gap="2xs">
+                    <p class="text-label-small hint">{hint}</p>
+                    <IconNext class="hint-icon" />
+                </div>
             </div>
-        </div>
-    </Card>
+        </Card>
+    </a>
 </Touchable>
 
 <style>
