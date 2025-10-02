@@ -5,7 +5,9 @@ import '../../styles/base.scss'
 import { ClientRouter } from 'astro:transitions'
 import { NAV_LINKS, NAV_PAGES } from '../../data/nav'
 import { getAge } from '../../utils/date'
+import { Button } from '../Button'
 import NavDock from '../navigation/NavDock'
+import { ThemeProvider } from '../providers/ThemeProvider'
 
 const {
 	title,
@@ -28,7 +30,8 @@ const {
 		<meta property="og:image:height" content="500" />
 		<meta property="og:image:type" content="image/webp" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:600,700|jetbrains-mono:400|outfit:600,700&display=swap" />
+		<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:500,600,700|jetbrains-mono:400|outfit:600,700&display=swap" />
+		<script data-astro-rerun is:inline>(() => {const saved=localStorage.getItem("theme");const {matches}=matchMedia("(prefers-color-scheme: dark)");document.documentElement.dataset.theme=!saved?(matches?"dark":"light"):saved})()</script>
 		<ClientRouter fallback="swap" />
 	</head>
 	<body>
@@ -50,3 +53,9 @@ const {
 		}
 	}
 </style>
+
+<script>
+  document.addEventListener("astro:before-swap", (e) => {
+	e.newDocument.documentElement.dataset.theme = document.documentElement.dataset.theme
+  })
+</script>

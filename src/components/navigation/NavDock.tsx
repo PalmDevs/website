@@ -1,21 +1,55 @@
 import { createSignal, For, onCleanup, onMount, Show } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
+import IconThemeAuto from '../../icons/theme_auto.svg?component-solid'
+import IconThemeDark from '../../icons/theme_dark.svg?component-solid'
+import IconThemeLight from '../../icons/theme_light.svg?component-solid'
+import IconThemeSyncing from '../../icons/theme_syncing.svg?component-solid'
 import Logger from '../../utils/Logger'
 import { LinkButton } from '../Button'
-import { LinkIconButton } from '../IconButton'
+import { IconButton, LinkIconButton } from '../IconButton'
+import { ThemeProvider, useTheme } from '../providers/ThemeProvider'
 import styles from './NavDock.module.css'
 import type { Component } from 'solid-js'
 import type { IconComponent } from '../_icons'
+import type { Theme } from '../providers/ThemeProvider'
 
-// let preserveScroll = 0
+let preserveScroll = 0
 const log = new Logger('NavDock')
+
+const scrollPreserver = (el: HTMLElement) => {
+	if (preserveScroll) el.scroll({ left: preserveScroll })
+
+	const beforeListener = () => {
+		log.info('Preserving scroll position:', el.scrollLeft)
+		preserveScroll = el.scrollLeft
+	}
+
+	const afterListener = () => {
+		if (preserveScroll) {
+			log.info('Restoring scroll position:', preserveScroll)
+			el.scroll({ left: preserveScroll, behavior: 'instant' })
+			preserveScroll = 0
+		}
+
+		requestAnimationFrame(() =>
+			document.dispatchEvent(new Event('palmdevs:NavDock:rehighlight')),
+		)
+	}
+
+	document.addEventListener('astro:before-swap', beforeListener)
+	document.addEventListener('astro:after-swap', afterListener)
+
+	onCleanup(() => {
+		document.removeEventListener('astro:before-swap', beforeListener)
+		document.removeEventListener('astro:after-swap', afterListener)
+	})
+}
 
 const NavDock: Component<NavDockProps> = props => {
 	const [pathname, setPathname] = createSignal('')
 
 	onMount(() => {
 		const listener = () => setPathname(getPathname())
-		listener()
-
 		document.addEventListener('astro:after-swap', listener)
 		onCleanup(() => document.removeEventListener('astro:after-swap', listener))
 	})
@@ -23,6 +57,7 @@ const NavDock: Component<NavDockProps> = props => {
 	return (
 		<div flex="~ horz center" class={styles.container}>
 			<div
+				ref={scrollPreserver}
 				flex="~ horz horz-y-center"
 				gap="m"
 				class={styles.dock}
@@ -57,9 +92,11 @@ const NavDock: Component<NavDockProps> = props => {
 						gap="xs"
 						aria-label="Other links and site settings"
 					>
-						{/* <li>
-                            <ThemeSwitchNavButton />
-                        </li> */}
+						<li>
+							<ThemeProvider>
+								<ThemeSwitchButton />
+							</ThemeProvider>
+						</li>
 						<Show when={props.links?.length}>
 							<For each={props.links}>
 								{link => (
@@ -146,12 +183,12 @@ const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 
 		highlight.style.width = `${active.clientWidth}px`
 		highlight.style.height = `${active.clientHeight}px`
-		highlight.style.left = `${rect.x - dockRect.x}px`
-		highlight.style.top = `${rect.y - dockRect.y}px`
+		highlight.style.left = `${rect.left - dockRect.left + dock.scrollLeft}px`
+		highlight.style.top = `${rect.top - dockRect.top + dock.scrollTop}px`
 	}
 
 	document.fonts.ready.then(rehighlight)
-	document.addEventListener('astro:after-swap', rehighlight)
+	document.addEventListener('palmdevs:NavDock:rehighlight', rehighlight)
 }
 
 function getPathname() {
@@ -160,33 +197,48 @@ function getPathname() {
 		: (log.warn('Attempted to get pathname on server'), '/')
 }
 
-// const ThemeSwitchNavButton: Component = () => {
-//     const theme = useContext(ThemeContext)
-//     const label = createMemo(() => ThemeSwitchHintMap[ThemeCycleMap[theme.theme]])
+const THEME_HINT: Record<Theme | 'sync', string> = {
+	light: 'Switch to light theme',
+	dark: 'Switch to dark theme',
+	auto: 'Use system theme',
+	sync: 'Loading theme preference...',
+}
 
-//     return (
-//         <Touchable
-//             as={Column}
-//             class={`${styles.Item} ${styles.IconItem}`}
-//             asProps={
-//                 {
-//                     as: 'button',
-//                     onClick: theme.cycle,
-//                     title: label(),
-//                     'aria-label': label(),
-//                 } as FlexHelperProps<'button'>
-//             }
-//             withoutHoverInteractionEffect
-//             centerVertical
-//         >
-//             <Dynamic
-//                 component={theme.initialized ? ThemeIconMap[theme.theme] : ThemeSyncing}
-//                 aria-hidden="true"
-//                 class={styles.Icon}
-//             />
-//         </Touchable>
-//     )
-// }
+const NEXT_THEME: Record<Theme, Theme> = {
+	light: 'dark',
+	dark: 'auto',
+	auto: 'light',
+	sync: 'sync',
+}
+
+const THEME_ICON: Record<Theme | 'sync', IconComponent> = {
+	light: IconThemeLight,
+	dark: IconThemeDark,
+	auto: IconThemeAuto,
+	sync: IconThemeSyncing,
+}
+
+const ThemeSwitchButton: Component = () => {
+	const theme = useTheme()
+
+	return (
+		<IconButton
+			class={styles.linkButton}
+			variant="text"
+			icon={ThemeSwitchButtonIcon}
+			title={THEME_HINT[theme.theme()]}
+			aria-label={THEME_HINT[theme.theme()]}
+			on:click={() => {
+				const next = NEXT_THEME[theme.theme()]
+				theme.setTheme(next)
+			}}
+		/>
+	)
+}
+
+const ThemeSwitchButtonIcon: IconComponent = props => (
+	<Dynamic component={THEME_ICON[useTheme().theme()]} {...props} />
+)
 
 export default NavDock
 
