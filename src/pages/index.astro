@@ -64,13 +64,15 @@ import { getAge } from '../utils/date'
 			<LinkButton icon={IconWork} href="/work#projects" text="View more projects" variant="glass" />
 		</Section>
 		<Section title="Experience" id="experience" flex="vert-x-center">
-			<div flex="~" gap="l">
+			<ul class="list" flex="~" gap="l">
 				{EXPERIENCES.slice(0, 2).map(({ name, image, href }) => (
-					<Touchable as="a" class="exp-item" client:visible title={name} href={href} target="_blank" rel="noreferrer">
-						<img src={image} alt={name} class="exp-image" />
+					<Touchable as="li" class="exp-item" client:visible >
+						<a title={name} href={href} target="_blank" rel="noreferrer">
+							<img src={image} alt={name} class="exp-image" />
+						</a>
 					</Touchable>
 				))}
-			</div>
+			</ul>
 			<LinkButton icon={IconWork} href="/work#experience" text="View full experience" variant="glass" />
 		</Section>
 		<Section title="Get in touch" description="Want to know more about me, work with me, or just want to have a casual chat? Feel free to reach out!" id="get-in-touch">
