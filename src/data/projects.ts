@@ -1,19 +1,23 @@
+export const PROJECT_REVANCED = {
+	name: 'ReVanced',
+	description: 'Free and open-source patcher to modify Android applications.',
+	image: '/assets/projects/revanced.svg',
+	href: 'https://revanced.app',
+	hint: 'Visit website',
+}
+
+export const PROJECT_REVENGE = {
+	name: 'Revenge',
+	description:
+		'Discord, your way. Customize your Discord experience with plugins, themes, and more.',
+	href: 'https://github.com/revenge-mod/Revenge',
+	image: '/assets/projects/revenge.webp',
+	hint: 'View repository',
+}
+
 const PROJECTS = [
-	{
-		name: 'ReVanced',
-		description: 'Free and open-source patcher to modify Android applications.',
-		image: '/assets/projects/revanced.svg',
-		href: 'https://revanced.app',
-		hint: 'Visit website',
-	},
-	{
-		name: 'Revenge',
-		description:
-			'Discord, your way. Customize your Discord experience with plugins, themes, and more.',
-		href: 'https://github.com/revenge-mod/Revenge',
-		image: '/assets/projects/revenge.webp',
-		hint: 'View repository',
-	},
+	PROJECT_REVANCED,
+	PROJECT_REVENGE,
 	{
 		name: 'DataBackup',
 		description:
