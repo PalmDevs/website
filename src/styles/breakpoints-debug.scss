@@ -1,0 +1,24 @@
+@use "breakpoints";
+
+:root::before {
+    content: "DESKTOP";
+    font-size: 16px;
+    font-family: "Outfit";
+    background: var(--tinted-high);
+    color: var(--on-tinted);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+@media (max-width: breakpoints.$tablet) {
+    :root::before {
+        content: "TABLET";
+    }
+}
+
+@media (max-width: breakpoints.$phone) {
+    :root::before {
+        content: "PHONE";
+    }
+}
