@@ -6,7 +6,7 @@ const { name, icon } = Astro.props
 
 <li title={name} aria-label={name}>
     <Card flex="~ horz-y-center horz-x-center" pad="s" {...Astro.props}>
-        <img src={icon} alt={`${name} logo`} class="icon" />
+        <img aria-hidden="true" src={icon} alt={`${name} logo`} class="icon" />
     </Card>
 </li>
 
