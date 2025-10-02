@@ -10,6 +10,7 @@ import ProjectCard from '../components/ProjectCard.astro'
 import SkillsCTA from '../components/pages/index/SkillsCTA.astro'
 import Section from '../components/Section.astro'
 import SkillItem from '../components/SkillItem.astro'
+import Touchable from '../components/Touchable'
 import EXPERIENCES from '../data/experience'
 import PROJECTS from '../data/projects'
 import { SKILLS } from '../data/skills'
@@ -67,9 +68,9 @@ import { getAge } from '../utils/date'
 		<Section title="Experience" id="experience" flex="vert-x-center">
 			<div flex="~" gap="l">
 				{EXPERIENCES.slice(0, 2).map(({ name, image, href }) => (
-					<a title={name} href={href} target="_blank" rel="noreferrer">
+					<Touchable as="a" class="exp-item" client:visible title={name} href={href} target="_blank" rel="noreferrer">
 						<img src={image} alt={name} class="exp-image" />
-					</a>
+					</Touchable>
 				))}
 			</div>
 			<LinkButton icon={IconWork} href="/work#experience" text="View full experience" variant="glass" />
@@ -117,10 +118,19 @@ import { getAge } from '../utils/date'
 		max-width: initial;
 	}
 
+	.exp-item {
+	    border-radius: var(--rad-sm);
+	}
+
 	.exp-image {
 		filter: saturate(0) brightness(0.8);
 		height: 128px;
 		width: auto;
+		transition: filter var(--dur-medium) var(--ease);
+
+		&:hover {
+			filter: unset;
+		}
 	}
 
 	.tint-high {
