@@ -1,11 +1,19 @@
 ---
+import './_styles/work.scss'
+
 import Page from '../components/layouts/Page.astro'
 import Section from '../components/Section.astro'
+import SkillItem from '../components/SkillItem.astro'
+import { SKILLS } from '../data/skills'
 ---
 
-<Page>
+<Page padx="xl">
     <Section title="Skills" description="These are the technologies I’ve used." id="skills">
-        TODO
+        <div class="skills-grid">
+            {SKILLS.map(({ name, icon, variant }) => (
+                <SkillItem {name} {icon} {variant} />
+            ))}
+        </div>
     </Section>
     <Section title="Projects" id="projects">
         TODO
@@ -23,7 +31,22 @@ import Section from '../components/Section.astro'
         max-width: 720px;
     }
 
+    section#skills {
+        width: 100%;
+    }
+
     section#experience, section#certifications {
         max-width: 1080px;
+    }
+
+    .skills-grid {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        display: grid;
+        gap: var(--gap-xs);
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-columns: repeat(9, 1fr);
     }
 </style>

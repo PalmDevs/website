@@ -1,0 +1,86 @@
+@use "../../styles/breakpoints";
+
+.skills-grid {
+    grid-template-areas:
+        "a b c c d d e e f"
+        "g h h i j j e e f"
+        "k h h i j j l l m"
+        "n n o o o p p q q"
+        "r r s t t u u v v";
+
+    & > :nth-child(1) {
+        grid-area: e;
+    }
+    & > :nth-child(2) {
+        grid-area: h;
+    }
+    & > :nth-child(3) {
+        grid-area: j;
+    }
+    & > :nth-child(4) {
+        grid-area: o;
+    }
+    & > :nth-child(5) {
+        grid-area: c;
+    }
+    & > :nth-child(6) {
+        grid-area: d;
+    }
+    & > :nth-child(7) {
+        grid-area: f;
+    }
+    & > :nth-child(8) {
+        grid-area: i;
+    }
+    & > :nth-child(9) {
+        grid-area: l;
+    }
+    & > :nth-child(10) {
+        grid-area: n;
+    }
+    & > :nth-child(11) {
+        grid-area: p;
+    }
+    & > :nth-child(12) {
+        grid-area: q;
+    }
+    & > :nth-child(13) {
+        grid-area: r;
+    }
+    & > :nth-child(14) {
+        grid-area: t;
+    }
+    & > :nth-child(15) {
+        grid-area: u;
+    }
+    & > :nth-child(16) {
+        grid-area: v;
+    }
+    & > :nth-child(17) {
+        grid-area: a;
+    }
+    & > :nth-child(18) {
+        grid-area: b;
+    }
+    & > :nth-child(19) {
+        grid-area: g;
+    }
+    & > :nth-child(20) {
+        grid-area: k;
+    }
+    & > :nth-child(21) {
+        grid-area: m;
+    }
+    & > :nth-child(22) {
+        grid-area: s;
+    }
+
+    @media (max-width: calc(breakpoints.$tablet - 96px)) {
+        grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)) !important;
+        grid-template-areas: unset !important;
+
+        & > * {
+            grid-area: unset !important;
+        }
+    }
+}
