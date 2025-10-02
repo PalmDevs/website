@@ -8,7 +8,6 @@ import { defineConfig } from 'astro/config'
 import compressor from 'astro-compressor'
 // import expressiveCode from 'astro-expressive-code'
 import favicons from 'astro-favicons'
-import metaTags from 'astro-meta-tags'
 import robotsTxt from 'astro-robots-txt'
 import sonda from 'sonda/astro'
 import UnoCSS from 'unocss/astro'
@@ -49,7 +48,6 @@ export default defineConfig({
 		// expressiveCode(),
 		// mdx(),
 		robotsTxt(),
-		metaTags(),
 		favicons(),
 		compressor(),
 		process.env.NODE_ENV !== 'build' && sonda(),
