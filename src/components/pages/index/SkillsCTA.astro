@@ -4,15 +4,16 @@ import Card from '../../Card.astro'
 import Touchable from '../../Touchable'
 ---
 
-<Touchable client:visible as="a" class="skills-cta" href="/work#skills" aria-label="View all skills">
-    <Card class="actual-card" flex="~ horz-y-center horz-x-center" gap="xs" pad="s">
-        <span class="text-heading">View all</span>
-        <IconNext class="icon" />
-    </Card>
+<Touchable class="skills-cta" as="a" client:visible href="/work#skills" aria-label="View all skills">
+	<Card flex="~ horz-y-center horz-x-center" gap="xs" pad="s">
+		<span class="text-heading">View all</span>
+		<IconNext class="icon" />
+	</Card>
 </Touchable>
 
 <style>
     .skills-cta {
+		display: block;
 		text-decoration: none;
 		color: var(--neutral-high);
 		border-radius: var(--rad-sm);
