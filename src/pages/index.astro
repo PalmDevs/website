@@ -50,7 +50,9 @@ import { getAge } from '../utils/date'
 			<div flex="~" gap="xs">
 				<ul class="list card-grid">
 					{SKILLS.slice(0, 6).map(({ name, icon, iconLight }) => (
-						<SkillItem {name} {icon} {iconLight} />
+						<li title={name} aria-label={name}>
+							<SkillItem {name} {icon} {iconLight} />
+						</li>
 					))}
 					<li class="skills-cta-item">
 						<SkillsCTA />
@@ -61,7 +63,9 @@ import { getAge } from '../utils/date'
 		<Section title="Projects" id="projects" flex="vert-x-center">
 			<ul class="list card-carousel projects-list" gap="s" flex="~">
 				{PROJECTS.slice(0, 3).map(({ name, description, href, image, hint }) => (
-					<ProjectCard preview={image} {name} {description} {href} {hint} />
+					<li>
+						<ProjectCard preview={image} {name} {description} {href} {hint} />
+					</li>
 				))}
 			</ul>
 			<LinkButton client:visible icon={IconWork} href="/work#projects" text="View more projects" variant="glass" />

@@ -6,25 +6,23 @@ import Touchable from './Touchable'
 const { preview, name, description, hint = 'View project', href } = Astro.props
 ---
 
-<li>
-    <Touchable class="project-card" as="a" client:visible {href} target="_blank" rel="noreferrer">
-        <Card flex="~ vert" class="actual-card">
-            <div class="preview" flex="~ horz-y-center horz-x-center">
-                <img alt={name} class="preview-img" src={preview} />
+<Touchable class="project-card" as="a" client:visible {href} target="_blank" rel="noreferrer">
+    <Card flex="~ vert" class="actual-card">
+        <div class="preview" flex="~ horz-y-center horz-x-center">
+            <img alt={name} class="preview-img" src={preview} />
+        </div>
+        <div class="info" gap="m" pad="m" flex="~ vert">
+            <div flex="~ vert" gap="2xs">
+                <h1 class="text-subheading">{name}</h1>
+                <p class="text-body-small">{description}</p>
             </div>
-            <div class="info" gap="m" pad="m" flex="~ vert">
-                <div flex="~ vert" gap="2xs">
-                    <h1 class="text-subheading">{name}</h1>
-                    <p class="text-body-small">{description}</p>
-                </div>
-                <div flex="~ horz-y-center" gap="2xs">
-                    <p class="text-label-small hint">{hint}</p>
-                    <IconNext class="hint-icon" />
-                </div>
+            <div flex="~ horz-y-center" gap="2xs">
+                <p class="text-label-small hint">{hint}</p>
+                <IconNext class="hint-icon" />
             </div>
-        </Card>
-    </Touchable>
-</li>
+        </div>
+    </Card>
+</Touchable>
 
 <style>
     .actual-card {
