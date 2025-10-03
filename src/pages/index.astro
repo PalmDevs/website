@@ -1,9 +1,12 @@
 ---
+import './_styles/index.css'
+
 import Avatar from '../components/Avatar.astro'
 import { LinkButton } from '../components/Button'
 import { Clock } from '../components/Clock'
 import Contacts from '../components/Contacts.astro'
 import { GradientText } from '../components/GradientText'
+import LightDarkImage from '../components/LightDarkImage.astro'
 import LineOfWork from '../components/LineOfWork.astro'
 import Page from '../components/layouts/Page.astro'
 import ProjectCard from '../components/ProjectCard.astro'
@@ -65,10 +68,10 @@ import { getAge } from '../utils/date'
 		</Section>
 		<Section title="Experience" id="experience" flex="vert-x-center">
 			<ul class="list" flex="~ horz-y-center vert-y-center" gap="l">
-				{EXPERIENCES.slice(0, 2).map(({ name, image, href }) => (
+				{EXPERIENCES.slice(0, 2).map(({ name, image, imageLight, href }) => (
 					<li class="exp-item">
 						<Touchable as="a" class="exp-item-link" client:visible title={name} href={href} target="_blank" rel="noreferrer">
-							<img src={image} alt={name} class="exp-image" />
+							<LightDarkImage srcLight={imageLight} src={image} alt={name} class="exp-image" />
 						</Touchable>
 					</li>
 				))}
@@ -166,17 +169,6 @@ import { getAge } from '../utils/date'
 		justify-content: center;
 		width: 100%;
 		border-radius: var(--rad-sm);
-	}
-
-	.exp-image {
-		filter: saturate(0) brightness(0.8);
-		height: 128px;
-		width: auto;
-		transition: filter var(--dur-medium) var(--ease);
-
-		.exp-item:hover & {
-			filter: unset;
-		}
 	}
 
 	.tint-high {
