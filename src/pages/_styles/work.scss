@@ -75,7 +75,7 @@
         grid-area: s;
     }
 
-    @media (max-width: calc(breakpoints.$tablet - 96px)) {
+    @media (max-width: calc(breakpoints.$tablet - 160px)) {
         grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)) !important;
         grid-template-areas: unset !important;
 
