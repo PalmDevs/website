@@ -66,11 +66,11 @@ import { getAge } from '../utils/date'
 		<Section title="Experience" id="experience" flex="vert-x-center">
 			<ul class="list" flex="~ horz-y-center vert-y-center" gap="l">
 				{EXPERIENCES.slice(0, 2).map(({ name, image, href }) => (
-					<Touchable as="li" class="exp-item" client:visible>
-						<a title={name} href={href} target="_blank" rel="noreferrer">
+					<li class="exp-item">
+						<Touchable as="a" class="exp-item-link" client:visible title={name} href={href} target="_blank" rel="noreferrer">
 							<img src={image} alt={name} class="exp-image" />
-						</a>
-					</Touchable>
+						</Touchable>
+					</li>
 				))}
 			</ul>
 			<LinkButton client:visible icon={IconWork} href="/work#experience" text="View full experience" variant="glass" />
@@ -159,7 +159,13 @@ import { getAge } from '../utils/date'
 		display: flex;
 		justify-content: center;
 		flex: 1;
-	    border-radius: var(--rad-sm);
+	}
+	
+	.exp-item-link {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		border-radius: var(--rad-sm);
 	}
 
 	.exp-image {

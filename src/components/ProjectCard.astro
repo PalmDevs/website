@@ -6,8 +6,8 @@ import Touchable from './Touchable'
 const { preview, name, description, hint = 'View project', href } = Astro.props
 ---
 
-<Touchable class="project-card" as="li" client:visible>
-    <a class="project-card" {href} target="_blank" rel="noreferrer">
+<li>
+    <Touchable class="project-card" as="a" client:visible {href} target="_blank" rel="noreferrer">
         <Card flex="~ vert" class="actual-card">
             <div class="preview" flex="~ horz-y-center horz-x-center">
                 <img alt={name} class="preview-img" src={preview} />
@@ -23,8 +23,8 @@ const { preview, name, description, hint = 'View project', href } = Astro.props
                 </div>
             </div>
         </Card>
-    </a>
-</Touchable>
+    </Touchable>
+</li>
 
 <style>
     .actual-card {
@@ -38,10 +38,14 @@ const { preview, name, description, hint = 'View project', href } = Astro.props
         justify-content: space-between;
     }
 
+    .item {
+        border-radius: var(--rad-sm);
+    }
+    
     .project-card {
+        display: block;
         text-decoration: none;
         min-width: 192px;
-        border-radius: var(--rad-sm);
     }
 
     .preview-img {
