@@ -1,0 +1,18 @@
+---
+import type { JSX } from 'astro/jsx-runtime'
+
+interface Props extends JSX.ImgHTMLAttributes {
+	srcLight?: string
+}
+
+const { src, alt, srcLight, class: className, ...rest } = Astro.props
+---
+
+{srcLight ? (
+    <picture class={className} {...rest}>
+        <source srcset={src} media="(prefers-color-scheme: dark)" />
+        <img class={className} src={srcLight} alt={alt} />
+    </picture>
+) : (
+    <img class={className} {...Astro.props} />
+)}

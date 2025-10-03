@@ -29,6 +29,28 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 	const [theme, setTheme] = createSignal<Theme>('sync')
 
 	onMount(() => {
+		const listener = () => {
+			log.info('Theme change detected, updating light-dark images...')
+			const { theme } = document.documentElement.dataset
+			if (!theme) return log.warn('No theme set on document element!')
+
+			for (const picture of document.querySelectorAll('picture')) {
+				for (const source of picture.querySelectorAll(
+					`source[media*="prefers-color-scheme"],source[data-media*="prefers-color-scheme"]`,
+				) as NodeListOf<HTMLSourceElement>) {
+					source.dataset.media ??= source.media
+					source.media = source.dataset.media.includes(theme) ? 'all' : 'none'
+				}
+			}
+		}
+
+		document.addEventListener('palmdevs:theme-change', listener)
+		onCleanup(() =>
+			document.removeEventListener('palmdevs:theme-change', listener),
+		)
+	})
+
+	onMount(() => {
 		const stored = localStorage.getItem('theme') as Theme | null
 		if (!stored) {
 			log.info('No theme found in localStorage, defaulting to auto')
@@ -75,6 +97,7 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 
 			default:
 				document.documentElement.dataset.theme = theme()
+				document.dispatchEvent(new Event('palmdevs:theme-change'))
 				localStorage.setItem(THEME_KEY, theme() as Theme)
 				log.info('Theme override applied:', theme())
 		}
