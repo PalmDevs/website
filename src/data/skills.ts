@@ -12,6 +12,7 @@ export const SKILLS = [
 	{
 		name: 'React',
 		icon: '/assets/skills/react.svg',
+		iconLight: '/assets/skills/react-light.svg',
 		variant: 'large',
 	},
 	{
@@ -52,6 +53,7 @@ export const SKILLS = [
 	{
 		name: 'Astro',
 		icon: '/assets/skills/astro.svg',
+		iconLight: '/assets/skills/astro-light.svg',
 		variant: 'large-horz',
 	},
 	{
@@ -62,6 +64,7 @@ export const SKILLS = [
 	{
 		name: 'Drizzle ORM',
 		icon: '/assets/skills/drizzle.svg',
+		iconLight: '/assets/skills/drizzle-light.svg',
 		variant: 'large-horz',
 	},
 	{
@@ -106,5 +109,6 @@ export const SKILLS = [
 ] as Array<{
 	name: string
 	icon: string
+	iconLight?: string
 	variant?: 'large' | 'large-horz' | 'large-vert' | 'small'
 }>

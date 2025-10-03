@@ -10,8 +10,8 @@ import { SKILLS } from '../data/skills'
 <Page>
     <Section title="Skills" description="These are the technologies I’ve used." id="skills">
         <div class="skills-grid">
-            {SKILLS.map(({ name, icon, variant }) => (
-                <SkillItem {name} {icon} {variant} />
+            {SKILLS.map(({ name, icon, iconLight, variant }) => (
+                <SkillItem {name} {icon} {iconLight} {variant} />
             ))}
         </div>
     </Section>

@@ -1,0 +1,40 @@
+@use '../styles/breakpoints';
+
+.icon {
+    --size: 48px;
+
+    width: var(--size);
+    height: var(--size);
+    object-fit: contain;
+
+    &.large {
+        --size: 64px;
+    }
+}
+
+.icon-glow {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 0;
+    filter: blur(16px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: var(--layer-effect);
+
+    .item:hover & {
+        transition: opacity var(--dur-medium);
+        opacity: 0.5;
+
+        [data-theme="light"] & {
+            opacity: 0.6;
+        }
+    }
+}
+
+@media (max-width: calc(breakpoints.$tablet - 32px)) {
+    .icon.large {
+        --size: 48px;
+    }
+}

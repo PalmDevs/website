@@ -46,8 +46,8 @@ import { getAge } from '../utils/date'
 			<h1 class="text-heading">with these technologies</h1>
 			<div flex="~" gap="xs">
 				<ul class="list card-grid">
-					{SKILLS.slice(0, 6).map((skill) => (
-						<SkillItem name={skill.name} icon={skill.icon} />
+					{SKILLS.slice(0, 6).map(({ name, icon, iconLight }) => (
+						<SkillItem {name} {icon} {iconLight} />
 					))}
 					<li class="skills-cta-item">
 						<SkillsCTA />
