@@ -50,6 +50,7 @@ const NavDock: Component<NavDockProps> = props => {
 
 	onMount(() => {
 		const listener = () => setPathname(getPathname())
+		listener()
 		document.addEventListener('astro:after-swap', listener)
 		onCleanup(() => document.removeEventListener('astro:after-swap', listener))
 	})
