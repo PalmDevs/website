@@ -52,9 +52,9 @@ svg {
 :root {
   width: 100%;
   height: 100%;
+  overflow: hidden;
   font-size: 14px;
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
   accent-color: var(--primary);
   background: var(--bg);
   background-repeat: repeat-y;
@@ -69,7 +69,10 @@ svg {
 }
 
 body {
-  min-height: 100%;
+  scrollbar-gutter: stable both-edges;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
   margin: 0;
 }
 
@@ -111,4 +114,10 @@ hr {
 :focus-visible {
   outline: var(--line) var(--secondary) !important;
   outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
 }

@@ -144,18 +144,34 @@ const NavDockLink = (props: { page: NavLinkConfig; active: boolean }) => (
 const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 	const dock = highlight.parentElement!
 
+	const updateScrollState = (document: Document) => {
+		console.log(document)
+		dock.setAttribute('data-scrolled', String(document.body.scrollTop > 0))
+		log.debug('Scrolled state updated:', document.body.scrollTop)
+	}
+
 	// Scroll transition
 	onMount(() => {
 		const listener = () => {
-			dock.setAttribute('data-scrolled', String(window.scrollY > 0))
-			log.debug('Scrolled state updated')
+			const listener = () => updateScrollState(document)
+			document.body.addEventListener('scroll', listener, { passive: true })
+
+			// Cleanup the listener (onCleanup does not work here!)
+			document.addEventListener(
+				'astro:before-swap',
+				() => {
+					document.body.removeEventListener('scroll', listener)
+				},
+				{ once: true },
+			)
+
+			listener()
 		}
 
 		listener()
-		document.addEventListener('scroll', listener, { passive: true })
-		onCleanup(() => document.removeEventListener('scroll', listener))
 
-		log.info('Component initialized')
+		document.addEventListener('astro:after-swap', listener)
+		onCleanup(() => document.removeEventListener('astro:after-swap', listener))
 	})
 
 	const rehighlight = () => {
