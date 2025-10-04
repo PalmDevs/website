@@ -4,7 +4,15 @@
 
 <style>
     .avatar {
+        animation: scale-in var(--dur-long) var(--ease);
         width: 256px;
         height: 256px;
+    }
+
+    @keyframes scale-in {
+        from {
+            transform: scale(0);
+            opacity: 0;
+        }
     }
 </style>

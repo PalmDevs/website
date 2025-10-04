@@ -5,9 +5,7 @@ import '../../styles/base.scss'
 import { ClientRouter } from 'astro:transitions'
 import { NAV_LINKS, NAV_PAGES } from '../../data/nav'
 import { getAge } from '../../utils/date'
-import { Button } from '../Button'
 import NavDock from '../navigation/NavDock'
-import { ThemeProvider } from '../providers/ThemeProvider'
 
 const {
 	title,
@@ -32,7 +30,7 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:500,600,700|jetbrains-mono:400|outfit:600,700&display=swap" />
-		<script data-astro-rerun is:inline>(() => {const saved=localStorage.getItem("theme");const {matches}=matchMedia("(prefers-color-scheme: dark)");document.documentElement.dataset.theme=!saved?(matches?"dark":"light"):saved;document.dispatchEvent(new Event('palmdevs:theme-change'))})()</script>
+		<script is:inline>(() => {const saved=localStorage.getItem("theme");const {matches}=matchMedia("(prefers-color-scheme: dark)");document.documentElement.dataset.theme=!saved?(matches?"dark":"light"):saved;document.dispatchEvent(new Event('palmdevs:theme-change'))})()</script>
 		<ClientRouter fallback="swap" />
 	</head>
 	<body>
@@ -47,10 +45,56 @@ const {
 	@use '../../styles/breakpoints';
 
 	main {
+		view-transition-name: content;
 		padding-inline: var(--gap-xl);
 
 		@media (max-width: breakpoints.$tablet) {
 			padding-inline: var(--gap-m);
+		}
+	}
+
+	// Until filters work correctly on NavDock with this, don't change:
+	// ::global(body) {
+	// 	view-transition-name: content;
+	// }
+
+	::view-transition-group(content) {
+		position: fixed;
+		inset: 0;
+	}
+
+	::view-transition-old(content),
+	::view-transition-new(content) {
+		animation-duration: var(--dur-medium);
+		animation-timing-function: var(--ease);
+	}
+
+	::view-transition-old(content) {
+		animation-name: fade-out;
+	}
+
+	::view-transition-new(content) {
+		animation-delay: var(--dur-xshort);
+		animation-name: slide-up-fade-in;
+	}
+
+	@keyframes fade-out {
+		25% {
+			opacity: 0;
+		}
+		to {
+			opacity: 0; 
+		}
+	}
+
+	@keyframes slide-up-fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(var(--gap-4xl));
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
 		}
 	}
 </style>
