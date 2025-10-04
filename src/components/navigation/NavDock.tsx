@@ -8,7 +8,7 @@ import Logger from '../../utils/Logger'
 import { LinkButton } from '../Button'
 import { IconButton, LinkIconButton } from '../IconButton'
 import { ThemeProvider, useTheme } from '../providers/ThemeProvider'
-import styles from './NavDock.module.css'
+import styles from './NavDock.module.scss'
 import type { Component } from 'solid-js'
 import type { IconComponent } from '../_icons'
 import type { Theme } from '../providers/ThemeProvider'
@@ -73,7 +73,7 @@ const NavDock: Component<NavDockProps> = props => {
 				<nav>
 					<ul
 						class={styles.list}
-						flex="~ horz"
+						flex="~ horz horz-y-center"
 						gap="xs"
 						aria-label="Navigation links"
 					>
