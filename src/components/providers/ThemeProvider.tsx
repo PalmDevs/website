@@ -7,6 +7,7 @@ import {
 	useContext,
 } from 'solid-js'
 import Logger from '../../utils/Logger'
+import type { TransitionBeforeSwapEvent } from 'astro:transitions/client'
 import type { Accessor, Component, JSX } from 'solid-js'
 
 export type Theme = 'light' | 'dark' | 'auto' | 'sync'
@@ -25,29 +26,41 @@ const ThemeContext = createContext<ThemeContext>({
 
 const THEME_KEY = 'theme'
 
+const updateImages = (document: Document) => {
+	const { theme } = document.documentElement.dataset
+	if (!theme) return log.warn('No theme set on document element!')
+
+	for (const picture of document.querySelectorAll('picture')) {
+		for (const source of picture.querySelectorAll(
+			`source[media*="prefers-color-scheme"],source[data-media*="prefers-color-scheme"]`,
+		) as NodeListOf<HTMLSourceElement>) {
+			source.dataset.media ??= source.media
+			source.media = source.dataset.media.includes(theme) ? 'all' : 'none'
+		}
+	}
+}
+
 export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 	const [theme, setTheme] = createSignal<Theme>('sync')
 
 	onMount(() => {
-		const listener = () => {
+		const themeChangeListener = () => {
 			log.info('Theme change detected, updating light-dark images...')
-			const { theme } = document.documentElement.dataset
-			if (!theme) return log.warn('No theme set on document element!')
-
-			for (const picture of document.querySelectorAll('picture')) {
-				for (const source of picture.querySelectorAll(
-					`source[media*="prefers-color-scheme"],source[data-media*="prefers-color-scheme"]`,
-				) as NodeListOf<HTMLSourceElement>) {
-					source.dataset.media ??= source.media
-					source.media = source.dataset.media.includes(theme) ? 'all' : 'none'
-				}
-			}
+			updateImages(document)
 		}
 
-		document.addEventListener('palmdevs:theme-change', listener)
-		onCleanup(() =>
-			document.removeEventListener('palmdevs:theme-change', listener),
-		)
+		const swapListener = (e: TransitionBeforeSwapEvent) => {
+			log.info('Swapping document, updating light-dark images...')
+			updateImages(e.newDocument)
+		}
+
+		document.addEventListener('astro:before-swap', swapListener)
+		document.addEventListener('palmdevs:theme-change', themeChangeListener)
+
+		onCleanup(() => {
+			document.removeEventListener('astro:before-swap', swapListener)
+			document.removeEventListener('palmdevs:theme-change', themeChangeListener)
+		})
 	})
 
 	onMount(() => {
