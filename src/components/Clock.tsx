@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onMount } from 'solid-js'
+import { createSignal, onCleanup, onMount } from 'solid-js'
 import { TIMEZONE_NAME } from '../utils/date'
 import Logger from '../utils/Logger'
 
@@ -23,8 +23,14 @@ export const Clock = () => {
 	}
 
 	onMount(formatTime)
-	createEffect(() =>
-		setTimeout(() => setInterval(formatTime, MINUTE), Date.now() % MINUTE),
+	onMount(() =>
+		setTimeout(
+			() => {
+				const int = setInterval(formatTime, MINUTE)
+				onCleanup(() => clearInterval(int))
+			},
+			MINUTE - (Date.now() % MINUTE),
+		),
 	)
 
 	return <span>{localTime()}</span>
