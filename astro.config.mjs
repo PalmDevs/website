@@ -25,8 +25,7 @@ export default defineConfig({
 		enabled: false,
 	},
 	output: 'server',
-	// TODO: Change this
-	site: 'https://v2.palmdevs.me',
+	site: 'https://palmdevs.me',
 	vite: {
 		plugins: [
 			solidSvg({

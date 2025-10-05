@@ -32,8 +32,7 @@ export const NAV_PAGES = [
 export const NAV_LINKS = [
 	{
 		name: 'Source code',
-		// TODO: Update this link
-		href: 'https://github.com/PalmDevs/website-v2',
+		href: 'https://github.com/PalmDevs/website',
 		icon: IconSource,
 	},
 ] as const satisfies NavLinkConfig[]
