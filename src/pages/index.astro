@@ -61,7 +61,7 @@ import { getAge } from '../utils/date'
 			</div>
 		</div>
 		<Section title="Projects" id="projects" flex="vert-x-center">
-			<ul class="list card-carousel projects-list" gap="s" flex="~">
+			<ul class="list projects-list" gap="s" flex="~">
 				{PROJECTS.slice(0, 3).map(({ name, description, href, image, hint }) => (
 					<li>
 						<ProjectCard preview={image} {name} {description} {href} {hint} />
@@ -109,6 +109,11 @@ import { getAge } from '../utils/date'
 	.projects-list {
 		flex-wrap: nowrap;
 
+		& li {
+			display: flex;
+			flex: 1;
+		}
+
 		@media (max-width: breakpoints.$tablet - 96px) {
 			display: flex;
 			max-width: 384px;
@@ -134,12 +139,6 @@ import { getAge } from '../utils/date'
 
 		.hero-buttons {
 			justify-content: center;
-		}
-	}
-
-	.card-carousel {
-		& > .carousel-item {
-			flex: 1;
 		}
 	}
 

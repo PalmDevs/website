@@ -2,8 +2,10 @@
 import './_styles/work.scss'
 
 import Page from '../components/layouts/Page.astro'
+import ProjectCard from '../components/ProjectCard.astro'
 import Section from '../components/Section.astro'
 import SkillItem from '../components/SkillItem.astro'
+import PROJECTS from '../data/projects'
 import { SKILLS } from '../data/skills'
 ---
 
@@ -18,22 +20,27 @@ import { SKILLS } from '../data/skills'
         </div>
     </Section>
     <Section title="Projects" id="projects">
-        TODO
+        <ul class="list projects-grid" gap="s" flex="~">
+            {PROJECTS.slice(0, 7).map(({ name, description, href, image, hint }) => (
+                <li>
+                    <ProjectCard preview={image} {name} {description} {href} {hint} />
+                </li>
+            ))}
+        </ul>
     </Section>
     <Section title="Experience" id="experience">
-        TODO
+        <p class="text-label-large">Check out my projects for now. It will be here soon.</p>
     </Section>
     <Section title="Certifications" id="certifications">
-        TODO
+        <p class="text-label-large">Work in progress...</p>
     </Section>
 </Page>
 
-<style>
+<style lang="scss">
+    @use "../styles/breakpoints";
+
     section {
         max-width: 720px;
-    }
-
-    section#skills {
         width: 100%;
     }
 
@@ -50,5 +57,61 @@ import { SKILLS } from '../data/skills'
         gap: var(--gap-xs);
         grid-template-rows: repeat(5, 1fr);
         grid-template-columns: repeat(9, 1fr);
+    }
+
+    .list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.75fr 0.75fr 0.75fr 1.75fr;
+        gap: var(--gap-xs);
+
+        & li {
+            display: flex;
+            flex: 1;
+        }
+
+        @media (max-width: breakpoints.$tablet) {
+            grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
+        }
+
+        @media (min-width: calc(breakpoints.$tablet + 1px)) {
+            grid-template-areas:
+                "a a b b b"
+                "c c c d d"
+                "e e f f g";
+
+            & > :nth-child(7n + 1) {
+                grid-area: a;
+            }
+
+            & > :nth-child(7n + 2) {
+                grid-area: b;
+            }
+
+            & > :nth-child(7n + 3) {
+                grid-area: c;
+            }
+
+            & > :nth-child(7n + 4) {
+                grid-area: d;
+            }
+
+            & > :nth-child(7n + 5) {
+                grid-area: e;
+            }
+
+            & > :nth-child(7n + 6) {
+                grid-area: f;
+            }
+
+            & > :nth-child(7n + 7) {
+                grid-area: g;
+            }
+        }
     }
 </style>
