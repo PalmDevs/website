@@ -6,6 +6,20 @@
   --trans-prop-content: color, fill, stroke-color;
   --trans-props-layout: background-color, outline-color, border-color,
   box-shadow;
+  view-transition-name: page;
+}
+
+::view-transition-old(page) {
+  animation-delay: 0.5s;
+}
+
+::view-transition-new(page) {
+  animation: circle-in 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes circle-in {
+  from { clip-path: circle(0% at 50% 0%); }
+  to { clip-path: circle(120% at 50% 0%); }
 }
 
 * {

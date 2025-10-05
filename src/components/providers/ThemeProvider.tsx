@@ -85,10 +85,8 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 		const listener = (e: { matches: boolean }) => {
 			if (theme() !== 'auto') return
 
-			document.documentElement.setAttribute(
-				'data-theme',
-				e.matches ? 'dark' : 'light',
-			)
+			updateTheme(e.matches ? 'dark' : 'light')
+			document.dispatchEvent(new Event('palmdevs:theme-change'))
 
 			log.info('System theme changed, applied:', e.matches ? 'dark' : 'light')
 		}
@@ -109,12 +107,22 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 				break
 
 			default:
-				document.documentElement.dataset.theme = theme()
-				document.dispatchEvent(new Event('palmdevs:theme-change'))
-				localStorage.setItem(THEME_KEY, theme() as Theme)
+				updateTheme(theme())
+				localStorage.setItem(THEME_KEY, theme())
 				log.info('Theme override applied:', theme())
 		}
 	})
+
+	const updateTheme = (theme: Theme) => {
+		// TODO: Maybe background needs to be a separate layer, so we can avoid retransitioning the content?
+		if (document.startViewTransition) document.startViewTransition(() => internal_updateTheme(theme))
+		else internal_updateTheme(theme)
+	}
+
+	const internal_updateTheme = (theme: Theme) => {
+		document.documentElement.dataset.theme = theme
+		document.dispatchEvent(new Event('palmdevs:theme-change'))
+	}
 
 	return (
 		<ThemeContext.Provider value={{ theme, setTheme }}>
