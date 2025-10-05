@@ -38,6 +38,9 @@ export default defineConfig({
 			sourcemap: true,
 		},
 	},
+	image: {
+		layout: 'constrained',
+	},
 	integrations: [
 		UnoCSS({
 			configFile: './uno.css.ts',
