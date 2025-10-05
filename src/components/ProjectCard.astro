@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 import IconNext from '../icons/next.svg'
 import Card from './Card.astro'
 import Touchable from './Touchable'
@@ -9,7 +10,7 @@ const { preview, name, description, hint = 'View project', href } = Astro.props
 <Touchable class="project-card" as="a" client:visible {href} target="_blank" rel="noreferrer">
     <Card flex="~ vert" class="actual-card">
         <div class="preview" flex="~ horz-y-center horz-x-center">
-            <img alt={name} class="preview-img" src={preview} />
+            <Image alt={name} class="preview-img" src={preview} />
         </div>
         <div class="info" gap="m" pad="m" flex="~ vert">
             <div flex="~ vert" gap="2xs">
@@ -50,6 +51,7 @@ const { preview, name, description, hint = 'View project', href } = Astro.props
 
     .preview-img {
         height: 96px;
+        width: auto;
         transition: scale var(--dur-long) var(--ease);
 
         .project-card:hover & {

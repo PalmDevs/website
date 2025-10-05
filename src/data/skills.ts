@@ -1,114 +1,142 @@
+import JS from '../images/skills/js.svg'
+import TS from '../images/skills/ts.svg'
+import React from '../images/skills/react.svg'
+import ReactLight from '../images/skills/react-light.svg'
+import Figma from '../images/skills/figma.svg'
+import Git from '../images/skills/git.svg'
+import SolidJS from '../images/skills/solidjs.svg'
+import Bun from '../images/skills/bun.svg'
+import NodeJS from '../images/skills/nodejs.svg'
+import HTML from '../images/skills/html.svg'
+import CSS from '../images/skills/css.svg'
+import Astro from '../images/skills/astro.svg'
+import AstroLight from '../images/skills/astro-light.svg'
+import Linux from '../images/skills/linux.webp'
+import Drizzle from '../images/skills/drizzle.svg'
+import DrizzleLight from '../images/skills/drizzle-light.svg'
+import Kotlin from '../images/skills/kotlin.svg'
+import ElysiaJS from '../images/skills/elysia.svg'
+import GHA from '../images/skills/gha.svg'
+import SemRel from '../images/skills/semrel.svg'
+import DJS from '../images/skills/djs.svg'
+import WitAI from '../images/skills/witai.svg'
+import Cloudflare from '../images/skills/cloudflare.svg'
+import Docker from '../images/skills/docker.svg'
+import Python from '../images/skills/python.svg'
+
 export const SKILLS = [
 	{
 		name: 'JavaScript',
-		icon: '/assets/skills/js.svg',
+		icon: JS,
 		variant: 'large',
 	},
 	{
 		name: 'TypeScript',
-		icon: '/assets/skills/ts.svg',
+		icon: TS,
 		variant: 'large',
 	},
 	{
 		name: 'React',
-		icon: '/assets/skills/react.svg',
-		iconLight: '/assets/skills/react-light.svg',
+		icon: React,
+		iconLight: ReactLight,
 		variant: 'large',
 	},
 	{
 		name: 'Figma',
-		icon: '/assets/skills/figma.svg',
+		icon: Figma,
 		variant: 'large-horz',
 	},
 	{
 		name: 'Git',
-		icon: '/assets/skills/git.svg',
+		icon: Git,
 		variant: 'large-horz',
 	},
 	{
 		name: 'SolidJS',
-		icon: '/assets/skills/solidjs.svg',
+		icon: SolidJS,
 		variant: 'large-horz',
 	},
 	{
 		name: 'Bun',
-		icon: '/assets/skills/bun.svg',
+		icon: Bun,
 		variant: 'large-vert',
 	},
 	{
 		name: 'Node.js',
-		icon: '/assets/skills/nodejs.svg',
+		icon: NodeJS,
 		variant: 'large-vert',
 	},
 	{
 		name: 'HTML',
-		icon: '/assets/skills/html.svg',
+		icon: HTML,
 		variant: 'large-horz',
 	},
 	{
 		name: 'CSS',
-		icon: '/assets/skills/css.svg',
+		icon: CSS,
 		variant: 'large-horz',
 	},
 	{
 		name: 'Astro',
-		icon: '/assets/skills/astro.svg',
-		iconLight: '/assets/skills/astro-light.svg',
+		icon: Astro,
+		iconLight: AstroLight,
 		variant: 'large-horz',
 	},
 	{
 		name: 'Linux',
-		icon: '/assets/skills/linux.webp',
+		icon: Linux,
 		variant: 'large-horz',
 	},
 	{
 		name: 'Drizzle ORM',
-		icon: '/assets/skills/drizzle.svg',
-		iconLight: '/assets/skills/drizzle-light.svg',
+		icon: Drizzle,
+		iconLight: DrizzleLight,
 		variant: 'large-horz',
 	},
 	{
 		name: 'Kotlin',
-		icon: '/assets/skills/kotlin.svg',
+		icon: Kotlin,
 		variant: 'large-horz',
 	},
 	{
 		name: 'ElysiaJS',
-		icon: '/assets/skills/elysia.svg',
+		icon: ElysiaJS,
 		variant: 'large-horz',
 	},
 	{
 		name: 'GitHub Actions',
-		icon: '/assets/skills/gha.svg',
+		icon: GHA,
 		variant: 'large-horz',
 	},
 	{
 		name: 'Semantic Release',
-		icon: '/assets/skills/semrel.svg',
+		icon: SemRel,
 	},
 	{
 		name: 'Discord.js',
-		icon: '/assets/skills/djs.svg',
+		icon: DJS,
 	},
 	{
 		name: 'wit.ai',
-		icon: '/assets/skills/witai.svg',
+		icon: WitAI,
 	},
 	{
 		name: 'Cloudflare',
-		icon: '/assets/skills/cloudflare.svg',
+		icon: Cloudflare,
 	},
 	{
 		name: 'Docker',
-		icon: '/assets/skills/docker.svg',
+		icon: Docker,
 	},
 	{
 		name: 'Python',
-		icon: '/assets/skills/python.svg',
+		icon: Python,
 	},
-] as Array<{
+] as Skill[]
+
+interface Skill {
 	name: string
-	icon: string
-	iconLight?: string
+	icon: ImageMetadata
+	iconLight?: ImageMetadata
 	variant?: 'large' | 'large-horz' | 'large-vert' | 'small'
-}>
+}

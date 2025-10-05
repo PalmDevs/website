@@ -1,15 +1,20 @@
 import { PROJECT_REVANCED, PROJECT_REVENGE } from './projects'
 
+import ReVanced from '../images/experience/revanced.webp'
+import ReVancedLight from '../images/experience/revanced-light.webp'
+import Revenge from '../images/experience/revenge.webp'
+import RevengeLight from '../images/experience/revenge-light.webp'
+
 const EXPERIENCES = [
 	{
 		...PROJECT_REVANCED,
-		image: '/assets/experience/revanced.webp',
-		imageLight: '/assets/experience/revanced-light.webp',
+		image: ReVanced,
+		imageLight: ReVancedLight,
 	},
 	{
 		...PROJECT_REVENGE,
-		image: '/assets/experience/revenge.webp',
-		imageLight: '/assets/experience/revenge-light.webp',
+		image: Revenge,
+		imageLight: RevengeLight,
 	},
 ] satisfies Experience[]
 
@@ -17,7 +22,7 @@ export default EXPERIENCES
 
 interface Experience {
 	name: string
-	image: string
-	imageLight?: string
+	image: ImageMetadata
+	imageLight?: ImageMetadata
 	href: string
 }

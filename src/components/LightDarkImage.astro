@@ -1,18 +1,22 @@
 ---
-import type { JSX } from 'astro/jsx-runtime'
+import type { LocalImageProps } from 'astro:assets'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 
-interface Props extends JSX.ImgHTMLAttributes {
-	srcLight?: string
+type Props = LocalImageProps & {
+	srcLight?: LocalImageProps['src']
 }
 
 const { src, alt, srcLight, class: className, ...rest } = Astro.props
+
+const image = await getImage({ src, alt });
 ---
 
 {srcLight ? (
     <picture class={className} {...rest}>
-        <source srcset={src} media="(prefers-color-scheme: dark)" />
-        <img class={className} src={srcLight} alt={alt} />
+        <source srcset={image.src} {...image.attributes} media="(prefers-color-scheme: dark)" />
+        <Image class={className} src={srcLight} alt={alt} />
     </picture>
 ) : (
-    <img class={className} {...Astro.props} />
+    <Image class={className} {...Astro.props} />
 )}
