@@ -146,7 +146,6 @@ const refHandler = (props: NavDockProps) => (highlight: HTMLDivElement) => {
 	const dock = highlight.parentElement!
 
 	const updateScrollState = (document: Document) => {
-		console.log(document)
 		dock.setAttribute('data-scrolled', String(document.body.scrollTop > 0))
 		log.debug('Scrolled state updated:', document.body.scrollTop)
 	}
