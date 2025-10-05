@@ -38,6 +38,12 @@ export default defineConfig({
 			sourcemap: true,
 		},
 	},
+	experimental: {
+		clientPrerender: true,
+		preserveScriptOrder: true,
+		failOnPrerenderConflict: true,
+		headingIdCompat: true,
+	},
 	image: {
 		layout: 'constrained',
 	},
