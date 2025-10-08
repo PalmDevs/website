@@ -45,6 +45,8 @@ const scrollPreserver = (el: HTMLElement) => {
 	})
 }
 
+const navTransitionSelector = '[data-transition-on="nav"]'
+
 const NavDock: Component<NavDockProps> = props => {
 	// Uncomment when needed:
 	// const [pathname, setPathname] = createSignal('')
@@ -55,6 +57,31 @@ const NavDock: Component<NavDockProps> = props => {
 	// 	document.addEventListener('astro:after-swap', listener)
 	// 	onCleanup(() => document.removeEventListener('astro:after-swap', listener))
 	// })
+
+	onMount(() => {
+		const els = document.querySelectorAll(navTransitionSelector)
+		for (const el of els) el.setAttribute('data-transitionable', 'false')
+	})
+
+	onMount(() => {
+		document.addEventListener('astro:before-swap', e => {
+			const oldEls = document.querySelectorAll(navTransitionSelector)
+			for (const el of oldEls) el.setAttribute('data-transitionable', 'true')
+			const newEls = e.newDocument.querySelectorAll(navTransitionSelector)
+			for (const el of newEls) el.setAttribute('data-transitionable', 'true')
+
+			document.addEventListener(
+				'astro:after-swap',
+				() => {
+					requestAnimationFrame(() => {
+						for (const el of newEls)
+							el.setAttribute('data-transitionable', 'false')
+					})
+				},
+				{ once: true },
+			)
+		})
+	})
 
 	return (
 		<div flex="~ horz center" class={styles.container}>

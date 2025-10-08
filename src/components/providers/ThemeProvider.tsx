@@ -42,6 +42,7 @@ const updateImages = (document: Document) => {
 
 export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 	const [theme, setTheme] = createSignal<Theme>('sync')
+	let isInitialUpdate = false
 
 	onMount(() => {
 		const themeChangeListener = () => {
@@ -76,6 +77,7 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 			return
 		}
 
+		isInitialUpdate = true
 		setTheme(stored)
 		log.info('Loaded theme from localStorage:', stored)
 	})
@@ -113,26 +115,25 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 		}
 	})
 
-	const updateTransitionElements = () => {
+	const updateTransitionElements = (to: 'true' | 'false') => {
 		const transitionElements = document.querySelectorAll(
-			'[data-transitionable]',
+			'[data-transition-on="theme-change"]',
 		)
 
-		for (const el of transitionElements) {
-			if (el.getAttribute('data-transitionable') === 'true')
-				el.setAttribute('data-transitionable', 'false')
-			else el.setAttribute('data-transitionable', 'true')
-		}
+		for (const el of transitionElements)
+			el.setAttribute('data-transitionable', to)
 	}
 
 	const updateTheme = (theme: Theme) => {
-		// TODO: Maybe background needs to be a separate layer, so we can avoid retransitioning the content?
-		if (document.startViewTransition) {
-			updateTransitionElements()
+		log.info('Updating theme to:', theme)
+		if (!isInitialUpdate && document.startViewTransition) {
+			updateTransitionElements('true')
 			document
 				.startViewTransition(() => internal_updateTheme(theme))
-				.finished.then(updateTransitionElements)
+				.finished.then(() => updateTransitionElements('false'))
 		} else internal_updateTheme(theme)
+
+		isInitialUpdate = false
 	}
 
 	const internal_updateTheme = (theme: Theme) => {
