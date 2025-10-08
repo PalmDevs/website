@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount } from 'solid-js'
+import { createSignal, onMount } from 'solid-js'
 import { TIMEZONE_NAME } from '../utils/date'
 import Logger from '../utils/Logger'
 
@@ -27,7 +27,7 @@ export const Clock = () => {
 		setTimeout(
 			() => {
 				const int = setInterval(formatTime, MINUTE)
-				onCleanup(() => clearInterval(int))
+				document.addEventListener('astro:before-swap', () => clearInterval(int))
 			},
 			MINUTE - (Date.now() % MINUTE),
 		),
