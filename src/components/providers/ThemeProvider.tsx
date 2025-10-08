@@ -113,10 +113,26 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 		}
 	})
 
+	const updateTransitionElements = () => {
+		const transitionElements = document.querySelectorAll(
+			'[data-transitionable]',
+		)
+
+		for (const el of transitionElements) {
+			if (el.getAttribute('data-transitionable') === 'true')
+				el.setAttribute('data-transitionable', 'false')
+			else el.setAttribute('data-transitionable', 'true')
+		}
+	}
+
 	const updateTheme = (theme: Theme) => {
 		// TODO: Maybe background needs to be a separate layer, so we can avoid retransitioning the content?
-		if (document.startViewTransition) document.startViewTransition(() => internal_updateTheme(theme))
-		else internal_updateTheme(theme)
+		if (document.startViewTransition) {
+			updateTransitionElements()
+			document
+				.startViewTransition(() => internal_updateTheme(theme))
+				.finished.then(updateTransitionElements)
+		} else internal_updateTheme(theme)
 	}
 
 	const internal_updateTheme = (theme: Theme) => {
