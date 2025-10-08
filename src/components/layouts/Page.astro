@@ -34,6 +34,11 @@ const {
 		<script is:inline>(() => {const saved=localStorage.getItem("theme");const {matches}=matchMedia("(prefers-color-scheme: dark)");document.documentElement.dataset.theme=!saved?(matches?"dark":"light"):saved;document.dispatchEvent(new Event('palmdevs:theme-change'))})()</script>
 		<ClientRouter fallback="swap" />
 	</head>
+	<script>
+		document.addEventListener("astro:before-swap", (e) => {
+			e.newDocument.documentElement.dataset.theme = document.documentElement.dataset.theme
+		})
+	</script>
 	<body>
 		<NavDock transition:persist client:load pages={NAV_PAGES} links={NAV_LINKS} />
 		<main data-transitionable="true" data-transition-on="nav" flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
@@ -100,9 +105,3 @@ const {
 		}
 	}
 </style>
-
-<script>
-  document.addEventListener("astro:before-swap", (e) => {
-	e.newDocument.documentElement.dataset.theme = document.documentElement.dataset.theme
-  })
-</script>
