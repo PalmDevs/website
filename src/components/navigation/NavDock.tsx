@@ -45,7 +45,7 @@ const scrollPreserver = (el: HTMLElement) => {
 	})
 }
 
-const navTransitionSelector = '[data-transition-on="nav"]'
+const navTransitionSelector = '[data-transition-on~="nav"]'
 
 const NavDock: Component<NavDockProps> = props => {
 	// Uncomment when needed:
@@ -64,19 +64,24 @@ const NavDock: Component<NavDockProps> = props => {
 	})
 
 	onMount(() => {
+		const updateElements = (els: NodeListOf<Element>) => {
+			for (const el of els) el.setAttribute('data-transitionable', 'true')
+		}
+
+		const resetElements = (els: NodeListOf<Element>) => {
+			for (const el of els) el.setAttribute('data-transitionable', 'false')
+		}
+
 		document.addEventListener('astro:before-swap', e => {
 			const oldEls = document.querySelectorAll(navTransitionSelector)
-			for (const el of oldEls) el.setAttribute('data-transitionable', 'true')
+			updateElements(oldEls)
 			const newEls = e.newDocument.querySelectorAll(navTransitionSelector)
-			for (const el of newEls) el.setAttribute('data-transitionable', 'true')
+			updateElements(newEls)
 
 			document.addEventListener(
 				'astro:after-swap',
 				() => {
-					requestAnimationFrame(() => {
-						for (const el of newEls)
-							el.setAttribute('data-transitionable', 'false')
-					})
+					requestAnimationFrame(() => resetElements(newEls))
 				},
 				{ once: true },
 			)

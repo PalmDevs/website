@@ -208,7 +208,13 @@ const Galaxy: Component<GalaxyProps> = props => {
 		})
 	})
 
-	return <div ref={ctnDom} class={styles.container} />
+	return (
+		<div
+			ref={ctnDom}
+			class={styles.container}
+			data-transition-on="nav theme-change"
+		/>
+	)
 }
 
 export default Galaxy

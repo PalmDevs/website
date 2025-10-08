@@ -115,22 +115,26 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 		}
 	})
 
-	const updateTransitionElements = (to: 'true' | 'false') => {
-		const transitionElements = document.querySelectorAll(
-			'[data-transition-on="theme-change"]',
-		)
+	const updateElements = (els: NodeListOf<Element>) => {
+		for (const el of els) el.setAttribute('data-transitionable', 'true')
+	}
 
-		for (const el of transitionElements)
-			el.setAttribute('data-transitionable', to)
+	const resetElements = (els: NodeListOf<Element>) => {
+		for (const el of els) el.setAttribute('data-transitionable', 'false')
 	}
 
 	const updateTheme = (theme: Theme) => {
 		log.info('Updating theme to:', theme)
+
+		const elements = document.querySelectorAll(
+			'[data-transition-on~="theme-change"]',
+		)
+
 		if (!isInitialUpdate && document.startViewTransition) {
-			updateTransitionElements('true')
+			updateElements(elements)
 			document
 				.startViewTransition(() => internal_updateTheme(theme))
-				.finished.then(() => updateTransitionElements('false'))
+				.finished.then(() => resetElements(elements))
 		} else internal_updateTheme(theme)
 
 		isInitialUpdate = false
