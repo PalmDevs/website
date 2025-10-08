@@ -6,17 +6,21 @@ const GalaxyBackground: Component = () => {
 	const [canShow, setCanShow] = createSignal(true)
 
 	onMount(() => {
+		const media = matchMedia('(prefers-reduced-motion:no-preference)')
+
 		const listener = () => {
 			const { theme } = document.documentElement.dataset
-			setCanShow(theme === 'dark')
+			setCanShow(theme === 'dark' && media.matches)
 		}
 
+		media.addEventListener('change', listener)
 		document.addEventListener('palmdevs:theme-change', listener)
 		listener()
 
-		onCleanup(() =>
-			document.removeEventListener('palmdevs:theme-change', listener),
-		)
+		onCleanup(() => {
+			media.removeEventListener('change', listener)
+			document.removeEventListener('palmdevs:theme-change', listener)
+		})
 	})
 
 	return (
