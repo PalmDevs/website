@@ -72,18 +72,14 @@ const NavDock: Component<NavDockProps> = props => {
 			for (const el of els) el.setAttribute('data-transitionable', 'false')
 		}
 
-		document.addEventListener('astro:before-swap', e => {
-			const oldEls = document.querySelectorAll(navTransitionSelector)
-			updateElements(oldEls)
-			const newEls = e.newDocument.querySelectorAll(navTransitionSelector)
-			updateElements(newEls)
+		document.addEventListener('astro:before-preparation', e => {
+			updateElements(document.querySelectorAll(navTransitionSelector))
+			updateElements(e.newDocument.querySelectorAll(navTransitionSelector))
+		})
 
-			document.addEventListener(
-				'astro:after-swap',
-				() => {
-					requestAnimationFrame(() => resetElements(newEls))
-				},
-				{ once: true },
+		document.addEventListener('astro:after-swap', () => {
+			requestAnimationFrame(() =>
+				resetElements(document.querySelectorAll(navTransitionSelector)),
 			)
 		})
 	})
