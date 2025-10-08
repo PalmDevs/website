@@ -11,6 +11,16 @@
     scroll-padding: 64px;
 }
 
+::view-transition-old(nav) {
+	display: none;
+}
+
+::view-transition-group(nav),
+::view-transition-new(nav) {
+	animation-duration: 0s;
+	z-index: var(--layer-nav);
+}
+
 .dock {
 	view-transition-name: nav;
 
