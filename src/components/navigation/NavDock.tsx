@@ -243,16 +243,18 @@ const THEME_ICON: Record<Theme | 'sync', IconComponent> = {
 
 const ThemeSwitchButton: Component = () => {
 	const theme = useTheme()
+	const nextTheme = createMemo(() => NEXT_THEME[theme.theme()])
+	const hint = createMemo(() => THEME_HINT[nextTheme()])
 
 	return (
 		<IconButton
 			class={styles.linkButton}
 			variant="text"
 			icon={ThemeSwitchButtonIcon}
-			title={THEME_HINT[theme.theme()]}
-			aria-label={THEME_HINT[theme.theme()]}
+			title={hint()}
+			aria-label={hint()}
 			on:click={() => {
-				const next = NEXT_THEME[theme.theme()]
+				const next = nextTheme()
 				theme.setTheme(next)
 			}}
 		/>
