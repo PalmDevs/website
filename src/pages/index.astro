@@ -50,7 +50,7 @@ import { getAge } from '../utils/date'
 			<div flex="~" gap="xs">
 				<ul class="list card-grid">
 					{SKILLS.slice(0, 6).map(({ name, icon, iconLight }) => (
-						<li title={name} aria-label={name}>
+						<li>
 							<SkillItem {name} {icon} {iconLight} />
 						</li>
 					))}
