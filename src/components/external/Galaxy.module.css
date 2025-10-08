@@ -7,9 +7,10 @@
   pointer-events: none;
   z-index: -1;
   opacity: 0.5;
+  view-transition-name: galaxy;
+}
 
-  & > canvas {
-    position: relative;
-    z-index: -1;
-  }
+::view-transition-old(galaxy),
+::view-transition-new(galaxy) {
+  animation-duration: 0s;
 }

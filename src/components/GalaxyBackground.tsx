@@ -25,11 +25,10 @@ const GalaxyBackground: Component = () => {
 				twinkleIntensity={0.5}
 				glowIntensity={0.33}
 				scrollSensitivity={-0.00005}
-				hueShift={132.5}
+				hueShift={265 / 360}
 				saturation={0.8}
 				speed={0.2}
 				rotationSpeed={0.025}
-				transparent
 			/>
 		</Show>
 	)
