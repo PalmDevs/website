@@ -5,6 +5,7 @@ import '../../styles/base.scss'
 import { ClientRouter } from 'astro:transitions'
 import { NAV_LINKS, NAV_PAGES } from '../../data/nav'
 import { getAge } from '../../utils/date'
+import GalaxyBackground from '../GalaxyBackground'
 import NavDock from '../navigation/NavDock'
 
 const {
@@ -38,6 +39,7 @@ const {
 		<main data-transitionable="true" data-transition-on="nav" flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
 			<slot />
 		</main>
+		<GalaxyBackground client:visible transition:persist />
 	</body>
 </html>
 
