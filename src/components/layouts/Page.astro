@@ -54,9 +54,8 @@ const {
 	main[data-transitionable='true'] {
 		view-transition-name: content;
 	}
-
+	
 	main {
-		// animation: slide-up-fade-in 0.5s var(--ease);
 		padding-inline: var(--gap-xl);
 
 		@media (max-width: breakpoints.$tablet) {
@@ -71,37 +70,31 @@ const {
 
 	::view-transition-old(content),
 	::view-transition-new(content) {
-		animation-timing-function: cubic-bezier(0, 0.6, 0.3, 1);
+		transform-origin: center 25%;
 	}
-	
+
 	::view-transition-old(content) {
-		animation-name: fade-out;
-		animation-duration: 200ms;
+		animation: old 200ms var(--ease) forwards;
 	}
 
 	::view-transition-new(content) {
-		animation-name: slide-up-fade-in;
-		animation-duration: 225ms;
+		animation-name: new;
+		animation-duration: 300ms;
+		animation-timing-function: cubic-bezier(0, 0.6, 0.3, 1);
 		animation-delay: 50ms;
 	}
 
-	@keyframes fade-out {
-		25% {
-			opacity: 0;
-		}
+	@keyframes old {
 		to {
-			opacity: 0; 
+			transform: scaleX(1.75) scaleY(1.5);
+			opacity: 0;
 		}
 	}
 
-	@keyframes slide-up-fade-in {
+	@keyframes new {
 		from {
 			opacity: 0;
-			transform: translateY(var(--gap-4xl));
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
+			transform: translateY(var(--gap-2xl)) scaleY(0.65) scaleX(0.45);
 		}
 	}
 </style>

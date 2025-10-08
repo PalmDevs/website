@@ -8,6 +8,11 @@
   box-shadow;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0s;
+}
+
 :root[data-transitionable='true'] {
   view-transition-name: page;
 }
