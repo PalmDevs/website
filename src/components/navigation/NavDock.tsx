@@ -1,4 +1,4 @@
-import { createSignal, For, onCleanup, onMount, Show } from 'solid-js'
+import { createMemo, For, onCleanup, onMount, Show } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import IconThemeAuto from '../../icons/theme_auto.svg?component-solid'
 import IconThemeDark from '../../icons/theme_dark.svg?component-solid'
@@ -46,14 +46,15 @@ const scrollPreserver = (el: HTMLElement) => {
 }
 
 const NavDock: Component<NavDockProps> = props => {
-	const [pathname, setPathname] = createSignal('')
+	// Uncomment when needed:
+	// const [pathname, setPathname] = createSignal('')
 
-	onMount(() => {
-		const listener = () => setPathname(getPathname())
-		listener()
-		document.addEventListener('astro:after-swap', listener)
-		onCleanup(() => document.removeEventListener('astro:after-swap', listener))
-	})
+	// onMount(() => {
+	// 	const listener = () => setPathname(getPathname())
+	// 	listener()
+	// 	document.addEventListener('astro:after-swap', listener)
+	// 	onCleanup(() => document.removeEventListener('astro:after-swap', listener))
+	// })
 
 	return (
 		<div flex="~ horz center" class={styles.container}>
@@ -80,7 +81,11 @@ const NavDock: Component<NavDockProps> = props => {
 						<For each={props.pages}>
 							{page => (
 								<li>
-									<NavDockLink page={page} active={pathname() === page.href} />
+									<NavDockLink
+										page={page}
+										// Uncomment when needed:
+										// active={pathname() === page.href}
+									/>
 								</li>
 							)}
 						</For>
@@ -124,15 +129,17 @@ const NavDock: Component<NavDockProps> = props => {
 	)
 }
 
-const NavDockLink = (props: { page: NavLinkConfig; active: boolean }) => (
+const NavDockLink = (props: {
+	page: NavLinkConfig
+	// Uncomment when needed:
+	// active: boolean
+}) => (
 	<LinkButton
-		classList={{
-			[styles.activeLink]: props.active,
-		}}
 		on:click={e => {
 			if (getPathname() === props.page.href) {
 				e.preventDefault()
-				log.warn('Already on page, not navigating:', props.page.href)
+				document.body.scrollTo({ top: 0, behavior: 'smooth' })
+				log.info('Already on page, scrolling to top:', props.page.href)
 			}
 		}}
 		variant="text"
