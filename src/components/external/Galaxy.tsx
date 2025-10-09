@@ -44,6 +44,7 @@ const Galaxy: Component<GalaxyProps> = props => {
 	let targetWarpZoom = 0
 	let smoothWarpZoom = 0
 	let randomSeed = 0
+	let counter = 0
 
 	const focal = () => props.focal ?? [0.5, 0.5]
 	const rotation = () => props.rotation ?? [1.0, 0.0]
@@ -123,8 +124,8 @@ const Galaxy: Component<GalaxyProps> = props => {
 		function handleBeforePreparation() {
 			if (disableAnimation()) return
 
-			targetWarpSpeed = -1.0
-			targetWarpZoom = -1.0
+			targetWarpSpeed = -1.5
+			targetWarpZoom = -1.5
 			targetFadeOut = 0.5
 		}
 
@@ -172,6 +173,9 @@ const Galaxy: Component<GalaxyProps> = props => {
 
 			if (!disableAnimation()) {
 				animateId = requestAnimationFrame(update)
+
+				counter = ~counter
+				if (counter & 1) return
 
 				program!.uniforms.uTime.value = t * 0.001
 				program!.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed()) / 10.0

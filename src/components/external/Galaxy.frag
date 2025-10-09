@@ -20,7 +20,8 @@ uniform float uRandomSeed;
 
 varying vec2 vUv;
 
-#define NUM_LAYER 3.0
+// 1 / LAYERS
+#define NUM_LAYER_DIVIDED 0.34
 #define STAR_COLOR_CUTOFF 0.2
 #define MAT45 mat2(0.7071, -0.7071, 0.7071, 0.7071)
 #define PERIOD 3.0
@@ -174,7 +175,7 @@ void main() {
 
   vec3 col = vec3(0.0);
 
-  for (float i = 0.0; i < 1.0; i += 1.0 / NUM_LAYER) {
+  for (float i = 0.0; i < 1.0; i += NUM_LAYER_DIVIDED) {
     float warpOffset = uWarpSpeed * 2.0;
     float depth = fract(i + uStarSpeed * uSpeed + warpOffset);
 
