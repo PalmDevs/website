@@ -1,10 +1,10 @@
 import { splitProps } from 'solid-js'
-import { joinToString } from '../utils/strings'
-import { IconComponentRenderer } from './_icons'
+import { joinToString } from '~/utils/strings'
+import { IconComponentRenderer } from '../_icons'
+import Touchable from '../Touchable'
 import styles from './IconButton.module.css'
-import Touchable from './Touchable'
 import type { Component, JSX } from 'solid-js'
-import type { IconComponent } from './_icons'
+import type { IconComponent } from '../_icons'
 
 type IconButtonVariant = 'filled' | 'glass' | 'text'
 type IconButtonSize = 's' | 'm'
@@ -71,6 +71,7 @@ export const LinkIconButton: LinkIconButtonComponent = props => {
 		'class',
 		'size',
 	])
+
 	return (
 		<Touchable
 			{...others}

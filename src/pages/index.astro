@@ -1,25 +1,25 @@
 ---
 import './_styles/index.css'
 
-import Avatar from '../components/Avatar.astro'
-import { LinkButton } from '../components/Button'
-import { Clock } from '../components/Clock'
-import Contacts from '../components/Contacts.astro'
-import { GradientText } from '../components/GradientText'
-import LightDarkImage from '../components/LightDarkImage.astro'
-import LineOfWork from '../components/LineOfWork.astro'
-import Page from '../components/layouts/Page.astro'
-import ProjectCard from '../components/ProjectCard.astro'
-import SkillsCTA from '../components/pages/index/SkillsCTA.astro'
-import Section from '../components/Section.astro'
-import SkillItem from '../components/SkillItem.astro'
-import Touchable from '../components/Touchable'
-import EXPERIENCES from '../data/experience'
-import PROJECTS from '../data/projects'
-import { SKILLS } from '../data/skills'
-import IconMail from '../icons/mail.svg?component-solid'
-import IconWork from '../icons/work.svg?component-solid'
-import { getAge } from '../utils/date'
+import Avatar from '~/components/Avatar.astro'
+import { LinkButton } from '~/components/buttons/Button'
+import { Clock } from '~/components/Clock'
+import Contacts from '~/components/Contacts.astro'
+import { GradientText } from '~/components/GradientText'
+import LightDarkImage from '~/components/LightDarkImage.astro'
+import LineOfWork from '~/components/LineOfWork.astro'
+import Page from '~/components/layouts/Page.astro'
+import Section from '~/components/layouts/Section.astro'
+import ProjectCard from '~/components/ProjectCard.astro'
+import SkillsCTA from '~/components/pages/index/SkillsCTA.astro'
+import SkillItem from '~/components/SkillItem.astro'
+import Touchable from '~/components/Touchable'
+import EXPERIENCES from '~/data/experience'
+import PROJECTS from '~/data/projects'
+import { SKILLS } from '~/data/skills'
+import IconMail from '~/icons/mail.svg?component-solid'
+import IconWork from '~/icons/work.svg?component-solid'
+import { getAge } from '~/utils/date'
 ---
 
 <Page>
@@ -89,7 +89,7 @@ import { getAge } from '../utils/date'
 </Page>
 
 <style lang="scss">
-	@use '../styles/breakpoints';
+	@use '~/styles/breakpoints';
 
 	.balance {
 		text-wrap: balance;

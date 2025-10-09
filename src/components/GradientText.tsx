@@ -1,4 +1,4 @@
-import { joinToString } from '../utils/strings'
+import { joinToString } from '~/utils/strings'
 import styles from './GradientText.module.css'
 import type { JSX } from 'solid-js'
 

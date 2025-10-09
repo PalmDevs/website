@@ -1,7 +1,6 @@
 ---
+import { getImage, Image } from 'astro:assets'
 import type { LocalImageProps } from 'astro:assets'
-import { getImage } from 'astro:assets'
-import { Image } from 'astro:assets'
 
 type Props = LocalImageProps & {
 	srcLight?: LocalImageProps['src']
@@ -9,7 +8,7 @@ type Props = LocalImageProps & {
 
 const { src, alt, srcLight, class: className, ...rest } = Astro.props
 
-const image = await getImage({ src, alt });
+const image = await getImage({ src, alt })
 ---
 
 {srcLight ? (

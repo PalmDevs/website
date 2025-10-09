@@ -1,9 +1,8 @@
+import ReVanced from '~/images/experience/revanced.webp'
+import ReVancedLight from '~/images/experience/revanced-light.webp'
+import Revenge from '~/images/experience/revenge.webp'
+import RevengeLight from '~/images/experience/revenge-light.webp'
 import { PROJECT_REVANCED, PROJECT_REVENGE } from './projects'
-
-import ReVanced from '../images/experience/revanced.webp'
-import ReVancedLight from '../images/experience/revanced-light.webp'
-import Revenge from '../images/experience/revenge.webp'
-import RevengeLight from '../images/experience/revenge-light.webp'
 
 const EXPERIENCES = [
 	{

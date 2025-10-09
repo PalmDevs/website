@@ -1,10 +1,10 @@
-import DataBackup from '../images/projects/data_backup.svg'
-import GitBartender from '../images/projects/git_bartender.webp'
-import Jasper from '../images/projects/jasper.webp'
-import Other from '../images/projects/other.svg'
-import Revenge from '../images/projects/revenge.webp'
-import ReVanced from '../images/projects/revanced.svg'
-import Website from '../images/projects/website.svg'
+import DataBackup from '~/images/projects/data_backup.svg'
+import GitBartender from '~/images/projects/git_bartender.webp'
+import Jasper from '~/images/projects/jasper.webp'
+import Other from '~/images/projects/other.svg'
+import ReVanced from '~/images/projects/revanced.svg'
+import Revenge from '~/images/projects/revenge.webp'
+import Website from '~/images/projects/website.svg'
 
 export const PROJECT_REVANCED: Project = {
 	name: 'ReVanced',

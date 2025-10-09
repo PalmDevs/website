@@ -1,7 +1,7 @@
 import { mergeRefs } from '@solid-primitives/refs'
 import { onCleanup, splitProps } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
-import { joinToString } from '../utils/strings'
+import { joinToString } from '~/utils/strings'
 import styles from './Touchable.module.css'
 import type { JSX, ValidComponent } from 'solid-js'
 import type { PolymorphicProps } from './_polymorphic'

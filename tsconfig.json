@@ -5,6 +5,9 @@
 	"compilerOptions": {
 		"types": ["vite-plugin-solid-svg/types", "bun"],
 		"jsx": "preserve",
-		"jsxImportSource": "solid-js"
+		"jsxImportSource": "solid-js",
+		"paths": {
+			"~/*": ["./src/*"]
+		}
 	}
 }

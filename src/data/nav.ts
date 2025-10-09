@@ -1,9 +1,9 @@
-import IconBlog from '../icons/blog.svg?component-solid'
-import IconHome from '../icons/home.svg?component-solid'
-import IconSmile from '../icons/smile.svg?component-solid'
-import IconSource from '../icons/source.svg?component-solid'
-import IconWork from '../icons/work.svg?component-solid'
-import type { NavLinkConfig } from '../components/navigation/NavDock'
+import IconBlog from '~/icons/blog.svg?component-solid'
+import IconHome from '~/icons/home.svg?component-solid'
+import IconSmile from '~/icons/smile.svg?component-solid'
+import IconSource from '~/icons/source.svg?component-solid'
+import IconWork from '~/icons/work.svg?component-solid'
+import type { NavLinkConfig } from '~/components/navigation/NavDock'
 
 export const NAV_PAGES = [
 	{

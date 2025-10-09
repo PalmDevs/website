@@ -1,6 +1,6 @@
 import { createSignal, onMount } from 'solid-js'
-import { TIMEZONE_NAME } from '../utils/date'
-import Logger from '../utils/Logger'
+import { TIMEZONE_NAME } from '~/utils/date'
+import Logger from '~/utils/Logger'
 
 const MINUTE = 60 * 1000
 

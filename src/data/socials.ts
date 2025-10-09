@@ -1,8 +1,8 @@
-import IconDiscord from '../icons/discord.svg?component-solid'
-import IconGitHub from '../icons/github.svg?component-solid'
-import IconEmail from '../icons/mail.svg?component-solid'
-import IconLinkedIn from '../icons/linkedin.svg?component-solid'
-import type { IconComponent } from '../components/_icons'
+import IconDiscord from '~/icons/discord.svg?component-solid'
+import IconGitHub from '~/icons/github.svg?component-solid'
+import IconLinkedIn from '~/icons/linkedin.svg?component-solid'
+import IconEmail from '~/icons/mail.svg?component-solid'
+import type { IconComponent } from '~/components/_icons'
 
 export const SOCIALS = {
 	github: {

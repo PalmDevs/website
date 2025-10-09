@@ -1,4 +1,4 @@
-import type { IconComponent } from '../_icons'
+import type { IconComponent } from '~/_icons'
 
 const NavDrawer = () => {
 	return

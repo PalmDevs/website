@@ -6,7 +6,7 @@ import {
 	onMount,
 	useContext,
 } from 'solid-js'
-import Logger from '../../utils/Logger'
+import Logger from '~/utils/Logger'
 import type { TransitionBeforeSwapEvent } from 'astro:transitions/client'
 import type { Accessor, Component, JSX } from 'solid-js'
 
