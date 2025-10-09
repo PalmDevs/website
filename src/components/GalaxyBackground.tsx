@@ -7,15 +7,15 @@ const GalaxyBackground: Component = () => {
 	const [canAnimate, setCanAnimate] = createSignal(true)
 
 	onMount(() => {
-		const motionMedia = matchMedia('(prefers-reduced-motion:no-preference)')
+		const motionMedia = matchMedia('(prefers-reduced-motion:reduce)')
 		const transMedia = matchMedia(
-			'(prefers-reduced-transparency:no-preference)',
+			'(prefers-reduced-transparency:reduce)',
 		)
 
 		const listener = () => {
 			const { theme } = document.documentElement.dataset
-			setCanAnimate(motionMedia.matches)
-			setCanShow(theme === 'dark' && transMedia.matches)
+			setCanAnimate(!motionMedia.matches)
+			setCanShow(theme === 'dark' && !transMedia.matches)
 		}
 
 		motionMedia.addEventListener('change', listener)
