@@ -166,7 +166,7 @@ const NavDockLink = (props: {
 		on:click={e => {
 			if (getPathname() === props.page.href) {
 				e.preventDefault()
-				document.body.scrollTo({ top: 0, behavior: 'smooth' })
+				document.body.scrollTo({ top: 0 })
 				log.info('Already on page, scrolling to top:', props.page.href)
 			}
 		}}

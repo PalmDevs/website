@@ -92,6 +92,7 @@ svg {
 
 body {
   position: relative;
+  scroll-behavior: inherit;
   scrollbar-gutter: stable both-edges;
   width: 100%;
   height: 100%;
@@ -126,6 +127,10 @@ hr {
     scroll-behavior: auto !important;
     animation-duration: 0s !important;
     transition-duration: 0s !important;
+  }
+
+  :root {
+    scroll-behavior: auto !important;
   }
 }
 
