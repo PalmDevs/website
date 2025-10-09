@@ -10,21 +10,26 @@ import Logger from '~/utils/Logger'
 import type { TransitionBeforeSwapEvent } from 'astro:transitions/client'
 import type { Accessor, Component, JSX } from 'solid-js'
 
-export type Theme = 'light' | 'dark' | 'auto' | 'sync'
+export type Theme = 'light' | 'dark'
+export type ThemeMode = 'sync' | 'system' | 'override'
 
 export interface ThemeContext {
 	theme: Accessor<Theme>
-	setTheme: (theme: Theme) => void
+	mode: Accessor<ThemeMode>
+	setThemeMode: (mode: 'system' | 'override', theme?: Theme) => void
 }
 
 const log = new Logger('ThemeProvider')
 
 const ThemeContext = createContext<ThemeContext>({
-	theme: () => 'sync',
-	setTheme: () => log.warn('No ThemeProvider found in tree!'),
+	theme: () => 'dark',
+	mode: () => 'sync',
+	setThemeMode: () => log.warn('No ThemeProvider found in tree!'),
 } satisfies ThemeContext)
 
+export const DEFAULT_THEME: Theme = 'dark'
 const THEME_KEY = 'theme'
+const SYSTEM_MODE_VALUE = 'system'
 
 const updateImages = (document: Document) => {
 	const { theme } = document.documentElement.dataset
@@ -41,8 +46,9 @@ const updateImages = (document: Document) => {
 }
 
 export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
-	const [theme, setTheme] = createSignal<Theme>('sync')
-	let isInitialUpdate = false
+	const [theme, setTheme] = createSignal<Theme>('dark')
+	const [mode, setMode] = createSignal<ThemeMode>('sync')
+	let gotInitialUpdate = false
 
 	onMount(() => {
 		const themeChangeListener = () => {
@@ -65,88 +71,105 @@ export const ThemeProvider: Component<{ children: JSX.Element }> = props => {
 	})
 
 	onMount(() => {
-		const stored = localStorage.getItem('theme') as Theme | null
-		if (!stored) {
-			log.info('No theme found in localStorage, defaulting to auto')
-			return setTheme('auto')
-		}
+		const stored = localStorage.getItem(THEME_KEY) as string | null
 
-		if (!['light', 'dark', 'auto'].includes(stored)) {
-			log.warn('Invalid theme in localStorage, defaulting to auto:', stored)
-			setTheme('auto')
+		if (!stored) {
+			log.info('No theme found in localStorage, defaulting to dark')
+			setMode('override')
+			setTheme(DEFAULT_THEME)
 			return
 		}
 
-		isInitialUpdate = true
-		setTheme(stored)
+		if (stored === SYSTEM_MODE_VALUE) {
+			log.info('Loaded system mode from localStorage')
+			setMode('system')
+			const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+				.matches
+				? 'dark'
+				: 'light'
+			setTheme(systemTheme)
+			return
+		}
+
+		if (!['light', 'dark'].includes(stored)) {
+			log.warn('Invalid theme in localStorage, defaulting to dark:', stored)
+			setMode('override')
+			setTheme(DEFAULT_THEME)
+			localStorage.setItem(THEME_KEY, DEFAULT_THEME)
+			return
+		}
+
 		log.info('Loaded theme from localStorage:', stored)
+		setMode('override')
+		setTheme(stored as Theme)
 	})
 
 	onMount(() => {
 		const media = window.matchMedia('(prefers-color-scheme: dark)')
 		const listener = (e: { matches: boolean }) => {
-			if (theme() !== 'auto') return
+			if (mode() !== 'system') return
 
-			updateTheme(e.matches ? 'dark' : 'light')
-			document.dispatchEvent(new Event('palmdevs:theme-change'))
-
-			log.info('System theme changed, applied:', e.matches ? 'dark' : 'light')
+			const newTheme = e.matches ? 'dark' : 'light'
+			setTheme(newTheme)
+			log.info('System theme changed, applied:', newTheme)
 		}
 
 		media.addEventListener('change', listener)
 		onCleanup(() => media.removeEventListener('change', listener))
 	})
 
-	createEffect(() => {
-		log.info('Theme state changed:', theme())
-
-		switch (theme()) {
-			case 'sync':
-				return
-
-			case 'auto':
-				localStorage.removeItem(THEME_KEY)
-				break
-
-			default:
-				updateTheme(theme())
-				localStorage.setItem(THEME_KEY, theme())
-				log.info('Theme override applied:', theme())
-		}
-	})
-
-	const updateElements = (els: NodeListOf<Element>) => {
-		for (const el of els) el.setAttribute('data-transitionable', 'true')
-	}
-
-	const resetElements = (els: NodeListOf<Element>) => {
-		for (const el of els) el.setAttribute('data-transitionable', 'false')
-	}
-
-	const updateTheme = (theme: Theme) => {
-		log.info('Updating theme to:', theme)
+	const applyTheme = (theme: Theme) => {
+		log.info('Applying theme:', theme)
 
 		const elements = document.querySelectorAll(
 			'[data-transition-on~="theme-change"]',
 		)
 
-		if (!isInitialUpdate && document.startViewTransition) {
-			updateElements(elements)
+		if (gotInitialUpdate && document.startViewTransition) {
+			for (const el of elements) el.setAttribute('data-transitionable', 'true')
 			document
-				.startViewTransition(() => internal_updateTheme(theme))
-				.finished.then(() => resetElements(elements))
-		} else internal_updateTheme(theme)
-
-		isInitialUpdate = false
+				.startViewTransition(() => {
+					document.documentElement.dataset.theme = theme
+					document.dispatchEvent(new Event('palmdevs:theme-change'))
+				})
+				.finished.then(() => {
+					for (const el of elements)
+						el.setAttribute('data-transitionable', 'false')
+				})
+		} else {
+			document.documentElement.dataset.theme = theme
+			document.dispatchEvent(new Event('palmdevs:theme-change'))
+		}
 	}
 
-	const internal_updateTheme = (theme: Theme) => {
-		document.documentElement.dataset.theme = theme
-		document.dispatchEvent(new Event('palmdevs:theme-change'))
+	const setThemeMode = (newMode: 'system' | 'override', newTheme?: Theme) => {
+		log.info('Setting theme mode:', newMode, 'with theme:', newTheme)
+		setMode(newMode)
+
+		if (newMode === 'system') {
+			localStorage.setItem(THEME_KEY, SYSTEM_MODE_VALUE)
+			const theme = matchMedia('(prefers-color-scheme: dark)').matches
+				? 'dark'
+				: 'light'
+
+			setTheme(theme)
+			log.info('Switched to system mode, applied:', theme)
+		} else if (newMode === 'override' && newTheme) {
+			if (newTheme === DEFAULT_THEME) localStorage.removeItem(THEME_KEY)
+			else localStorage.setItem(THEME_KEY, newTheme)
+
+			setTheme(newTheme)
+			log.info('Theme override applied:', newTheme)
+		}
 	}
+
+	createEffect(() => {
+		applyTheme(theme())
+		gotInitialUpdate = true
+	})
 
 	return (
-		<ThemeContext.Provider value={{ theme, setTheme }}>
+		<ThemeContext.Provider value={{ theme, mode, setThemeMode }}>
 			{props.children}
 		</ThemeContext.Provider>
 	)

@@ -248,31 +248,38 @@ function getPathname() {
 		: (log.warn('Attempted to get pathname on server'), '/')
 }
 
-const THEME_HINT: Record<Theme | 'sync', string> = {
-	light: 'Switch to light theme',
-	dark: 'Switch to dark theme',
-	auto: 'Use system theme',
-	sync: 'Loading theme preference...',
-}
-
-const NEXT_THEME: Record<Theme, Theme> = {
-	light: 'dark',
-	dark: 'auto',
-	auto: 'light',
-	sync: 'sync',
-}
-
-const THEME_ICON: Record<Theme | 'sync', IconComponent> = {
-	light: IconThemeLight,
-	dark: IconThemeDark,
-	auto: IconThemeAuto,
-	sync: IconThemeSyncing,
-}
-
 const ThemeSwitchButton: Component = () => {
-	const theme = useTheme()
-	const nextTheme = createMemo(() => NEXT_THEME[theme.theme()])
-	const hint = createMemo(() => THEME_HINT[nextTheme()])
+	const Theme = useTheme()
+
+	const nextState = (): [mode: 'system' | 'override', theme?: Theme] => {
+		const currentMode = Theme.mode()
+		const currentTheme = Theme.theme()
+
+		switch (currentMode) {
+			case 'sync':
+				return ['system']
+			case 'system':
+				return ['override', 'light']
+			case 'override':
+				if (currentTheme === 'light') return ['override', 'dark']
+				return ['system']
+		}
+	}
+
+	const hint = createMemo<string>(() => {
+		const currentMode = Theme.mode()
+		const currentTheme = Theme.theme()
+
+		switch (currentMode) {
+			case 'sync':
+				return 'Loading theme preference...'
+			case 'system':
+				return 'Switch to light theme'
+			case 'override':
+				if (currentTheme === 'light') return 'Switch to dark theme'
+				return 'Use system theme'
+		}
+	})
 
 	return (
 		<IconButton
@@ -282,16 +289,26 @@ const ThemeSwitchButton: Component = () => {
 			title={hint()}
 			aria-label={hint()}
 			on:click={() => {
-				const next = nextTheme()
-				theme.setTheme(next)
+				const [mode, theme] = nextState()
+				Theme.setThemeMode(mode, theme)
 			}}
 		/>
 	)
 }
 
-const ThemeSwitchButtonIcon: IconComponent = props => (
-	<Dynamic component={THEME_ICON[useTheme().theme()]} {...props} />
-)
+const ThemeSwitchButtonIcon: IconComponent = props => {
+	const Theme = useTheme()
+	const icon = createMemo<IconComponent>(() => {
+		const mode = Theme.mode()
+		const theme = Theme.theme()
+
+		if (mode === 'sync') return IconThemeSyncing
+		if (mode === 'system') return IconThemeAuto
+		return theme === 'light' ? IconThemeLight : IconThemeDark
+	})
+
+	return <Dynamic component={icon()} {...props} />
+}
 
 export default NavDock
 

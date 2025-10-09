@@ -7,6 +7,7 @@ import { NAV_LINKS, NAV_PAGES } from '~/data/nav'
 import { getAge } from '~/utils/date'
 import GalaxyBackground from '../GalaxyBackground'
 import NavDock from '../navigation/NavDock'
+import { DEFAULT_THEME } from '../providers/ThemeProvider'
 
 const {
 	title,
@@ -16,7 +17,7 @@ const {
 } = Astro.props
 ---
 
-<html lang="en" data-theme="light" data-transitionable="false" data-transition-on="theme-change">
+<html lang="en" data-theme={DEFAULT_THEME} data-transitionable="false" data-transition-on="theme-change">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />	
@@ -31,7 +32,7 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:500,600,700|jetbrains-mono:400|outfit:600,700&display=swap" />
-		<script is:inline>(() => {const saved=localStorage.getItem("theme");const {matches}=matchMedia("(prefers-color-scheme: dark)");document.documentElement.dataset.theme=!saved?(matches?"dark":"light"):saved;document.dispatchEvent(new Event('palmdevs:theme-change'))})()</script>
+		<script is:inline>const saved=localStorage.getItem("theme"),resolveTheme=()=>{switch(saved){case"dark":case"light":return saved;case"system":return matchMedia("(prefers-color-scheme:dark)")?"dark":"light";default:return"dark"}};document.documentElement.dataset.theme=resolveTheme();document.dispatchEvent(new Event("palmdevs:theme-change"));</script>
 		<ClientRouter fallback="swap" />
 	</head>
 	<script>
@@ -79,7 +80,7 @@ const {
 
 	::view-transition-new(content) {
 		animation-name: new;
-		animation-duration: 300ms;
+		animation-duration: 200ms;
 		animation-timing-function: cubic-bezier(0, 0.6, 0.3, 1);
 		animation-delay: 50ms;
 	}
