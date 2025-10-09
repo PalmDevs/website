@@ -4,21 +4,27 @@ import type { Component } from 'solid-js'
 
 const GalaxyBackground: Component = () => {
 	const [canShow, setCanShow] = createSignal(true)
+	const [canAnimate, setCanAnimate] = createSignal(true)
 
 	onMount(() => {
-		const media = matchMedia('(prefers-reduced-motion:no-preference)')
+		const motionMedia = matchMedia('(prefers-reduced-motion:no-preference)')
+		const transMedia = matchMedia(
+			'(prefers-reduced-transparency:no-preference)',
+		)
 
 		const listener = () => {
 			const { theme } = document.documentElement.dataset
-			setCanShow(theme === 'dark' && media.matches)
+			setCanAnimate(motionMedia.matches)
+			setCanShow(theme === 'dark' && transMedia.matches)
 		}
 
-		media.addEventListener('change', listener)
+		motionMedia.addEventListener('change', listener)
+		transMedia.addEventListener('change', listener)
 		document.addEventListener('palmdevs:theme-change', listener)
 		listener()
 
 		onCleanup(() => {
-			media.removeEventListener('change', listener)
+			motionMedia.removeEventListener('change', listener)
 			document.removeEventListener('palmdevs:theme-change', listener)
 		})
 	})
@@ -26,6 +32,7 @@ const GalaxyBackground: Component = () => {
 	return (
 		<Show when={canShow()}>
 			<Galaxy
+				disableAnimation={!canAnimate()}
 				twinkleIntensity={0.5}
 				glowIntensity={0.33}
 				scrollSensitivity={-0.00005}

@@ -4,11 +4,11 @@
  * Source: https://reactbits.dev/backgrounds/galaxy
  *
  * Adding support for warp effects during Astro navigation, scroll parallax, and reduced color randomization.
- * Note that this component is not reactive to prop changes after initial mount.
+ * Note that this component is not reactive to some prop changes after initial mount.
  */
 
 import { Color, Mesh, Program, Renderer, Triangle } from 'ogl'
-import { onCleanup, onMount } from 'solid-js'
+import { createEffect, onCleanup, onMount } from 'solid-js'
 import fragmentShader from './Galaxy.frag?raw'
 import styles from './Galaxy.module.css'
 import vertexShader from './Galaxy.vert?raw'
@@ -75,6 +75,9 @@ const Galaxy: Component<GalaxyProps> = props => {
 					gl.canvas.height,
 					gl.canvas.width / gl.canvas.height,
 				)
+
+				// Redraw static image regardless
+				if (disableAnimation()) update(0, true)
 			}
 		}
 		window.addEventListener('resize', resize, false)
@@ -118,12 +121,16 @@ const Galaxy: Component<GalaxyProps> = props => {
 		}
 
 		function handleBeforePreparation() {
+			if (disableAnimation()) return
+
 			targetWarpSpeed = -1.0
 			targetWarpZoom = -1.0
 			targetFadeOut = 0.5
 		}
 
 		function handleAfterSwap() {
+			if (disableAnimation()) return
+
 			// Generate new random seed to show different stars
 			randomSeed = Math.random() * 100
 
@@ -160,40 +167,50 @@ const Galaxy: Component<GalaxyProps> = props => {
 		)
 		document.addEventListener('astro:after-swap', handleAfterSwap)
 
-		function update(t: number) {
-			animateId = requestAnimationFrame(update)
+		function update(t: number, forceRender?: boolean) {
+			if (disableAnimation() && !forceRender) return
+
 			if (!disableAnimation()) {
+				animateId = requestAnimationFrame(update)
+
 				program!.uniforms.uTime.value = t * 0.001
 				program!.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed()) / 10.0
+
+				const smoothScrollLerpFactor = 0.04
+				smoothScrollOffset +=
+					(targetScrollOffset - smoothScrollOffset) * smoothScrollLerpFactor
+				program!.uniforms.uScrollOffset.value = smoothScrollOffset
+
+				const warpLerpFactor = 0.1
+				smoothWarpSpeed += (targetWarpSpeed - smoothWarpSpeed) * warpLerpFactor
+				program!.uniforms.uWarpSpeed.value = smoothWarpSpeed
+
+				const fadeLerpFactor = 0.12
+				smoothFadeOut += (targetFadeOut - smoothFadeOut) * fadeLerpFactor
+				program!.uniforms.uFadeOut.value = smoothFadeOut
+
+				const zoomLerpFactor = 0.1
+				smoothWarpZoom += (targetWarpZoom - smoothWarpZoom) * zoomLerpFactor
+				program!.uniforms.uWarpZoom.value = smoothWarpZoom
+
+				program!.uniforms.uRandomSeed.value = randomSeed
 			}
 
-			const smoothScrollLerpFactor = 0.04
-			smoothScrollOffset +=
-				(targetScrollOffset - smoothScrollOffset) * smoothScrollLerpFactor
-			program!.uniforms.uScrollOffset.value = smoothScrollOffset
-
-			const warpLerpFactor = 0.1
-			smoothWarpSpeed += (targetWarpSpeed - smoothWarpSpeed) * warpLerpFactor
-			program!.uniforms.uWarpSpeed.value = smoothWarpSpeed
-
-			const fadeLerpFactor = 0.12
-			smoothFadeOut += (targetFadeOut - smoothFadeOut) * fadeLerpFactor
-			program!.uniforms.uFadeOut.value = smoothFadeOut
-
-			const zoomLerpFactor = 0.1
-			smoothWarpZoom += (targetWarpZoom - smoothWarpZoom) * zoomLerpFactor
-			program!.uniforms.uWarpZoom.value = smoothWarpZoom
-
-			program!.uniforms.uRandomSeed.value = randomSeed
 			renderer!.render({ scene: mesh! })
 		}
-		animateId = requestAnimationFrame(update)
+
+		createEffect(() => {
+			if (disableAnimation()) return
+			animateId = requestAnimationFrame(update)
+		})
+
+		// Redraw static image regardless
+		update(0, true)
 		ctn.appendChild(gl.canvas)
 
 		onCleanup(() => {
-			if (animateId !== undefined) {
-				cancelAnimationFrame(animateId)
-			}
+			if (animateId !== undefined) cancelAnimationFrame(animateId)
+
 			window.removeEventListener('resize', resize)
 			window.removeEventListener('scroll', handleScroll)
 			document.removeEventListener(
