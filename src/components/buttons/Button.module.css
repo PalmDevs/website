@@ -6,6 +6,7 @@
     border-radius: var(--rad-full);
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(8px);
 
     &:disabled {
         opacity: var(--opacity-disabled);

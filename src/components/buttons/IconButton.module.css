@@ -1,6 +1,7 @@
 .base {
     border-radius: var(--rad-full);
     display: flex;
+    backdrop-filter: blur(8px);
 
     & > span {
         line-height: 0;
