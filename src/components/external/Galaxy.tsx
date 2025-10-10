@@ -9,6 +9,7 @@
 
 import { Color, Mesh, Program, Renderer, Triangle } from 'ogl'
 import { createEffect, onCleanup, onMount } from 'solid-js'
+import Logger from '~/utils/Logger'
 import fragmentShader from './Galaxy.frag?raw'
 import styles from './Galaxy.module.css'
 import vertexShader from './Galaxy.vert?raw'
@@ -29,6 +30,13 @@ interface GalaxyProps {
 	scrollSensitivity?: number
 }
 
+const log = new Logger('Galaxy')
+
+// every 3 frames
+const PERFORMANCE_CHECK_INTERVAL = 3
+const MIN_FPS_THRESHOLD = 24
+const MIN_FPS_NO_SAMPLES = 60
+
 const Galaxy: Component<GalaxyProps> = props => {
 	let ctnDom: HTMLDivElement | undefined
 	let renderer: Renderer | undefined
@@ -45,6 +53,9 @@ const Galaxy: Component<GalaxyProps> = props => {
 	let smoothWarpZoom = 0
 	let randomSeed = 0
 	let counter = 0
+	let disableAnimationByPerformance = false
+	let lastFrameTime = 0
+	let frameTimes: number[] = []
 
 	const focal = () => props.focal ?? [0.5, 0.5]
 	const rotation = () => props.rotation ?? [1.0, 0.0]
@@ -78,7 +89,7 @@ const Galaxy: Component<GalaxyProps> = props => {
 				)
 
 				// Redraw static image regardless
-				if (disableAnimation()) update(0, true)
+				if (disableAnimation() || disableAnimationByPerformance) update(0, true)
 			}
 		}
 		window.addEventListener('resize', resize, false)
@@ -170,12 +181,50 @@ const Galaxy: Component<GalaxyProps> = props => {
 
 		function update(t: number, forceRender?: boolean) {
 			if (disableAnimation() && !forceRender) return
+			if (disableAnimationByPerformance && !forceRender)
+				return log.warn('Bad performance, disabling animation')
 
 			if (!disableAnimation()) {
 				animateId = requestAnimationFrame(update)
 
 				counter = ~counter
 				if (counter & 1) return
+
+				// Performance monitoring (only sample during non-warps)
+				if (
+					document.hasFocus() &&
+					lastFrameTime > 0 &&
+					Math.abs(smoothWarpSpeed) <= 0.01
+				) {
+					const deltaTime = t - lastFrameTime
+					const fps = 1000 / deltaTime
+
+					if (fps < MIN_FPS_NO_SAMPLES) {
+						frameTimes.push(fps)
+
+						if (frameTimes.length >= PERFORMANCE_CHECK_INTERVAL) {
+							const avgFps =
+								frameTimes.reduce((sum, fps) => sum + fps, 0) /
+								frameTimes.length
+							const fpsVariance =
+								Math.max(...frameTimes) - Math.min(...frameTimes)
+
+							// If avg. FPS is below threshold or frames are not consistent (> half avg. diff)
+							if (avgFps < MIN_FPS_THRESHOLD || fpsVariance > avgFps / 2) {
+								disableAnimationByPerformance = true
+								log.warn(
+									`Performance check failed: ${avgFps.toFixed(2)} FPS (variance: ${fpsVariance.toFixed(2)})`,
+								)
+
+								if (animateId !== undefined) cancelAnimationFrame(animateId)
+								return
+							}
+
+							frameTimes = []
+						}
+					}
+				}
+				lastFrameTime = t
 
 				program!.uniforms.uTime.value = t * 0.001
 				program!.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed()) / 10.0
