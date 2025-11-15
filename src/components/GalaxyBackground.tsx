@@ -8,23 +8,25 @@ const GalaxyBackground: Component = () => {
 
 	onMount(() => {
 		const motionMedia = matchMedia('(prefers-reduced-motion:reduce)')
-		const transMedia = matchMedia(
-			'(prefers-reduced-transparency:reduce)',
-		)
+		const transMedia = matchMedia('(prefers-reduced-transparency:reduce)')
+		const contMedia = matchMedia('(prefers-contrast:more)')
 
 		const listener = () => {
 			const { theme } = document.documentElement.dataset
 			setCanAnimate(!motionMedia.matches)
-			setCanShow(theme === 'dark' && !transMedia.matches)
+			setCanShow(theme === 'dark' && !transMedia.matches && !contMedia.matches)
 		}
 
-		motionMedia.addEventListener('change', listener)
-		transMedia.addEventListener('change', listener)
+		for (const media of [motionMedia, transMedia, contMedia])
+			media.addEventListener('change', listener)
+
 		document.addEventListener('palmdevs:theme-change', listener)
 		listener()
 
 		onCleanup(() => {
-			motionMedia.removeEventListener('change', listener)
+			for (const media of [motionMedia, transMedia, contMedia])
+				media.removeEventListener('change', listener)
+
 			document.removeEventListener('palmdevs:theme-change', listener)
 		})
 	})
