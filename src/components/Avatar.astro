@@ -1,22 +1,87 @@
 ---
-import { Image } from 'astro:assets'
 import Me from '~/images/me.png'
 ---
 
-<!-- TODO: Spin on hover (requires mask) -->
-<Image src={Me} alt="Palm's avatar" class="avatar" fetchpriority="high" loading="eager" />
+<div class="avatar" aria-label="Palm's avatar">
+    <svg class="avatar-svg" viewBox="0 0 256 256" width="256" height="256" role="img">
+        <title>Palm's avatar</title>
+        <defs>
+            <mask id="cookieMask" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
+                <g id="mask-cont">
+                    <image id="mask" href="/src/images/cookie.svg" x="4" y="4" width="248" height="248" preserveAspectRatio="xMidYMid meet" />
+                </g>
+            </mask>
+        </defs>
+        <image class="me" href={Me.src} x="0" y="0" width="256" height="256" preserveAspectRatio="xMidYMid slice" mask="url(#cookieMask)" />
+    </svg>
+</div>
 
 <style>
     .avatar {
-        animation: scale-in var(--dur-long) var(--ease);
+        position: relative;
         width: 256px;
         height: 256px;
+        animation: scale-in var(--dur-long) var(--ease);
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        user-select: none;
+        cursor: pointer;
+
+        #mask-cont,
+        #mask {
+            transform-origin: center center;
+            transform-box: fill-box;
+        }
+
+        #mask-cont {
+            transform: scale(1);
+            transition: transform var(--dur-medium) var(--ease);
+            will-change: transform;
+        }
+
+        #mask {
+            animation: spin 10s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .me {
+            transform-origin: center center;
+            transform: scale(1);
+            transition: transform var(--dur-long) var(--ease);
+            will-change: transform;
+        }
+        
+        :hover #mask {
+            animation-play-state: running;
+        }
+
+        :active {
+            #mask-cont {
+                transform: scale(0.925);
+            }
+
+            .me {
+                transform: scale(1.025);
+            }
+        }
+    }
+
+    .avatar-svg {
+        display: block;
+        width: 100%;
+        height: 100%;
     }
 
     @keyframes scale-in {
         from {
             transform: scale(0);
             opacity: 0;
+        }
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
         }
     }
 </style>
