@@ -1,4 +1,5 @@
 ---
+import Mask from '~/images/cookie.svg'
 import Me from '~/images/me.png'
 ---
 
@@ -8,7 +9,7 @@ import Me from '~/images/me.png'
         <defs>
             <mask id="cookieMask" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
                 <g id="mask-cont">
-                    <image id="mask" href="/src/images/cookie.svg" x="4" y="4" width="248" height="248" preserveAspectRatio="xMidYMid meet" />
+                    <image id="mask" href={Mask.src} x="4" y="4" width="248" height="248" preserveAspectRatio="xMidYMid meet" />
                 </g>
             </mask>
         </defs>
