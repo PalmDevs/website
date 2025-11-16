@@ -30,9 +30,9 @@ export const NAV_PAGES = [
 ] as const satisfies NavLinkConfig[]
 
 export const NAV_LINKS = [
-	{
-		name: 'Source code',
-		href: 'https://github.com/PalmDevs/website',
-		icon: IconSource,
-	},
+	// {
+	// 	name: 'Source code',
+	// 	href: 'https://github.com/PalmDevs/website',
+	// 	icon: IconSource,
+	// },
 ] as const satisfies NavLinkConfig[]

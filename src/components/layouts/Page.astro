@@ -5,6 +5,7 @@ import '~/styles/base.scss'
 import { ClientRouter } from 'astro:transitions'
 import { NAV_LINKS, NAV_PAGES } from '~/data/nav'
 import { getAge } from '~/utils/date'
+import Credit from '../Credit.astro'
 import GalaxyBackground from '../GalaxyBackground'
 import NavDock from '../navigation/NavDock'
 import { DEFAULT_THEME } from '../providers/ThemeProvider'
@@ -45,6 +46,9 @@ const {
 		<main data-transitionable="true" data-transition-on="nav" flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
 			<slot />
 		</main>
+		<footer>
+			<Credit />
+		</footer>
 		<GalaxyBackground client:visible transition:persist />
 	</body>
 </html>
@@ -99,7 +103,7 @@ const {
 
 	@keyframes old {
 		to {
-			transform: rotateX(20deg) translateZ(500px) translateY(150vh);
+			transform: rotateX(20deg) translateZ(10vh) translateY(150vh);
 			opacity: 0;
 		}
 	}
@@ -107,7 +111,7 @@ const {
 	@keyframes new {
 		from {
 			opacity: 0;
-			transform: rotateX(45deg) translateZ(-250px) scaleX(0.2) scaleY(0.75) translateY(20vh);
+			transform: rotateX(45deg) translateZ(-15vh) scaleX(0.2) scaleY(0.75) translateY(20vh);
 		}
 	}
 </style>

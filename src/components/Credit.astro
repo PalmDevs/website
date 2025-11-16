@@ -1,0 +1,27 @@
+---
+import { GradientText } from './GradientText'
+---
+
+<div class="banner" flex="~ horz horz-x-center">
+    <p class="text-label-small text" flex="~ horz horz-x-center">
+        <span>Made with 💜 by <GradientText client:visible>Palm</GradientText></span>
+        <span>•</span>
+        <a target="_blank" rel="noreferrer noopener" href="https://github.com/PalmDevs/website">Source code</a>
+    </p>
+</div>
+
+<style>
+    .banner {
+        width: 100%;
+        background-color: var(--color-bg-accent);
+        border-radius: var(--rad-sm);
+        padding: var(--pad-m);
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+    }
+
+    .text {
+        gap: var(--gap-xs);
+        padding: var(--gap-2xs);
+    }
+</style>
