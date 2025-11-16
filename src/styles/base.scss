@@ -108,6 +108,14 @@ a {
   font: inherit;
 }
 
+a {
+  color: var(--tinted-high);
+
+  &:hover {
+    color: var(--primary)
+  }
+}
+
 input,
 button {
   font-size: var(--text-label);

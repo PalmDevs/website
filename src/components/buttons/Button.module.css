@@ -39,7 +39,7 @@
     color: var(--neutral-medium);
 
     &:not(:disabled):hover {
-        color: var(--neutral-high)
+        color: var(--neutral-high);
     }
 }
 
@@ -61,6 +61,7 @@
     color: var(--neutral-medium);
 
     &:not(:disabled):hover {
+        color: var(--neutral-medium);
         background-color: var(--surface-high);
     }
 }
@@ -70,6 +71,7 @@
     color: var(--tinted-medium);
 
     &:not(:disabled):hover {
+        color: var(--tinted-medium);
         background-color: var(--surface-high);
     }
 }
