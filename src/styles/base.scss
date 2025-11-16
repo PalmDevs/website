@@ -6,11 +6,17 @@
   --trans-prop-content: color, fill, stroke-color;
   --trans-props-layout: background-color, outline-color, border-color,
   box-shadow;
+  view-transition-name: none;
+}
+
+// Why does this block interaction by default?
+::view-transition {
+  pointer-events: none;
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0s;
+  animation: none 0s;
 }
 
 :root[data-transitionable='true'] {

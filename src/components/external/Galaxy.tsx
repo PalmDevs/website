@@ -31,7 +31,7 @@ interface GalaxyProps {
 }
 
 const log = new Logger('Galaxy')
-const PERFORMANCE_FPS_THRESHOLD = 60
+const PERFORMANCE_FPS_THRESHOLD = 48
 
 const Galaxy: Component<GalaxyProps> = props => {
 	let ctn!: HTMLDivElement
@@ -248,7 +248,8 @@ const Galaxy: Component<GalaxyProps> = props => {
 		<div
 			ref={ctn}
 			class={styles.container}
-			data-transition-on="nav theme-change"
+			// TODO: When view-transition is applied on body, uncomment
+			// data-transition-on="nav theme-change"
 		/>
 	)
 }

@@ -11,18 +11,20 @@
     scroll-padding: 64px;
 }
 
-::view-transition-old(nav) {
-	display: none;
-}
+// TODO: When view-transition is applied on body, uncomment
 
-::view-transition-group(nav),
-::view-transition-new(nav) {
-	animation-duration: 0s;
-	z-index: var(--layer-nav);
-}
+// ::view-transition-old(nav) {
+// 	display: none;
+// }
+
+// ::view-transition-group(nav),
+// ::view-transition-new(nav) {
+// 	animation-duration: 0s;
+// 	z-index: var(--layer-nav);
+// }
 
 .dock {
-	view-transition-name: nav;
+	// view-transition-name: nav;
 
 	max-width: 100vw;
 	max-width: 100dvw;

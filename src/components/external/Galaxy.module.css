@@ -9,11 +9,12 @@
   opacity: 0.5;
 }
 
-[data-transitionable="true"] {
+/* TODO: When view-transition is applied on body, uncomment */
+/* [data-transitionable="true"] {
   view-transition-name: galaxy;
 }
 
 ::view-transition-old(galaxy),
 ::view-transition-new(galaxy) {
   animation-duration: 0s;
-}
+} */
