@@ -49,12 +49,24 @@ const {
 		<footer>
 			<Credit />
 		</footer>
+		<noscript style="position:sticky;bottom:0;z-index:var(--layer-overlay);">
+			<div class="ns">
+				<p>Turn on JavaScript for a better experience!</p>
+			</div>
+		</noscript>
 		<GalaxyBackground client:visible transition:persist />
 	</body>
 </html>
 
 <style lang="scss">
 	@use '~/styles/breakpoints';
+
+	.ns {
+		display: inline-block;
+		background-color: var(--tinted-high);
+		color: var(--on-tinted);
+		align-self: center;
+	}
 
 	body {
 		display: flex;
@@ -89,21 +101,21 @@ const {
 	}
 	
 	::view-transition-old(content) {
-		transform-origin: center 75vh;
-		animation: old 600ms var(--ease) forwards;
+		transform-origin: center 25vh;
+		animation: old 400ms var(--ease) forwards;
 	}
 
 	::view-transition-new(content) {
-		transform-origin: center -10vh;
+		transform-origin: center 50vh;
 		animation-name: new;
 		animation-duration: 600ms;
 		animation-timing-function: var(--ease);
-		animation-delay: 150ms;
+		animation-delay: 250ms;
 	}
 
 	@keyframes old {
 		to {
-			transform: rotateX(20deg) translateZ(10vh) translateY(150vh);
+			transform: rotateX(20deg) translateZ(10vh) translateY(125vh);
 			opacity: 0;
 		}
 	}
@@ -111,7 +123,7 @@ const {
 	@keyframes new {
 		from {
 			opacity: 0;
-			transform: rotateX(45deg) translateZ(-15vh) scaleX(0.2) scaleY(0.75) translateY(20vh);
+			transform: rotateX(35deg) translateZ(-20vh) scaleX(0.35) scaleY(1.25) translateY(-35vh);
 		}
 	}
 </style>
