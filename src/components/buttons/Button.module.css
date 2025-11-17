@@ -76,3 +76,21 @@
         background-color: var(--surface-high);
     }
 }
+
+.radioInput {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* noscript fallbacks */
+
+.radioInput:focus-visible + .radio {
+    outline: var(--line) var(--secondary);
+}
+
+.radioInput:checked + .radio {
+    outline-offset: 2px;
+    background-color: var(--tinted-high);
+    color: var(--on-tinted);
+}
