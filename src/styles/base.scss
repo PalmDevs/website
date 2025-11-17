@@ -116,6 +116,7 @@ a {
 
 a {
   color: var(--tinted-high);
+  border-radius: var(--gap-2xs);
 
   &:hover {
     color: var(--primary)
@@ -155,7 +156,6 @@ hr {
 
 :focus-visible {
   outline: var(--line) var(--secondary) !important;
-  outline-offset: -2px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
