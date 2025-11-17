@@ -118,7 +118,7 @@ a {
   color: var(--tinted-high);
   border-radius: var(--gap-2xs);
 
-  &:hover {
+  &:where(:hover) {
     color: var(--primary)
   }
 }

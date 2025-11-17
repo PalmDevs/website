@@ -7,6 +7,8 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(8px);
+    outline: var(--line-thin) transparent;
+    outline-offset: -1px;
 
     &:disabled {
         opacity: var(--opacity-disabled);
@@ -28,6 +30,7 @@
 .filled {
     background-color: var(--tinted-high);
     color: var(--on-tinted);
+    outline-offset: 2px;
 
     --intr-hover-glow: var(--intr-hover-glow-inverse);
 }
@@ -61,7 +64,6 @@
     color: var(--neutral-medium);
 
     &:not(:disabled):hover {
-        color: var(--neutral-medium);
         background-color: var(--surface-high);
     }
 }
@@ -71,7 +73,6 @@
     color: var(--tinted-medium);
 
     &:not(:disabled):hover {
-        color: var(--tinted-medium);
         background-color: var(--surface-high);
     }
 }
