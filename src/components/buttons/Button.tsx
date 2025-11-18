@@ -39,7 +39,7 @@ const ButtonContentRenderer = (props: {
 		<Show when={props.icon}>
 			<IconComponentRenderer icon={props.icon!} class={styles.icon} />
 		</Show>
-		<span class="text-label-large">{props.text}</span>
+		<span class={`${styles.label} text-label-large`}>{props.text}</span>
 		<Show when={props.trailingIcon}>
 			<IconComponentRenderer icon={props.trailingIcon!} class={styles.icon} />
 		</Show>

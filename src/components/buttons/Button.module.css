@@ -28,6 +28,10 @@
 }
 
 .filled {
+    .label::selection {
+        background-color: var(--tinted-low);
+    }
+
     background-color: var(--tinted-high);
     color: var(--on-tinted);
     outline-offset: 2px;
@@ -93,4 +97,8 @@
     outline-offset: 2px;
     background-color: var(--tinted-high);
     color: var(--on-tinted);
+
+    .label::selection {
+        background-color: var(--tinted-low);
+    }
 }
