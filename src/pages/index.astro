@@ -23,31 +23,31 @@ import { getAge } from '~/utils/date'
 ---
 
 <Page>
-	<section id="hero" flex="~ horz horz-y-center horz-x-center wrap" gap="3xl" pady="4xl">
+	<section id="hero" flex="center wrap" gap="3xl" pady="4xl">
 		<Avatar />
-		<div class="hero-content" flex="~ vert" gap="m">
+		<div class="hero-content" flex="vert" gap="m">
 			<h1 class="text-display hero-text">Hey there, I'm <span><GradientText direction='45deg'>Palm</GradientText></span>!</h1>
 			<div>
 				<p class="text-label-large tint-high hero-text">Full-Stack Developer, UI/UX Designer</p>
 				<p class="text-label-large tint-low hero-text">Bangkok, Thailand<span aria-hidden="true"> • <Clock client:idle /></span>
 			</div>
 			<p class="text-body-large balance hero-text">I make cool things with user experience and accessibility in mind.</p>
-			<div class="hero-buttons" flex="~ horz wrap" gap="m">
+			<div class="hero-buttons" flex="wrap" gap="m">
 				<LinkButton client:visible href="/work" icon={IconWork} text="View my work" />
 				<LinkButton client:visible href="#get-in-touch" variant="glass" icon={IconMail} text="Get in touch" />
 			</div>
 		</div>
 	</section>
-	<section flex="~ vert" id="brief" pady="2xl" gap="xl">
+	<section flex="vert" id="brief" pady="2xl" gap="xl">
 		<p>
 			I'm <span class="tint-high">Pasuthorn Buala</span> (<span class="tint-high">Palm</span>), a {getAge()}-year-old from <span class="tint-high">Bangkok, Thailand</span>.
 			<br>
 			I have been making websites and applications for <span class="tint-high">more than {getAge() - 13} years!</span>
 		</p>
 		<LineOfWork />
-		<div flex="~ vert" gap="m">
+		<div flex="vert" gap="m">
 			<h1 class="text-heading">with these technologies</h1>
-			<div flex="~" gap="xs">
+			<div flex="" gap="xs">
 				<ul class="list card-grid">
 					{SKILLS.slice(0, 6).map(({ name, icon, iconLight }) => (
 						<li>
@@ -60,8 +60,8 @@ import { getAge } from '~/utils/date'
 				</ul>
 			</div>
 		</div>
-		<Section title="Projects" id="projects" flex="vert-x-center">
-			<ul class="list projects-list" gap="s" flex="~">
+		<Section title="Projects" id="projects" flex="vert x-center">
+			<ul class="list projects-list" gap="s" flex="">
 				{PROJECTS.slice(0, 3).map(({ name, description, href, image, hint }) => (
 					<li>
 						<ProjectCard preview={image} {name} {description} {href} {hint} />
@@ -70,8 +70,8 @@ import { getAge } from '~/utils/date'
 			</ul>
 			<LinkButton client:visible icon={IconWork} href="/work#projects" text="View more projects" variant="glass" />
 		</Section>
-		<Section title="Experience" id="experience" flex="vert-x-center">
-			<ul class="list" flex="~ horz-y-center vert-y-center" gap="l">
+		<Section title="Experience" id="experience" flex="vert x-center">
+			<ul class="list" flex="center" gap="l">
 				{EXPERIENCES.slice(0, 2).map(({ name, image, imageLight, href }) => (
 					<li class="exp-item">
 						<Touchable as="a" class="exp-item-link" client:visible title={name} href={href} target="_blank" rel="noreferrer">

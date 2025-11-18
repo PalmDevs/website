@@ -10,7 +10,6 @@ import compressor from 'astro-compressor'
 import favicons from 'astro-favicons'
 import robotsTxt from 'astro-robots-txt'
 import sonda from 'sonda/astro'
-import UnoCSS from 'unocss/astro'
 import solidSvg from 'vite-plugin-solid-svg'
 
 export default defineConfig({
@@ -48,9 +47,6 @@ export default defineConfig({
 		layout: 'constrained',
 	},
 	integrations: [
-		UnoCSS({
-			configFile: './uno.css.ts',
-		}),
 		solid(),
 		sitemap(),
 		// expressiveCode(),

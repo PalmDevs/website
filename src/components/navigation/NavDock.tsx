@@ -85,10 +85,10 @@ const NavDock: Component<NavDockProps> = props => {
 	})
 
 	return (
-		<div flex="~ horz center" class={styles.container}>
+		<div flex="center" class={styles.container}>
 			<div
 				ref={scrollPreserver}
-				flex="~ horz horz-y-center"
+				flex="y-center"
 				gap="m"
 				class={styles.dock}
 				data-scrolled="true"
@@ -102,7 +102,7 @@ const NavDock: Component<NavDockProps> = props => {
 				<nav>
 					<ul
 						class={styles.list}
-						flex="~ horz horz-y-center"
+						flex="y-center"
 						gap="xs"
 						aria-label="Navigation links"
 					>
@@ -122,7 +122,7 @@ const NavDock: Component<NavDockProps> = props => {
 				<div>
 					<ul
 						class={styles.list}
-						flex="~ horz"
+						flex=""
 						gap="xs"
 						aria-label="Other links and site settings"
 					>

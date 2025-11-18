@@ -43,7 +43,7 @@ const {
 	</script>
 	<body>
 		<NavDock transition:persist client:load pages={NAV_PAGES} links={NAV_LINKS} />
-		<main data-transitionable="true" data-transition-on="nav" flex={`~ vert vert-x-center ${flex ?? ''}`} {...rest}>
+		<main data-transitionable="true" data-transition-on="nav" flex={`vert x-center ${flex ?? ''}`} {...rest}>
 			<slot />
 		</main>
 		<footer>

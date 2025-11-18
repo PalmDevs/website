@@ -1,0 +1,58 @@
+// DIRECTION & ALIGNMENT
+
+[flex] {
+  display: flex;
+  flex-direction: row;
+}
+[flex~="vert"] { flex-direction: column; }
+[flex~="horz"] { flex-direction: row; }
+
+[flex~="wrap"] { flex-wrap: wrap; }
+[flex~="nowrap"] { flex-wrap: nowrap; }
+
+[flex~="vert"][flex~="center"] { align-items: center; justify-content: center; }
+[flex~="vert"][flex~="x-start"] { align-items: flex-start; }
+[flex~="vert"][flex~="x-center"] { align-items: center; }
+[flex~="vert"][flex~="x-end"] { align-items: flex-end; }
+[flex~="vert"][flex~="x-stretch"] { align-items: stretch; }
+
+[flex~="vert"][flex~="y-start"] { justify-content: flex-start; }
+[flex~="vert"][flex~="y-center"] { justify-content: center; }
+[flex~="vert"][flex~="y-end"] { justify-content: flex-end; }
+[flex~="vert"][flex~="y-between"] { justify-content: space-between; }
+[flex~="vert"][flex~="y-around"] { justify-content: space-around; }
+[flex~="vert"][flex~="y-evenly"] { justify-content: space-evenly; }
+
+[flex]:not([flex~="vert"])[flex~="center"],
+[flex~="horz"][flex~="center"] { justify-content: center; align-items: center; }
+[flex]:not([flex~="vert"])[flex~="x-start"],
+[flex~="horz"][flex~="x-start"] { justify-content: flex-start; }
+[flex]:not([flex~="vert"])[flex~="x-center"],
+[flex~="horz"][flex~="x-center"] { justify-content: center; }
+[flex]:not([flex~="vert"])[flex~="x-end"],
+[flex~="horz"][flex~="x-end"] { justify-content: flex-end; }
+[flex]:not([flex~="vert"])[flex~="x-between"],
+[flex~="horz"][flex~="x-between"] { justify-content: space-between; }
+[flex]:not([flex~="vert"])[flex~="x-around"],
+[flex~="horz"][flex~="x-around"] { justify-content: space-around; }
+[flex]:not([flex~="vert"])[flex~="x-evenly"],
+[flex~="horz"][flex~="x-evenly"] { justify-content: space-evenly; }
+
+[flex]:not([flex~="vert"])[flex~="y-start"],
+[flex~="horz"][flex~="y-start"] { align-items: flex-start; }
+[flex]:not([flex~="vert"])[flex~="y-center"],
+[flex~="horz"][flex~="y-center"] { align-items: center; }
+[flex]:not([flex~="vert"])[flex~="y-end"],
+[flex~="horz"][flex~="y-end"] { align-items: flex-end; }
+[flex]:not([flex~="vert"])[flex~="y-stretch"],
+[flex~="horz"][flex~="y-stretch"] { align-items: stretch; }
+
+// GAPS & PADDING
+
+$gaps: none, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl;
+@each $g in $gaps {
+  [gap="#{$g}"] { gap: var(--gap-#{$g}); }
+  [pad="#{$g}"] { padding: var(--gap-#{$g}); }
+  [pady="#{$g}"] { padding-block: var(--gap-#{$g}); }
+  [padx="#{$g}"] { padding-inline: var(--gap-#{$g}); }
+}

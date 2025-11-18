@@ -11,7 +11,6 @@ My personal and portfolio website, built with [Astro](https://astro.build/) and 
 
 - [Astro](https://astro.build/)
 - [SolidJS](https://www.solidjs.com/)
-- [UnoCSS](https://unocss.dev/)
 - [Bun](https://bun.sh/)
 
 ## 👷 Developing

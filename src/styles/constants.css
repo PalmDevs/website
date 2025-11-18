@@ -1,5 +1,6 @@
 :root {
 	/* GAPS */
+	--gap-none: 0px;
 	--gap-2xs: 4px;
 	--gap-xs: 8px;
 	--gap-s: 12px;

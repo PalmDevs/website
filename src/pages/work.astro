@@ -20,7 +20,7 @@ import { SKILLS } from '~/data/skills'
         </div>
     </Section>
     <Section title="Projects" id="projects">
-        <ul class="list projects-grid" gap="s" flex="~">
+        <ul class="list projects-grid" gap="s" flex="">
             {PROJECTS.slice(0, 7).map(({ name, description, href, image, hint }) => (
                 <li>
                     <ProjectCard preview={image} {name} {description} {href} {hint} />
