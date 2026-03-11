@@ -44,6 +44,24 @@
   }
 }
 
+@media (max-width: breakpoints.$phone) {
+  :root {
+    --text-size-display: 48px;
+    --text-size-title: 32px;
+    --text-size-heading: 24px;
+    --text-size-subheading: 20px;
+    --text-size-label-large: 18px;
+    --text-size-label-medium: 16px;
+    --text-size-label-small: 14px;
+    --text-size-body-large: 15px;
+    --text-size-body-medium: 14px;
+    --text-size-body-small: 13px;
+
+    --text-spacing-small: 2.5%;
+    --text-spacing-medium: 5%;
+  }
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
