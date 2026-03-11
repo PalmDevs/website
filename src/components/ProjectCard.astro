@@ -10,7 +10,7 @@ const { preview, name, description, hint = 'View project', href } = Astro.props
 <Touchable class="project-card" as="a" client:visible {href} target="_blank" rel="noreferrer">
     <Card flex="vert" class="actual-card">
         <div class="preview" flex="x-center y-center">
-            <Image alt={name} class="preview-img" src={preview} />
+            <Image alt={name} class="preview-img unselectable" src={preview} />
         </div>
         <div class="info" gap="m" pad="m" flex="vert">
             <div flex="vert" gap="2xs">

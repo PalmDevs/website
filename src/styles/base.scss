@@ -136,6 +136,10 @@ hr {
   margin-block: var(--gap-xl);
 }
 
+ul {
+  padding-inline-start: var(--gap-l);
+}
+
 // Disabling animations for users who prefer reduced motion
 // or in print mode (why would you print my website)
 @media (prefers-reduced-motion: reduce), print {
@@ -148,6 +152,10 @@ hr {
   :root {
     scroll-behavior: auto !important;
   }
+}
+
+.unselectable {
+  user-select: none;
 }
 
 // Focused elements will have a 2px outline with a bright color

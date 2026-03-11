@@ -3,7 +3,7 @@ import Mask from '~/images/cookie.svg'
 import Me from '~/images/me.png'
 ---
 
-<div class="avatar" aria-label="Palm's avatar">
+<div class="avatar unselectable" aria-label="Palm's avatar">
     <svg class="avatar-svg" viewBox="0 0 256 256" width="256" height="256" role="img">
         <title>Palm's avatar</title>
         <defs>
@@ -25,7 +25,6 @@ import Me from '~/images/me.png'
         animation: scale-in var(--dur-long) var(--ease);
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
-        user-select: none;
         cursor: pointer;
 
         #mask-cont,
