@@ -148,12 +148,6 @@ export const RadioButton: RadioButtonComponent = props => {
 	const [radioProps] = splitProps(props, ['value'])
 	const [checked, setChecked] = createSignal(false)
 
-	createEffect(() => {
-		if (group) {
-			setChecked(group.selected() === radioProps.value)
-		}
-	})
-
 	// Only throw after all hooks used
 	if (!group)
 		throw new Error(

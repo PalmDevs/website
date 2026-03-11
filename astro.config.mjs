@@ -1,7 +1,7 @@
 // @ts-check
 
+import cloudflare from '@astrojs/cloudflare'
 // import mdx from '@astrojs/mdx'
-import node from '@astrojs/node'
 import sitemap from '@astrojs/sitemap'
 import solid from '@astrojs/solid-js'
 import { defineConfig } from 'astro/config'
@@ -17,8 +17,12 @@ export default defineConfig({
 		defaultStrategy: 'hover',
 		prefetchAll: true,
 	},
-	adapter: node({
-		mode: 'middleware',
+	adapter: cloudflare({
+		prerenderEnvironment: 'node',
+		imageService: {
+			build: 'compile',
+			runtime: 'passthrough',
+		},
 	}),
 	devToolbar: {
 		enabled: false,
@@ -39,9 +43,6 @@ export default defineConfig({
 	},
 	experimental: {
 		clientPrerender: true,
-		preserveScriptOrder: true,
-		failOnPrerenderConflict: true,
-		headingIdCompat: true,
 	},
 	image: {
 		layout: 'constrained',
