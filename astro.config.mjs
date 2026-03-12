@@ -17,6 +17,8 @@ export default defineConfig({
 		defaultStrategy: 'hover',
 		prefetchAll: true,
 	},
+	// TODO: Internal server error: Expected `miniflare` to be defined
+	// https://github.com/withastro/astro/issues/15524
 	adapter: import.meta.env.DEV
 		? undefined
 		: cloudflare({
@@ -26,7 +28,7 @@ export default defineConfig({
 	devToolbar: {
 		enabled: false,
 	},
-	output: 'server',
+	output: 'static',
 	site: 'https://palmdevs.me',
 	vite: {
 		plugins: [

@@ -10,11 +10,11 @@
 		"generate-types": "wrangler types"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "^13.1.0",
-		"@astrojs/node": "10.0.0",
+		"@astrojs/cloudflare": "^13.1.1",
+		"@astrojs/node": "10.0.1",
 		"@fastify/middie": "^9.3.1",
 		"@fastify/static": "^9.0.0",
-		"astro": "6.0.3",
+		"astro": "6.0.4",
 		"fastify": "^5.8.2",
 		"ogl": "^1.0.11",
 		"solid-js": "^1.9.11",
@@ -27,13 +27,13 @@
 		"@biomejs/biome": "^2.4.6",
 		"@solid-primitives/refs": "^1.1.3",
 		"@types/bun": "^1.3.10",
-		"@types/node": "^25.4.0",
+		"@types/node": "^25.5.0",
 		"astro-compressor": "^1.3.0",
 		"astro-expressive-code": "^0.41.7",
 		"astro-favicons": "^3.1.6",
 		"astro-robots-txt": "^1.0.0",
 		"sass-embedded": "^1.98.0",
-		"sonda": "^0.10.2",
+		"sonda": "^0.11.1",
 		"vite-plugin-solid-svg": "^0.8.1"
 	},
 	"trustedDependencies": [
