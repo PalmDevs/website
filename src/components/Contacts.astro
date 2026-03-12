@@ -8,7 +8,7 @@ const { align = 'start', ...props } = Astro.props
 ---
 
 <div flex={`vert ${align === 'start' ? 'x-start' : 'x-center'}`} gap="xs" {...props}>
-    <div flex="" gap="xs">
+    <div flex={`wrap ${align === 'start' ? 'x-start' : 'x-center'}`} gap="xs">
         {Object.values(SOCIALS).map(({ name, icon, url }) => (
             <LinkIconButton
                 client:visible

@@ -17,7 +17,9 @@ import Me from '~/images/me.png'
     </svg>
 </div>
 
-<style>
+<style lang="scss">
+    @use "../styles/breakpoints";
+
     .avatar {
         position: relative;
         width: 256px;
@@ -26,6 +28,11 @@ import Me from '~/images/me.png'
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
         cursor: pointer;
+
+        @media (max-width: breakpoints.$phone) {
+            width: 224px;
+            height: 224px;
+        }
 
         #mask-cont,
         #mask {

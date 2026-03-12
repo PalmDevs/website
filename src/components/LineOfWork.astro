@@ -66,5 +66,10 @@ const { detailed = false } = Astro.props
 		gap: var(--gap-xs);
 		padding-inline: var(--gap-l);
 		padding-block: var(--gap-m);
+
+        @media (max-width: breakpoints.$phone) {
+            padding-inline: var(--gap-m);
+            padding-block: var(--gap-s);
+        }
 	}
 </style>
