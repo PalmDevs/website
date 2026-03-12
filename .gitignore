@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # build analyzer
 .sonda
+
+# cloudflare
+.wrangler
