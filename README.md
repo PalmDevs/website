@@ -15,6 +15,10 @@ My personal and portfolio website, built with [Astro](https://astro.build/) and 
 
 ## 👷 Developing
 
+> [!NOTE]  
+> Since Bun isn't fully compatible with Node.js yet, you should probably install Node.js alongside Bun to avoid potential issues with Astro.  
+> Bun will automatically use the installed Node.js for running Astro, so you don't have to worry about it.
+
 1. Install dependencies
 
    ```sh
@@ -43,27 +47,15 @@ My personal and portfolio website, built with [Astro](https://astro.build/) and 
 
 ### 🐳 Deployment
 
-This site can be deployed to a Docker container.
-The port is exposed on `8443`.
-
-```sh
-# Run on this shell
-docker compose up
-# or run in background
-docker compose up -d
-```
-
-If you want to deploy statically via GitHub pages, Cloudflare pages, or similar, modify [astro.config.mjs](./astro.config.mjs) to remove the adapter for Node.js:
+Currently, the site is deployed on Cloudflare Pages. If you want to deploy it on other services, you can change the adapter in `astro.config.mjs`:
 
 ```diff
      },
--    adapter: node({
--        mode: 'middleware',
+-    adapter: cloudflare({
+-        ...
 -    }),
-     // ...
++    // Add your adapter here
 ```
-
-The `dist/` directory can then be served statically.
 
 ## 📝 License
 

@@ -17,13 +17,12 @@ export default defineConfig({
 		defaultStrategy: 'hover',
 		prefetchAll: true,
 	},
-	adapter: cloudflare({
-		prerenderEnvironment: 'node',
-		imageService: {
-			build: 'compile',
-			runtime: 'passthrough',
-		},
-	}),
+	adapter: import.meta.env.DEV
+		? undefined
+		: cloudflare({
+				prerenderEnvironment: 'node',
+				imageService: 'compile',
+			}),
 	devToolbar: {
 		enabled: false,
 	},

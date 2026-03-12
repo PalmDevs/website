@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "bun run server.ts",
+		"preview": "astro preview",
 		"astro": "astro",
 		"generate-types": "wrangler types"
 	},
