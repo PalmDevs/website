@@ -1,4 +1,4 @@
-precision mediump float;
+precision highp float;
 
 uniform float uTime;
 uniform vec3 uResolution;
@@ -26,20 +26,56 @@ varying vec2 vUv;
 #define MAT45 mat2(0.7071, -0.7071, 0.7071, 0.7071)
 #define PERIOD 3.0
 
+#define NEBULA_OPACITY 0.67
+#define NEBULA_THRESHOLD_MIN 0.3
+#define NEBULA_THRESHOLD_MAX 0.6
+#define NEBULA_SCALE_MIN 5.0
+#define NEBULA_SCALE_MAX 2.0
+#define GLITTER_DENSITY 0.7
+#define GLITTER_BRIGHTNESS_MIN 15.0
+#define GLITTER_BRIGHTNESS_MAX 25.0
+#define GLITTER_PULSE_POWER 200.0
+#define GLITTER_GRID_MIN 700.0
+#define GLITTER_GRID_MAX 400.0
+
+// Dave Hoskins hash
 float hash21(vec2 p) {
-  p = fract(p * vec2(123.34, 456.21));
-  p += dot(p, p + 45.32);
-  return fract(p.x * p.y);
+  vec3 p3  = fract(vec3(p.xyx) * .1031);
+  p3 += dot(p3, p3.yzx + 33.33);
+  return fract((p3.x + p3.y) * p3.z);
+}
+
+float noise(vec2 p) {
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u * u * (3.0 - 2.0 * u);
+    
+    // Bilinear interpolation with fewer hash calls if possible? 
+    // No, standard 4-point is required for quality.
+    float res = mix(
+        mix(hash21(ip), hash21(ip + vec2(1.0, 0.0)), u.x),
+        mix(hash21(ip + vec2(0.0, 1.0)), hash21(ip + vec2(1.0, 1.0)), u.x), u.y);
+    return res;
+}
+
+float fbm(vec2 p) {
+    float f = 0.0;
+    // Unrolled FBM to avoid loop overhead
+    mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+    f += 0.5 * noise(p);
+    p = m * p;
+    f += 0.25 * noise(p);
+    p = m * p;
+    f += 0.125 * noise(p);
+    return f;
 }
 
 float tris(float x) {
-  float t = fract(x);
-  return 1.0 - abs(2.0 * t - 1.0);
+  return 1.0 - abs(fract(x) * 2.0 - 1.0);
 }
 
 float trisn(float x) {
-  float t = fract(x);
-  return 2.0 * (1.0 - abs(2.0 * t - 1.0)) - 1.0;
+  return 2.0 * (1.0 - abs(fract(x) * 2.0 - 1.0)) - 1.0;
 }
 
 vec3 hsv2rgb(vec3 c) {
@@ -52,19 +88,20 @@ float star(vec2 uv, float flare) {
   float d2 = dot(uv, uv);
   if (d2 > 1.0) return 0.0;
   
-  float d = sqrt(d2);
-  float m = (0.05 * uGlowIntensity) / max(d, 0.001);
+  // Use inversesqrt for faster falloff calculation
+  float invd = inversesqrt(max(d2, 1e-6));
+  float m = (0.05 * uGlowIntensity) * invd;
 
+  // Axis rays
   float ray = abs(uv.x * uv.y) * 1000.0;
-  float rays = max(0.0, 1.0 - ray);
-  m += rays * flare * uGlowIntensity * 0.7;
+  m += max(0.0, 1.0 - ray) * flare * uGlowIntensity * 0.7;
 
-  uv *= MAT45;
-  ray = abs(uv.x * uv.y) * 1000.0;
-  rays = max(0.0, 1.0 - ray);
-  m += rays * flare * uGlowIntensity * 0.2;
+  // Rotated rays
+  vec2 uvRot = uv * MAT45;
+  ray = abs(uvRot.x * uvRot.y) * 1000.0;
+  m += max(0.0, 1.0 - ray) * flare * uGlowIntensity * 0.2;
 
-  return m * smoothstep(1.0, 0.2, d);
+  return m * smoothstep(1.0, 0.2, d2 * invd); // d2 * invd = sqrt(d2)
 }
 
 vec3 starAt(vec2 id, vec2 gv, float seed, float tSpeed) {
@@ -77,12 +114,13 @@ vec3 starAt(vec2 id, vec2 gv, float seed, float tSpeed) {
   float starV = star(gv - pad, flare);
   if (starV <= 0.001) return vec3(0.0);
 
-  float red = smoothstep(STAR_COLOR_CUTOFF, 1.0, hash21(id + 1.0)) + STAR_COLOR_CUTOFF;
-  float blu = smoothstep(STAR_COLOR_CUTOFF, 1.0, hash21(id + 3.0)) + STAR_COLOR_CUTOFF;
+  // Reuse seed for colors to avoid extra hash calls
+  float red = smoothstep(STAR_COLOR_CUTOFF, 1.0, fract(seed * 123.456)) + STAR_COLOR_CUTOFF;
+  float blu = smoothstep(STAR_COLOR_CUTOFF, 1.0, fract(seed * 567.890)) + STAR_COLOR_CUTOFF;
   float grn = min(red, blu) * seed;
   vec3 base = vec3(red, grn, blu);
 
-  float hue = fract(uHueShift + 0.05 * (hash21(id) - 0.5));
+  float hue = fract(uHueShift + 0.05 * (seed - 0.5));
   float gray = dot(base, vec3(0.299, 0.587, 0.114));
   float sat = length(base - vec3(gray)) * uSaturation;
   float val = max(max(base.r, base.g), base.b);
@@ -98,6 +136,9 @@ vec3 starLayer(vec2 uv, float tSpeed) {
   vec2 gv = fract(uv) - 0.5;
   vec2 id = floor(uv);
 
+  // Unrolled loop for common cases (-1, 0, 1) could be faster but less readable.
+  // We keep the loop as it is standard and usually optimized by compiler, 
+  // but we minimize work inside starAt.
   for (int y = -1; y <= 1; y++) {
     for (int x = -1; x <= 1; x++) {
       vec2 offset = vec2(float(x), float(y));
@@ -128,13 +169,76 @@ void main() {
   vec3 col = vec3(0.0);
   float warpOffset = uWarpSpeed * 2.0;
   float tSpeed = uTime * uSpeed;
+  
+  float warpFade = 1.0 - smoothstep(0.0, 0.1, abs(uWarpSpeed));
 
   for (int i = 0; i < 3; i++) {
     float layer = float(i) * NUM_LAYER_DIVIDED;
     float depth = fract(layer + uStarSpeed * uSpeed + warpOffset);
     float scale = mix(20.0 * uDensity, 0.5 * uDensity, depth);
     float fade = depth * (1.0 - smoothstep(0.9, 1.0, depth));
-    col += starLayer(uv * scale + layer * 453.32 + uRandomSeed, tSpeed) * fade;
+    
+    // Rotate each layer differently to break up grid alignment and patterns
+    float layerAngle = layer * 6.283 + uRandomSeed;
+    float cL = cos(layerAngle), sL = sin(layerAngle);
+    mat2 layerRot = mat2(cL, -sL, sL, cL);
+    vec2 rotatedUv = uv * layerRot;
+    
+    vec2 layerUv = rotatedUv * scale + layer * 453.32 + uRandomSeed;
+    col += starLayer(layerUv, tSpeed) * fade;
+
+    // Nebula (dust clouds)
+    float nebulaScale = mix(NEBULA_SCALE_MIN, NEBULA_SCALE_MAX, depth);
+    vec2 nUv = rotatedUv * nebulaScale + layer * 10.0 + uRandomSeed;
+    float n = fbm(nUv - vec2(tSpeed * 0.01, tSpeed * 0.02));
+    
+    // Softer clouds, rarer threshold
+    n = smoothstep(NEBULA_THRESHOLD_MIN, NEBULA_THRESHOLD_MAX, n); 
+    
+    if (n > 0.0) {
+       // Sparkle (glitter) grid - Keep coordinates small to maintain high precision
+       vec2 glitterUv = rotatedUv;
+
+       // Golden angle (137.5 deg) rotation is mathematically optimal for breaking grid artifacts
+       glitterUv *= mat2(-0.608, -0.793, 0.793, -0.608); 
+
+       glitterUv *= mix(GLITTER_GRID_MIN, GLITTER_GRID_MAX, depth);
+       glitterUv += (layer + uRandomSeed) * 13.37;
+
+       vec2 glitterId = floor(glitterUv);
+       vec2 glitterFract = fract(glitterUv);
+       float glitterHash = hash21(glitterId);
+       
+       // Single hash-based sparkles
+       if (glitterHash > 1.0 - GLITTER_DENSITY) {
+           // Use independent hash calls for x and y to ensure maximum decorrelation
+           vec2 randomPos = vec2(
+               hash21(glitterId + 0.156), 
+               hash21(glitterId + 0.842)
+           );
+           float sizeHash = fract(glitterHash * 123.456);
+           
+           float distG = length(glitterFract - randomPos);
+           float sparkleRadius = mix(0.12, 0.4, sizeHash);
+           float sparkleShape = smoothstep(sparkleRadius, mix(0.01, 0.05, sizeHash), distG);
+           
+           float individualPhase = tSpeed * (0.4 + sizeHash * 0.6) + glitterHash * 6.28;
+           float individualPulse = pow(max(0.0, sin(individualPhase)), GLITTER_PULSE_POWER);
+           
+           float brightness = mix(GLITTER_BRIGHTNESS_MIN, GLITTER_BRIGHTNESS_MAX, sizeHash);
+           float glitter = sparkleShape * individualPulse * depth * brightness;
+           
+           float hue = fract(uHueShift + layer * 0.2 - n * 0.15);
+           vec3 nebulaCol = hsv2rgb(vec3(hue, mix(0.2, 0.8, uSaturation), max(0.15, uGlowIntensity * 0.6)));
+           
+           col += nebulaCol * n * fade * warpFade * NEBULA_OPACITY * (1.0 + glitter * uTwinkleIntensity);
+       } else {
+           // Just nebula if no sparkle in this cell
+           float hue = fract(uHueShift + layer * 0.2 - n * 0.15);
+           vec3 nebulaCol = hsv2rgb(vec3(hue, mix(0.2, 0.8, uSaturation), max(0.15, uGlowIntensity * 0.6)));
+           col += nebulaCol * n * fade * warpFade * NEBULA_OPACITY;
+       }
+    }
   }
 
   col *= (1.0 - uFadeOut);
