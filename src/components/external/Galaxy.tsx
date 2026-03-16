@@ -31,7 +31,7 @@ const log = new Logger('Galaxy')
 
 // Memory pool for frequently sent messages to avoid garbage collection
 const scrollMsg = { type: 'scroll', payload: 0 }
-const resizeMsg = { type: 'resize', payload: { width: 0, height: 0 } }
+const resizeMsg = { type: 'resize', payload: { width: 0, height: 0, dpr: 1 } }
 const prepMsg = { type: 'before-prep' }
 const swapMsg = { type: 'after-swap', payload: { randomSeed: 0 } }
 
@@ -44,6 +44,9 @@ const Galaxy: Component<GalaxyProps> = props => {
 
 	onMount(() => {
 		const canvas = document.createElement('canvas')
+		canvas.style.width = '100%'
+		canvas.style.height = '100%'
+		canvas.style.display = 'block'
 		ctn.appendChild(canvas)
 
 		let offscreen: OffscreenCanvas
@@ -59,13 +62,23 @@ const Galaxy: Component<GalaxyProps> = props => {
 		})
 
 		worker.onmessage = e => {
-			if (e.data?.type === 'low-fps') {
-				log.warn(
-					`Low FPS (${e.data.fps.toFixed(1)}), disabling animation via worker`,
-				)
+			switch (e.data?.type) {
+				case 'low-fps':
+					log.warn(
+						`Low FPS (${e.data.fps.toFixed(1)}), disabling animation via worker`,
+					)
+					break
+				case 'fps-downgrade':
+					log.info(
+						`FPS Downgrade to ${e.data.target} (currently ${e.data.currentFps.toFixed(
+							1,
+						)})`,
+					)
+					break
 			}
 		}
 
+		const dpr = window.devicePixelRatio || 1
 		worker.postMessage(
 			{
 				type: 'init',
@@ -83,6 +96,7 @@ const Galaxy: Component<GalaxyProps> = props => {
 						saturation: props.saturation,
 						twinkleIntensity: props.twinkleIntensity,
 						rotationSpeed: props.rotationSpeed,
+						dpr,
 					},
 				},
 			},
@@ -133,6 +147,7 @@ const Galaxy: Component<GalaxyProps> = props => {
 			if (!worker) return
 			resizeMsg.payload.width = ctn.offsetWidth
 			resizeMsg.payload.height = ctn.offsetHeight
+			resizeMsg.payload.dpr = window.devicePixelRatio || 1
 			worker.postMessage(resizeMsg)
 		}
 		window.addEventListener('resize', handleResize, { passive: true })
