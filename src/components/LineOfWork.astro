@@ -23,7 +23,7 @@ const { detailed = false } = Astro.props
 </div>
 {detailed && (
     <div flex="vert" gap="m">
-        <h1 class="text-heading">But did you know? I also do</h1>
+        <h1 class="text-heading balance">But did you know? I also do</h1>
         <ul class="list card-list" gap="s">
             <Card as="li" class="card-item">
                 <h2 class="text-subheading">Reverse Engineering</h2>
@@ -41,6 +41,10 @@ const { detailed = false } = Astro.props
 
 <style lang="scss">
     @use '../styles/breakpoints';
+
+    .balance {
+        text-wrap: balance;
+    }
 
     .list {
 		list-style: none;
