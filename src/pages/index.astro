@@ -16,10 +16,13 @@ import SkillItem from '~/components/SkillItem.astro'
 import Touchable from '~/components/Touchable'
 import EXPERIENCES from '~/data/experience'
 import PROJECTS from '~/data/projects'
-import { SKILLS } from '~/data/skills'
+import { SKILLS as SKILLS_ } from '~/data/skills'
 import IconMail from '~/icons/mail.svg?component-solid'
 import IconWork from '~/icons/work.svg?component-solid'
 import { getAge } from '~/utils/date'
+import type { Skill } from '~/data/skills'
+
+const SKILLS = SKILLS_ as Record<string, Skill>
 ---
 
 <Page>
@@ -49,7 +52,7 @@ import { getAge } from '~/utils/date'
 			<h1 class="text-heading">with these technologies</h1>
 			<div flex="" gap="xs">
 				<ul class="list card-grid">
-					{SKILLS.slice(0, 6).map(({ name, icon, iconLight }) => (
+					{Object.values(SKILLS).slice(0, 6).map(({ name, icon, iconLight }) => (
 						<li>
 							<SkillItem {name} {icon} {iconLight} />
 						</li>
@@ -181,4 +184,4 @@ import { getAge } from '~/utils/date'
 	.tint-low {
 		color: var(--tinted-low);
 	}
-</style>
+</style></style>

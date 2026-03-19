@@ -4,17 +4,21 @@ import Revenge from '~/images/experience/revenge.webp'
 import RevengeLight from '~/images/experience/revenge-light.webp'
 import { PROJECT_REVANCED, PROJECT_REVENGE } from './projects'
 
+export const EXPERIENCE_REVANCED: Experience = {
+	...PROJECT_REVANCED,
+	image: ReVanced,
+	imageLight: ReVancedLight,
+}
+
+export const EXPERIENCE_REVENGE: Experience = {
+	...PROJECT_REVENGE,
+	image: Revenge,
+	imageLight: RevengeLight,
+}
+
 const EXPERIENCES = [
-	{
-		...PROJECT_REVANCED,
-		image: ReVanced,
-		imageLight: ReVancedLight,
-	},
-	{
-		...PROJECT_REVENGE,
-		image: Revenge,
-		imageLight: RevengeLight,
-	},
+	EXPERIENCE_REVANCED,
+	EXPERIENCE_REVENGE,
 ] satisfies Experience[]
 
 export default EXPERIENCES

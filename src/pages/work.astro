@@ -4,15 +4,20 @@ import './_styles/work.scss'
 import Page from '~/components/layouts/Page.astro'
 import Section from '~/components/layouts/Section.astro'
 import ProjectCard from '~/components/ProjectCard.astro'
+import ExperienceReVanced from '~/components/pages/work/ExperienceReVanced.astro'
+import ExperienceRevenge from '~/components/pages/work/ExperienceRevenge.astro'
 import SkillItem from '~/components/SkillItem.astro'
 import PROJECTS from '~/data/projects'
-import { SKILLS } from '~/data/skills'
+import { SKILLS as SKILLS_ } from '~/data/skills'
+import type { Skill } from '~/data/skills'
+
+const SKILLS = SKILLS_ as Record<string, Skill>
 ---
 
 <Page>
     <Section title="Skills" description="These are the technologies I’ve used." id="skills">
         <div class="skills-grid">
-            {SKILLS.map(({ name, icon, iconLight, variant }) => (
+            {Object.values(SKILLS).map(({ name, icon, iconLight, variant }) => (
                 <li>
                     <SkillItem {name} {icon} {iconLight} {variant} />
                 </li>
@@ -29,7 +34,24 @@ import { SKILLS } from '~/data/skills'
         </ul>
     </Section>
     <Section title="Experience" id="experience">
-        <p class="text-label-large">Check out my projects for now. It will be here soon.</p>
+        <div class="selector">
+            <!-- <Experience client:idle /> -->
+            <h2>Active Projects</h2>
+            <div flex="vert" gap="m">
+                <div>
+                    <ExperienceReVanced />
+                </div>
+                <div>
+                    <ExperienceRevenge />
+                </div>
+            </div>
+        </div>
+        <!-- <div class="selector">
+            <h2>Other Projects</h2>
+            <div flex="vert" gap="m">
+                
+            </div>
+        </div> -->
     </Section>
     <Section title="Certifications" id="certifications">
         <p class="text-label-large">Work in progress...</p>
@@ -39,13 +61,26 @@ import { SKILLS } from '~/data/skills'
 <style lang="scss">
     @use "../styles/breakpoints";
 
+    .selector {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-l);
+    }
+
+    @media (min-width: breakpoints.$tablet - 64px) {
+        .selector {
+            flex-direction: row;
+        }
+    }
+
+
     section {
         max-width: 720px;
         width: 100%;
     }
 
     section#experience, section#certifications {
-        max-width: 1080px;
+        max-width: 880px;
     }
 
     .skills-grid {
@@ -114,4 +149,4 @@ import { SKILLS } from '~/data/skills'
             }
         }
     }
-</style>
+</style></style>

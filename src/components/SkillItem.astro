@@ -9,19 +9,20 @@ interface Props {
 	name: string
 	icon: ImageMetadata
 	iconLight?: ImageMetadata
-	variant?: 'small' | 'large' | 'large-horz' | 'large-vert'
+	variant?: 'xsmall' | 'small' | 'large' | 'large-horz' | 'large-vert'
 }
 
 const { name, icon, iconLight, variant = 'small' } = Astro.props
 const shouldHaveLabel = ['large', 'large-horz', 'large-vert'].includes(variant)
-const shouldHaveLargeIcon = variant === 'large'
+const imgSizeClass =
+	variant === 'xsmall' ? 'xsmall' : variant === 'large' ? 'large' : false
 ---
 
 <Touchable class="item" client:visible aria-label={name} title={name}>
     <Card class:list={["item", "pad"]} flex={variant === 'large-horz' ? 'center' : 'vert center'} gap="xs">
         <div class="icon-cont">
-            <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", shouldHaveLargeIcon && 'large']} />
-            <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", "icon-glow", shouldHaveLargeIcon && 'large']} />
+            <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", imgSizeClass]} />
+            <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", "icon-glow", imgSizeClass]} />
         </div>
         {shouldHaveLabel && <span data-variant={variant} aria-hidden="true" class="text-label-medium text">{name}</span>}
     </Card>

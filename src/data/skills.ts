@@ -24,117 +24,117 @@ import SolidJS from '~/images/skills/solidjs.svg'
 import TS from '~/images/skills/ts.svg'
 import WitAI from '~/images/skills/witai.svg'
 
-export const SKILLS = [
-	{
+export const SKILLS = {
+	javascript: {
 		name: 'JavaScript',
 		icon: JS,
 		variant: 'large',
 	},
-	{
+	typescript: {
 		name: 'TypeScript',
 		icon: TS,
 		variant: 'large',
 	},
-	{
-		name: 'React',
-		icon: React,
-		iconLight: ReactLight,
+	kotlin: {
+		name: 'Kotlin',
+		icon: Kotlin,
 		variant: 'large',
 	},
-	{
+	figma: {
 		name: 'Figma',
 		icon: Figma,
 		variant: 'large-horz',
 	},
-	{
+	react: {
+		name: 'React',
+		icon: React,
+		iconLight: ReactLight,
+		variant: 'large-horz',
+	},
+	git: {
 		name: 'Git',
 		icon: Git,
 		variant: 'large-horz',
 	},
-	{
+	solidjs: {
 		name: 'SolidJS',
 		icon: SolidJS,
-		variant: 'large-horz',
+		variant: 'large',
 	},
-	{
+	bun: {
 		name: 'Bun',
 		icon: Bun,
 		variant: 'large-vert',
 	},
-	{
+	nodejs: {
 		name: 'Node.js',
 		icon: NodeJS,
 		variant: 'large-vert',
 	},
-	{
+	html: {
 		name: 'HTML',
 		icon: HTML,
 		variant: 'large-horz',
 	},
-	{
+	css: {
 		name: 'CSS',
 		icon: CSS,
 		variant: 'large-horz',
 	},
-	{
+	astro: {
 		name: 'Astro',
 		icon: Astro,
 		iconLight: AstroLight,
 		variant: 'large-horz',
 	},
-	{
+	linux: {
 		name: 'Linux',
 		icon: Linux,
 		variant: 'large-horz',
 	},
-	{
+	drizzle: {
 		name: 'Drizzle ORM',
 		icon: Drizzle,
 		iconLight: DrizzleLight,
+	},
+	cloudflare: {
+		name: 'Cloudflare',
+		icon: Cloudflare,
 		variant: 'large-horz',
 	},
-	{
-		name: 'Kotlin',
-		icon: Kotlin,
-		variant: 'large-horz',
-	},
-	{
-		name: 'ElysiaJS',
-		icon: ElysiaJS,
-		variant: 'large-horz',
-	},
-	{
+	gha: {
 		name: 'GitHub Actions',
 		icon: GHA,
 		variant: 'large-horz',
 	},
-	{
+	semrel: {
 		name: 'Semantic Release',
 		icon: SemRel,
 	},
-	{
+	djs: {
 		name: 'Discord.js',
 		icon: DJS,
 	},
-	{
+	witai: {
 		name: 'wit.ai',
 		icon: WitAI,
 	},
-	{
-		name: 'Cloudflare',
-		icon: Cloudflare,
+	elysia: {
+		name: 'ElysiaJS',
+		icon: ElysiaJS,
 	},
-	{
+	docker: {
 		name: 'Docker',
 		icon: Docker,
+		variant: 'large-vert',
 	},
-	{
+	python: {
 		name: 'Python',
 		icon: Python,
 	},
-] as Skill[]
+} as const satisfies Record<string, Skill>
 
-interface Skill {
+export interface Skill {
 	name: string
 	icon: ImageMetadata
 	iconLight?: ImageMetadata

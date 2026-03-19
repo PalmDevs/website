@@ -1,0 +1,65 @@
+---
+import Card from '~/components/Card.astro'
+import LightDarkImage from '~/components/LightDarkImage.astro'
+import SkillItem from '~/components/SkillItem.astro'
+import { PROJECT_REVANCED } from '~/data/projects'
+import { SKILLS } from '~/data/skills'
+---
+
+<Card flex="vert x-start" pad="l" gap="m">
+    <div gap="s" flex="vert x-start">
+        <div gap="m" flex="horz wrap y-center">
+            <LightDarkImage src={PROJECT_REVANCED.image} alt={PROJECT_REVANCED.name} class="logo unselectable" />
+            <h2 class="text-title">ReVanced</h2>
+        </div>
+        <div flex="horz wrap" class="roles text-label-large">
+            <p class="tint-high">
+                <span>UI/UX Designer</span>, <span>Support Agents</span>, <span>CI/CD</span>
+            </p>
+            <div flex="horz" class="roles">
+                <span aria-hidden="true"> • </span>
+                <p class="tint-low">2022 - Present</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-body-medium">
+        <p>
+            ReVanced is a free and open-source patcher used to modify Android applications.
+        </p>
+        <ul>
+            <li>Redesigned the ReVanced Manager app in Figma</li>
+            <li>Coordinated UI/UX tasks</li>
+            <li>Maintained support agents using Wit.ai</li>
+            <li>Helped with CI/CD pipelines using semantic-release</li>
+        </ul>
+        <p>
+            Working with the ReVanced team has helped me learn how to communicate clearly, and how to design and build applications pragmatically.
+        </p>
+    </div>
+    <div class="skills" flex="horz wrap" gap="xs">
+        {[SKILLS.figma, SKILLS.typescript, SKILLS.bun, SKILLS.djs, SKILLS.drizzle, SKILLS.witai, SKILLS.gha, SKILLS.semrel].map((skill) => (
+            <div>
+                <SkillItem {...skill} variant='xsmall' />
+            </div>
+        ))}
+    </div>
+</Card>
+
+<style>
+    .logo {
+        height: 64px;
+        width: auto;
+    }
+
+    .roles {
+        column-gap: var(--gap-xs);
+    }
+
+    .tint-high {
+		color: var(--tinted-high);
+	}
+
+	.tint-low {
+		color: var(--tinted-low);
+	}
+</style>

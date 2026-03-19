@@ -1,0 +1,68 @@
+---
+import Card from '~/components/Card.astro'
+import LightDarkImage from '~/components/LightDarkImage.astro'
+import SkillItem from '~/components/SkillItem.astro'
+import { PROJECT_REVENGE } from '~/data/projects'
+import { SKILLS } from '~/data/skills'
+---
+
+<Card flex="vert x-start" pad="l" gap="m">
+    <div gap="s" flex="vert x-start">
+        <div gap="m" flex="horz wrap y-center">
+            <LightDarkImage src={PROJECT_REVENGE.image} alt={PROJECT_REVENGE.name} class="logo unselectable" />
+            <h2 class="text-title">Revenge</h2>
+        </div>
+        <div flex="horz wrap" class="roles text-label-large">
+            <p class="tint-high">
+                <span>Lead Developer</span>, <span>Founder</span>
+            </p>
+            <div flex="horz" class="roles">
+                <span aria-hidden="true"> • </span>
+                <p class="tint-low">2024 - Present</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-body-medium">
+        <p>
+            Revenge is a client modification for Discord on Android, allowing users to customize and add custom functionality to their Discord client.
+        </p>
+        <ul>
+            <li>Reverse engineered React Native apps, and Android apps in general</li>
+            <li>Worked closely with Xposed and JADX</li>
+            <li>Did architectural design for plugin system</li>
+        </ul>
+        <p>
+            Many of Revenge team members are actually from ReVanced, so working on Revenge helped me further improve my communication skills, and has given me the opportunity to lead a team and make high level decisions.
+        </p>
+    </div>
+    <div class="skills" flex="horz wrap" gap="xs">
+        {[SKILLS.typescript, SKILLS.javascript, SKILLS.kotlin, SKILLS.bun, SKILLS.react].map((skill) => (
+            <div>
+                <SkillItem {...skill} variant='xsmall' />
+            </div>
+        ))}
+    </div>
+</Card>
+
+<style>
+    .skills {
+        width: 100%;
+    }
+
+    .logo {
+        height: 64px;
+        width: auto;
+    }
+
+    .roles {
+        column-gap: var(--gap-xs);
+    }
+
+    .tint-high {
+		color: var(--tinted-high);
+	}
+
+	.tint-low {
+		color: var(--tinted-low);
+	}
+</style>
