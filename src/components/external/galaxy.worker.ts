@@ -28,9 +28,11 @@ let avgActualDt = 0.016
 let frameCount = 0
 
 let props: any = {}
+let currentQuality = 2
 
 function init(canvas: OffscreenCanvas, initialProps: any) {
 	props = initialProps
+	currentQuality = props.initialQuality ?? 2
 
 	const dpr = Math.min(props.dpr ?? 1, 2)
 	// @ts-expect-error: Works, but types are incorrect
@@ -65,6 +67,7 @@ function init(canvas: OffscreenCanvas, initialProps: any) {
 			uFadeOut: { value: 0 },
 			uWarpZoom: { value: 0 },
 			uRandomSeed: { value: 0 },
+			uQuality: { value: currentQuality },
 		},
 	})
 
@@ -83,7 +86,7 @@ function resize(width: number, height: number, dpr: number) {
 	if (!renderer || !program) return
 
 	let cappedDpr = Math.min(dpr, 2)
-	const maxRes = 2560
+	const maxRes = props.maxResolution ?? 1600
 	if (width * cappedDpr > maxRes) cappedDpr = maxRes / width
 	if (height * cappedDpr > maxRes)
 		cappedDpr = Math.min(cappedDpr, maxRes / height)
@@ -163,6 +166,20 @@ function update(t: number, forceRender?: boolean) {
 		if (tierIndex >= TIERS.length) tierIndex = TIERS.length - 1
 
 		const newLimit = TIERS[tierIndex]
+
+		// Update quality based on tier
+		if (tierIndex >= 3) {
+			currentQuality = 0
+		} else if (tierIndex >= 2) {
+			currentQuality = 1
+		} else {
+			currentQuality = props.initialQuality ?? 2
+		}
+
+		if (program) {
+			program.uniforms.uQuality.value = currentQuality
+		}
+
 		if (newLimit === -1) {
 			disableAnimationByPerf = true
 			cancelAnimationFrame(animateId)
@@ -172,6 +189,7 @@ function update(t: number, forceRender?: boolean) {
 			self.postMessage({
 				type: 'fps-downgrade',
 				target: newLimit,
+				quality: currentQuality,
 				currentFps: 1 / Math.max(actualDt, 1e-4),
 			})
 		}

@@ -17,6 +17,7 @@ uniform float uWarpSpeed;
 uniform float uFadeOut;
 uniform float uWarpZoom;
 uniform float uRandomSeed;
+uniform float uQuality;
 
 varying vec2 vUv;
 
@@ -58,15 +59,20 @@ float noise(vec2 p) {
     return res;
 }
 
-float fbm(vec2 p) {
+float fbm(vec2 p, int octaves) {
     float f = 0.0;
     // Unrolled FBM to avoid loop overhead
     mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+    
     f += 0.5 * noise(p);
-    p = m * p;
-    f += 0.25 * noise(p);
-    p = m * p;
-    f += 0.125 * noise(p);
+    if (octaves > 1) {
+        p = m * p;
+        f += 0.25 * noise(p);
+    }
+    if (octaves > 2) {
+        p = m * p;
+        f += 0.125 * noise(p);
+    }
     return f;
 }
 
@@ -173,6 +179,8 @@ void main() {
   float warpFade = 1.0 - smoothstep(0.0, 0.1, abs(uWarpSpeed));
 
   for (int i = 0; i < 3; i++) {
+    if (float(i) > uQuality) break;
+    
     float layer = float(i) * NUM_LAYER_DIVIDED;
     float depth = fract(layer + uStarSpeed * uSpeed + warpOffset);
     float scale = mix(20.0 * uDensity, 0.5 * uDensity, depth);
@@ -190,9 +198,13 @@ void main() {
     // Nebula (dust clouds)
     float nebulaScale = mix(NEBULA_SCALE_MIN, NEBULA_SCALE_MAX, depth);
     vec2 nUv = rotatedUv * nebulaScale + layer * 10.0 + uRandomSeed;
-    float n = fbm(nUv - vec2(tSpeed * 0.01, tSpeed * 0.02));
+    
+    int octaves = 3;
+    if (uQuality < 2.0) octaves = 2;
+    if (uQuality < 1.0) octaves = 1;
     
     // Softer clouds, rarer threshold
+    float n = fbm(nUv - vec2(tSpeed * 0.01, tSpeed * 0.02), octaves);
     n = smoothstep(NEBULA_THRESHOLD_MIN, NEBULA_THRESHOLD_MAX, n); 
     
     if (n > 0.0) {
@@ -209,8 +221,10 @@ void main() {
        vec2 glitterFract = fract(glitterUv);
        float glitterHash = hash21(glitterId);
        
+       bool showGlitter = uQuality >= 1.0;
+       
        // Single hash-based sparkles
-       if (glitterHash > 1.0 - GLITTER_DENSITY) {
+       if (showGlitter && glitterHash > 1.0 - GLITTER_DENSITY) {
            // Use independent hash calls for x and y to ensure maximum decorrelation
            vec2 randomPos = vec2(
                hash21(glitterId + 0.156), 

@@ -25,6 +25,8 @@ interface GalaxyProps {
 	twinkleIntensity?: number
 	rotationSpeed?: number
 	scrollSensitivity?: number
+	maxResolution?: number
+	initialQuality?: number
 }
 
 const log = new Logger('Galaxy')
@@ -41,6 +43,7 @@ const Galaxy: Component<GalaxyProps> = props => {
 
 	const disableAnimation = () => props.disableAnimation ?? false
 	const scrollSensitivity = () => props.scrollSensitivity ?? 0.001
+	const maxResolution = () => props.maxResolution ?? 1600
 
 	onMount(() => {
 		const canvas = document.createElement('canvas')
@@ -72,7 +75,7 @@ const Galaxy: Component<GalaxyProps> = props => {
 					log.info(
 						`FPS Downgrade to ${e.data.target} (currently ${e.data.currentFps.toFixed(
 							1,
-						)})`,
+						)}), Quality: ${e.data.quality}`,
 					)
 					break
 			}
@@ -96,6 +99,8 @@ const Galaxy: Component<GalaxyProps> = props => {
 						saturation: props.saturation,
 						twinkleIntensity: props.twinkleIntensity,
 						rotationSpeed: props.rotationSpeed,
+						maxResolution: maxResolution(),
+						initialQuality: props.initialQuality ?? 2,
 						dpr,
 					},
 				},
