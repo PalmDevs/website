@@ -85,11 +85,7 @@ svg {
   font-size: 14px;
   scroll-behavior: smooth;
   accent-color: var(--primary);
-  background: var(--bg);
-  background-repeat: repeat-y;
-  background-attachment: fixed;
-  transition-property: --bg-1, --bg-2;
-  transition-duration: var(--dur-xshort);
+  background: var(--bg-2);
 }
 
 ::selection {
@@ -98,6 +94,12 @@ svg {
 }
 
 body {
+  background: var(--bg);
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  transition-property: --bg-1, --bg-2;
+  transition-duration: var(--dur-xshort);
+
   position: relative;
   scroll-behavior: inherit;
   scrollbar-gutter: stable both-edges;
