@@ -12,11 +12,11 @@ import Figma from '~/images/skills/figma.svg'
 import GHA from '~/images/skills/gha.svg'
 import Git from '~/images/skills/git.svg'
 import HTML from '~/images/skills/html.svg'
+import JetpackCompose from '~/images/skills/jetpack-compose.webp'
 import JS from '~/images/skills/js.svg'
 import Kotlin from '~/images/skills/kotlin.svg'
 import Linux from '~/images/skills/linux.webp'
 import NodeJS from '~/images/skills/nodejs.svg'
-import Python from '~/images/skills/python.svg'
 import React from '~/images/skills/react.svg'
 import ReactLight from '~/images/skills/react-light.svg'
 import SemRel from '~/images/skills/semrel.svg'
@@ -111,6 +111,10 @@ export const SKILLS = {
 		name: 'Semantic Release',
 		icon: SemRel,
 	},
+	jetpackcompose: {
+		name: 'Jetpack Compose',
+		icon: JetpackCompose,
+	},
 	djs: {
 		name: 'Discord.js',
 		icon: DJS,
@@ -127,10 +131,6 @@ export const SKILLS = {
 		name: 'Docker',
 		icon: Docker,
 		variant: 'large-vert',
-	},
-	python: {
-		name: 'Python',
-		icon: Python,
 	},
 } as const satisfies Record<string, Skill>
 
