@@ -33,5 +33,5 @@ export const Clock = () => {
 		),
 	)
 
-	return <span>{localTime()}</span>
+	return <span title="Current time for me">{localTime()}</span>
 }
