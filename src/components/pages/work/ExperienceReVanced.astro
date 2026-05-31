@@ -39,7 +39,7 @@ import { SKILLS } from '~/data/skills'
     <div class="skills" flex="horz wrap" gap="xs">
         {[SKILLS.figma, SKILLS.typescript, SKILLS.bun, SKILLS.djs, SKILLS.drizzle, SKILLS.jetpackcompose, SKILLS.witai, SKILLS.gha, SKILLS.semrel].map((skill) => (
             <div>
-                <SkillItem {...skill} variant='xsmall' />
+                <SkillItem {...skill} variant='xsmall' noBlur />
             </div>
         ))}
     </div>
@@ -62,4 +62,8 @@ import { SKILLS } from '~/data/skills'
 	.tint-low {
 		color: var(--tinted-low);
 	}
+
+    .no-blur {
+        backdrop-filter: none !important;
+    }
 </style>

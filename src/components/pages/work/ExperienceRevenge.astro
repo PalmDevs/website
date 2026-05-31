@@ -38,7 +38,7 @@ import { SKILLS } from '~/data/skills'
     <div class="skills" flex="horz wrap" gap="xs">
         {[SKILLS.typescript, SKILLS.javascript, SKILLS.kotlin, SKILLS.bun, SKILLS.react].map((skill) => (
             <div>
-                <SkillItem {...skill} variant='xsmall' />
+                <SkillItem {...skill} variant='xsmall' noBlur />
             </div>
         ))}
     </div>
@@ -65,4 +65,8 @@ import { SKILLS } from '~/data/skills'
 	.tint-low {
 		color: var(--tinted-low);
 	}
+
+    .no-blur {
+        backdrop-filter: none !important;
+    }
 </style>

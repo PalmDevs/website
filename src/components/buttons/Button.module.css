@@ -6,7 +6,6 @@
     border-radius: var(--rad-full);
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(8px);
     outline: var(--line-thin) transparent;
     outline-offset: -1px;
 
@@ -44,6 +43,7 @@
     background-color: var(--surface-highest);
     outline: var(--line-thin) var(--surface-highest);
     outline-offset: -1px;
+    backdrop-filter: blur(8px);
     color: var(--neutral-medium);
 
     &:not(:disabled):hover {
