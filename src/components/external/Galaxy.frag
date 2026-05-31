@@ -1,3 +1,9 @@
+/**
+ * Modified version of: React Bits - Galaxy
+ * License: MIT
+ * Source: https://reactbits.dev/backgrounds/galaxy
+ */
+
 precision highp float;
 
 uniform float uTime;
@@ -195,63 +201,61 @@ void main() {
     vec2 layerUv = rotatedUv * scale + layer * 453.32 + uRandomSeed;
     col += starLayer(layerUv, tSpeed) * fade;
 
-    // Nebula (dust clouds)
-    float nebulaScale = mix(NEBULA_SCALE_MIN, NEBULA_SCALE_MAX, depth);
-    vec2 nUv = rotatedUv * nebulaScale + layer * 10.0 + uRandomSeed;
-    
-    int octaves = 3;
-    if (uQuality < 2.0) octaves = 2;
-    if (uQuality < 1.0) octaves = 1;
-    
-    // Softer clouds, rarer threshold
-    float n = fbm(nUv - vec2(tSpeed * 0.01, tSpeed * 0.02), octaves);
-    n = smoothstep(NEBULA_THRESHOLD_MIN, NEBULA_THRESHOLD_MAX, n); 
-    
-    if (n > 0.0) {
-       // Sparkle (glitter) grid - Keep coordinates small to maintain high precision
-       vec2 glitterUv = rotatedUv;
+    // Nebula (dust clouds), skipped on lowest quality tier (tier 0)
+    if (uQuality >= 1.0) {
+      float nebulaScale = mix(NEBULA_SCALE_MIN, NEBULA_SCALE_MAX, depth);
+      vec2 nUv = rotatedUv * nebulaScale + layer * 10.0 + uRandomSeed;
+      
+      int octaves = uQuality < 2.0 ? 2 : 3;
+      
+      // Softer clouds, rarer threshold
+      float n = fbm(nUv - vec2(tSpeed * 0.01, tSpeed * 0.02), octaves);
+      n = smoothstep(NEBULA_THRESHOLD_MIN, NEBULA_THRESHOLD_MAX, n); 
+      
+      if (n > 0.0) {
+        // Sparkle (glitter) grid - Keep coordinates small to maintain high precision
+        vec2 glitterUv = rotatedUv;
 
-       // Golden angle (137.5 deg) rotation is mathematically optimal for breaking grid artifacts
-       glitterUv *= mat2(-0.608, -0.793, 0.793, -0.608); 
+        // Golden angle (137.5 deg) rotation is mathematically optimal for breaking grid artifacts
+        glitterUv *= mat2(-0.608, -0.793, 0.793, -0.608); 
 
-       glitterUv *= mix(GLITTER_GRID_MIN, GLITTER_GRID_MAX, depth);
-       glitterUv += (layer + uRandomSeed) * 13.37;
+        glitterUv *= mix(GLITTER_GRID_MIN, GLITTER_GRID_MAX, depth);
+        glitterUv += (layer + uRandomSeed) * 13.37;
 
-       vec2 glitterId = floor(glitterUv);
-       vec2 glitterFract = fract(glitterUv);
-       float glitterHash = hash21(glitterId);
-       
-       bool showGlitter = uQuality >= 1.0;
-       
-       // Single hash-based sparkles
-       if (showGlitter && glitterHash > 1.0 - GLITTER_DENSITY) {
-           // Use independent hash calls for x and y to ensure maximum decorrelation
-           vec2 randomPos = vec2(
-               hash21(glitterId + 0.156), 
-               hash21(glitterId + 0.842)
-           );
-           float sizeHash = fract(glitterHash * 123.456);
-           
-           float distG = length(glitterFract - randomPos);
-           float sparkleRadius = mix(0.12, 0.4, sizeHash);
-           float sparkleShape = smoothstep(sparkleRadius, mix(0.01, 0.05, sizeHash), distG);
-           
-           float individualPhase = tSpeed * (0.4 + sizeHash * 0.6) + glitterHash * 6.28;
-           float individualPulse = pow(max(0.0, sin(individualPhase)), GLITTER_PULSE_POWER);
-           
-           float brightness = mix(GLITTER_BRIGHTNESS_MIN, GLITTER_BRIGHTNESS_MAX, sizeHash);
-           float glitter = sparkleShape * individualPulse * depth * brightness;
-           
-           float hue = fract(uHueShift + layer * 0.2 - n * 0.15);
-           vec3 nebulaCol = hsv2rgb(vec3(hue, mix(0.2, 0.8, uSaturation), max(0.15, uGlowIntensity * 0.6)));
-           
-           col += nebulaCol * n * fade * warpFade * NEBULA_OPACITY * (1.0 + glitter * uTwinkleIntensity);
-       } else {
-           // Just nebula if no sparkle in this cell
-           float hue = fract(uHueShift + layer * 0.2 - n * 0.15);
-           vec3 nebulaCol = hsv2rgb(vec3(hue, mix(0.2, 0.8, uSaturation), max(0.15, uGlowIntensity * 0.6)));
-           col += nebulaCol * n * fade * warpFade * NEBULA_OPACITY;
-       }
+        vec2 glitterId = floor(glitterUv);
+        vec2 glitterFract = fract(glitterUv);
+        float glitterHash = hash21(glitterId);
+        
+        // Single hash-based sparkles
+        if (glitterHash > 1.0 - GLITTER_DENSITY) {
+          // Use independent hash calls for x and y to ensure maximum decorrelation
+          vec2 randomPos = vec2(
+            hash21(glitterId + 0.156), 
+            hash21(glitterId + 0.842)
+          );
+          float sizeHash = fract(glitterHash * 123.456);
+          
+          float distG = length(glitterFract - randomPos);
+          float sparkleRadius = mix(0.12, 0.4, sizeHash);
+          float sparkleShape = smoothstep(sparkleRadius, mix(0.01, 0.05, sizeHash), distG);
+          
+          float individualPhase = tSpeed * (0.4 + sizeHash * 0.6) + glitterHash * 6.28;
+          float individualPulse = pow(max(0.0, sin(individualPhase)), GLITTER_PULSE_POWER);
+          
+          float brightness = mix(GLITTER_BRIGHTNESS_MIN, GLITTER_BRIGHTNESS_MAX, sizeHash);
+          float glitter = sparkleShape * individualPulse * depth * brightness;
+          
+          float hue = fract(uHueShift + layer * 0.2 - n * 0.15);
+          vec3 nebulaCol = hsv2rgb(vec3(hue, mix(0.2, 0.8, uSaturation), max(0.15, uGlowIntensity * 0.6)));
+          
+          col += nebulaCol * n * fade * warpFade * NEBULA_OPACITY * (1.0 + glitter * uTwinkleIntensity);
+        } else {
+          // Just nebula if no sparkle in this cell
+          float hue = fract(uHueShift + layer * 0.2 - n * 0.15);
+          vec3 nebulaCol = hsv2rgb(vec3(hue, mix(0.2, 0.8, uSaturation), max(0.15, uGlowIntensity * 0.6)));
+          col += nebulaCol * n * fade * warpFade * NEBULA_OPACITY;
+        }
+      }
     }
   }
 

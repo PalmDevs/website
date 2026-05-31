@@ -34,6 +34,17 @@ const GalaxyBackground: Component = () => {
 	return (
 		<Show when={canShow()}>
 			<Galaxy
+				staticImage={
+					// biome-ignore lint/a11y/noInteractiveElementToNoninteractiveRole: This is simply a background image that serves no purpose other than cosmetic
+					<picture
+						role="presentation"
+						style="user-select:none;pointer-events:none"
+					>
+						<source srcset="/assets/galaxy.avif" type="image/avif" />
+						<source srcset="/assets/galaxy.webp" type="image/webp" />
+						<img fetchpriority="low" src="/assets/galaxy.png" alt="" />
+					</picture>
+				}
 				disableAnimation={!canAnimate()}
 				twinkleIntensity={0.5}
 				glowIntensity={0.33}

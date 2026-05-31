@@ -9,6 +9,13 @@
   opacity: 0.5;
 }
 
+.container :global(picture, image) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* TODO: When view-transition is applied on body, uncomment */
 /* [data-transitionable="true"] {
   view-transition-name: galaxy;
