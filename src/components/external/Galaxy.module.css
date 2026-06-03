@@ -9,11 +9,25 @@
   opacity: 0.5;
 }
 
-.container :global(picture, image) {
+.container :global(picture, img) {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  animation: fadeIn 0.5s 0.5s var(--ease-quick) forwards;
+  overflow: visible;
+}
+
+@keyframes fadeIn {
+  from {
+    scale: 0.7;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
 }
 
 /* TODO: When view-transition is applied on body, uncomment */

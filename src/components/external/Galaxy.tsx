@@ -12,6 +12,10 @@
  */
 
 import { createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
+import GalaxyAvifUrl from '~/../public/assets/galaxy.avif?url'
+import GalaxyPngUrl from '~/../public/assets/galaxy.png?url'
+import GalaxyWebpUrl from '~/../public/assets/galaxy.webp?url'
+import { supportsAvif, supportsWebp } from '~/utils/image'
 import Logger from '~/utils/Logger'
 import styles from './Galaxy.module.css'
 import type { Component, JSX } from 'solid-js'
@@ -188,11 +192,42 @@ const Galaxy: Component<GalaxyProps> = props => {
 		fallbackToStatic()
 	}
 
+	let preloadedStatic = false
+
 	const handleDowngrade = (
 		target: number,
 		quality: number,
 		currentFps: number,
 	) => {
+		if (quality <= 1 && !preloadedStatic) {
+			log.warn('Quality dropped to 1, preloading static fallback image')
+
+			;(async () => {
+				let src: string | undefined
+
+				if (await supportsAvif()) {
+					log.info('AVIF supported')
+					src = GalaxyAvifUrl
+				}
+
+				if (await supportsWebp()) {
+					log.info('WebP supported')
+					src ??= GalaxyWebpUrl
+				}
+
+				src ??= GalaxyPngUrl
+
+				const img = new Image()
+				img.src = src
+
+				img.onload = () => {
+					log.info('Static fallback image preloaded:', src)
+				}
+
+				preloadedStatic = true
+			})()
+		}
+
 		log.info(
 			`FPS Downgrade to ${target} (currently ${currentFps.toFixed(
 				1,

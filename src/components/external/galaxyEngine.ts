@@ -19,11 +19,11 @@ type AnyCanvas = OffscreenCanvas | HTMLCanvasElement
 
 // cap: 0 = uncapped, -1 = disabled
 const TIERS: { cap: number; quality: number }[] = [
-	{ cap: 60, quality: 2 }, // full quality, uncapped
-	{ cap: 60, quality: 1 }, // shed nebula octaves + glitter cost first
-	{ cap: 30, quality: 0 }, // stars only, no nebula
-	{ cap: 24, quality: 0 },
-	{ cap: -1, quality: 0 }, // disabled
+	{ cap: 60, quality: 2 }, // full quality
+	{ cap: 60, quality: 1 }, // shed nebula octaves + glitter
+	{ cap: 30, quality: 1 }, // stars only, no nebula
+	{ cap: 24, quality: 1 }, // even lower frames
+	{ cap: -1, quality: 0 }, // give up live rendering -> static image fallback
 ]
 
 /**
