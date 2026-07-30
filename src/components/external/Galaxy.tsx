@@ -12,11 +12,11 @@
  */
 
 import { createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
+import GalaxyAvifUrl from '~/../public/assets/galaxy.avif?url'
+import GalaxyPngUrl from '~/../public/assets/galaxy.png?url'
+import GalaxyWebpUrl from '~/../public/assets/galaxy.webp?url'
 import { supportsAvif, supportsWebp } from '~/utils/image'
 import Logger from '~/utils/Logger'
-import GalaxyAvifUrl from '/assets/galaxy.avif?url'
-import GalaxyPngUrl from '/assets/galaxy.png?url'
-import GalaxyWebpUrl from '/assets/galaxy.webp?url'
 import styles from './Galaxy.module.css'
 import type { Component, JSX } from 'solid-js'
 import type { GalaxyEngine } from './galaxyEngine'
