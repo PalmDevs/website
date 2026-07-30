@@ -20,7 +20,7 @@ const imgSizeClass =
 ---
 
 <Touchable class="item" client:visible aria-label={name} title={name}>
-    <Card class:list={["item", "pad", noBlur ? 'no-blur' : undefined]} flex={variant === 'large-horz' ? 'center' : 'vert center'} gap="xs">
+    <Card class:list={["item", "pad", noBlur ? 'no-blur' : undefined]} flex={variant === 'large-horz' ? 'center' : 'vert center'} gap="xs" no-blur>
         <div class="icon-cont">
             <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", imgSizeClass]} />
             <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", "icon-glow", imgSizeClass]} />
@@ -37,7 +37,6 @@ const imgSizeClass =
         height: 100%;
         border-radius: var(--rad-sm);
         cursor: default;
-        backdrop-filter: blur(6px);
     
         &:active {
             transform: none;

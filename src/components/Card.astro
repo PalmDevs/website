@@ -14,4 +14,8 @@ const { as: Tag = 'div', ...props } = Astro.props
         outline-offset: -2px;
         backdrop-filter: blur(8px);
     }
+
+    .card[no-blur] {
+        backdrop-filter: none;
+    }
 </style>
