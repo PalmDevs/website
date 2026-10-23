@@ -51,15 +51,15 @@ export const SKILLS = {
 		iconLight: ReactLight,
 		variant: 'large-horz',
 	},
-	git: {
-		name: 'Git',
-		icon: Git,
-		variant: 'large-horz',
-	},
 	solidjs: {
 		name: 'SolidJS',
 		icon: SolidJS,
-		variant: 'large',
+		variant: 'large-horz',
+	},
+	git: {
+		name: 'Git',
+		icon: Git,
+		variant: 'large-vert',
 	},
 	bun: {
 		name: 'Bun',

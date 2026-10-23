@@ -160,6 +160,16 @@ ul {
   user-select: none;
 }
 
+// Screen reader only text
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 // Focused elements will have a 2px outline with a bright color
 :where(:is(button, a):not(:focus-visible)) {
   outline: var(--line) transparent;

@@ -1,0 +1,12 @@
+.container {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: clip;
+}
+
+.measurer {
+  position: absolute;
+  visibility: hidden;
+}

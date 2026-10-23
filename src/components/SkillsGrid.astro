@@ -1,0 +1,33 @@
+---
+import './SkillsGrid.scss'
+
+import { SKILLS as SKILLS_ } from '~/data/skills'
+import SkillItem from './SkillItem.astro'
+import type { Skill } from '~/data/skills'
+
+const SKILLS = SKILLS_ as Record<string, Skill>
+---
+
+<ul class="skills-grid">
+    {Object.values(SKILLS).map(({ name, icon, iconLight, variant }) => (
+        <li>
+            <SkillItem {name} {icon} {iconLight} {variant} />
+        </li>
+    ))}
+</ul>
+
+<style>
+    .skills-grid {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        display: grid;
+        gap: var(--gap-xs);
+        grid-template-rows: repeat(auto-fit, 1fr);
+        grid-template-columns: repeat(9, 1fr);
+
+        border-radius: var(--gap-m);
+        backdrop-filter: blur(8px);
+    }
+</style>

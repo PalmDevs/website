@@ -4,8 +4,8 @@ const { title, description, flex, ...props } = Astro.props
 
 <section flex={`vert ${flex ?? ''}`} {...props} pady="2xl" gap="xl">
     <div flex={`vert ${flex ?? ''}`} gap="xs">
-        <h1 class="text-title">{title}</h1>
-        {description && <p>{description}</p>}
+        <h1 class="text-title"><slot name="title">{title}</slot></h1>
+        <slot name="description">{description && <p>{description}</p>}</slot>
     </div>
     <slot />
 </section>

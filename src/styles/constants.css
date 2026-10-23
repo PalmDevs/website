@@ -15,8 +15,8 @@
 	--line-thin: 1px solid;
 
 	/* BORDER RADII */
-	--rad-full: 1000px;
-	--rad-sm: 16px;
+	--rad-full: 8px;
+	--rad-sm: 8px;
 
 	/* DURATIONS */
 	--dur-xshort: 0.1s;

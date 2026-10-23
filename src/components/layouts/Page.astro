@@ -84,11 +84,15 @@ const {
 	}
 	
 	main {
+		--page-padding: var(--gap-xl);
+
 		flex: 1;
-		padding-inline: var(--gap-xl);
+		padding-inline: var(--page-padding);
+		overflow-x: clip;
+		container-type: inline-size;
 
 		@media (max-width: breakpoints.$tablet) {
-			padding-inline: var(--gap-m);
+			--page-padding: var(--gap-m);
 		}
 	}
 

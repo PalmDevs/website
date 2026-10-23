@@ -1,14 +1,14 @@
 ---
 import Card from './Card.astro'
 
-const { detailed = false } = Astro.props
+const { detailed = false, stacked = false } = Astro.props
 ---
 
 <div flex="vert" gap="m">
     <h1 class="text-heading">I do</h1>
-    <ul class="list card-list" gap="s">
+    <ul class:list={["list card-list", { stacked }]} gap="s">
         <Card as="li" class="card-item">
-            <h2 class="text-subheading">Full-Stack Development</h2>
+            <h2 class="text-subheading">Software Development</h2>
             <p class="text-body-medium">From <span class="tint-high">architecture planning</span> to <span class="tint-high">launching production applications</span>. I make sure all the pieces fit right in.</p>
         </Card>
         <Card as="li" class="card-item">
@@ -62,6 +62,10 @@ const { detailed = false } = Astro.props
         @media (max-width: breakpoints.$tablet) {
             flex-direction: column;
         }
+	}
+
+	.stacked {
+		flex-direction: column;
 	}
 
 	.card-item {

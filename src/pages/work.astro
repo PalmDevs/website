@@ -1,29 +1,14 @@
 ---
-import './_styles/work.scss'
-
 import Page from '~/components/layouts/Page.astro'
 import Section from '~/components/layouts/Section.astro'
 import ProjectCard from '~/components/ProjectCard.astro'
 import ExperienceReVanced from '~/components/pages/work/ExperienceReVanced.astro'
 import ExperienceRevenge from '~/components/pages/work/ExperienceRevenge.astro'
-import SkillItem from '~/components/SkillItem.astro'
+import SkillsGrid from '~/components/SkillsGrid.astro'
 import PROJECTS from '~/data/projects'
-import { SKILLS as SKILLS_ } from '~/data/skills'
-import type { Skill } from '~/data/skills'
-
-const SKILLS = SKILLS_ as Record<string, Skill>
 ---
 
 <Page>
-    <Section title="Skills" description="These are the technologies I’ve used." id="skills">
-        <div class="skills-grid">
-            {Object.values(SKILLS).map(({ name, icon, iconLight, variant }) => (
-                <li>
-                    <SkillItem {name} {icon} {iconLight} {variant} />
-                </li>
-            ))}
-        </div>
-    </Section>
     <Section title="Projects" id="projects">
         <ul class="list projects-grid" gap="s" flex="">
             {PROJECTS.slice(0, 7).map(({ name, description, href, image, hint }) => (
@@ -33,9 +18,12 @@ const SKILLS = SKILLS_ as Record<string, Skill>
             ))}
         </ul>
     </Section>
+    <!-- <Section title="Skills" description="These are the technologies I’ve used." id="skills">
+        <SkillsGrid />
+    </Section>
     <Section title="Experience" id="experience">
         <div class="selector">
-            <!-- <Experience client:idle /> -->
+            <Experience client:idle />
             <h2>Active Projects</h2>
             <div flex="vert" gap="m">
                 <div>
@@ -46,13 +34,13 @@ const SKILLS = SKILLS_ as Record<string, Skill>
                 </div>
             </div>
         </div>
-        <!-- <div class="selector">
+        <div class="selector">
             <h2>Other Projects</h2>
             <div flex="vert" gap="m">
                 
             </div>
-        </div> -->
-    </Section>
+        </div>
+    </Section> -->
     <Section title="Certifications" id="certifications">
         <p class="text-label-large">Work in progress...</p>
     </Section>
@@ -81,20 +69,6 @@ const SKILLS = SKILLS_ as Record<string, Skill>
 
     section#experience, section#certifications {
         max-width: 880px;
-    }
-
-    .skills-grid {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-
-        display: grid;
-        gap: var(--gap-xs);
-        grid-template-rows: repeat(auto-fit, 1fr);
-        grid-template-columns: repeat(9, 1fr);
-
-        border-radius: var(--gap-m);
-        backdrop-filter: blur(8px);
     }
 
     .list {
