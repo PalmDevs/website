@@ -10,22 +10,23 @@ interface Props {
 	icon: ImageMetadata
 	iconLight?: ImageMetadata
 	noBlur?: boolean
-	variant?: 'xsmall' | 'small' | 'large' | 'large-horz' | 'large-vert'
+	variant?: 'xsmall' | 'xsmall-horz' | 'small' | 'large' | 'large-horz' | 'large-vert'
 }
 
 const { name, icon, iconLight, variant = 'small', noBlur = false } = Astro.props
-const shouldHaveLabel = ['large', 'large-horz', 'large-vert'].includes(variant)
+const isLarge = ['large', 'large-horz', 'large-vert'].includes(variant)
+const isHorz = ['large-horz', 'xsmall-horz'].includes(variant)
 const imgSizeClass =
-	variant === 'xsmall' ? 'xsmall' : variant === 'large' ? 'large' : false
+	variant.startsWith('xsmall') ? 'xsmall' : variant === 'large' ? 'large' : false
 ---
 
 <Touchable class="item" client:visible aria-label={name} title={name}>
-    <Card class:list={["item", "pad", noBlur ? 'no-blur' : undefined]} flex={variant === 'large-horz' ? 'center' : 'vert center'} gap="xs" no-blur>
+    <Card class:list={["item", "pad", noBlur ? 'no-blur' : undefined]} data-variant={variant} flex={isHorz ? 'center' : 'vert center'} gap="xs" no-blur>
         <div class="icon-cont">
             <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", imgSizeClass]} />
             <LightDarkImage draggable="false" aria-hidden="true" srcLight={iconLight} src={icon} alt={name} class:list={["icon", "icon-glow", imgSizeClass]} />
         </div>
-        {shouldHaveLabel && <span data-variant={variant} aria-hidden="true" class="text-label-medium text">{name}</span>}
+        <span aria-hidden="true" class:list={[isLarge ? 'text-label-medium' : 'text-label-small', 'text']}>{name}</span>
     </Card>
 </Touchable>
 
@@ -57,6 +58,10 @@ const imgSizeClass =
 
     .text {
         text-align: center;
+
+        &.text-label-small {
+            color: var(--neutral-low);
+        }
     }
 
     .icon-cont {
@@ -64,15 +69,14 @@ const imgSizeClass =
         position: relative;
     }
 
+    // Not enough room beside the icon, stack the label below instead
     @media (max-width: breakpoints.$tablet) {
-        .text[data-variant="large-horz"] {
-            display: none;
+        .item[data-variant="large-horz"] {
+            flex-direction: column;
         }
-    }
 
-    @media (max-width: calc(breakpoints.$tablet - 32px)) {
-        .text {
-            display: none;
+        .text.text-label-medium {
+            font-size: var(--text-size-label-small);
         }
     }
 </style>

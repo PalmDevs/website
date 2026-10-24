@@ -14,6 +14,7 @@ import SkillsGrid from '~/components/SkillsGrid.astro'
 import { SwappingText } from '~/components/SwappingText'
 import { SKILLS as SKILLS_ } from '~/data/skills'
 import IconMail from '~/icons/mail.svg?component-solid'
+import IconNext from '~/icons/next.svg?component-solid'
 import IconWork from '~/icons/work.svg?component-solid'
 import Glow from '~/images/glow.svg'
 import { getAge } from '~/utils/date'
@@ -45,13 +46,18 @@ const SKILLS = SKILLS_ as Record<string, Skill>
 			<LineOfWork stacked />
 			<div flex="vert" gap="m">
 				<h1 class="text-heading">with these technologies</h1>
-				<ul class="list skills-list">
-					{Object.values(SKILLS).slice(0, 6).map(({ name, icon, iconLight }) => (
-						<li>
-							<SkillItem {name} {icon} {iconLight} />
-						</li>
-					))}
-				</ul>
+				<div flex="vert" gap="xs">
+					<ul class="list skills-list">
+						{Object.values(SKILLS).slice(0, 6).map(({ name, icon, iconLight }) => (
+							<li>
+								<SkillItem {name} {icon} {iconLight} />
+							</li>
+						))}
+					</ul>
+					<div flex="vert" style="align-items: flex-start;">
+					<LinkButton client:visible href="#skills" variant="glass" text="and much more" trailingIcon={IconNext} />
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -73,11 +79,12 @@ const SKILLS = SKILLS_ as Record<string, Skill>
 			<ExperienceReVanced />
 			<ExperienceRevenge />
 		</div>
+		<div id="skills" flex="vert" gap="l">
+			<h2 class="text-heading">and with these technologies</h2>
+			<SkillsGrid />
+		</div>
 	</Section>
-	<Section title="using these technologies" id="skills">
-		<SkillsGrid />
-	</Section>
-	<Section id="get-in-touch">
+	<Section id="get-in-touch" pady="4xl">
 		<Fragment slot="title">Let's <span class="tint-high">talk</span></Fragment>
 		<p slot="description" class="text-label-large">
 			— whether it'll be about <span class="tint-medium">work</span>, or just a <span class="tint-medium">casual chat</span> — I don't mind!
@@ -113,7 +120,18 @@ const SKILLS = SKILLS_ as Record<string, Skill>
 		align-items: center;
 	}
 
-	section:is(#hero, #experience) {
+	@media (min-width: breakpoints.$tablet) {		
+		#skills {
+			max-width: 720px;
+			align-self: center;
+		}
+	}
+
+	section#hero {
+		max-width: 1144px;
+	}
+
+	section#experience {
 		max-width: 1080px;
 	}
 
@@ -128,8 +146,8 @@ const SKILLS = SKILLS_ as Record<string, Skill>
 	}
 
 	.skills-list {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, 72px);
+		display: flex;
+		flex-wrap: wrap;
 		gap: var(--gap-xs);
 		width: fit-content;
 		max-width: 100%;
