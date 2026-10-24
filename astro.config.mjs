@@ -54,7 +54,11 @@ export default defineConfig({
 		// expressiveCode(),
 		// mdx(),
 		robotsTxt(),
-		favicons(),
+		favicons({
+			name: 'PalmDevs',
+			short_name: 'Palm',
+			input: 'public/favicon.png',
+		}),
 		compressor(),
 		process.env.NODE_ENV !== 'build' && sonda(),
 	],
